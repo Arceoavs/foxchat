@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/dokumente', function () {
     return view('dokumente');
 });
+
+Route::get('/chats', function () {
+    return view('chats');
+});

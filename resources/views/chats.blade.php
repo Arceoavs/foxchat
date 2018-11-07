@@ -5,8 +5,8 @@
       <div class="container">
 
         <div class="row">
-          <h1>Dokumente</h1>
-		  <p>Hier werden dann die Dokumente aufgeführt...</p>
+          <h1>Chats</h1>
+		  <p>Hier werden dann die Chats...</p>
 		</div>
       </div>
     </div>
