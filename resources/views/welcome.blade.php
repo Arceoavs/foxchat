@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Hallo Henrik, Luis und Jan-Hendrik
                 </div>
 
                 <div class="links">
