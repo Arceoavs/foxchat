@@ -1,4 +1,4 @@
-Wenn ihr die Entwicklungsumgebung auf dem Computer eingerichtet habt, geht ihr folgendermaßen vor: 
+Wenn ihr Valet (Mac) / Homestead (Windows) eingerichtet habt, dann holt ihr euch das Projekt im Git an dem wir arbeiten wie folgt:
 
 1. Ordner aussuchen, in dem ihr arbeiten wollt und Command ausführen:
 valet park
@@ -28,3 +28,5 @@ in den Ordner navigieren und npm install aufrufen
 
 9. Laravel Mix einrichten (Damit Bootstrap und Vue usw. mit dabei sind)
 npm run dev 
+
+Getestet habe ich das nur unter OS X mit Valet, Windows und Linux User dürften ein klein wenig anders vorgehen müssen
