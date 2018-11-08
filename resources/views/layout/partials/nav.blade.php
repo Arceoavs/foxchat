@@ -1,7 +1,4 @@
-<style>
-.nav-item::after{content:'';display:block;width:0px;height:4px;background:#EB5D39;transition: 0.15s;}
-.nav-item:hover::after{width:100%;}
-</style>
+<link href="/css/navbar.css" rel="stylesheet">
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
