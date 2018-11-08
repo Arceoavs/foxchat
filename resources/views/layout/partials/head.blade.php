@@ -3,7 +3,7 @@
 <meta name="description" content="Projektseminar: Der digitale Tresor">
 <meta name="author" content="Arnold Arz von Straussenburg, Eric Matala de Mazza, Henrik Baumann, Nils Neuhaus, Nikolai Schöning, Luis Meierkort, Manuel Barkau, Jan-hendrik Büttner">
 
-<title>Digitaler Tresor</title>
+<title>@yield('title', 'Digitaler Tresor')</title> 
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">

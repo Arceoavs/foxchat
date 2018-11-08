@@ -1,5 +1,7 @@
 @extends('layout.default')
 
+@section('title', 'Dokumente')
+
 @section('content')
     <div class="album text-muted">
       <div class="container">

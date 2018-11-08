@@ -1,5 +1,7 @@
 @extends('layout.default')
 
+@section('title', 'Chats')
+
 @section('content')
     <div class="album text-muted">
       <div class="container">
