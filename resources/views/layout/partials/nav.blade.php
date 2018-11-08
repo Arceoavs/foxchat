@@ -1,3 +1,8 @@
+<style>
+.nav-item::after{content:'';display:block;width:0px;height:4px;background:#EB5D39;transition: 0.15s;}
+.nav-item:hover::after{width:100%;}
+</style>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,8 +20,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/dokumente">Dokumente <span class="sr-only">(current)</span></a></li>
-        <li><a href="/chats">Chats <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item">
+          <a href="/dokumente">Dokumente <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a href="/chats">Chats <span class="sr-only">(current)</span></a>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
