@@ -8,8 +8,10 @@
 
         <div class="row">
           <h1>Dokumente</h1>
-		  <p>Hier werden dann die Dokumente aufgeführt...</p>
-		</div>
+        </div>
+        <div class = "row">
+            <p>Hier werden dann die Dokumente aufgeführt...</p>
+        </div>  
       </div>
     </div>
 @endsection

@@ -8,8 +8,11 @@
 
         <div class="row">
           <h1>Chats</h1>
-		  <p>Hier werden dann die Chats...</p>
-		</div>
+        </div>
+        
+        <div class="row">
+            <p>Hier werden dann die Chats...</p>
+        </div>
       </div>
     </div>
 @endsection
