@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-        <div class="row">
+        <div class="row justify-content-md-center">
             <div class="col-md-3">
                 <form class="form-signin">
                         <h1 class="h3 mb-3 font-weight-normal">Login</h1>

@@ -7,12 +7,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item fixedWidth">
         <a class="nav-link" href="/dokumente">Dokumente <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item fixedWidth">
         <a class="nav-link" href="/chats">Chats</a>
       </li>
     </ul>
+
+    <button class="btn btn-outline-danger" type="logout">Abmelden</button>
   </div>
 </nav>
