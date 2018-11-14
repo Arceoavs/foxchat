@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href=".">
-        <img style='height:25px' alt="Brand" src="{{ asset('img/logo.png') }}">
+        <img style='height:35px' alt="Brand" src="{{ asset('img/FoxdoxChat.png') }}">
       </a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
