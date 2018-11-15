@@ -2,6 +2,20 @@
 
 Projektseminar: Digitaler Tresor
 
+Git Guidelines:
+
+1. Get familiar with the feature branch workflow (https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
+
+2. Use meaningful, english names for branches (not patch-1)
+
+3. Use lowerCamelCase for branches and add your initials at the end of the branch. If you work together on one branch, you may add multiple initials.
+    Example: loginFeatureJB; loginFeatureJBHB
+
+4. Please do not destroy the Repository! 
+
+
+Clean Code Guidelines:
+
 1. Less code is always better
 
 Reduce the amount of code in one place. Remove unused variables. Keep it simple.
