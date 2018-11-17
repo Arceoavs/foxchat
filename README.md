@@ -2,53 +2,6 @@
 
 Projektseminar: Digitaler Tresor
 
-Get the project running:
-	1  	Valet (Mac) / Homestead (Windows) setup
-		Composer and PHP install
-
-	2   navigate to folder:
-		cd digitaler-tresor
-
-	3   copy .env file:
-		cp .env.example .env
-
-	4   resolve Composer dependencies:
-		composer install
-
-	5   generate Application key:
-		php artisan key:generate
-
-	6   execute migrate command:
-		php artisan migrate
-
-	Then you should see under http://digitaler-tresor.test our project.
-
-Get the project running (Alternative):
-	1  	Setup a databse of your choice
-		Composer and PHP install
-
-	2   navigate to folder:
-		cd digitaler-tresor
-
-	3   copy .env file:
-		cp .env.example .env
-		
-	5	edit .env file and insert your database connection
-
-	6   resolve Composer dependencies:
-		composer install
-
-	7   generate Application key:
-		php artisan key:generate
-
-	8   execute migrate command:
-		php artisan migrate
-		
-	9	execute serve command:
-		php artisan serve
-		
-	Then you should see under http://digitaler-tresor.test our project.
-
 Git Guidelines:
 
 	1. Get familiar with the feature branch workflow (https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
