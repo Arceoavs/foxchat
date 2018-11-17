@@ -12,13 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth/login');
 });
 
-Route::get('/dokumente', function () {
-    return view('dokumente');
-});
+Auth::routes();
 
-Route::get('/chats', function () {
-    return view('chats');
-});
+Route::get('/home', 'HomeController@index')->name('home');

@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use GuzzleHttp\Client;
+use \Illuminate\Http\Response as HTTPSTATUSCODES;
+use \App\User;
+use \Illuminate\Http\Request;
+use App\Http\Controllers\FoxdoxApiClient;
 
 class LoginController extends Controller
 {
@@ -36,4 +41,43 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function login(Request $request)
+    {
+
+        $name = $request['name'];
+        $password = $request['password'];
+
+        $body = [
+            'username' => $name,
+            'password' => $password,
+        ];
+        // Unser Foxdox-Api-Client
+        $client = new FoxdoxApiClient('https://api.foxdox.de/auth/requesttoken', $body);
+
+        $response = $client->loginRequest();
+
+        $token = (json_decode($response->getBody())->Token);
+
+
+        if($response->getStatusCode() == HTTPSTATUSCODES::HTTP_OK){
+                   User::updateOrCreate(
+                       ['name' => $name],
+                       ['foxdox-token' => $token]
+                   );
+                   session(['foxdoxUsername' => $name]);
+               }
+
+
+        // TEST
+        $client2 = new FoxdoxApiClient('https://api.foxdox.de/document/listalldocs', []);
+        $response2 = $client2->apiRequest();
+
+        print_r((json_decode($response2->getBody())));
+        
+        return view('successlogin', ['name' => $name, 'foxtoken' => $token]);
+              
+          
+    }
+
 }
