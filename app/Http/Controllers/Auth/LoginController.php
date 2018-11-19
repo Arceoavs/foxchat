@@ -65,13 +65,13 @@ class LoginController extends Controller
                        ['name' => $name],
                        ['foxdox-token' => $token]
                    );
-                   session(['foxdoxUsername' => $name]);
+                   # session(['foxdoxUsername' => $name]);
                }
 
 
         // TEST
         $client2 = new FoxdoxApiClient('https://api.foxdox.de/document/listalldocs', []);
-        $response2 = $client2->apiRequest();
+        $response2 = $client2->apiRequest($name);
 
         print_r((json_decode($response2->getBody())));
         

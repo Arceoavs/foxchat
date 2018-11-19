@@ -10,7 +10,8 @@ use \App\User;
 /**
  * 
  * A client for communication with the foxdox-api
- * Contains methods for sending api-requests to any given URL with given parameters for HTML headers and body
+ * Contains methods for sending api-requests to any given URL with given parameters for HTML headers and body.
+ * When login in the first time the loginRequest() method will be used as it does not need a Valid Foxdox-Token.
  * 
  */
 
@@ -46,15 +47,32 @@ class FoxdoxApiClient extends Controller
         $this->body = $body;
     }
 
-    public function setHeader($index, $value)
+    /**
+     * Gives the ability to set a Custom Header. 
+     * @param string $index takes the name as a String the
+     * @param string $value will be placed under
+     */
+
+    public function setHeader(string $index, string $value)
     {
         $this->headers[$index] = $value;
     }
 
-    public function setHeaders($newHeaders)
+    /**
+     * Gives the ability to replace the complete Header Array
+     * @param array ($newHeaders) 
+     * 
+     */
+
+    public function setHeaders(array $newHeaders)
     {
         $this->headers = $newHeaders;
     }
+
+    /**
+     * This method is once called to request the Token by the FoxdoxApi.
+     * @return Response Object with the Information of sent by Foxdox 
+     */
 
     public function loginRequest()
     {
@@ -66,9 +84,15 @@ class FoxdoxApiClient extends Controller
           return $response;
     }
 
-    public function apiRequest()
+    /**
+     * This method can be use by for any other ApiRquest sent to FoxdoxApiClient.
+     * Takes the
+     * @param string $foxdoxUserName the API request should be done with.
+     * @return Response $response Object with the Information of sent by Foxdox
+     */
+    public function apiRequest(string $foxdoxUsername)
     {
-        $foxdoxUsername = session('foxdoxUsername');
+        # $foxdoxUsername = session('foxdoxUsername');
         $token = User::where('name', $foxdoxUsername)
                         ->pluck('foxdox-token')
                         ->first();
