@@ -68,14 +68,17 @@ class LoginController extends Controller
                    # session(['foxdoxUsername' => $name]);
                }
 
+        return $response = [
+            'username' => $name,
+            'status' => $response->getStatusCode()
+        ];
+        // // TEST
+        // $client2 = new FoxdoxApiClient('https://api.foxdox.de/document/listalldocs', []);
+        // $response2 = $client2->apiRequest($name);
 
-        // TEST
-        $client2 = new FoxdoxApiClient('https://api.foxdox.de/document/listalldocs', []);
-        $response2 = $client2->apiRequest($name);
-
-        print_r((json_decode($response2->getBody())));
+        // print_r((json_decode($response2->getBody())));
         
-        return view('successlogin', ['name' => $name, 'foxtoken' => $token]);
+        // return view('successlogin', ['name' => $name, 'foxtoken' => $token]);
               
           
     }
