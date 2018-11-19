@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -72,6 +72,7 @@ class LoginController extends Controller
             'username' => $name,
             'status' => $response->getStatusCode()
         ];
+
         // // TEST
         // $client2 = new FoxdoxApiClient('https://api.foxdox.de/document/listalldocs', []);
         // $response2 = $client2->apiRequest($name);
