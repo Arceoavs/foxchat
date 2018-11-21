@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Http\Controllers\Auth\FoxdoxAuthProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Auth::provider('FoxdoxAuthProvider', function($app, array $config){
+            return new FoxdoxAuthProvider($app['hash'], $config['model']);
+        });
 
         //
     }

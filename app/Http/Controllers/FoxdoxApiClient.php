@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use \App\User;
 
+use Illuminate\Support\Facades\Log;
+
 /**
  * 
  * A client for communication with the foxdox-api

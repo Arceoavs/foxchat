@@ -44,9 +44,10 @@ class LoginController extends Controller
 
     protected function login(Request $request)
     {
-
+        $this->validateLogin($request);
         $name = $request['name'];
         $password = $request['password'];
+
 
         $body = [
             'username' => $name,
@@ -72,16 +73,23 @@ class LoginController extends Controller
             'username' => $name,
             'status' => $response->getStatusCode()
         ];
-
-        // // TEST
-        // $client2 = new FoxdoxApiClient('https://api.foxdox.de/document/listalldocs', []);
-        // $response2 = $client2->apiRequest($name);
-
-        // print_r((json_decode($response2->getBody())));
-        
-        // return view('successlogin', ['name' => $name, 'foxtoken' => $token]);
               
           
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $errors =[
+            'name' => 'Das Feld Name ist notwendig!',
+            'password' => 'Das Feld Passwort ist notwendig!'
+        ];
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'password' => 'required|string'
+
+        ], $errors);
+
+        $validator->validate($request);
     }
 
 }

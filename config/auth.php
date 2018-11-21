@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
@@ -66,7 +66,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => 'FoxdoxAuthProvider',
             'model' => App\User::class,
         ],
 
