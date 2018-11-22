@@ -45,6 +45,7 @@ class FoxdoxApiClient extends Controller
             'X-APPID' => 'chXhweSqLsyUdAyZVz9a',
             'X-LANG' => 'de',
             'Content-Type' => 'application/x-www-form-urlencoded',
+            'X-PROVIDER' => 'cSwKpDdwpCgVBYWfSkJY'
         ];
         $this->body = $body;
     }

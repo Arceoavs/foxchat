@@ -11,9 +11,9 @@ use App\Http\Controllers\FoxdoxApiClient;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Http\Response as HTTPSTATUSCODES;
 use Illuminate\Support\Str;
-use \App\User;
+use \App\FoxdoxUser;
 
-class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
+class FoxdoxUserAuthProvider extends EloquentUserProvider implements UserProvider
 {
     protected $foxdoxapiclient;
     protected $response;
@@ -22,33 +22,9 @@ class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
         if($this->foxdoxapiclient === null){
             $this->createNewFoxdoxApiClient($credentials);
         }
-        //Laravel native code
-
-        if (empty($credentials) ||
-            (count($credentials) === 1 &&
-            array_key_exists('password', $credentials))) {
-            return;
+        if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
+            return FoxdoxUser::where('name', $credentials['name'])->first();
         }
-        // First we will add each credential element to the query as a where clause.
-        // Then we can execute the query and, if we found a user, return it in a
-        // Eloquent User "model" that will be utilized by the Guard instances.
-        $query = $this->createModel()->newQuery();
-
-        foreach ($credentials as $key => $value) {
-            if($key != 'password'){
-                if (Str::contains($key, 'name')) {
-                    continue;
-                }
-
-                if (is_array($value) || $value instanceof Arrayable) {
-                    $query->whereIn($key, $value);
-                } else {
-                    $query->where($key, $value);
-                }
-            }
-        }
-
-        return $query->first();
     }
 
     public function createNewFoxdoxApiClient($credentials)
@@ -59,15 +35,20 @@ class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
             'username' => $name,
             'password' => $password,
         ];
+        
+        //Test, ob user credentials
         $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/auth/requesttoken', $body);
         $this->response = $foxdoxapiclient->loginRequest();
-        $token = (json_decode($this->response->getBody())->Token);
-        User::updateOrCreate(
-            ['name' => $name],
-            ['foxdox-token' => $token]
-        );
+        $this->response=(json_decode($this->response->getBody()));
+        $token = $this->response->Token;
+        
+        if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
+            \App\FoxdoxUser::updateOrCreate(
+                ['name' => $name],
+                ['foxdox-token' => $token]
+            );
+        }
     }
-
     /**
      * Validate a user against the given credentials.
      *
@@ -80,7 +61,7 @@ class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
         if($this->foxdoxapiclient === null){
             $this->createNewFoxdoxApiClient($credentials);
         }
-        if($this->response->getStatusCode() == HTTPSTATUSCODES::HTTP_OK){
+        if($this->response->Status == HTTPSTATUSCODES::HTTP_OK){
             return true;
         }
         return false;
