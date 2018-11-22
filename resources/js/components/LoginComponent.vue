@@ -15,11 +15,6 @@
         </div>
     </div>
 </template>
-<style>
-    .myCont {
-        padding: 10px;
-    }
-</style>
 
 <script>
     var Vue = require('vue');
@@ -29,8 +24,6 @@
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     }
-
-    const self = this;
 
     export default {
         data: function() {
@@ -42,34 +35,42 @@
         },
         methods: {
             sendPassword: function(){
+                console.log('Logging In...');
+
                 var formData = new FormData();
                 formData.append('name', this.username);
                 formData.append('password', this.password);
-                
+
                 axios.post('/api/auth/login', formData, config)
                     .then(response => {
-                        this.$store.commit('setToken', response.data);
+                        console.log('Saving access token as cookie:');
+                        this.$cookies.set('bearer', response.data.access_token);
+                        console.log(this.$cookies.get('bearer'));
+
                         this.retrieveUser();
                         console.log('Logged In.');
-                        self.$router.psuh('/');
+                        this.$router.push('/');
                     })
                     .catch(error => console.log('error while Login' + JSON.stringify(error)) );
             },
             retrieveUser: function(){
+                console.log('Getting Userdata...');
+
                 var formData = new FormData();
-                formData.append('token', this.$store.state.token.access_token);
+                formData.append('token', this.$cookies.get('bearer'));
 
                 axios.post('/api/auth/me', formData, this.config)
                     .then(response => {
-                        this.$store.commit('setUser', response.data);
-                        console.log('Got Userdata.');
+                        this.$cookies.set('user', JSON.stringify(response.data));
+                        console.log('Got Userdata:');
+                        console.log(JSON.stringify(this.$cookies.get('user')));
                     })
                     .catch(error => console.log('error while fetching user data' + JSON.stringify(error)));
             }
 
         },
         mounted() {
-            console.log('Component mounted.')            
+            console.log('Login Component mounted.')            
         }
     };
 </script>

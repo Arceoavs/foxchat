@@ -29,4 +29,10 @@ in den Ordner navigieren und npm install aufrufen
 9. Laravel Mix einrichten (Damit Bootstrap und Vue usw. mit dabei sind)
 npm run dev 
 
+10. php artisan jwt:secret 
+
+11. npm run watch 
+
+12. php artisan serve
+
 Getestet habe ich das nur unter OS X mit Valet, Windows und Linux User dürften ein klein wenig anders vorgehen müssen

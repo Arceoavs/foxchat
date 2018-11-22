@@ -10477,5 +10477,62 @@ a.text-dark:focus {
   color: white;
 }
 
+.foxcolor-pure {
+  color: #f86a2d;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.foxcolor-inverted {
+  color: #f86a2d;
+  background-color: #c9c9c9;
+}
+
+.myCont {
+  padding: 10px;
+}
+
+.menuText {
+  color: white;
+  font-weight: bold;
+  min-height: 66px;
+}
+
+div.menuText:hover > li > a > li > div.menuText {
+  color: #f86a2d !important;
+}
+
+div.menuText:hover {
+  color: #f86a2d !important;
+  background-color: white;
+  font-weight: bold;
+}
+
+.logo {
+  background-color: white;
+}
+
+.alert-chat {
+  background-color: #e2e2e2;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.img-logo {
+  max-height: 50px;
+}
+
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIvY3NzL2FwcC5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/

@@ -1,20 +1,72 @@
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
 .navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.foxcolor {
+    background-color: $foxi;
+    color: white;
+}
 
-.foxcolor{
-  background-color: rgb(248,106,45);
-  color: white;
+.foxcolor-pure {
+  color: $foxi;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.foxcolor-inverted {
+    color: $foxi;
+    background-color: rgb(201, 201, 201);
+}
+
+.myCont {
+    padding: 10px;
+}
+
+.menuText {
+    color: white;
+    font-weight: bold;
+    min-height: 66px;
+}
+
+div.menuText:hover>li>a>li>div.menuText {
+    color: $foxi !important;
+}
+
+div.menuText:hover {
+    color: $foxi !important;
+    background-color: white;
+    font-weight: bold;
+}
+
+.logo {
+    background-color: white;
+}
+
+.alert-chat {
+    background-color: rgb(226, 226, 226);
+}
+
+ul {
+    list-style-type: none;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.img-logo {
+    max-height: 50px;
 }

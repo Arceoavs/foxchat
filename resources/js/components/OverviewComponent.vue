@@ -21,7 +21,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.');
+            console.log('Overview Component mounted.');
             axios.get('/api/providers')
                 .then(response => (this.providers = response.data))
                 .catch(error => console.log('error in provider retrieval') );

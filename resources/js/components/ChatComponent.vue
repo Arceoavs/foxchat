@@ -9,8 +9,8 @@
                         <ul>
                             <li class="row col-md-12" v-for="message in messages" v-bind:key="message.value">
                                 <div class="col-md-12">
-                                    <div class="alert alert-chat left" v-if="!(message.sender == 'You')"><p>{{message.sender}}:</p> {{message.body}}</div>
-                                    <div class="alert alert-chat right" v-else><p>{{message.sender}}:</p> {{message.body}}</div>
+                                    <div class="alert alert-chat float-left" v-if="!(message.sender == 'You')"><p>{{message.sender}}:</p> {{message.body}}</div>
+                                    <div class="alert alert-chat float-right" v-else><p>{{message.sender}}:</p> {{message.body}}</div>
                                 </div>
                             </li>
                         </ul>
@@ -26,23 +26,6 @@
         </div>
     </div>
 </template>
-<style>
-    .myCont {
-        padding: 10px;
-    }
-    .alert-chat {
-        background-color: rgb(226, 226, 226);
-    }
-    ul {
-        list-style-type: none;
-    }
-    .right{
-        float: right;
-    }
-    .left{
-        float: left;
-    }
-</style>
 
 <script>
     var Vue = require('vue');
@@ -67,7 +50,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Chat Component mounted.')
         }
     };
 </script>
