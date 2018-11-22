@@ -6,7 +6,7 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        This is my 2nd home: I'm an example component.
                     </div>
                 </div>
             </div>
@@ -15,9 +15,11 @@
 </template>
 
 <script>
-    export default {
+    var Vue = require('vue');
+    
+    Vue.component('ChatComponent', {
         mounted() {
             console.log('Component mounted.')
         }
-    }
+    });
 </script>

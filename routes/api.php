@@ -30,3 +30,8 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+
+
+Route::get('providers', 'TalkController@allProviders');
+Route::get('message/{id}', 'MessageController@chatHistory');
+Route::post('message/send', 'MessageController@sendMessage');
