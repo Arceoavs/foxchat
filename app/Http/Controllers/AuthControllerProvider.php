@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Validator;
+
 use Illuminate\Support\Facades\Log;
 
 class AuthControllerProvider extends Controller
@@ -18,7 +19,7 @@ class AuthControllerProvider extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:provider', ['except' => ['login']]);
+        $this->middleware('api', ['except' => ['login']]);
     }
 
     /**
@@ -33,16 +34,14 @@ class AuthControllerProvider extends Controller
             'password'=> 'required',
             'x-provider' => 'required'
         ]);
-        Log::info("ich war hier");
-
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
-        $credentials = request(['name', 'password']);
+        $credentials = request(['name', 'password', 'x-provider']);
 
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = auth()->guard()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

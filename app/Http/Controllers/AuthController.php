@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Validator;
 
+use Illuminate\Support\Facades\Log;
+
 class AuthController extends Controller
 {
          /**
@@ -17,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('api', ['except' => ['login']]);
     }
 
     /**
