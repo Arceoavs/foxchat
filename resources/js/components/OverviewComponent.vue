@@ -1,8 +1,10 @@
 <template>
     <div class="container">
+        <h1>Overview</h1>
         <ul>
-            <li v-for="provider in providers">
+            <li v-for="provider in providers" v-bind:key="provider.value">
                 {{ provider }}
+                <!-- TODO: Chats anklickbar machen, Pro User nur ein Chat? Mehrere Konversationen zwischen zwei Nutzern -->
             </li>
         </ul>
     </div>

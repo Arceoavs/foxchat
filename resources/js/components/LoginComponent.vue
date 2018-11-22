@@ -4,7 +4,7 @@
             <div class="col-md-8">
                 <div class="card card-default">
                     <div class="card-header">Login</div>
-
+                    <!-- Alert Box bei fehler, und Login ablegen als Cookie  -->
                     <div @keyup.enter="sendPassword()" class="card-body">
                         <input v-model="username" placeholder="Username">
                         <input type="password" v-model="password" placeholder="Password">
@@ -24,39 +24,52 @@
 <script>
     var Vue = require('vue');
 
-    
-    
+    const config = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+
+    const self = this;
+
     export default {
         data: function() {
             return {
                 username: 'manuel.barkau',
                 password: '011235813',
-                token: ''
+                token: '',
             }
         },
         methods: {
             sendPassword: function(){
-
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                }
-
                 var formData = new FormData();
                 formData.append('name', this.username);
                 formData.append('password', this.password);
                 
-                axios.post('/api/login', formData, config)
+                axios.post('/api/auth/login', formData, config)
                     .then(response => {
-                        console.log( JSON.stringify(response));
-                        window.router.next('/');
+                        this.$store.commit('setToken', response.data);
+                        this.retrieveUser();
+                        console.log('Logged In.');
+                        self.$router.psuh('/');
                     })
-                    .catch(error => console.log('error in provider retrieval' + JSON.stringify(error)) );
+                    .catch(error => console.log('error while Login' + JSON.stringify(error)) );
+            },
+            retrieveUser: function(){
+                var formData = new FormData();
+                formData.append('token', this.$store.state.token.access_token);
+
+                axios.post('/api/auth/me', formData, this.config)
+                    .then(response => {
+                        this.$store.commit('setUser', response.data);
+                        console.log('Got Userdata.');
+                    })
+                    .catch(error => console.log('error while fetching user data' + JSON.stringify(error)));
             }
+
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.')            
         }
     };
 </script>
