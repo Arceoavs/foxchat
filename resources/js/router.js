@@ -1,17 +1,18 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import store from './store.js';
 import OverviewComponent from './components/OverviewComponent.vue';
 import ChatComponent from './components/ChatComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
+import cookies from './cookies.js';
+import auth from './services/AuthService.js';
 
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '*',
+        path: '/',
         name: 'Overview',
         component: OverviewComponent,
         meta: { 
@@ -40,17 +41,19 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
-        console.log(store.state.user)
-        if (store.state.user == null) {
+        if (cookies.get('bearer') == null) {
             next('/login');
-        } else {    
-            next();
+        } else {   
+            if(cookies.get('user') == null){
+                auth.retrieveUser();
+            }
+            next();       
         }
     } else {
         next();
     }
     // uncomment
-    next();
+    // next();
 });
 
 export default router;

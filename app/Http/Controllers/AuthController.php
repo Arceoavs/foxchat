@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -26,6 +27,15 @@ class AuthController extends Controller
      */
     public function login()
     {
+        $validator = Validator::make(request()->all(), [
+            'name' => 'required',
+            'password'=> 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
         $credentials = request(['name', 'password']);
 
 
@@ -35,6 +45,7 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
+
 
     /**
      * Get the authenticated User.

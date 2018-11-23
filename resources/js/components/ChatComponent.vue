@@ -28,7 +28,6 @@
 </template>
 
 <script>
-    var Vue = require('vue');
     
     export default {
         data: function() {

@@ -10481,6 +10481,10 @@ a.text-dark:focus {
   color: #f86a2d;
 }
 
+.foxcolor-bg {
+  background-color: #f86a2d;
+}
+
 .bold {
   font-weight: bold;
 }

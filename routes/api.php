@@ -24,14 +24,24 @@ Route::group([
 
 ], function ($router) {
 
+    //Login requests for FoxdoxProviders
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    //Login requests for FoxdoxProviders
 
+    Route::post('getuserid', 'HomeController@index');
 });
 
 
 Route::get('providers', 'MessageController@allProviders');
 Route::get('message/{id}', 'MessageController@chatHistory');
 Route::post('message/send', 'MessageController@sendMessage');
+
+Route::group(
+    ['middleware' => 'auth:provider',
+    'prefix' => 'auth'],
+    function($router){
+        Route::post('provider/login', 'AuthControllerProvider@login');
+});

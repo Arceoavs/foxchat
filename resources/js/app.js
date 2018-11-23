@@ -1,8 +1,6 @@
 // stock
 require('./bootstrap');
 
-window.Vue = require('vue');
-
 // custom
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -15,6 +13,7 @@ import store from './store.js';
 import router from './router.js';
 import cookies from './cookies.js'; 
 import App from './components/App.vue';
+
 
 
 Vue.use(BootstrapVue);

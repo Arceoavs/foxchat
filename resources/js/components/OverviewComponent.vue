@@ -11,7 +11,6 @@
 </template>
 
 <script> 
-    var Vue = require('vue');
 
     // Vue.component('OverviewComponent', 
     export default {
