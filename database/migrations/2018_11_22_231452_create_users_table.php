@@ -15,9 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('isProvider')->nullable();
             $table->string('name')->unique();
             $table->string('foxdox-token');
-            $table->string('foxdox-provider');
             $table->timestamps();
         });
     }

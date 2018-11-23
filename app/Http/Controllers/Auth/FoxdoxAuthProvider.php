@@ -14,10 +14,17 @@ use App\User;
 
 use Illuminate\Support\Facades\Log;
 
-class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
+class FoxdoxAuthProvider implements UserProvider
 {
+    protected $model;
     protected $foxdoxapiclient;
     protected $response;
+
+    public function __construct($model)
+    {
+        $this->model = $model;
+    }
+
     public function retrieveByCredentials(array $credentials)
     {
         if($this->foxdoxapiclient === null){
@@ -30,6 +37,7 @@ class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
 
     public function createNewFoxdoxApiClient($credentials)
     {
+        
         if(array_key_exists('x-provider', $credentials)){
             $name = $credentials['name'];
             $password = $credentials['password'];
@@ -50,8 +58,8 @@ class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
             if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
                 User::updateOrCreate(
                     ['name' => $name],
-                    ['foxdox-token' => $token],
-                    ['foxdox-provider' => 'HALLO']
+                    ['foxdox-token' => $token,
+                     'isProvider' => true]
                 );
             }
         }else {
@@ -72,8 +80,8 @@ class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
             if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
                 User::updateOrCreate(
                     ['name' => $name],
-                    ['foxdox-token' => $token],
-                    ['foxdox-provider' => 'HL']
+                    ['foxdox-token' => $token,
+                     'isProvider' => false]
                 );
             }
 
@@ -95,6 +103,63 @@ class FoxdoxAuthProvider extends EloquentUserProvider implements UserProvider
             return true;
         }
         return false;
+    }
+
+    /**
+     * Retrieve a user by their unique identifier.
+     *
+     * @param  mixed  $identifier
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function retrieveById($identifier)
+    {
+        // $model = $this->createModel();
+
+        // return $model->newQuery()
+        //     ->where($model->getAuthIdentifierName(), $identifier)
+        //     ->first();
+    }
+
+    /**
+     * Retrieve a user by their unique identifier and "remember me" token.
+     *
+     * @param  mixed   $identifier
+     * @param  string  $token
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function retrieveByToken($identifier, $token)
+    {
+        // $model = $this->createModel();
+
+        // $model = $model->where($model->getAuthIdentifierName(), $identifier)->first();
+
+        // if (! $model) {
+        //     return null;
+        // }
+
+        // $rememberToken = $model->getRememberToken();
+
+        // return $rememberToken && hash_equals($rememberToken, $token) ? $model : null;
+    }
+
+        /**
+     * Update the "remember me" token for the given user in storage.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  string  $token
+     * @return void
+     */
+    public function updateRememberToken(UserContract $user, $token)
+    {
+        // $user->setRememberToken($token);
+
+        // $timestamps = $user->timestamps;
+
+        // $user->timestamps = false;
+
+        // $user->save();
+
+        // $user->timestamps = $timestamps;
     }
 
 }
