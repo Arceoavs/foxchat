@@ -9,6 +9,9 @@ use GuzzleHttp\Client;
 use Validator;
 
 use Illuminate\Support\Facades\Log;
+/**
+ * Here all requests from (auth/login) arrives.
+ */
 
 class AuthController extends Controller
 {
@@ -29,25 +32,25 @@ class AuthController extends Controller
      */
     public function login()
     {
+        //Check if provided requests contains the needed parameters
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
             'password'=> 'required'
         ]);
 
+        //Send errors
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-
+        
+        //Try to login
         $credentials = request(['name', 'password']);
-
-
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return $this->respondWithToken($token);
     }
-
 
     /**
      * Get the authenticated User.
@@ -92,6 +95,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
+            'isProvider' => auth()->user()->isProvider,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 24
         ]);

@@ -27,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        //Registriere den Provider, für den alle Foxdox Anfragen authentifiziert werden
         Auth::provider('FoxdoxAuthProvider', function($app, array $config){
             return new FoxdoxAuthProvider($app['hash'], $config['model']);
         });

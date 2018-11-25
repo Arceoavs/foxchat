@@ -28,13 +28,11 @@ Route::group([
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+    Route::get('me', 'AuthController@me');
     //Login requests for FoxdoxProviders
     Route::post('provider/login', 'AuthControllerProvider@login');
     Route::post('provider/logout', 'AuthControllerProvider@logout');
     Route::post('provider/refresh', 'AuthControllerProvider@refresh');
-    Route::post('provider/me', 'AuthControllerProvider@me');
-
-    Route::post('getuserid', 'HomeController@index');
+    Route::get('provider/me', 'AuthControllerProvider@me');
 
 });

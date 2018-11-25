@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use App\Http\Controllers\FoxdoxApiClient;
@@ -14,17 +13,18 @@ use App\User;
 
 use Illuminate\Support\Facades\Log;
 
-class FoxdoxAuthProvider implements UserProvider
+class FoxdoxAuthProvider extends EloquentUserProvider
 {
-    protected $model;
     protected $foxdoxapiclient;
     protected $response;
 
-    public function __construct($model)
-    {
-        $this->model = $model;
-    }
-
+    /**
+     * Retrieve a user by their unique identifier and "remember me" token.
+     *
+     * @param  mixed   $identifier
+     * @param  string  $token
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
     public function retrieveByCredentials(array $credentials)
     {
         if($this->foxdoxapiclient === null){
@@ -34,11 +34,16 @@ class FoxdoxAuthProvider implements UserProvider
             return User::where('name', $credentials['name'])->first();
         }
     }
-
+    /**
+     * This method initializes the FoxdoxApiClient, to check whether valid Foxdox Provider or
+     * Client credentials where permitted.
+     * If some vaiid Foxdox credentials were permitted a new Database entry will be done or an exisiting 
+     * entry will be updated.
+     */
     public function createNewFoxdoxApiClient($credentials)
-    {
-        
+    {   
         if(array_key_exists('x-provider', $credentials)){
+            //Provider section
             $name = $credentials['name'];
             $password = $credentials['password'];
             $xprovider = $credentials['x-provider'];
@@ -46,16 +51,17 @@ class FoxdoxAuthProvider implements UserProvider
                 'username' => $name,
                 'password' => $password,
             ];
-            Log::info('provider');
-            
-            //Test, ob user credentials
+            //Create an Foxdox API Client and request an Foxdox Token
             $foxdoxapiclient = new FoxdoxApiClient('https://papi.foxdox.de/auth/requesttoken', $body);
+            //Set the special Header for Foxdox Provider requests "X-PROVIDER"
             $foxdoxapiclient->setHeader('X-PROVIDER',$xprovider);
             $this->response = $foxdoxapiclient->loginRequest();
             $this->response=(json_decode($this->response->getBody()));
             $token = $this->response->Token;
             
+            //Check if response gives valid tokens
             if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
+                //The first array verfies the second array fill optional columns
                 User::updateOrCreate(
                     ['name' => $name],
                     ['foxdox-token' => $token,
@@ -63,28 +69,28 @@ class FoxdoxAuthProvider implements UserProvider
                 );
             }
         }else {
+            //User section 
             $name = $credentials['name'];
             $password = $credentials['password'];
             $body = [
                 'username' => $name,
                 'password' => $password,
             ];
-
-            
-            //Test, ob user credentials
+            //Create an Foxdox API Client and request an Foxdox Token
             $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/auth/requesttoken', $body);
             $this->response = $foxdoxapiclient->loginRequest();
             $this->response=(json_decode($this->response->getBody()));
             $token = $this->response->Token;
-            
+
+            //Check if response gives valid tokens
             if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
+                //The first array verfies the second array fill optional columns
                 User::updateOrCreate(
                     ['name' => $name],
                     ['foxdox-token' => $token,
                      'isProvider' => false]
                 );
             }
-
         }
     }
     /**
@@ -104,62 +110,4 @@ class FoxdoxAuthProvider implements UserProvider
         }
         return false;
     }
-
-    /**
-     * Retrieve a user by their unique identifier.
-     *
-     * @param  mixed  $identifier
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function retrieveById($identifier)
-    {
-        // $model = $this->createModel();
-
-        // return $model->newQuery()
-        //     ->where($model->getAuthIdentifierName(), $identifier)
-        //     ->first();
-    }
-
-    /**
-     * Retrieve a user by their unique identifier and "remember me" token.
-     *
-     * @param  mixed   $identifier
-     * @param  string  $token
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function retrieveByToken($identifier, $token)
-    {
-        // $model = $this->createModel();
-
-        // $model = $model->where($model->getAuthIdentifierName(), $identifier)->first();
-
-        // if (! $model) {
-        //     return null;
-        // }
-
-        // $rememberToken = $model->getRememberToken();
-
-        // return $rememberToken && hash_equals($rememberToken, $token) ? $model : null;
-    }
-
-        /**
-     * Update the "remember me" token for the given user in storage.
-     *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
-     * @param  string  $token
-     * @return void
-     */
-    public function updateRememberToken(UserContract $user, $token)
-    {
-        // $user->setRememberToken($token);
-
-        // $timestamps = $user->timestamps;
-
-        // $user->timestamps = false;
-
-        // $user->save();
-
-        // $user->timestamps = $timestamps;
-    }
-
 }
