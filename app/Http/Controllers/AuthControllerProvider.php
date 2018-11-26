@@ -42,7 +42,7 @@ class AuthControllerProvider extends Controller
 
         //Send errors
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 400);
         }
 
         //Try to login

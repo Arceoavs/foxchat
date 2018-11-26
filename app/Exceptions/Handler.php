@@ -92,7 +92,7 @@ class Handler extends ExceptionHandler
             [
                 'errors' => [
                     'status' => 401,
-                    'message' => 'Unauthenticated',
+                    'message' => 'Unauthorized',
                 ]
             ],
             401

@@ -9,13 +9,15 @@ use GuzzleHttp\Client;
 use Validator;
 
 use Illuminate\Support\Facades\Log;
+use function GuzzleHttp\json_decode;
 /**
  * Here all requests from (auth/login) arrives.
  */
 
 class AuthController extends Controller
 {
-         /**
+    
+    /**
      * Create a new AuthController instance.
      *
      * @return void
@@ -24,6 +26,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login']]);
     }
+    
 
     /**
      * Get a JWT via given credentials.
@@ -40,7 +43,7 @@ class AuthController extends Controller
 
         //Send errors
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 400);
         }
         
         //Try to login
@@ -51,7 +54,6 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
-
     /**
      * Get the authenticated User.
      *
