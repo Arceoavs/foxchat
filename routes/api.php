@@ -39,6 +39,7 @@ Route::group([
     Route::post('getuserid', 'HomeController@index');
 });
 
+//test
 
 Route::get('providers', 'MessageController@allProviders');
 Route::get('message/{id}', 'MessageController@chatHistory');
