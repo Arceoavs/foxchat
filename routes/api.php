@@ -29,8 +29,12 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::get('me', 'AuthController@me');
+
     //Login requests for FoxdoxProviders
-<<<<<<< HEAD
+    Route::post('provider/login', 'AuthControllerProvider@login');
+    Route::post('provider/logout', 'AuthControllerProvider@logout');
+    Route::post('provider/refresh', 'AuthControllerProvider@refresh');
+    Route::get('provider/me', 'AuthControllerProvider@me');
 
     Route::post('getuserid', 'HomeController@index');
 });
@@ -39,17 +43,3 @@ Route::group([
 Route::get('providers', 'MessageController@allProviders');
 Route::get('message/{id}', 'MessageController@chatHistory');
 Route::post('message/send', 'MessageController@sendMessage');
-
-Route::group(
-    ['middleware' => 'auth:provider',
-    'prefix' => 'auth'],
-    function($router){
-        Route::post('provider/login', 'AuthControllerProvider@login');
-=======
-    Route::post('provider/login', 'AuthControllerProvider@login');
-    Route::post('provider/logout', 'AuthControllerProvider@logout');
-    Route::post('provider/refresh', 'AuthControllerProvider@refresh');
-    Route::get('provider/me', 'AuthControllerProvider@me');
-
->>>>>>> remotes/origin/AnmeldungMitLaravelChat
-});
