@@ -7,7 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Validator;
+
 use Illuminate\Support\Facades\Log;
+
+/**
+ * Here all requests from (auth/provider/login) arrives.
+ */
 
 class AuthControllerProvider extends Controller
 {
@@ -18,7 +23,7 @@ class AuthControllerProvider extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:provider', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login']]);
     }
 
     /**
@@ -28,21 +33,21 @@ class AuthControllerProvider extends Controller
      */
     public function login()
     {
+        //Check if provided requests contains the needed parameters
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
             'password'=> 'required',
             'x-provider' => 'required'
         ]);
-        Log::info("ich war hier");
 
+        //Send errors
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 400);
         }
 
-        $credentials = request(['name', 'password']);
-
-
-        if (! $token = auth()->attempt($credentials)) {
+        //Try to login
+        $credentials = request(['name', 'password', 'x-provider']);
+        if (! $token = auth()->guard()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -93,6 +98,7 @@ class AuthControllerProvider extends Controller
     {
         return response()->json([
             'access_token' => $token,
+            'isProvider' => auth()->user()->isProvider,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 24
         ]);

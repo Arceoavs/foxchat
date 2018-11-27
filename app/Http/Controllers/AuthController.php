@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Validator;
 
+use Illuminate\Support\Facades\Log;
+use function GuzzleHttp\json_decode;
+/**
+ * Here all requests from (auth/login) arrives.
+ */
+
 class AuthController extends Controller
 {
-         /**
+    
+    /**
      * Create a new AuthController instance.
      *
      * @return void
@@ -19,6 +26,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login']]);
     }
+    
 
     /**
      * Get a JWT via given credentials.
@@ -27,26 +35,25 @@ class AuthController extends Controller
      */
     public function login()
     {
+        //Check if provided requests contains the needed parameters
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
             'password'=> 'required'
         ]);
 
+        //Send errors
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 400);
         }
-
+        
+        //Try to login
         $credentials = request(['name', 'password']);
-
-
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return $this->respondWithToken($token);
     }
-
-
     /**
      * Get the authenticated User.
      *
@@ -90,6 +97,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
+            'isProvider' => auth()->user()->isProvider,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 24
         ]);

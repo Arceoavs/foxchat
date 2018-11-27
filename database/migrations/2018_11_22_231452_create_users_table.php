@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFoxdoxUsersTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateFoxdoxUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('foxdox_users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('isProvider')->nullable();
             $table->string('name')->unique();
             $table->string('foxdox-token');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateFoxdoxUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foxdox_users');
+        Schema::dropIfExists('users');
     }
 }

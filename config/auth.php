@@ -42,11 +42,7 @@ return [
         ],
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'foxdoxusers',
-        ],
-        'provider' => [
-            'driver' => 'jwt',
-            'provider' => 'foxdoxprovider'
+            'provider' => 'users',
         ]
     ],
 
@@ -68,14 +64,11 @@ return [
     */
 
     'providers' => [
-        'foxdoxusers' => [
-            'driver' => 'FoxdoxUserAuthProvider',
-            'model' => App\FoxdoxUser::class,
+        'users' => [
+            'driver' => 'FoxdoxAuthProvider',
+            'model' => App\User::class,
         ],
-        'foxdoxprovider' => [
-            'driver' => 'FoxdoxProviderAuthProvider',
-            'model' => App\FoxdoxProvider::class,
-        ],
+
 
         // 'users' => [
         //     'driver' => 'database',

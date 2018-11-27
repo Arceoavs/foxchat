@@ -1,0 +1,341 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Foxchat API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logs a Foxdox User in.",
+                "operationId": "loginFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes username and password for verification against Foxdox Server.",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/userLoginForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully logged in.",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/loginResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Email or Password is missing."
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logs a User out",
+                "operationId": "logutFoxdoxUser",
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully logged out.",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/me": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Gives the corresponding user based on the Token back.",
+                "operationId": "meFoxdoxUser",
+                "responses": {
+                    "200": {
+                        "description": "User information.",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/meResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/provider/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logs a Foxdox Provider in.",
+                "operationId": "loginFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes username, password and X-PROVIDER Header for verification against Foxdox Server.",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/providerLoginForm"
+                            },
+                            "example":{
+                                "providerLoginForm": {
+                                    "summary" : "Example for meine.versicherung",
+                                    "value" : {
+                                        "name": "meine.versicherung",
+                                        "password": "meine.versicherung",
+                                        "x-provider": "HwCuYqDaadmXGMObfLYP"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully logged in.",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/loginResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Email or Password is missing."
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/auth/provider/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logs a Provider out",
+                "operationId": "logutFoxdoxProvider",
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully logged out.",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/provider/me": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Gives the corresponding provider based on the Token back.",
+                "operationId": "meFoxdoxProvider",
+                "responses": {
+                    "200": {
+                        "description": "Provider information.",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/meResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/x-www-form-urlencoded": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "userLoginForm": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "password"
+                ],
+                "properties":{
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "providerLoginForm": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "password",
+                    "x-provider"
+                ],
+                "properties":{
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "x-provider":{
+                        "type": "string"
+                    }
+                },
+                "example":{
+                    "meineversicherung": {
+                        "summary" : "Example for meine.versicherung",
+                        "value" : {
+                            "name": "meine.versicherung",
+                            "password": "meine.versicherung",
+                            "x-provider": "HwCuYqDaadmXGMObfLYP"
+                        }
+                    }
+                }
+            },
+            "loginResponse": {
+                "type": "object",
+                "properties":{
+                    "access_token": {
+                        "type": "string"
+                    },
+                    "isProvider": {
+                        "type": "boolean"
+                    },
+                    "token_type": {
+                        "type": "string"
+                    },
+                    "expires in": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "meResponse": {
+                "type": "object",
+                "properties":{
+                    "id": {
+                        "type": "integer"
+                    },
+                    "isProvider": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "foxdox-token": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "name": "FoxdoxUser-API-Key",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
