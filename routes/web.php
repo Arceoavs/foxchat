@@ -12,13 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/welcome');
 });
 
-Route::get('/dokumente', function () {
-    return view('dokumente');
-});
-
-Route::get('/chats', function () {
-    return view('chats');
-});
+Route::get('/{any}', function () {
+    return view('/welcome');
+})->where('{any}', '.*');

@@ -1,33 +1,16 @@
-@extends('layout.default')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" type="image/png" href="/img/FoxdoxChat.png"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="stylesheet" type="text/css" href="/css/app.css">
+        <title>foxdox Chat</title>
 
-@section('content')
-
-<div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-md-3">
-                <form class="form-signin">
-                        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-                        <label for="username" class="sr-only">Foxdox Benutzername</label>
-                        <input type="username" id="username" class="form-control" placeholder="Foxdox Benutzername" required autofocus></input>
-                        <label for="inputPassword" class="sr-only">Passwort</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
-                        <div class="checkbox mb-3">
-                         
-                        </div>
-                        <button class="btn btn-primary btn-md" type="submit">Anmelden</button>
-                    </form>
-            </div>
-            <div class="col-md-4">
-                <div class="content">
-                        <div class="title">
-                            Hallo
-                        </div>
-            
-                        <div class="links">
-                            <a href="/dokumente"> Willkommen im digitalen Tresor</a>
-                        </div>
-                </div>
-          </div>
-        </div>
-</div>
-@endsection
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/javascript" src="/js/app.js"></script>
+    </body>
+</html>
