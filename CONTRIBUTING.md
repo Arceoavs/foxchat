@@ -57,7 +57,7 @@ Get the project running (Alternative):
 	9	execute serve command:
 		php artisan serve
 
-    10  execute jwt command:
-        php artisan jwt:secret
+  10 execute jwt command:
+    php artisan jwt:secret
 		
 	Then you should see under http://digitaler-tresor.test our project.

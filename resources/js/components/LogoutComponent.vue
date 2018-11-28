@@ -9,8 +9,7 @@
         methods: {
             logout: function(){
                 console.log('Logging Out...');
-                auth.logout();                
-                this.$router.push('/login');
+                auth.logout(this);
             }
         },
         mounted() {

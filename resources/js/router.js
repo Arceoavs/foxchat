@@ -37,7 +37,12 @@ const router = new VueRouter({
         mode: 'history',
         routes: routes     
 });
-
+    
+var self = {
+        errorMsg: 'Login Fehler: ',
+        showAlert: false,
+        noError: true
+    }
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
@@ -45,9 +50,15 @@ router.beforeEach((to, from, next) => {
             next('/login');
         } else {   
             if(cookies.get('user') == null){
-                auth.retrieveUser();
-            }
-            next();       
+                auth.retrieveUser(this.self);
+                if(this.self.noError){
+                    next();
+                }else{
+                    next('login');
+                }
+            } else {
+                next();
+            } 
         }
     } else {
         next();

@@ -19,7 +19,7 @@ class AuthService {
                 console.log('Logging In...');
                 cookies.set('bearer', response.data.access_token);
 
-                this.retrieveUser();
+                this.retrieveUser(self);
                 
                 if( self.noError  ){
                     self.$router.push('/');
@@ -36,7 +36,7 @@ class AuthService {
             });
     }
 
-    logout(){
+    logout(self){
         var formData = new FormData();
         formData.append('token', cookies.get('bearer'));
 
@@ -51,9 +51,10 @@ class AuthService {
         cookies.remove('bearer');
         cookies.remove('user');
 
+        self.$router.push('/login');
     }
 
-    retrieveUser(){
+    retrieveUser(self){
         console.log('Getting Userdata...');
 
         var configExt = {
