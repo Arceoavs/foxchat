@@ -55,11 +55,14 @@ class AuthService {
 
     retrieveUser(){
         console.log('Getting Userdata...');
-            
-        var formData = new FormData();
-        formData.append('token', cookies.get('bearer'));
 
-        axios.post('/api/auth/me', formData, config)
+        var configExt = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer '+cookies.get('bearer')
+            }
+        }
+        axios.get('/api/auth/me', configExt)
             .then(response => {
 
                 cookies.set('user', JSON.stringify(response.data));
