@@ -4,12 +4,16 @@
             <div class="col-md-8">
                 <div class="card card-default">
                     <div class="card-header">Login</div>
-                    <div @keyup.enter="sendPassword()" class="card-body">
+                    <div @keyup.enter="sendPassword()" class="card-body mx-auto">
                         <input v-model="username" placeholder="Username">
                         <input type="password" v-model="password" placeholder="Password">
                         <button type="button" class="btn foxcolor" v-on:click="sendPassword()" >Login</button>
 
                         <b-alert :show="showAlert" @dismissed="showAlert = false" variant="danger" dismissible>{{ errorMsg }}</b-alert>
+                        
+                        <p><router-link to="/provider/login">
+                            <a class="">No User? Get to our Provider Form</a>
+                        </router-link></p>
                     </div>
                 </div>
             </div>

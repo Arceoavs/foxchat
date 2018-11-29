@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import OverviewComponent from './components/OverviewComponent.vue';
 import ChatComponent from './components/ChatComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
+import LoginComponentProvider from './components/LoginComponentProvider.vue';
 import auth from './services/AuthService.js';
 
 
@@ -21,6 +22,10 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: LoginComponent
+    },{
+        path: '/provider/login',
+        name: 'Login Provider',
+        component: LoginComponentProvider
     },{
         path: '/:partner',
         name: 'Chat with Partner',
