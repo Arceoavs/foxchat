@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
             next('/login');
         } else {   
             if(cookies.get('user') == null){
-                auth.retrieveUser(this.self);
+                auth.retrieveUser(self);
                 if(self.noError){
                     next();
                 }else{
