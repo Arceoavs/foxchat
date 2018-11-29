@@ -15,7 +15,7 @@ class AuthService {
         axios.post('/api/auth/login', formData, config)
             .then(response => {
                 console.log('Logging In...');
-                self.cookies.set('bearer', response.data.access_token);
+                self.$cookies.set('bearer', response.data.access_token);
 
                 this.retrieveUser(self);
                 
@@ -36,7 +36,7 @@ class AuthService {
 
     logout(self){
         var formData = new FormData();
-        formData.append('token', self.cookies.get('bearer'));
+        formData.append('token', self.$cookies.get('bearer'));
 
         axios.post('/api/auth/logout', formData, config)
             .then(response => {
@@ -46,8 +46,8 @@ class AuthService {
                 console.log('Error logging Out.');
             });
             
-        self.cookies.remove('bearer');
-        self.cookies.remove('user');
+        self.$cookies.remove('bearer');
+        self.$cookies.remove('user');
 
         self.$router.push('/login');
     }
@@ -58,16 +58,16 @@ class AuthService {
         var configExt = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer '+self.cookies.get('bearer')
+                'Authorization': 'Bearer '+self.$cookies.get('bearer')
             }
         }
         axios.get('/api/auth/me', configExt)
             .then(response => {
 
-                self.cookies.set('user', JSON.stringify(response.data));
+                self.$cookies.set('user', JSON.stringify(response.data));
 
                 console.log('Got Userdata:');
-                console.log(JSON.stringify(self.cookies.get('user')));
+                console.log(JSON.stringify(self.$cookies.get('user')));
             })
             .catch(error => {
                 this.logout();
