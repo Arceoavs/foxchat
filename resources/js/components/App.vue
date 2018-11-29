@@ -1,5 +1,6 @@
 <template>
     <div>
+        <loading-component></loading-component>
         <b-navbar toggleable="md" type="dark" class="foxcolor-inverted" >
             <b-navbar-brand to="/">
                 <img class="img-logo" src="/img/FoxdoxChat.png" />
@@ -24,10 +25,12 @@
 
 <script>
     import LogoutComponent from "./LogoutComponent.vue";
+    import LoadingComponent from "./LoadingComponent.vue";
     
     export default {
         components: {
-            LogoutComponent
+            LogoutComponent,
+            LoadingComponent
         }
     };
 </script>

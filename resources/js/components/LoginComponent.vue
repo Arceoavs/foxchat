@@ -18,7 +18,7 @@
 </template>
 
 <script>
-
+    
     import auth from '../services/AuthService.js';
 
     export default {
