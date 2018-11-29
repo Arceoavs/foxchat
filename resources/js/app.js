@@ -11,7 +11,6 @@ import BootstrapVue from 'bootstrap-vue';
 
 import store from './store.js';
 import router from './router.js';
-import cookies from './cookies.js'; 
 import App from './components/App.vue';
 
 
@@ -22,7 +21,6 @@ const app = new Vue({
     el: '#app',
     router,
     store,
-    cookies,
     template: '<App></App>',
     components: { App }
 });

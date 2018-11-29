@@ -1,4 +1,4 @@
-import cookies from '../cookies.js';
+import EventBus from './event-bus.js';
 
 const config = {
     headers: {
@@ -6,8 +6,11 @@ const config = {
     }
 }
 
+
 class AuthService {
     login(pUsername, pPassword, self){
+        EventBus.$emit('loading');
+
         console.log('Logging In...');
             
         var formData = new FormData();
@@ -17,14 +20,10 @@ class AuthService {
         axios.post('/api/auth/login', formData, config)
             .then(response => {
                 console.log('Logging In...');
-                cookies.set('bearer', response.data.access_token);
+                localStorage.setItem('bearer', response.data.access_token);
 
                 this.retrieveUser(self);
                 
-                if( self.noError  ){
-                    self.$router.push('/');
-                    console.log('Logged In.');
-                }
             })
             .catch(error => {
                 console.log('error while Login' + JSON.stringify(error));
@@ -32,13 +31,17 @@ class AuthService {
                 self.showAlert = true;
                 self.noError = !self.showAlert;
 
-                LogoutComponent.logout();
+                this.logout();
+            }).finally(param => {
+                EventBus.$emit('loaded');
             });
     }
 
     logout(self){
+        EventBus.$emit('loading');
+
         var formData = new FormData();
-        formData.append('token', cookies.get('bearer'));
+        formData.append('Authorization', 'Bearer '+localStorage.getItem('bearer'));
 
         axios.post('/api/auth/logout', formData, config)
             .then(response => {
@@ -46,30 +49,42 @@ class AuthService {
             })
             .catch(error => {
                 console.log('Error logging Out.');
+            }).finally(param => {
+                EventBus.$emit('loaded');
+                self.$router.push('/login');
             });
-            
-        cookies.remove('bearer');
-        cookies.remove('user');
+        
+        localStorage.removeItem('bearer');
+        localStorage.removeItem('user');
 
-        self.$router.push('/login');
+
+        
     }
 
     retrieveUser(self){
+        EventBus.$emit('loading');
+
         console.log('Getting Userdata...');
 
         var configExt = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer '+cookies.get('bearer')
+                'Authorization': 'Bearer '+localStorage.getItem('bearer')
+
             }
         }
         axios.get('/api/auth/me', configExt)
             .then(response => {
 
-                cookies.set('user', JSON.stringify(response.data));
+                localStorage.setItem('user', JSON.stringify(response.data));
 
                 console.log('Got Userdata:');
-                console.log(JSON.stringify(cookies.get('user')));
+                console.log(JSON.stringify(localStorage.getItem('user')));
+
+                if( self.noError  ){
+                    self.$router.push('/');
+                    console.log('Logged In.');
+                }
             })
             .catch(error => {
                 this.logout();
@@ -77,6 +92,8 @@ class AuthService {
                 self.errorMsg = 'Login Fehler User: ' + error.response.status + error.response.statusText + error.response.data.message;
                 self.showAlert = true;
                 self.noError = !self.showAlert;
+            }).finally(param => {
+                EventBus.$emit('loaded');
             });
     }
 }
