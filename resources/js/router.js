@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 import OverviewComponent from './components/OverviewComponent.vue';
 import ChatComponent from './components/ChatComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
-import cookies from './cookies.js';
 import auth from './services/AuthService.js';
 
 
@@ -46,10 +45,10 @@ var self = {
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
-        if (cookies.get('bearer') == null) {
+        if (localStorage.getItem('bearer') == null) {
             next('/login');
         } else {   
-            if(cookies.get('user') == null){
+            if(localStorage.getItem('user') == null){
                 auth.retrieveUser(self);
                 if(self.noError){
                     next();
