@@ -17,7 +17,7 @@ class CreateConversationsTable extends Migration
             $table->increments('id');
             $table->integer('user_one');
             $table->integer('user_two');
-            $table->boolean('status');
+            $table->string('tag');
             $table->timestamps();
         });
     }
