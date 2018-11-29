@@ -5,13 +5,13 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 .navbar-laravel {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .foxcolor {
-    background-color: $foxi;
-    color: white;
+  background-color: $foxi;
+  color: white;
 }
 
 .foxcolor-pure {
@@ -19,7 +19,7 @@
 }
 
 .foxcolor-bg {
-    background-color: $foxi;
+  background-color: $foxi;
 }
 
 .bold {
@@ -27,87 +27,132 @@
 }
 
 .foxcolor-inverted {
-    color: $foxi;
-    background-color: rgb(201, 201, 201);
+  color: $foxi;
+  background-color: rgb(201, 201, 201);
 }
 
 .myCont {
-    padding: 10px;
+  padding: 10px;
 }
 
 .menuText {
-    color: white;
-    font-weight: bold;
-    min-height: 66px;
+  color: white;
+  font-weight: bold;
+  min-height: 66px;
 }
 
-div.menuText:hover>li>a>li>div.menuText {
-    color: $foxi !important;
+div.menuText:hover > li > a > li > div.menuText {
+  color: $foxi !important;
 }
 
 div.menuText:hover {
-    color: $foxi !important;
-    background-color: white;
-    font-weight: bold;
+  color: $foxi !important;
+  background-color: white;
+  font-weight: bold;
 }
 
 .logo {
-    background-color: white;
+  background-color: white;
 }
 
 .alert-chat {
-    background-color: rgb(226, 226, 226);
+  background-color: rgb(226, 226, 226);
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .float-right {
-    float: right;
+  float: right;
 }
 
 .float-left {
-    float: left;
+  float: left;
 }
 
 .img-logo {
-    max-height: 50px;
+  max-height: 35px;
 }
 
 .loader-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 
-.loader {    
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid $foxi; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid $foxi; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
+.overlay {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20000;
+  cursor: pointer;
+}
 
-.overlay{
-    position: fixed;
-    display: block;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 20000;
-    cursor: pointer;
+//Login
+.panel h2 {
+  color: #444444;
+  font-size: 40px;
+}
+.panel p {
+  color: #777777;
+  font-size: 14px;
+  margin-bottom: 30px;
+  line-height: 24px;
+}
+.login-form .form-control {
+  border: 1px solid #f86a2d;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 50px;
+}
+.main-div {
+  border-radius: 2px;
+  margin: 10px auto 30px;
+  max-width: 38%;
+  padding: 50px 70px 70px 71px;
+}
+.login-form {
+  text-align: center;
+}
+.login-form .btn.btn-primary {
+  background: #f86a2d;
+  border-color: #f86a2d;
+  font-size: 14px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px;
+}
+.description {
+  color: #777777;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 30px;
 }
