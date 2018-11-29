@@ -9,7 +9,7 @@
                 <b-nav-item to="/">
                     <div class="foxcolor-pure">Overview</div>
                 </b-nav-item>
-                <b-nav-item to="/2ndHome">
+                <b-nav-item to="/Chat">
                     <div class="foxcolor-pure">Chat</div>
                 </b-nav-item>
             </b-navbar-nav>
