@@ -7,6 +7,16 @@
                 <!-- TODO: Chats anklickbar machen, Pro User nur ein Chat? Mehrere Konversationen zwischen zwei Nutzern -->
             </li>
         </ul>
+        <router-link to="/index/nestedzwei">
+            <a class="">Nested Link</a>
+        </router-link>
+
+        <router-link to="/index/nested">
+            <a class="">root Link</a>
+        </router-link>
+
+        <router-view></router-view>
+
     </div>
 </template>
 

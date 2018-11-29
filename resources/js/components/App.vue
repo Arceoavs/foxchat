@@ -5,7 +5,7 @@
             <b-navbar-brand to="/">
                 <img class="img-logo" src="/img/FoxdoxChat.png" />
             </b-navbar-brand>
-            <b-navbar-nav>
+            <b-navbar-nav v-show="loggedIn">
                 <b-nav-item to="/">
                     <div class="foxcolor-pure">Overview</div>
                 </b-nav-item>
@@ -13,7 +13,7 @@
                     <div class="foxcolor-pure">Chat</div>
                 </b-nav-item>
             </b-navbar-nav>
-             <b-navbar-nav class="ml-auto">
+             <b-navbar-nav class="ml-auto" v-show="loggedIn">
                 <b-nav-item right> 
                     <logout-component></logout-component>
                 </b-nav-item>
@@ -26,8 +26,18 @@
 <script>
     import LogoutComponent from "./LogoutComponent.vue";
     import LoadingComponent from "./LoadingComponent.vue";
+    import EventBus from '../services/event-bus.js';
     
     export default {
+        data:{ function(){ 
+                return { loggedIn };
+            }
+        },
+        mounted(){
+            EventBus.$on('loading', payload => {
+                this.loggedIn = localStorage.getItem('bearer');
+            });
+        },
         components: {
             LogoutComponent,
             LoadingComponent

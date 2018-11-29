@@ -11,7 +11,7 @@
 
                         <b-alert :show="showAlert" @dismissed="showAlert = false" variant="danger" dismissible>{{ errorMsg }}</b-alert>
                         
-                        <p><router-link to="/provider/login">
+                        <p><router-link to="/login/provider">
                             <a class="">No User? Get to our Provider Form</a>
                         </router-link></p>
                     </div>

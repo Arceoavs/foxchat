@@ -12,8 +12,8 @@
 
                         <b-alert :show="showAlert" @dismissed="showAlert = false" variant="danger" dismissible>{{ errorMsg }}</b-alert>
 
-                        <p><router-link to="/provider/login">
-                            <a class="">No User? Get to our Provider Form</a>
+                        <p><router-link to="/login/">
+                            <a class="">No Provider? Get to our User Form</a>
                         </router-link></p>
                     </div>
                 </div>
@@ -22,9 +22,10 @@
     </div>
 </template>
 
+
 <script>
     
-    import auth from '../services/AuthService.js';
+    import auth from '../services/AuthServiceProvider.js';
 
     export default {
         data: function() {

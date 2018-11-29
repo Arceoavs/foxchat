@@ -43,7 +43,14 @@ class AuthService {
         var formData = new FormData();
         formData.append('Authorization', 'Bearer '+localStorage.getItem('bearer'));
 
-        axios.post('/api/auth/logout', formData, config)
+        var configExt = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer '+localStorage.getItem('bearer')
+            }
+        }
+
+        axios.post('/api/auth/logout', formData, configExt)
             .then(response => {
                 console.log('Logged Out.');
             })
@@ -70,7 +77,6 @@ class AuthService {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Bearer '+localStorage.getItem('bearer')
-
             }
         }
         axios.get('/api/auth/me', configExt)

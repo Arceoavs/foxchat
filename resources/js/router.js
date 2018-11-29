@@ -2,8 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import OverviewComponent from './components/OverviewComponent.vue';
+import NestedComponent from './components/NestedComponent.vue';
+import NestedComponent2 from './components/NestedComponent.1.vue';
 import ChatComponent from './components/ChatComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
+import LoginAggr from './components/LoginAggr.vue';
 import LoginComponentProvider from './components/LoginComponentProvider.vue';
 import auth from './services/AuthService.js';
 
@@ -18,14 +21,41 @@ const routes = [
         meta: { 
             requiresAuth: true,
         }
+    },
+    {
+        path: '/index',
+        name: 'Overview Index',
+        component: OverviewComponent,
+        meta: { 
+            requiresAuth: true,
+        },
+        children: [
+            {
+                path: 'nested',
+                name: 'Nested',
+                component: NestedComponent
+            },{
+                path: 'nestedzwei',
+                name: 'Nested 2',
+                component: NestedComponent2
+            }
+        ]
+
     },{
         path: '/login',
         name: 'Login',
-        component: LoginComponent
-    },{
-        path: '/provider/login',
-        name: 'Login Provider',
-        component: LoginComponentProvider
+        component: LoginAggr,
+        children: [
+            {
+                path: '',
+                name: 'Login User',
+                component: LoginComponent
+            },{
+                path: 'provider',
+                name: 'Provider Login',
+                component: LoginComponentProvider
+            }
+        ]
     },{
         path: '/:partner',
         name: 'Chat with Partner',
