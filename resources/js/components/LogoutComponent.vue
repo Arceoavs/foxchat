@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="btn foxcolor-inverted" v-on:click="logout()" >Logout</button>
+    <button type="button" class="btn btn-dark foxcolor-inverted" v-on:click="logout()" >Logout</button>
 </template>
 
 <script>
