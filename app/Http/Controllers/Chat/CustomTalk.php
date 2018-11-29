@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Chat;
 
 use Nahid\Talk\Talk;
 
+use App\CustomConversation as Conversation;
+use App\CustomMessage as Message;
 use Illuminate\Support\Facades\Log;
+
 
 class CustomTalk extends Talk
 { 
@@ -73,6 +76,33 @@ class CustomTalk extends Talk
 
         $convId = $this->newConversationWithTag($receiverId, $conversationtag);
         $message = $this->makeMessage($convId, $message);
+
+        return $message;
+    }
+
+    /**
+     * create a new message by using conversationId.
+     *
+     * @param int    $conversationId
+     * @param string $message
+     *
+     * @return \Nahid\Talk\Messages\Message
+     */
+    protected function makeMessage($conversationId, $message)
+    {
+        $conversation =$this->conversation->where('id', $conversationId)->first();
+        Log::info($conversation->tag);
+        $message = $this->message->create([
+            'message' => $message,
+            'conversation_id' => $conversationId,
+            'conversation_tag' => $conversation->tag,
+            'user_id' => $this->authUserId,
+            'is_seen' => 0,
+        ]);
+
+        $message->conversation->touch();
+
+        $this->broadcast->transmission($message);
 
         return $message;
     }

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
 use App\Http\Controllers\Chat\CustomConversationRepository as ConversationRepository;
-use Nahid\Talk\Messages\MessageRepository;
+use App\Http\Controllers\Chat\CustomMessageRepository as MessageRepository;
 
 //Benötigt für Abänderung
 use Nahid\Talk\TalkServiceProvider;
