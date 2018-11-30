@@ -45,7 +45,7 @@
 
         },
         mounted() {
-            console.log('Login Component mounted.')            
+            console.log('Login Provider Component mounted.')            
         }
     };
 </script>

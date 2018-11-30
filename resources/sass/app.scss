@@ -4,18 +4,61 @@
 @import 'variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+body {
+    background-color: #d6d6d6 !important;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .navbar-laravel {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.navbar-light .navbar-nav .show>.nav-link,
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+    color: $foxi !important;
+}
+
+.logout-link {
+    padding-top: 6px !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: $foxi !important;
 }
 
 .foxcolor {
     background-color: $foxi;
-    color: white;
+    color: white !important;
+}
+
+.navbar {
+    padding: 0rem 1rem !important;
+    padding-right: 0rem !important;
+}
+
+.max-height-nav {
+    height: 60px;
+}
+
+.clearfisx {
+    width: 100%;
+    height: 10px;
+    background-color: black;
 }
 
 .foxcolor-pure {
-  color: $foxi;
+    color: $foxi;
 }
 
 .foxcolor-bg {
@@ -23,12 +66,12 @@
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .foxcolor-inverted {
     color: $foxi;
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(255, 255, 255);
 }
 
 .myCont {
@@ -79,13 +122,15 @@ ul {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
 }
 
-.loader {    
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid $foxi; /* Blue */
+.loader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid $foxi;
+    /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -93,12 +138,17 @@ ul {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 
-.overlay{
+.overlay {
     position: fixed;
     display: block;
     width: 100%;
@@ -107,7 +157,7 @@ ul {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 20000;
     cursor: pointer;
 }

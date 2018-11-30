@@ -16,15 +16,11 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        name: 'Overview',
-        component: OverviewComponent,
-        meta: { 
-            requiresAuth: true,
-        }
+        redirect: { path: '/index' }
     },
     {
         path: '/index',
-        name: 'Overview Index',
+        name: 'OverviewIndex',
         component: OverviewComponent,
         meta: { 
             requiresAuth: true,
@@ -43,21 +39,20 @@ const routes = [
 
     },{
         path: '/login',
-        name: 'Login',
         component: LoginAggr,
         children: [
             {
-                path: '',
-                name: 'Login User',
-                component: LoginComponent
-            },{
                 path: 'provider',
                 name: 'Provider Login',
                 component: LoginComponentProvider
+            },{
+                path: '',
+                name: 'Login',
+                component: LoginComponent
             }
         ]
     },{
-        path: '/:partner',
+        path: '/chat',
         name: 'Chat with Partner',
         component: ChatComponent,
         meta: { 

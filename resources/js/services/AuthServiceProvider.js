@@ -34,7 +34,7 @@ class AuthServiceProvider {
                 self.showAlert = true;
                 self.noError = !self.showAlert;
 
-                this.logout();
+                this.logout(self);
             }).finally(param => {
                 EventBus.$emit('loaded');
             });
@@ -96,7 +96,7 @@ class AuthServiceProvider {
                 }
             })
             .catch(error => {
-                this.logout();
+                this.logout(self);
                 console.log('error while fetching user data' + JSON.stringify(error));
                 self.errorMsg = 'Login Fehler User: ' + error.response.status + error.response.statusText + error.response.data.message;
                 self.showAlert = true;
