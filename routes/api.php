@@ -40,12 +40,14 @@ Route::group([
 Route::group([
 
     'middleware' => 'api',
-    'prefix' => 'chat'
+    'prefix' => 'chat/user'
 
 ], function ($router) {
 
     //Chat requests for FoxdoxUser
     Route::post('sendmessage', 'Chat\ChatAPIFoxdoxUser@sendMessageByFoxdoxUser');
     Route::post('getinbox', 'Chat\ChatAPIFoxdoxUser@getInboxForFoxdoxUser');
+    Route::post('getconversationbyuserid', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderName');
+    Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxUser@getConvetsationById');
 
 });
