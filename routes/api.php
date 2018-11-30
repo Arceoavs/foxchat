@@ -35,12 +35,4 @@ Route::group([
     Route::post('provider/logout', 'AuthControllerProvider@logout');
     Route::post('provider/refresh', 'AuthControllerProvider@refresh');
     Route::get('provider/me', 'AuthControllerProvider@me');
-
-    Route::post('getuserid', 'HomeController@index');
 });
-
-//test
-
-Route::get('providers', 'MessageController@allProviders');
-Route::get('message/{id}', 'MessageController@chatHistory');
-Route::post('message/send', 'MessageController@sendMessage');

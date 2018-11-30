@@ -33,6 +33,9 @@ class AuthService {
 
                 this.logout(self);
             }).finally(param => {
+                if(self.noError){
+                    self.$router.push();
+                }
                 EventBus.$emit('loaded');
             });
     }
