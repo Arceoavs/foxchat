@@ -18,10 +18,23 @@ class CustomTalkServiceProvider extends TalkServiceProvider
 {
     protected function registerTalk()
     {
-        $this->app->singleton('talk', function (Container $app) {
+        $this->app->singleton('customtalk', function (Container $app) {
             return new CustomTalk($app['config'], $app['talk.broadcast'], $app[ConversationRepository::class], $app[MessageRepository::class]);
         });
 
-        $this->app->alias('talk', CustomTalk::class);
+        $this->app->alias('customtalk', CustomTalk::class);
+    }
+
+        /**
+     * Get the services provided by the provider.
+     *
+     * @return string[]
+     */
+    public function provides()
+    {
+        return [
+            'customtalk',
+            'talk.broadcast',
+        ];
     }
 }

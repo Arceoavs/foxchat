@@ -67,7 +67,7 @@ class CustomTalk extends Talk
      */
     public function sendMessageByUserIdWithTag($receiverId, $message, $conversationtag)
     {
-        Log::info("in send Message");
+        // Log::info("in send Message");
         if ($conversationId = $this->isConversationExistsWithTag($receiverId, $conversationtag)) {
             $message = $this->makeMessage($conversationId, $message);
 
@@ -91,7 +91,7 @@ class CustomTalk extends Talk
     protected function makeMessage($conversationId, $message)
     {
         $conversation =$this->conversation->where('id', $conversationId)->first();
-        Log::info($conversation->tag);
+        // Log::info($conversation->tag);
         $message = $this->message->create([
             'message' => $message,
             'conversation_id' => $conversationId,
