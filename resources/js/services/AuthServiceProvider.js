@@ -27,6 +27,9 @@ class AuthServiceProvider {
 
                 this.retrieveUser(self);
                 
+                if(self.noError){
+                    self.$router.push();
+                }
             })
             .catch(error => {
                 console.log('error while Login' + JSON.stringify(error));

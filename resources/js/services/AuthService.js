@@ -24,6 +24,9 @@ class AuthService {
 
                 this.retrieveUser(self);
                 
+                if(self.noError){
+                    self.$router.push();
+                }
             })
             .catch(error => {
                 console.log('error while Login' + JSON.stringify(error));
@@ -33,9 +36,6 @@ class AuthService {
 
                 this.logout(self);
             }).finally(param => {
-                if(self.noError){
-                    self.$router.push();
-                }
                 EventBus.$emit('loaded');
             });
     }
