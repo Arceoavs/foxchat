@@ -6,6 +6,8 @@ const config = {
     }
 }
 
+var path = '/api/auth/provider';
+
 
 class AuthServiceProvider {
     login(pUsername, pPassword, pXProvider, self){
@@ -18,7 +20,7 @@ class AuthServiceProvider {
         formData.append('password', pPassword);
         formData.append('x-provider', pXProvider);
 
-        axios.post('/api/auth/provider/login', formData, config)
+        axios.post(path+'/login', formData, config)
             .then(response => {
                 console.log('Logging In...');
                 localStorage.setItem('bearer', response.data.access_token);
@@ -32,7 +34,7 @@ class AuthServiceProvider {
                 self.showAlert = true;
                 self.noError = !self.showAlert;
 
-                this.logout();
+                this.logout(self);
             }).finally(param => {
                 EventBus.$emit('loaded');
             });
@@ -44,7 +46,14 @@ class AuthServiceProvider {
         var formData = new FormData();
         formData.append('Authorization', 'Bearer '+localStorage.getItem('bearer'));
 
-        axios.post('/api/auth/provider/logout', formData, config)
+        var configExt = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer '+localStorage.getItem('bearer')
+            }
+        }
+
+        axios.post(path+'/logout', formData, configExt)
             .then(response => {
                 console.log('Logged Out.');
             })
@@ -73,7 +82,7 @@ class AuthServiceProvider {
                 'Authorization': 'Bearer '+localStorage.getItem('bearer')
             }
         }
-        axios.get('/api/auth/provider/me', configExt)
+        axios.get(path+'/me', configExt)
             .then(response => {
 
                 localStorage.setItem('user', JSON.stringify(response.data));
@@ -87,7 +96,7 @@ class AuthServiceProvider {
                 }
             })
             .catch(error => {
-                this.logout();
+                this.logout(self);
                 console.log('error while fetching user data' + JSON.stringify(error));
                 self.errorMsg = 'Login Fehler User: ' + error.response.status + error.response.statusText + error.response.data.message;
                 self.showAlert = true;

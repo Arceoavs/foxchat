@@ -1,51 +1,52 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <b-navbar-brand to="/">
-        <img class="img-logo" src="/img/FoxdoxChat.png">
-      </b-navbar-brand>
-      <!--Toggler-->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <b-nav-item to="/">
-              <div class="foxcolor-pure">Dokumente</div>
-            </b-nav-item>
-          </li>
-          <b-nav-item to="/Chat">
-            <div class="foxcolor-pure">Chat</div>
-          </b-nav-item>
-        </ul>
-        <ul right>
-          <logout-component></logout-component>
-        </ul>
-      </div>
-    </nav>
-    <router-view></router-view>
-    <loading-component></loading-component>
-  </div>
+    <div>
+        <loading-component></loading-component>
+        <b-navbar toggleable="md" class="navbar-laravel" >
+            <b-navbar-brand to="/">
+                <img class="img-logo" src="/img/FoxdoxChat.png" />
+            </b-navbar-brand>
+            <b-navbar-nav v-show="loggedIn">
+                <b-nav-item to="/index">
+                    <div >Overview</div>
+                </b-nav-item>
+                <b-nav-item to="/Chat">
+                    <div >Chat</div>
+                </b-nav-item>
+            </b-navbar-nav>
+            <b-navbar-nav class="ml-auto foxcolor max-height-nav" v-show="loggedIn">
+                <b-nav-item right class="logout-link"> 
+                    <logout-component ></logout-component>
+                </b-nav-item>
+            </b-navbar-nav>
+        </b-navbar>
+        <!--<div class="clearfisx"></div>-->
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-import LogoutComponent from "./LogoutComponent.vue";
-import LoadingComponent from "./LoadingComponent.vue";
-
-export default {
-  components: {
-    LogoutComponent,
-    LoadingComponent
-  }
-};
+    import LogoutComponent from "./LogoutComponent.vue";
+    import LoadingComponent from "./LoadingComponent.vue";
+    import EventBus from '../services/event-bus.js';
+    
+    export default {
+        data: function(){ 
+            return { 
+                loggedIn: false
+            }
+        },
+        mounted(){
+            this.loggedIn = localStorage.getItem('bearer');
+            EventBus.$on('loading', payload => {
+                this.loggedIn = localStorage.getItem('bearer');
+            });
+            EventBus.$on('loaded', payload => {
+                this.loggedIn = localStorage.getItem('bearer');
+            });
+        },
+        components: {
+            LogoutComponent,
+            LoadingComponent
+        }
+    };
 </script>

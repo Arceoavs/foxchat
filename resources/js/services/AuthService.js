@@ -31,7 +31,7 @@ class AuthService {
                 self.showAlert = true;
                 self.noError = !self.showAlert;
 
-                this.logout();
+                this.logout(self);
             }).finally(param => {
                 EventBus.$emit('loaded');
             });
@@ -43,7 +43,14 @@ class AuthService {
         var formData = new FormData();
         formData.append('Authorization', 'Bearer '+localStorage.getItem('bearer'));
 
-        axios.post('/api/auth/logout', formData, config)
+        var configExt = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer '+localStorage.getItem('bearer')
+            }
+        }
+
+        axios.post('/api/auth/logout', formData, configExt)
             .then(response => {
                 console.log('Logged Out.');
             })
@@ -70,7 +77,6 @@ class AuthService {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Bearer '+localStorage.getItem('bearer')
-
             }
         }
         axios.get('/api/auth/me', configExt)
@@ -87,7 +93,7 @@ class AuthService {
                 }
             })
             .catch(error => {
-                this.logout();
+                this.logout(self);
                 console.log('error while fetching user data' + JSON.stringify(error));
                 self.errorMsg = 'Login Fehler User: ' + error.response.status + error.response.statusText + error.response.data.message;
                 self.showAlert = true;

@@ -10466,15 +10466,56 @@ a.text-dark:focus {
   }
 }
 
+body {
+  background-color: #d6d6d6 !important;
+}
+
+.card {
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  background-color: #fff !important;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+  color: #f86a2d !important;
+}
+
+.logout-link {
+  padding-top: 6px !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #f86a2d !important;
 }
 
 .foxcolor {
   background-color: #f86a2d;
-  color: white;
+  color: white !important;
+}
+
+.navbar {
+  padding: 0rem 1rem !important;
+  padding-right: 0rem !important;
+}
+
+.max-height-nav {
+  height: 60px;
+}
+
+.clearfisx {
+  width: 100%;
+  height: 10px;
+  background-color: black;
 }
 
 .foxcolor-pure {
@@ -10491,7 +10532,7 @@ a.text-dark:focus {
 
 .foxcolor-inverted {
   color: #f86a2d;
-  background-color: #c9c9c9;
+  background-color: white;
 }
 
 .myCont {
