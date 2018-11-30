@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class ReceiverNotValidException extends Exception
+class UserNotValidException extends Exception
 {
     public function render()
     {
@@ -12,7 +12,7 @@ class ReceiverNotValidException extends Exception
             [
                 'errors' => [
                     'status' => 400,
-                    'message' => 'Receiver not valid.',
+                    'message' => 'User not valid.',
                 ]
             ],
             400

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Chat;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\CustomTalk\Facades\CustomTalk;
 use App\Services\ChatAPIService as ChatAPIService;
 use Validator;
 
@@ -38,13 +37,45 @@ class ChatAPIFoxdoxUser extends Controller
         $message = request()->input('message');
         $conversationtag = request()->input('conversationtag');
 
-        if($this->chatapiservice->isValidReceiver($receivingprovider)){
-            return $this->chatapiservice->sendMessage($receivingprovider, $message, $conversationtag);
-        }
+        return $this->chatapiservice->sendMessage($receivingprovider, $message, $conversationtag);
     }
     
     public function getInboxForFoxdoxUser()
     {
         return $this->chatapiservice->getInbox();
+    }
+
+    public function getConversationByProviderName()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'username' => 'required'
+        ]);
+
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $user = request()->input('username');
+
+        return $this->chatapiservice->getConversationByUserId($user);
+    }
+
+    public function getConvetsationById()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'conversationid' => 'required'
+        ]);
+
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $conversationid = request()->input('conversationid');
+
+        return $this->chatapiservice->getConversationById($conversationid);
     }
 }
