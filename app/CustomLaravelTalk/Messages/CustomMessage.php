@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\CustomLaravelTalk\Messages;
 
 use Nahid\Talk\Messages\Message;
 

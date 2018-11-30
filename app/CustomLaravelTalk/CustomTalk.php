@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Chat;
+namespace App\CustomLaravelTalk;
 
 use Nahid\Talk\Talk;
 
-use App\CustomConversation as Conversation;
-use App\CustomMessage as Message;
+use App\CustomLaravelTalk\Conversations\CustomConversation as Conversation;
+use App\CustomLaravelTalk\Messages\CustomMessage as Message;
 use Illuminate\Support\Facades\Log;
 
 

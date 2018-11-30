@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\CustomLaravelTalk\Conversations;
 
 use Nahid\Talk\Conversations\Conversation;
 

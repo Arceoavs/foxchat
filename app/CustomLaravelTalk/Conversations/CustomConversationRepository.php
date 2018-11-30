@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Chat;
+namespace App\CustomLaravelTalk\Conversations;
 
 use Nahid\Talk\Conversations\ConversationRepository;
-use App\CustomConversation as Conversation;
+use App\CustomLaravelTalk\Conversations\CustomConversation as Conversation;
 
 
 class CustomConversationRepository extends ConversationRepository
