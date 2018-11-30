@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Chat;
+namespace App\CustomLaravelTalk\Messages;
 
 use Nahid\Talk\Messages\MessageRepository;
-use App\CustomMessage as Message;
+use App\CustomLaravelTalk\Messages\CustomMessage as Message;
 
 class CustomMessageRepository extends MessageRepository
 {

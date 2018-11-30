@@ -6,12 +6,12 @@ use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
-use App\Http\Controllers\Chat\CustomConversationRepository as ConversationRepository;
-use App\Http\Controllers\Chat\CustomMessageRepository as MessageRepository;
+use App\CustomLaravelTalk\Conversations\CustomConversationRepository as ConversationRepository;
+use App\CustomLaravelTalk\Messages\CustomMessageRepository as MessageRepository;
 
 //Benötigt für Abänderung
 use Nahid\Talk\TalkServiceProvider;
-use App\Http\Controllers\Chat\CustomTalk;
+use App\CustomLaravelTalk\CustomTalk;
 
 
 class CustomTalkServiceProvider extends TalkServiceProvider
