@@ -7,7 +7,7 @@
             </b-navbar-brand>
             <b-navbar-nav v-show="loggedIn">
                 <b-nav-item to="/index">
-                    <div >Overview</div>
+                    <div >Dokumente</div>
                 </b-nav-item>
                 <b-nav-item to="/Chat">
                     <div >Chat</div>

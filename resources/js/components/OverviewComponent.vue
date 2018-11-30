@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-default">
-                    <div class="card-header">Overview</div>
+                    <div class="card-header">Dokumente</div>
                     <div  class="card-body  mx-auto">
                         <ul>
                             <li v-for="provider in providers" v-bind:key="provider.value">
