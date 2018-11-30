@@ -20,6 +20,10 @@ class AuthServiceProvider {
         formData.append('password', pPassword);
         formData.append('x-provider', pXProvider);
 
+        self.errorMsg= "Login Fehler: ";
+        self.showAlert= false;
+        self.noError= true;
+
         axios.post(path+'/login', formData, config)
             .then(response => {
                 console.log('Logging In...');
@@ -28,7 +32,8 @@ class AuthServiceProvider {
                 this.retrieveUser(self);
                 
                 if(self.noError){
-                    self.$router.push();
+                    self.$router.push('/');
+                    console.log('Logged In');
                 }
             })
             .catch(error => {
@@ -63,8 +68,8 @@ class AuthServiceProvider {
             .catch(error => {
                 console.log('Error logging Out.');
             }).finally(param => {
+                self.$router.push('/login/provider');
                 EventBus.$emit('loaded');
-                self.$router.push('/login');
             });
         
         localStorage.removeItem('bearer');
@@ -93,10 +98,10 @@ class AuthServiceProvider {
                 console.log('Got Userdata:');
                 console.log(JSON.stringify(localStorage.getItem('user')));
 
-                if( self.noError  ){
-                    self.$router.push('/');
-                    console.log('Logged In.');
-                }
+                // if( self.noError  ){
+                //     self.$router.push('/');
+                //     console.log('Logged In.');
+                // }
             })
             .catch(error => {
                 this.logout(self);

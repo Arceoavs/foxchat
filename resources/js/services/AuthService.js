@@ -6,6 +6,7 @@ const config = {
     }
 }
 
+var path = '/api/auth';
 
 class AuthService {
     login(pUsername, pPassword, self){
@@ -17,7 +18,11 @@ class AuthService {
         formData.append('name', pUsername);
         formData.append('password', pPassword);
 
-        axios.post('/api/auth/login', formData, config)
+        self.errorMsg= "Login Fehler: ";
+        self.showAlert= false;
+        self.noError= true;
+
+        axios.post(path+'/login', formData, config)
             .then(response => {
                 console.log('Logging In...');
                 localStorage.setItem('bearer', response.data.access_token);
@@ -25,7 +30,8 @@ class AuthService {
                 this.retrieveUser(self);
                 
                 if(self.noError){
-                    self.$router.push();
+                    self.$router.push('/');
+                    console.log('Logged In');
                 }
             })
             .catch(error => {
@@ -53,15 +59,15 @@ class AuthService {
             }
         }
 
-        axios.post('/api/auth/logout', formData, configExt)
+        axios.post(path+'/logout', formData, configExt)
             .then(response => {
                 console.log('Logged Out.');
             })
             .catch(error => {
                 console.log('Error logging Out.');
             }).finally(param => {
-                EventBus.$emit('loaded');
                 self.$router.push('/login');
+                EventBus.$emit('loaded');
             });
         
         localStorage.removeItem('bearer');
@@ -82,7 +88,7 @@ class AuthService {
                 'Authorization': 'Bearer '+localStorage.getItem('bearer')
             }
         }
-        axios.get('/api/auth/me', configExt)
+        axios.get(path+'/me', configExt)
             .then(response => {
 
                 localStorage.setItem('user', JSON.stringify(response.data));
@@ -90,10 +96,10 @@ class AuthService {
                 console.log('Got Userdata:');
                 console.log(JSON.stringify(localStorage.getItem('user')));
 
-                if( self.noError  ){
-                    self.$router.push('/');
-                    console.log('Logged In.');
-                }
+                // if( self.noError  ){
+                //     self.$router.push('/');
+                //     console.log('Logged In.');
+                // }
             })
             .catch(error => {
                 this.logout(self);
