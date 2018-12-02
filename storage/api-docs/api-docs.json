@@ -141,16 +141,6 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/providerLoginForm"
-                            },
-                            "example": {
-                                "providerLoginForm": {
-                                    "summary": "Example for meine.versicherung",
-                                    "value": {
-                                        "name": "meine.versicherung",
-                                        "password": "meine.versicherung",
-                                        "x-provider": "HwCuYqDaadmXGMObfLYP"
-                                    }
-                                }
                             }
                         }
                     }
@@ -278,6 +268,169 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "Receiver not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/sendMessage": {
+            "post": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Send a message to a FoxdoxProvider",
+                "description": "This request allows a Foxdox User to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
+                "operationId": "sendMessageFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sendMessageForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sendMessageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/getconversationbyprovidername": {
+            "post": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox Provider back. ",
+                "description": "This request allows a Foxdox User to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
+                "operationId": "sendMessageFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sendMessageForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sendMessageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/makeseen": {
+            "patch": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Marks a Message sent from a FoxdoxProvider as seen.",
+                "description": "",
+                "operationId": "makeseenFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes a messageid.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "messageid": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Messageid not valid."
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -305,6 +458,9 @@
                     "error": {
                         "type": "string"
                     }
+                },
+                "example": {
+                    "error": "Unauthorized."
                 }
             },
             "userLoginForm": {
@@ -341,14 +497,9 @@
                     }
                 },
                 "example": {
-                    "meineversicherung": {
-                        "summary": "Example for meine.versicherung",
-                        "value": {
-                            "name": "meine.versicherung",
-                            "password": "meine.versicherung",
-                            "x-provider": "HwCuYqDaadmXGMObfLYP"
-                        }
-                    }
+                    "name": "meine.versicherung",
+                    "password": "meine.versicherung",
+                    "x-provider": "HwCuYqDaadmXGMObfLYP"
                 }
             },
             "loginResponse": {
@@ -451,30 +602,9 @@
                                         "updated_at": {
                                             "type": "string"
                                         }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "isProvider",
-                                        "name",
-                                        "foxdox-token",
-                                        "created_at",
-                                        "updated_at"
-                                    ]
+                                    }
                                 }
-                            },
-                            "required": [
-                                "id",
-                                "message",
-                                "is_seen",
-                                "deleted_from_sender",
-                                "deleted_from_receiver",
-                                "user_id",
-                                "conversation_id",
-                                "conversation_tag",
-                                "created_at",
-                                "updated_at",
-                                "sender"
-                            ]
+                            }
                         },
                         "withUser": {
                             "type": "object",
@@ -497,21 +627,80 @@
                                 "updated_at": {
                                     "type": "string"
                                 }
-                            },
-                            "required": [
-                                "id",
-                                "isProvider",
-                                "name",
-                                "foxdox-token",
-                                "created_at",
-                                "updated_at"
-                            ]
+                            }
                         }
+                    }
+                }
+            },
+            "sendMessageForm": {
+                "type": "object",
+                "required": [
+                    "receivingprovider",
+                    "message",
+                    "conversationtag"
+                ],
+                "properties": {
+                    "receivingprovider": {
+                        "type": "string"
                     },
-                    "required": [
-                        "thread",
-                        "withUser"
-                    ]
+                    "message": {
+                        "type": "string"
+                    },
+                    "conversationtag": {
+                        "type": "string"
+                    }
+                }
+            },
+            "sendMessageResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "conversation_id": {
+                        "type": "integer"
+                    },
+                    "conversation_tag": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "is_seen": {
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "integer"
+                    },
+                    "conversation": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "user_one": {
+                                "type": "integer"
+                            },
+                            "user_two": {
+                                "type": "integer"
+                            },
+                            "tag": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 }
             }
         },

@@ -20,7 +20,6 @@ class CustomTalk extends Talk
      */
     protected function newConversationWithTag($receiverId, $conversationtag)
     {
-        Log::info("in nmew conversation");
         $conversationId = $this->isConversationExistsWithTag($receiverId, $conversationtag);
         $user = $this->getSerializeUser($this->authUserId, $receiverId);
 
@@ -105,5 +104,18 @@ class CustomTalk extends Talk
         $this->broadcast->transmission($message);
 
         return $message;
+    }
+
+    /**
+     * fetch all inbox with soft deleted message for currently loggedin user with pagination.
+     *
+     * @param int $offset
+     * @param int $take
+     *
+     * @return array
+     */
+    public function getInboxAll($order = 'desc', $offset = 0, $take = 20)
+    {
+        return $this->conversation->inboxAll($this->authUserId, $order, $offset, $take);
     }
 }

@@ -45,11 +45,17 @@ class ChatAPIFoxdoxUser extends Controller
         return $this->chatapiservice->getInbox();
     }
 
+    public function getInboxAllForFoxdoxUser()
+    {
+        return $this->chatapiservice->getInboxAll();
+    }
+
     public function getConversationByProviderName()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
-            'username' => 'required'
+            'username' => 'required',
+            'conversationtag' => 'required'
         ]);
 
         //Send errors
@@ -58,15 +64,17 @@ class ChatAPIFoxdoxUser extends Controller
         }
 
         $user = request()->input('username');
+        $conversationtag = request()->input('conversationtag');
 
-        return $this->chatapiservice->getConversationByUserId($user);
+        return $this->chatapiservice->getConversationByName($user, $conversationtag);
     }
 
     public function getConversationAllByProviderName()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
-            'username' => 'required'
+            'username' => 'required',
+            'conversationtag' => 'required'
         ]);
 
         //Send errors
@@ -75,15 +83,17 @@ class ChatAPIFoxdoxUser extends Controller
         }
 
         $user = request()->input('username');
+        $conversationtag = request()->input('conversationtag');
 
-        return $this->chatapiservice->getConversationAllByUserId($user);
+        return $this->chatapiservice->getConversationAllByName($user, $conversationtag);
     }
 
-    public function getConversationById()
+    public function getConversationByProviderId()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
-            'conversationid' => 'required'
+            'userid' => 'required',
+            'conversationtag' => 'required'
         ]);
 
         //Send errors
@@ -91,29 +101,31 @@ class ChatAPIFoxdoxUser extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $conversationid = request()->input('conversationid');
+        $user = request()->input('userid');
+        $conversationtag = request()->input('conversationtag');
 
-        return $this->chatapiservice->getConversationById($conversationid);
+        return $this->chatapiservice->getConversationById($user, $conversationtag);
     }
 
-    public function getConversationAllById()
+    public function getConversationAllByProviderId()
     {
-        Log::info(Input::all());
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
-            'conversationid' => 'required'
+            'userid' => 'required',
+            'conversationtag' => 'required'
         ]);
-
 
         //Send errors
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
 
-        $conversationid = request()->input('conversationid');
+        $user = request()->input('userid');
+        $conversationtag = request()->input('conversationtag');
 
-        return $this->chatapiservice->getConversationAllById($conversationid);
+        return $this->chatapiservice->getConversationAllById($user, $conversationtag);
     }
+
 
     public function makeSeen()
     {
@@ -130,5 +142,22 @@ class ChatAPIFoxdoxUser extends Controller
         $messageid = request()->input('messageid');
 
         return $this->chatapiservice->makeSeen($messageid);
+    }
+
+    public function deleteMessage()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'messageid' => 'required'
+        ]);
+
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $messageid = request()->input('messageid');
+
+        return $this->chatapiservice->deleteMessage($messageid);
     }
 }

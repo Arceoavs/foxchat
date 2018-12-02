@@ -75,4 +75,31 @@ class CustomConversationRepository extends ConversationRepository
 
         return collect($threads);
     }
+
+    /*
+     * retrieve all message thread with latest one message and sender and receiver user model
+     *
+     * @param   int $user
+     * @param   int $offset
+     * @param   int $take
+     * @return  collection
+     * */
+    public function inboxAll($user, $order, $offset, $take)
+    {
+        $msgThread = Conversation::with(['messages' => function ($q) use ($user) {
+            return $q->latest();
+        }, 'userone', 'usertwo'])
+            ->where('user_one', $user)->orWhere('user_two', $user)->offset($offset)->take($take)->get();
+
+        $threads = [];
+
+        foreach ($msgThread as $thread) {
+            $conversationWith = ($thread->userone->id == $user) ? $thread->usertwo : $thread->userone;
+            $message = $thread->messages->first();
+            $message->user = $conversationWith;
+            $threads[] = $message;
+        }
+
+        return collect($threads);
+    }
 }

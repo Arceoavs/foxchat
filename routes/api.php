@@ -47,10 +47,12 @@ Route::group([
     //Chat requests for FoxdoxUser
     Route::post('sendmessage', 'Chat\ChatAPIFoxdoxUser@sendMessageByFoxdoxUser');
     Route::get('getinbox', 'Chat\ChatAPIFoxdoxUser@getInboxForFoxdoxUser');
-    Route::get('getconversationbyuserid', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderName');
-    Route::post('getconversationbyuseridall', 'Chat\ChatAPIFoxdoxUser@getConversationAllByProviderName');
-    Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxUser@getConversationById');
-    Route::get('getconversationbyidall', 'Chat\ChatAPIFoxdoxUser@getConversationAllById');
-    Route::post('makeSeen', 'Chat\ChatAPIFoxdoxUser@makeSeen');
+    Route::get('getinboxall', 'Chat\ChatAPIFoxdoxUser@getInboxAllForFoxdoxUser');
+    Route::post('getconversationbyprovidername', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderName');
+    Route::post('getconversationbyprovidernameall', 'Chat\ChatAPIFoxdoxUser@getConversationAllByProviderName');
+    Route::post('getconversationbyproviderid', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderId');
+    Route::post('getconversationbyprovideridall', 'Chat\ChatAPIFoxdoxUser@getConversationAllByProviderId');
+    Route::patch('makeseen', 'Chat\ChatAPIFoxdoxUser@makeSeen');
+    Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxUser@deleteMessage');
 
 });

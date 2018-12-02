@@ -3,6 +3,7 @@ namespace App\Services;
  
 use App\User;
 use App\CustomLaravelTalk\Conversations\CustomConversation;
+use App\CustomLaravelTalk\Messages\CustomMessage;
 use App\Http\Controllers\Controller;
 use App\CustomTalk\Facades\CustomTalk;
 use App\Exceptions\ChatAPIServiceException;
@@ -14,7 +15,9 @@ class ChatAPIService extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
-        CustomTalk::setAuthUserId(auth()->user()->id);
+        if(auth()->user()){
+            CustomTalk::setAuthUserId(auth()->user()->id);
+        }  
     }
 
     protected function getUserFromDatabase($username)
@@ -65,40 +68,55 @@ class ChatAPIService extends Controller
         return CustomTalk::getInbox();
     }
 
-    public function getConversationByUserId($username)
+    public function getInboxAll()
     {
-        if(!$this->isValidUser($username)){
-            throw new ChatAPIServiceException("User");
-        }
-        $user = $this->getUserFromDatabase($username);
-        return response()->json(CustomTalk::getConversationsByUserId($user->id));
+        return CustomTalk::getInboxAll();
     }
-
-    public function getConversationAllByUserId($username)
+    
+    public function getConversationByName($username, $conversationtag)
     {
-        if(!$this->isValidUser($username)){
-            throw new ChatAPIServiceException("User");
-        }
-        $user = $this->getUserFromDatabase($username);
-        return response()->json(CustomTalk::getConversationsAllByUserId($user->id));
-    }
-
-    public function getConversationById($conversationid)
-    {
-        $conversation = $this->getConversationFromDatabase($conversationid);
+        $chatpartner = $this->getUserFromDatabase($username);
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
+        ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
+        ->first();
         if(!$conversation){
-            throw new ChatAPIServiceException("ConversationId");
+            throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
         }
-        return response()->json(CustomTalk::getConversationsByUserId($conversation->id));
+        return response()->json(CustomTalk::getConversationsById($conversation->id));
     }
 
-    public function getConversationAllById($conversationid)
+    public function getConversationAllByName($username, $conversationtag)
     {
-        $conversation = $this->getConversationFromDatabase($conversationid);
+        $chatpartner = $this->getUserFromDatabase($username);
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
+        ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
+        ->first();
         if(!$conversation){
-            throw new ChatAPIServiceException("ConversationId");
+            throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
         }
-        return response()->json(CustomTalk::getConversationsAllByUserId($conversation->id));
+        return response()->json(CustomTalk::getConversationsAllById($conversation->id));
+    }
+
+    public function getConversationById($userid, $conversationtag)
+    {
+        $conversation = CustomConversation::where(["user_one"=> $userid, "user_two" => auth()->user()->id, "tag" => $conversationtag])
+        ->orWhere(["user_two"=> $userid, "user_one" => auth()->user()->id, "tag" => $conversationtag])
+        ->first();
+        if(!$conversation){
+            throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
+        }
+        return response()->json(CustomTalk::getConversationsById($conversation->id));
+    }
+
+    public function getConversationAllById($userid, $conversationtag)
+    {
+        $conversation = CustomConversation::where(["user_one"=> $userid, "user_two" => auth()->user()->id, "tag" => $conversationtag])
+        ->orWhere(["user_two"=> $userid, "user_one" => auth()->user()->id, "tag" => $conversationtag])
+        ->first();
+        if(!$conversation){
+            throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
+        }
+        return response()->json(CustomTalk::getConversationsAllById($conversation->id));
     }
 
     public function makeSeen($messageid)
@@ -107,7 +125,24 @@ class ChatAPIService extends Controller
         if(!$message){
             throw new ChatAPIServiceException("MessageId");
         }
-        return response()->json(CustomTalk::makeSeen($message->id));
+        
+        if(CustomTalk::makeSeen($message->id)){
+            return ["message" => $message->id,
+            "text" => "Marked as seen."];
+        }
     }
- 
+
+    public function deleteMessage($messageid)
+    {
+        $message = $this->getMessageFromDatabase($messageid);
+        if(!$message){
+            throw new ChatAPIServiceException("MessageId");
+        }
+        
+        if(CustomTalk::deleteMessage($message->id)){
+            return ["message" => $message->id,
+            "text" => "Has been soft deleted."];
+        }
+    }
+
 }
