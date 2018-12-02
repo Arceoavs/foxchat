@@ -46,8 +46,11 @@ Route::group([
 
     //Chat requests for FoxdoxUser
     Route::post('sendmessage', 'Chat\ChatAPIFoxdoxUser@sendMessageByFoxdoxUser');
-    Route::post('getinbox', 'Chat\ChatAPIFoxdoxUser@getInboxForFoxdoxUser');
-    Route::post('getconversationbyuserid', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderName');
-    Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxUser@getConvetsationById');
+    Route::get('getinbox', 'Chat\ChatAPIFoxdoxUser@getInboxForFoxdoxUser');
+    Route::get('getconversationbyuserid', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderName');
+    Route::post('getconversationbyuseridall', 'Chat\ChatAPIFoxdoxUser@getConversationAllByProviderName');
+    Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxUser@getConversationById');
+    Route::get('getconversationbyidall', 'Chat\ChatAPIFoxdoxUser@getConversationAllById');
+    Route::post('makeSeen', 'Chat\ChatAPIFoxdoxUser@makeSeen');
 
 });

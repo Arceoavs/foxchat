@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Foxchat API",
-        "version": "0.1"
+        "version": "0.2"
     },
     "paths": {
         "/api/auth/login": {
@@ -16,7 +16,7 @@
                     "description": "Takes username and password for verification against Foxdox Server.",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/userLoginForm"
                             }
@@ -27,18 +27,25 @@
                     "200": {
                         "description": "Sucessfully logged in.",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/loginResponse"
                                 }
                             }
                         }
                     },
-                    "400":{
+                    "400": {
                         "description": "Email or Password is missing."
                     },
-                    "401":{
-                        "description": "Unauthorized"
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -54,10 +61,10 @@
                     "200": {
                         "description": "Sucessfully logged out.",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties":{
+                                    "properties": {
                                         "message": {
                                             "type": "string"
                                         }
@@ -66,8 +73,15 @@
                             }
                         }
                     },
-                    "401":{
-                        "description": "Unauthorized"
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -88,7 +102,7 @@
                     "200": {
                         "description": "User information.",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/meResponse"
                                 }
@@ -98,14 +112,9 @@
                     "401": {
                         "description": "Unauthorized",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties":{
-                                        "error": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/unauthorizedError"
                                 }
                             }
                         }
@@ -129,14 +138,14 @@
                     "description": "Takes username, password and X-PROVIDER Header for verification against Foxdox Server.",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/providerLoginForm"
                             },
-                            "example":{
+                            "example": {
                                 "providerLoginForm": {
-                                    "summary" : "Example for meine.versicherung",
-                                    "value" : {
+                                    "summary": "Example for meine.versicherung",
+                                    "value": {
                                         "name": "meine.versicherung",
                                         "password": "meine.versicherung",
                                         "x-provider": "HwCuYqDaadmXGMObfLYP"
@@ -150,18 +159,25 @@
                     "200": {
                         "description": "Sucessfully logged in.",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/loginResponse"
                                 }
                             }
                         }
                     },
-                    "400":{
+                    "400": {
                         "description": "Email or Password is missing."
                     },
-                    "401":{
-                        "description": "Unauthorized"
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -177,10 +193,10 @@
                     "200": {
                         "description": "Sucessfully logged out.",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties":{
+                                    "properties": {
                                         "message": {
                                             "type": "string"
                                         }
@@ -189,8 +205,15 @@
                             }
                         }
                     },
-                    "401":{
-                        "description": "Unauthorized"
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -211,7 +234,7 @@
                     "200": {
                         "description": "Provider information.",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/meResponse"
                                 }
@@ -221,14 +244,46 @@
                     "401": {
                         "description": "Unauthorized",
                         "content": {
-                            "application/x-www-form-urlencoded": {
+                            "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties":{
-                                        "error": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/getinbox": {
+            "get": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Get the current Inbox of the Foxdox User.",
+                "description": "Get the current Conversations with each last message & chat partner of the given Foxdox User.",
+                "operationId": "getInboxFoxdoxUser",
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/inboxResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
                                 }
                             }
                         }
@@ -244,13 +299,21 @@
     },
     "components": {
         "schemas": {
+            "unauthorizedError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                }
+            },
             "userLoginForm": {
                 "type": "object",
                 "required": [
                     "name",
                     "password"
                 ],
-                "properties":{
+                "properties": {
                     "name": {
                         "type": "string"
                     },
@@ -266,21 +329,21 @@
                     "password",
                     "x-provider"
                 ],
-                "properties":{
+                "properties": {
                     "name": {
                         "type": "string"
                     },
                     "password": {
                         "type": "string"
                     },
-                    "x-provider":{
+                    "x-provider": {
                         "type": "string"
                     }
                 },
-                "example":{
+                "example": {
                     "meineversicherung": {
-                        "summary" : "Example for meine.versicherung",
-                        "value" : {
+                        "summary": "Example for meine.versicherung",
+                        "value": {
                             "name": "meine.versicherung",
                             "password": "meine.versicherung",
                             "x-provider": "HwCuYqDaadmXGMObfLYP"
@@ -290,7 +353,7 @@
             },
             "loginResponse": {
                 "type": "object",
-                "properties":{
+                "properties": {
                     "access_token": {
                         "type": "string"
                     },
@@ -307,7 +370,7 @@
             },
             "meResponse": {
                 "type": "object",
-                "properties":{
+                "properties": {
                     "id": {
                         "type": "integer"
                     },
@@ -327,12 +390,135 @@
                         "type": "string"
                     }
                 }
+            },
+            "inboxResponse": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "title": "eachConversation",
+                    "properties": {
+                        "thread": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "is_seen": {
+                                    "type": "integer"
+                                },
+                                "deleted_from_sender": {
+                                    "type": "integer"
+                                },
+                                "deleted_from_receiver": {
+                                    "type": "integer"
+                                },
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "conversation_id": {
+                                    "type": "integer"
+                                },
+                                "conversation_tag": {
+                                    "type": "string"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "type": "string"
+                                },
+                                "sender": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "isProvider": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "foxdox-token": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "isProvider",
+                                        "name",
+                                        "foxdox-token",
+                                        "created_at",
+                                        "updated_at"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "message",
+                                "is_seen",
+                                "deleted_from_sender",
+                                "deleted_from_receiver",
+                                "user_id",
+                                "conversation_id",
+                                "conversation_tag",
+                                "created_at",
+                                "updated_at",
+                                "sender"
+                            ]
+                        },
+                        "withUser": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "isProvider": {
+                                    "type": "integer"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "foxdox-token": {
+                                    "type": "string"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "isProvider",
+                                "name",
+                                "foxdox-token",
+                                "created_at",
+                                "updated_at"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "thread",
+                        "withUser"
+                    ]
+                }
             }
         },
         "securitySchemes": {
             "Bearer": {
                 "type": "http",
-                "name": "FoxdoxUser-API-Key",
+                "name": "API-Key",
                 "bearerFormat": "JWT",
                 "scheme": "bearer"
             }

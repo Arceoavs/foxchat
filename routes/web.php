@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('/welcome');
-});
+})->name('standard');
 
 Route::get('/{any}', function () {
     return view('/welcome');

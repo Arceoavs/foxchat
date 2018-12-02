@@ -27,6 +27,11 @@ class ChatAPIService extends Controller
         return CustomConversation::find($conversationid);
     }
 
+    protected function getMessageFromDatabase($messageid)
+    {
+        return CustomMessage::find($messageid);
+    }
+
     protected function isValidUser($username)
     {
         if(!$this->getUserFromDatabase($username)){
@@ -69,6 +74,15 @@ class ChatAPIService extends Controller
         return response()->json(CustomTalk::getConversationsByUserId($user->id));
     }
 
+    public function getConversationAllByUserId($username)
+    {
+        if(!$this->isValidUser($username)){
+            throw new ChatAPIServiceException("User");
+        }
+        $user = $this->getUserFromDatabase($username);
+        return response()->json(CustomTalk::getConversationsAllByUserId($user->id));
+    }
+
     public function getConversationById($conversationid)
     {
         $conversation = $this->getConversationFromDatabase($conversationid);
@@ -76,6 +90,24 @@ class ChatAPIService extends Controller
             throw new ChatAPIServiceException("ConversationId");
         }
         return response()->json(CustomTalk::getConversationsByUserId($conversation->id));
+    }
+
+    public function getConversationAllById($conversationid)
+    {
+        $conversation = $this->getConversationFromDatabase($conversationid);
+        if(!$conversation){
+            throw new ChatAPIServiceException("ConversationId");
+        }
+        return response()->json(CustomTalk::getConversationsAllByUserId($conversation->id));
+    }
+
+    public function makeSeen($messageid)
+    {
+        $message = $this->getMessageFromDatabase($messageid);
+        if(!$message){
+            throw new ChatAPIServiceException("MessageId");
+        }
+        return response()->json(CustomTalk::makeSeen($message->id));
     }
  
 }
