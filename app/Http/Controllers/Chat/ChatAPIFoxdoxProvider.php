@@ -8,6 +8,8 @@ use App\Services\ChatAPIService as ChatAPIService;
 use Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\ChatAPIServiceException;
+use App\Exceptions\ChatAuthException;
 
 class ChatAPIFoxdoxProvider extends Controller
 {
