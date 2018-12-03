@@ -40,7 +40,6 @@
             variant="danger"
             dismissible
           >{{ errorMsg }}</b-alert>
-
           <router-link class="description" to="/login/provider">
             <p>Zum Provider-Login</p>
           </router-link>
@@ -57,8 +56,8 @@ import auth from "../services/AuthService.js";
 export default {
   data: function() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       errorMsg: "Login Fehler: ",
       showAlert: false,
       noError: true

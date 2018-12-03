@@ -1,52 +1,40 @@
 <template>
-    <div>
-        <loading-component></loading-component>
-        <b-navbar toggleable="md" class="navbar-laravel" >
-            <b-navbar-brand to="/">
-                <img class="img-logo" src="/img/FoxdoxChat.png" />
-            </b-navbar-brand>
-            <b-navbar-nav v-show="loggedIn">
-                <b-nav-item to="/index">
-                    <div >Dokumente</div>
-                </b-nav-item>
-                <b-nav-item to="/Chat">
-                    <div >Chat</div>
-                </b-nav-item>
-            </b-navbar-nav>
-            <b-navbar-nav class="ml-auto foxcolor max-height-nav" v-show="loggedIn">
-                <b-nav-item right class="logout-link"> 
-                    <logout-component ></logout-component>
-                </b-nav-item>
-            </b-navbar-nav>
-        </b-navbar>
-        <!--<div class="clearfisx"></div>-->
-        <router-view></router-view>
-    </div>
+  <div>
+    <loading-component></loading-component>
+    <header-component></header-component>
+    <!--<div class="clearfisx"></div>-->
+    <router-view></router-view>
+    <footer-component></footer-component>
+  </div>
 </template>
 
 <script>
-    import LogoutComponent from "./LogoutComponent.vue";
-    import LoadingComponent from "./LoadingComponent.vue";
-    import EventBus from '../services/event-bus.js';
-    
-    export default {
-        data: function(){ 
-            return { 
-                loggedIn: false
-            }
-        },
-        mounted(){
-            this.loggedIn = localStorage.getItem('bearer');
-            EventBus.$on('loading', payload => {
-                this.loggedIn = localStorage.getItem('bearer');
-            });
-            EventBus.$on('loaded', payload => {
-                this.loggedIn = localStorage.getItem('bearer');
-            });
-        },
-        components: {
-            LogoutComponent,
-            LoadingComponent
-        }
+import LogoutComponent from "./LogoutComponent.vue";
+import LoadingComponent from "./LoadingComponent.vue";
+import HeaderComponent from "./Header.vue";
+import FooterComponent from "./Footer.vue";
+import EventBus from "../services/event-bus.js";
+
+export default {
+  data: function() {
+    return {
+      loggedIn: false
     };
+  },
+  mounted() {
+    this.loggedIn = localStorage.getItem("bearer");
+    EventBus.$on("loading", payload => {
+      this.loggedIn = localStorage.getItem("bearer");
+    });
+    EventBus.$on("loaded", payload => {
+      this.loggedIn = localStorage.getItem("bearer");
+    });
+  },
+  components: {
+    LogoutComponent,
+    LoadingComponent,
+    FooterComponent,
+    HeaderComponent
+  }
+};
 </script>
