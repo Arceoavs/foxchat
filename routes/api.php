@@ -56,3 +56,23 @@ Route::group([
     Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxUser@deleteMessage');
 
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'chat/provider'
+
+], function ($router) {
+
+    //Chat requests for FoxdoxUser
+    Route::post('sendmessage', 'Chat\ChatAPIFoxdoxProvider@sendMessageByFoxdoxProvider');
+    Route::get('getinbox', 'Chat\ChatAPIFoxdoxProvider@getInboxForFoxdoxProvider');
+    Route::get('getinboxall', 'Chat\ChatAPIFoxdoxProvider@getInboxAllForFoxdoxProvider');
+    Route::post('getconversationbyprovidername', 'Chat\ChatAPIFoxdoxProvider@getConversationByProviderProvider');
+    Route::post('getconversationbyprovidernameall', 'Chat\ChatAPIFoxdoxProvider@getConversationAllByProviderProvider');
+    Route::post('getconversationbyproviderid', 'Chat\ChatAPIFoxdoxProvider@getConversationByProviderId');
+    Route::post('getconversationbyprovideridall', 'Chat\ChatAPIFoxdoxProvider@getConversationAllByProviderId');
+    Route::patch('makeseen', 'Chat\ChatAPIFoxdoxProvider@makeSeen');
+    Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxProvider@deleteMessage');
+
+});

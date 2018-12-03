@@ -8,35 +8,33 @@ use App\Services\ChatAPIService as ChatAPIService;
 use Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\ChatAPIServiceException;
-use App\Exceptions\ChatAuthException;
 
-class ChatAPIFoxdoxUser extends Controller
+class ChatAPIFoxdoxProvider extends Controller
 {
     protected $chatapiservice;
     public function __construct()
     {
-        if($this->validateUserAsUser()){
+        if($this->validateUserAsProvider()){
             $this->chatapiservice = new ChatAPIService();
         }
         $this->middleware('auth:api');
     }
 
-    public function validateUserAsUser()
+    public function validateUserAsProvider()
     {
-        Log::info(auth()->user()->isProvider);
-        if(auth()->user()->isProvider==0){
+        // Log::info(auth()->user()->isProvider);
+        if(auth()->user()->isProvider==1){
             return true;
         }else{
             throw new ChatAuthException("You are not a Foxdox User.");
         }
     }
 
-    public function sendMessageByFoxdoxUser()
+    public function sendMessageByFoxdoxProvider()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
-            'receivingprovider' => 'required',
+            'receivinguser' => 'required',
             'message' => 'required',
             'conversationtag' => 'required'
         ]);
@@ -47,24 +45,24 @@ class ChatAPIFoxdoxUser extends Controller
         }
 
         //Get all the informations from the request
-        $user = request()->input('receivingprovider');
+        $user = request()->input('receivinguser');
         $message = request()->input('message');
         $conversationtag = request()->input('conversationtag');
 
         return $this->chatapiservice->sendMessage($user, $message, $conversationtag);
     }
     
-    public function getInboxForFoxdoxUser()
+    public function getInboxForFoxdoxProvider()
     {
         return $this->chatapiservice->getInbox();
     }
 
-    public function getInboxAllForFoxdoxUser()
+    public function getInboxAllForFoxdoxProviderr()
     {
         return $this->chatapiservice->getInboxAll();
     }
 
-    public function getConversationByProviderName()
+    public function getConversationByUserName()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
@@ -83,7 +81,7 @@ class ChatAPIFoxdoxUser extends Controller
         return $this->chatapiservice->getConversationByName($user, $conversationtag);
     }
 
-    public function getConversationAllByProviderName()
+    public function getConversationAllByUserName()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
@@ -102,7 +100,7 @@ class ChatAPIFoxdoxUser extends Controller
         return $this->chatapiservice->getConversationAllByName($user, $conversationtag);
     }
 
-    public function getConversationByProviderId()
+    public function getConversationByUserId()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
@@ -121,7 +119,7 @@ class ChatAPIFoxdoxUser extends Controller
         return $this->chatapiservice->getConversationById($user, $conversationtag);
     }
 
-    public function getConversationAllByProviderId()
+    public function getConversationAllByUserId()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [

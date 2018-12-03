@@ -2,8 +2,23 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Foxchat API",
-        "version": "0.2"
+        "version": "0.5",
+        "description": "Dies ist die API Dokumentation zum Projektseminars digitaler Tresor."
     },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Everything about Login"
+        },
+        {
+            "name": "UserChat",
+            "description": "Everything about the UserChat - Please make sure to be calling this as a Foxdox User"
+        },
+        {
+            "name": "ProviderChat",
+            "description": "Everything about the ProviderChat - Please make sure to be calling this as a Foxdox Provider"
+        }
+    ],
     "paths": {
         "/api/auth/login": {
             "post": {
@@ -55,7 +70,7 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Logs a User out",
+                "summary": "Logs a Foxdox User out.",
                 "operationId": "logutFoxdoxUser",
                 "responses": {
                     "200": {
@@ -177,7 +192,7 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Logs a Provider out",
+                "summary": "Logs a Foxdox Provider out.",
                 "operationId": "logutFoxdoxProvider",
                 "responses": {
                     "200": {
@@ -254,8 +269,8 @@
                 "tags": [
                     "UserChat"
                 ],
-                "summary": "Get the current Inbox of the Foxdox User.",
-                "description": "Get the current Conversations with each last message & chat partner of the given Foxdox User.",
+                "summary": "Get the current Inbox of the User.",
+                "description": "Get the current Conversations with each last message & chat partner of the given User.",
                 "operationId": "getInboxFoxdoxUser",
                 "responses": {
                     "200": {
@@ -344,14 +359,14 @@
                 ],
                 "summary": "Get back the conversation with a Foxdox Provider back. ",
                 "description": "This request allows a Foxdox User to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
-                "operationId": "sendMessageFoxdoxUser",
+                "operationId": "getConversationByNameFoxdoxUser",
                 "requestBody": {
                     "description": "Takes receivingprovider, message and conversationtag.",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/sendMessageForm"
+                                "$ref": "#/components/schemas/getConversationByNameForm"
                             }
                         }
                     }
@@ -362,7 +377,191 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/sendMessageResponse"
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByNameError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/getconversationbyprovidernameall": {
+            "post": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox Provider back. Including the soft deleted ones.",
+                "description": "Get the messages of conversation with a given Foxdox Provider-name. This request includes also the soft deleted ones.",
+                "operationId": "getConversationByNameAllFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/getConversationByNameForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByNameError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/getconversationbyproviderid": {
+            "post": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox Provider back. ",
+                "description": "This request allows a Foxdox User to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
+                "operationId": "getConversationByIdFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/getConversationByIdForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByIdError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/getconversationbyprovideridall": {
+            "post": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox Provider back. Including the soft deleted ones.",
+                "description": "Get the messages of conversation with a given Foxdox Provider-name. This request includes also the soft deleted ones.",
+                "operationId": "getConversationByIdAllFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/getConversationByIdForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByIdError"
                                 }
                             }
                         }
@@ -428,7 +627,525 @@
                             }
                         }
                     },
-                    "400":{
+                    "400": {
+                        "description": "Messageid not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/user/deleteMessage": {
+            "patch": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "This request soft deletes the message which means it is not accessible without the All methods anymore. This is done individually so the chat partner still have access.",
+                "description": "",
+                "operationId": "deleteMessageFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes a messageid.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "messageid": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "text": "Has been soft deleted."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Messageid not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/getinbox": {
+            "get": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Get the current Inbox of the User.",
+                "description": "Get the current Conversations with each last message & chat partner of the given User.",
+                "operationId": "getInboxFoxdoxProvider",
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/inboxResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Receiver not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/sendMessage": {
+            "post": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Send a message to a FoxdoxProvider",
+                "description": "This request allows a Foxdox User to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
+                "operationId": "sendMessageFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sendMessageForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sendMessageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/getconversationbyprovidername": {
+            "post": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox Provider back. ",
+                "description": "This request allows a Foxdox Provider to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
+                "operationId": "getConversationByNameFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/getConversationByNameForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByNameError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/getconversationbyprovidernameall": {
+            "post": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox User back. Including the soft deleted ones.",
+                "description": "Get the messages of conversation with a given Foxdox User-name. This request includes also the soft deleted ones.",
+                "operationId": "getConversationByNameAllFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/getConversationByNameForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByNameError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/getconversationbyproviderid": {
+            "post": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox User back. ",
+                "description": "This request allows a Foxdox Provider to send a message to a valid Foxdox User. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
+                "operationId": "getConversationByIdFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/getConversationByIdForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByIdError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/getconversationbyprovideridall": {
+            "post": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Get back the conversation with a Foxdox User back. Including the soft deleted ones.",
+                "description": "Get the messages of conversation with a given Foxdox User-name. This request includes also the soft deleted ones.",
+                "operationId": "getConversationByIdAllFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/getConversationByIdForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The message information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Provided Tag, Name or the combination of both not valid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getConversationByIdError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/makeseen": {
+            "patch": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Marks a Message sent from a FoxdoxUser as seen.",
+                "description": "",
+                "operationId": "makeseenFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes a messageid.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "messageid": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Messageid not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/deleteMessage": {
+            "patch": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "This request soft deletes the message which means it is not accessible without the All methods anymore. This is done individually so the chat partner still have access.",
+                "description": "",
+                "operationId": "deleteMessageFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes a messageid.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "messageid": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "text": "Has been soft deleted."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
                         "description": "Messageid not valid."
                     },
                     "401": {
@@ -461,6 +1178,50 @@
                 },
                 "example": {
                     "error": "Unauthorized."
+                }
+            },
+            "getConversationByNameError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "error": {
+                        "status": "400",
+                        "message": "Provided Tag, Name or the combination of both not valid."
+                    }
+                }
+            },
+            "getConversationByIdError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "error": {
+                        "status": "400",
+                        "message": "Provided Tag, Id or the combination of both not valid."
+                    }
                 }
             },
             "userLoginForm": {
@@ -651,6 +1412,36 @@
                     }
                 }
             },
+            "getConversationByNameForm": {
+                "type": "object",
+                "required": [
+                    "username",
+                    "conversationtag"
+                ],
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "conversationtag": {
+                        "type": "string"
+                    }
+                }
+            },
+            "getConversationByIdForm": {
+                "type": "object",
+                "required": [
+                    "userid",
+                    "conversationtag"
+                ],
+                "properties": {
+                    "userid": {
+                        "type": "string"
+                    },
+                    "conversationtag": {
+                        "type": "string"
+                    }
+                }
+            },
             "sendMessageResponse": {
                 "type": "object",
                 "properties": {
@@ -698,6 +1489,95 @@
                             },
                             "updated_at": {
                                 "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "getConversationResponse": {
+                "type": "object",
+                "properties": {
+                    "withUser": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "isProvider": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "foxdox-token": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "messages": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "is_seen": {
+                                    "type": "integer"
+                                },
+                                "deleted_from_sender": {
+                                    "type": "integer"
+                                },
+                                "deleted_from_receiver": {
+                                    "type": "integer"
+                                },
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "conversation_id": {
+                                    "type": "integer"
+                                },
+                                "conversation_tag": {
+                                    "type": "string"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "type": "string"
+                                },
+                                "sender": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "isProvider": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "foxdox-token": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

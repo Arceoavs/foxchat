@@ -47,6 +47,7 @@ class ChatAPIService extends Controller
     {
         //Try to find user in database
         $user = $this->getUserFromDatabase($username);
+        Log::info(true);
         // Throws an Exception whether the Receiver is not found or the Receiver is not the Opposite of the Sender (User/ Provider)
         if (!$this->isValidUser($username) || (auth()->user()->isProvider == $user->isProvider)) {
             return false;
@@ -76,6 +77,9 @@ class ChatAPIService extends Controller
     public function getConversationByName($username, $conversationtag)
     {
         $chatpartner = $this->getUserFromDatabase($username);
+        if(!$chatpartner){
+            throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
+        }
         $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
         ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
         ->first();
@@ -88,6 +92,9 @@ class ChatAPIService extends Controller
     public function getConversationAllByName($username, $conversationtag)
     {
         $chatpartner = $this->getUserFromDatabase($username);
+        if(!$chatpartner){
+            throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
+        }
         $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
         ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
         ->first();
