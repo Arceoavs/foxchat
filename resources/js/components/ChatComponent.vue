@@ -6,9 +6,7 @@
       :onMessageWasSent="onMessageWasSent"
       :messageList="messageList"
       :newMessagesCount="newMessagesCount"
-      :isOpen="isChatOpen"
-      :close="closeChat"
-      :open="openChat"
+      :isOpen="true"
       :showEmoji="true"
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
@@ -28,7 +26,6 @@ export default {
       titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: messageHistory,
       newMessagesCount: 0,
-      isChatOpen: false,
       showTypingIndicator: '',
       alwaysScrollToBottom: false,
       messageStyling: true,
@@ -48,13 +45,6 @@ export default {
     },
     onMessageWasSent (message) {
       this.messageList = [ ...this.messageList, message ]
-    },
-    openChat () {
-      this.isChatOpen = true
-      this.newMessagesCount = 0
-    },
-    closeChat () {
-      this.isChatOpen = false
     },
     showStylingInfo() {
       this.$modal.show('dialog', {
