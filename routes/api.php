@@ -36,3 +36,43 @@ Route::group([
     Route::post('provider/refresh', 'AuthControllerProvider@refresh');
     Route::get('provider/me', 'AuthControllerProvider@me');
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'chat/user'
+
+], function ($router) {
+
+    //Chat requests for FoxdoxUser
+    Route::post('sendmessage', 'Chat\ChatAPIFoxdoxUser@sendMessageByFoxdoxUser');
+    Route::get('getinbox', 'Chat\ChatAPIFoxdoxUser@getInboxForFoxdoxUser');
+    Route::get('getinboxall', 'Chat\ChatAPIFoxdoxUser@getInboxAllForFoxdoxUser');
+    Route::post('getconversationbyprovidername', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderName');
+    Route::post('getconversationbyprovidernameall', 'Chat\ChatAPIFoxdoxUser@getConversationAllByProviderName');
+    Route::post('getconversationbyproviderid', 'Chat\ChatAPIFoxdoxUser@getConversationByProviderId');
+    Route::post('getconversationbyprovideridall', 'Chat\ChatAPIFoxdoxUser@getConversationAllByProviderId');
+    Route::patch('makeseen', 'Chat\ChatAPIFoxdoxUser@makeSeen');
+    Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxUser@deleteMessage');
+
+});
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'chat/provider'
+
+], function ($router) {
+
+    //Chat requests for FoxdoxUser
+    Route::post('sendmessage', 'Chat\ChatAPIFoxdoxProvider@sendMessageByFoxdoxProvider');
+    Route::get('getinbox', 'Chat\ChatAPIFoxdoxProvider@getInboxForFoxdoxProvider');
+    Route::get('getinboxall', 'Chat\ChatAPIFoxdoxProvider@getInboxAllForFoxdoxProvider');
+    Route::post('getconversationbyprovidername', 'Chat\ChatAPIFoxdoxProvider@getConversationByProviderProvider');
+    Route::post('getconversationbyprovidernameall', 'Chat\ChatAPIFoxdoxProvider@getConversationAllByProviderProvider');
+    Route::post('getconversationbyproviderid', 'Chat\ChatAPIFoxdoxProvider@getConversationByProviderId');
+    Route::post('getconversationbyprovideridall', 'Chat\ChatAPIFoxdoxProvider@getConversationAllByProviderId');
+    Route::patch('makeseen', 'Chat\ChatAPIFoxdoxProvider@makeSeen');
+    Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxProvider@deleteMessage');
+
+});

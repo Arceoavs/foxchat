@@ -99,7 +99,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'isProvider' => auth()->user()->isProvider,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 24
+            'expires_in' => auth()->factory()->getTTL()
         ]);
     }
 }
