@@ -1,66 +1,72 @@
 <template>
-  <div class="container myCont">
-    <div class="row justify-content-center">
-      <div class="col-md-12">
-        <div class="card card-default">
-          <div class="card-header">Allgemeiner Chat mit d.velop</div>
-
-          <div class="card-body">
-            <ul>
-              <li class="row col-md-12" v-for="message in messages" v-bind:key="message.value">
-                <div class="col-md-12">
-                  <div class="alert alert-chat float-left" v-if="!(message.sender == 'You')">
-                    <p>{{message.sender}}:</p>
-                    {{message.body}}
-                  </div>
-                  <div class="alert alert-chat float-right" v-else>
-                    <p>{{message.sender}}:</p>
-                    {{message.body}}
-                  </div>
-                </div>
-              </li>
-            </ul>
-            <div class="row justify-content-center" @keyup.enter="sendMessage()">
-              <input v-model="message" class="col-md-8" placeholder="Type your message here..">
-              <div class="col-md-1"></div>
-              <button type="button" class="btn foxcolor col-md-1" v-on:click="sendMessage()">Send</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div>
+    <beautiful-chat
+      :participants="participants"
+      :titleImageUrl="titleImageUrl"
+      :onMessageWasSent="onMessageWasSent"
+      :messageList="messageList"
+      :newMessagesCount="newMessagesCount"
+      :isOpen="isChatOpen"
+      :close="closeChat"
+      :open="openChat"
+      :showEmoji="true"
+      :showFile="true"
+      :showTypingIndicator="showTypingIndicator"
+      :alwaysScrollToBottom="alwaysScrollToBottom"
+      :messageStyling="messageStyling" />
   </div>
 </template>
 
 <script>
+import messageHistory from './messageHistory'
+import chatParticipants from './chatProfiles'
 export default {
-  data: function() {
+  name: 'app',
+  data() {
     return {
-      messages: [
-        {
-          id: 1,
-          body: "Ahoi Ich möchte gerne 1 Millionen Foxdox Dollar",
-          sender: "You"
-        },
-        {
-          id: 2,
-          body: "Da müssten sie mir einmal ihren top Secret Foxdox Token geben",
-          sender: "d.velop"
-        },
-        { id: 3, body: "Brauchen sie auch meinen Bank PIN?", sender: "You" },
-        { id: 4, body: "Ja", sender: "d.velop" }
-      ],
-      message: ""
-    };
-  },
-  methods: {
-    sendMessage: function() {
-      this.messages.push({ id: 5, body: this.message, sender: "You" });
-      this.message = "";
+      participants: chatParticipants,
+      titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+      messageList: messageHistory,
+      newMessagesCount: 0,
+      isChatOpen: false,
+      showTypingIndicator: '',
+      alwaysScrollToBottom: false,
+      messageStyling: true,
     }
   },
-  mounted() {
-    console.log("Chat Component mounted.");
+  created() {
+  },
+  methods: {
+    sendMessage (text) {
+      if (text.length > 0) {
+        this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
+        this.onMessageWasSent({ author: 'support', type: 'text', data: { text } })
+      }
+    },
+    handleTyping (text) {
+      this.showTypingIndicator = text.length > 0 ? this.participants[this.participants.length - 1].id : '';
+    },
+    onMessageWasSent (message) {
+      this.messageList = [ ...this.messageList, message ]
+    },
+    openChat () {
+      this.isChatOpen = true
+      this.newMessagesCount = 0
+    },
+    closeChat () {
+      this.isChatOpen = false
+    },
+    showStylingInfo() {
+      this.$modal.show('dialog', {
+        title: 'Info',
+        text: 'You can use *word* to <strong>boldify</strong>, /word/ to <em>emphasize</em>, _word_ to <u>underline</u>, `code` to <code>write = code;</code>, ~this~ to <del>delete</del> and ^sup^ or ¡sub¡ to write <sup>sup</sup> and <sub>sub</sub>'
+      })
+    },
+    messageStylingToggled(e) {
+      this.messageStyling = e.target.checked
+    }
+  },
+  computed: {
   }
-};
+}
 </script>
