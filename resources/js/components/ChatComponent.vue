@@ -1,7 +1,7 @@
 <template>
-  <div class="container myCont">
+  <div class="myCont">
     <div class="row justify-content-center">
-      <div class="col-md-12">
+      <div class="col-md-8 col-sm-12">
         <beautiful-chat
           :participants="participants"
           :titleImageUrl="titleImageUrl"
@@ -74,3 +74,6 @@ export default {
   computed: {}
 };
 </script>
+
+<style>
+</style>

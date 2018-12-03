@@ -18,6 +18,7 @@
   bottom: 0;
   width: 100%;
   height: 35px;
+  margin-top: -35px;
   background-color: #fff !important;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
 }
