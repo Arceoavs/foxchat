@@ -1,25 +1,63 @@
 export default [
-    { type: 'text', author: `me`, data: { text: `Why don't they have salsa on the table?` } },
-    { type: 'text', author: `mattmezza`, data: { text: `What do you need salsa for?` } },
-    { type: 'text', author: `me`, data: { text: `Salsa is now the number one condiment in America.` } },
-    { type: 'text', author: `mattmezza`, data: { text: `You know why? Because people like to say 'salsa.' 'Excuse me, do you have salsa?' 'We need more salsa.' 'Where is the salsa? No salsa?'` } },
-    { type: 'text', author: `me`, data: { text: `You know it must be impossible for a Spanish person to order seltzer and not get salsa. 'I wanted seltzer, not salsa.'` } },
-    { type: 'text', author: `mattmezza`, data: { text: `Don't you know the difference between seltzer and salsa?? You have the seltezer after the salsa!` } },
-    { type: 'text', author: `me`, data: { text: `See, this should be a show. This is the show. ` } },
-    { type: 'text', author: `mattmezza`, data: { text: `What?` } },
-    { type: 'text', author: `me`, data: { text: `This. Just talking.` } },
-    { type: 'text', author: `mattmezza`, data: { text: `Yeah, right.` } },
-    { type: 'text', author: `me`, data: { text: `I'm really serious. I think that's a good idea. ` } },
-    { type: 'text', author: `mattmezza`, data: { text: `Just talking? Well what's the show about?` } },
-    { type: 'text', author: `me`, data: { text: `It's about nothing.` } },
-    { type: 'text', author: `mattmezza`, data: { text: `No story?` } },
-    { type: 'system', data: { text: 'You have been transferred to another operator', meta: '04-07-2018 15:57' } },
-    { type: 'file', author: `support`, data: { text: `No forget the story. `, file: { name: 'file.mp3', url: '#' } } },
-    { type: 'file', author: `me`, data: { text: `What about this one instead?? `, file: { name: 'song.mp3', url: '#' }, meta: '✓✓ Read' } },
-    { type: 'text', author: `support`, data: { text: `You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. ` } },
-    { type: 'emoji', author: `me`, data: { emoji: `😋` } },
-    { type: 'text', author: `me`, data: { text: `Do you read me...`, meta: '✓✓ Read' } },
-    { type: 'text', author: `me`, data: { text: `...or not?`, meta: '✓ Delivered' } },
-    { type: 'system', data: { text: 'User changed security key', meta: '04-08-2018 15:57' } },
-    { type: 'text', author: `support`, data: { text: `What about suggestions?` }, suggestions: ["Looks good!", "It's OK.", "Uhh.. Do I really have to say something?", "This suggestion is way too long for css purpose. Let's make it long... Longer, and more and more.. Never ending."] }
-  ]
+  {
+    type: 'text',
+    author: `me`,
+    data: { text: `Ahoi Ich möchte gerne 1 Millionen Foxdox Dollar!` }
+  },
+  {
+    type: 'text',
+    author: `mattmezza`,
+    data: {
+      text: `Da müssten sie mir einmal ihren top Secret Foxdox Token geben.`
+    }
+  },
+  {
+    type: 'text',
+    author: `me`,
+    data: { text: `Brauchen sie auch meinen Bank PIN?` }
+  },
+  {
+    type: 'text',
+    author: `mattmezza`,
+    data: {
+      text: `Ja.`
+    }
+  },
+  {
+    type: 'file',
+    author: `me`,
+    data: {
+      text: `Alle wichtigen Informationen`,
+      file: { name: 'file.csv', url: '#' }
+    }
+  },
+  {
+    type: 'system',
+    data: {
+      text: 'Ihr Konto wurde leergeräumt!',
+      meta: '03-11-2018 18:32'
+    }
+  },
+  { type: 'emoji', author: `me`, data: { emoji: `😋` } },
+  {
+    type: 'text',
+    author: `me`,
+    data: { text: `Do you read me...`, meta: '✓✓ Read' }
+  },
+  {
+    type: 'text',
+    author: `me`,
+    data: { text: `...or not?`, meta: '✓ Delivered' }
+  },
+  {
+    type: 'text',
+    author: `support`,
+    data: { text: `What about suggestions?` },
+    suggestions: [
+      'Hallo!',
+      "Alles wird gut.",
+      'Wir bitten um Entschuldigung.',
+      "Gewitter? In Neuss?."
+    ]
+  }
+];
