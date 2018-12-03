@@ -21,7 +21,6 @@
     </b-navbar>
     <!--<div class="clearfisx"></div>-->
     <router-view></router-view>
-    <footer-component></footer-component>
   </div>
 </template>
 
