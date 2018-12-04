@@ -1,6 +1,6 @@
 <template>
   <b-container class="login-form">
-    <b-row class="justify-content-center">
+    <b-row class="justify-content-center mt-5">
       <b-col md="4" sm="6" cols="8">
         <div class="panel">
           <h2>Anmeldung</h2>

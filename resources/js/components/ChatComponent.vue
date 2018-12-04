@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <b-row class="justify-content-md-center">
+    <b-row class="justify-content-md-center my-3">
       <b-col md="8" sm="12">
         <beautiful-chat
           :participants="participants"

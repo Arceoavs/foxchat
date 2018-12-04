@@ -1,7 +1,7 @@
 <template>
-  <div class="container myCont">
-    <div class="row justify-content-center">
-      <div class="col-md-12">
+  <b-container class="myContainer">
+    <b-row class="justify-content-center mt-3">
+      <b-col md="12">
         <div class="card card-default">
           <div class="card-header">Dokumente</div>
           <div class="card-body mx-auto">
@@ -22,9 +22,9 @@
             <router-view></router-view>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -46,3 +46,6 @@ export default {
 
 // );
 </script>
+
+<style>
+</style>
