@@ -1,15 +1,15 @@
 <template>
-  <div class="login-form">
-    <div class="row justify-content-center">
-      <div class="col-4 col-md-4 col-sm-8">
+  <b-container class="login-form">
+    <b-row class="justify-content-center mt-5">
+      <b-col md="4" sm="6" cols="8">
         <div class="panel">
           <h2>Anmeldung</h2>
-          <p>Melden sie sich mit ihrem foxdox Konto an:</p>
+          <p>Bitte melden Sie sich mit Ihrem foxdox Konto an:</p>
         </div>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-8 col-md-4 col-sm-6">
+      </b-col>
+    </b-row>
+    <b-row class="justify-content-center">
+      <b-col md="4" sm="6" cols="8">
         <div @keyup.enter="sendPassword()">
           <div class="form-group">
             <input v-model="username" class="form-control" placeholder="Benutzername">
@@ -36,11 +36,10 @@
           </div>
           <button type="button" v-on:click="sendPassword()" class="btn btn-primary">Anmelden</button>
         </div>
-      </div>
-    </div>
-  </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
-
 
 <script>
 import auth from "../services/AuthServiceProvider.js";
