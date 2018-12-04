@@ -22,5 +22,8 @@
         "bootstrap-vue": "^2.0.0-rc.11",
         "vuex": "^3.0.1",
         "vue-cookies": "^1.5.7"
+    },
+    "dependencies": {
+        "vue-beautiful-chat": "git+https://github.com/Arceoavs/vue-beautiful-chat.git"
     }
 }
