@@ -1,7 +1,7 @@
 <template>
-  <div class="myCont">
-    <div class="row justify-content-center">
-      <div class="col-md-8 col-sm-12">
+  <b-container fluid>
+    <b-row class="justify-content-md-center">
+      <b-col md="8" sm="12">
         <beautiful-chat
           :participants="participants"
           :titleImageUrl="titleImageUrl"
@@ -15,9 +15,9 @@
           :alwaysScrollToBottom="alwaysScrollToBottom"
           :messageStyling="messageStyling"
         />
-      </div>
-    </div>
-  </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

@@ -23,6 +23,7 @@
       </b-collapse>
     </b-navbar>
     <!--<div class="clearfisx"></div>-->
+    <breadcrumb-component></breadcrumb-component>
     <router-view></router-view>
   </div>
 </template>
@@ -31,6 +32,7 @@
 import LogoutComponent from "./LogoutComponent.vue";
 import LoadingComponent from "./LoadingComponent.vue";
 import FooterComponent from "./Footer.vue";
+import BreadcrumbComponent from "./BreadcrumbComponent.vue";
 import EventBus from "../services/event-bus.js";
 
 export default {
@@ -51,7 +53,8 @@ export default {
   components: {
     LogoutComponent,
     LoadingComponent,
-    FooterComponent
+    FooterComponent,
+    BreadcrumbComponent
   }
 };
 </script>
