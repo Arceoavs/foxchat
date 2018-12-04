@@ -23,9 +23,10 @@
       </b-collapse>
     </b-navbar>
     <!--<div class="clearfisx"></div>-->
-    <!--<breadcrumb-component></breadcrumb-component>-->
+    <breadcrumb-component></breadcrumb-component>
     <!--<footer-component></footer-component>-->
     <router-view></router-view>
+    <footer-component></footer-component>
   </div>
 </template>
 
