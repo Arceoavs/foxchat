@@ -3,7 +3,7 @@
     <b-row class="justify-content-center mt-5">
       <b-col md="4" sm="6" cols="8">
         <div class="panel">
-          <h2>Testtest</h2>
+          <h2>Anmeldung</h2>
           <p>Bitte melden Sie sich mit Ihrem foxdox Konto an:</p>
         </div>
       </b-col>
@@ -43,7 +43,7 @@ export default {
     return {
       username: "",
       password: "",
-      errorMsg: "Login Fehler: ",
+      errorMsg: "Anmeldung fehlgeschlagen: ",
       showAlert: false,
       noError: true
     };
