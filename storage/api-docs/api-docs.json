@@ -304,7 +304,7 @@
                 ]
             }
         },
-        "/api/chat/user/sendMessage": {
+        "/api/chat/user/sendmessage": {
             "post": {
                 "tags": [
                     "UserChat"
@@ -648,7 +648,7 @@
                 ]
             }
         },
-        "/api/chat/user/deleteMessage": {
+        "/api/chat/user/deletemessage": {
             "patch": {
                 "tags": [
                     "UserChat"
@@ -755,7 +755,7 @@
                 ]
             }
         },
-        "/api/chat/provider/sendMessage": {
+        "/api/chat/provider/sendmessage": {
             "post": {
                 "tags": [
                     "ProviderChat"
@@ -1099,7 +1099,7 @@
                 ]
             }
         },
-        "/api/chat/provider/deleteMessage": {
+        "/api/chat/provider/deletemessage": {
             "patch": {
                 "tags": [
                     "ProviderChat"
