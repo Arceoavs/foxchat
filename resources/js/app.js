@@ -20,8 +20,7 @@ Vue.use(BootstrapVue);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-library.add(faCoffee);
-library.add(faAngleRight);
+library.add(faCoffee, faAngleRight);
 
 const app = new Vue({
   el: '#app',
