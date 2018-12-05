@@ -22,7 +22,7 @@ class ChatAPIService extends Controller
 
     protected function getUserFromDatabase($username)
     {
-        return User::where('name' ,$username)->first();
+        return User::where('name', $username)->first();
     }
 
     protected function getConversationFromDatabase($conversationid)
@@ -47,7 +47,6 @@ class ChatAPIService extends Controller
     {
         //Try to find user in database
         $user = $this->getUserFromDatabase($username);
-        Log::info(true);
         // Throws an Exception whether the Receiver is not found or the Receiver is not the Opposite of the Sender (User/ Provider)
         if (!$this->isValidUser($username) || (auth()->user()->isProvider == $user->isProvider)) {
             return false;
@@ -80,9 +79,10 @@ class ChatAPIService extends Controller
         if(!$chatpartner){
             throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
         }
-        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
         }
@@ -95,9 +95,10 @@ class ChatAPIService extends Controller
         if(!$chatpartner){
             throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
         }
-        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
         }
@@ -106,9 +107,10 @@ class ChatAPIService extends Controller
 
     public function getConversationById($userid, $conversationtag)
     {
-        $conversation = CustomConversation::where(["user_one"=> $userid, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $userid, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
         }
@@ -117,9 +119,10 @@ class ChatAPIService extends Controller
 
     public function getConversationAllById($userid, $conversationtag)
     {
-        $conversation = CustomConversation::where(["user_one"=> $userid, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $userid, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
         }
