@@ -24,6 +24,6 @@
         "vue-cookies": "^1.5.7"
     },
     "dependencies": {
-        "vue-beautiful-chat": "git+https://github.com/Arceoavs/vue-beautiful-chat.git"
+        "vue-beautiful-foxchat": "^2.2.2"
     }
 }
