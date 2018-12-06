@@ -43,7 +43,7 @@ export default {
     return {
       username: "",
       password: "",
-      errorMsg: "Login Fehler: ",
+      errorMsg: "Anmeldung fehlgeschlagen: ",
       showAlert: false,
       noError: true
     };

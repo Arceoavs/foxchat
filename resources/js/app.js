@@ -8,13 +8,19 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import Chat from 'vue-beautiful-foxchat';
-
 import store from './store.js';
 import router from './router.js';
 import App from './components/App.vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCoffee, faAngleRight, faComments, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.use(Chat);
 Vue.use(BootstrapVue);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+library.add(faCoffee, faAngleRight, faComments, faPlusCircle);
 
 const app = new Vue({
   el: '#app',

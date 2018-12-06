@@ -55,9 +55,9 @@ export default [
     data: { text: `What about suggestions?` },
     suggestions: [
       'Hallo!',
-      "Alles wird gut.",
+      'Alles wird gut.',
       'Wir bitten um Entschuldigung.',
-      "Gewitter? In Neuss?."
+      'Gewitter? In Neuss?.'
     ]
   }
 ];

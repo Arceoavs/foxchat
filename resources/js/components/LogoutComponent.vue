@@ -1,5 +1,5 @@
 <template>
-  <a class="foxcolor" v-on:click="logout()">Logout</a>
+  <a class="foxcolor" v-on:click="logout()">Abmelden</a>
 </template>
 
 <script>
