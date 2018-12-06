@@ -23,15 +23,14 @@
 <script>
 import messageHistory from "./messageHistory";
 import chatParticipants from "./chatProfiles";
-
-import chatUser from "../services/ChatServiceUser.js";
-
 export default {
   name: "app",
   data() {
     return {
+      participants: chatParticipants,
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+      messageList: messageHistory,
       newMessagesCount: 0,
       showTypingIndicator: "",
       alwaysScrollToBottom: false,
@@ -40,7 +39,6 @@ export default {
   },
   created() {},
   methods: {
-    
     sendMessage(text) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen
@@ -53,8 +51,6 @@ export default {
         });
       }
     },
-
-
     handleTyping(text) {
       this.showTypingIndicator =
         text.length > 0
@@ -75,10 +71,7 @@ export default {
       this.messageStyling = e.target.checked;
     }
   },
-  computed: {
-      participants: chatUser.getConversationByProviderName('mein.arbeitgeber'),
-      messageList: chatUser.,
-  }
+  computed: {}
 };
 </script>
 
