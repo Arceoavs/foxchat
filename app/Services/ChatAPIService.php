@@ -22,7 +22,7 @@ class ChatAPIService extends Controller
 
     protected function getUserFromDatabase($username)
     {
-        return User::where('name' ,$username)->first();
+        return User::where('name', $username)->first();
     }
 
     protected function getConversationFromDatabase($conversationid)
@@ -47,7 +47,6 @@ class ChatAPIService extends Controller
     {
         //Try to find user in database
         $user = $this->getUserFromDatabase($username);
-        Log::info(true);
         // Throws an Exception whether the Receiver is not found or the Receiver is not the Opposite of the Sender (User/ Provider)
         if (!$this->isValidUser($username) || (auth()->user()->isProvider == $user->isProvider)) {
             return false;
@@ -74,56 +73,68 @@ class ChatAPIService extends Controller
         return CustomTalk::getInboxAll();
     }
     
-    public function getConversationByName($username, $conversationtag)
+    public function getConversationByName($username, $conversationtag, $offset, $take)
     {
         $chatpartner = $this->getUserFromDatabase($username);
         if(!$chatpartner){
-            throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
+            throw new ChatAPIServiceException("Provided Name");
         }
-        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
         }
-        return response()->json(CustomTalk::getConversationsById($conversation->id));
+        return response()->json(CustomTalk::getConversationsById($conversation->id, $offset, $take));
     }
 
-    public function getConversationAllByName($username, $conversationtag)
+    public function getConversationAllByName($username, $conversationtag, $offset, $take)
     {
         $chatpartner = $this->getUserFromDatabase($username);
         if(!$chatpartner){
-            throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
+            throw new ChatAPIServiceException("Provided Name");
         }
-        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $chatpartner->id, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
         }
-        return response()->json(CustomTalk::getConversationsAllById($conversation->id));
+        return response()->json(CustomTalk::getConversationsAllById($conversation->id, $offset, $take));
     }
 
-    public function getConversationById($userid, $conversationtag)
+    public function getConversationById($userid, $conversationtag, $offset, $take)
     {
-        $conversation = CustomConversation::where(["user_one"=> $userid, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $userid, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $chatpartner = User::find($userid);
+        if(!$chatpartner){
+            throw new ChatAPIServiceException("Provided Userid");
+        }
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
         }
-        return response()->json(CustomTalk::getConversationsById($conversation->id));
+        return response()->json(CustomTalk::getConversationsById($conversation->id, $offset, $take));
     }
 
-    public function getConversationAllById($userid, $conversationtag)
+    public function getConversationAllById($userid, $conversationtag, $offset, $take)
     {
-        $conversation = CustomConversation::where(["user_one"=> $userid, "user_two" => auth()->user()->id, "tag" => $conversationtag])
-        ->orWhere(["user_two"=> $userid, "user_one" => auth()->user()->id, "tag" => $conversationtag])
-        ->first();
+        $chatpartner = User::find($userid);
+        if(!$chatpartner){
+            throw new ChatAPIServiceException("Provided Userid");
+        }
+        $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
+        if(!$conversation){
+            $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
+        }
         if(!$conversation){
             throw new ChatAPIServiceException("Provided Tag, Id or the combination of both");
         }
-        return response()->json(CustomTalk::getConversationsAllById($conversation->id));
+        return response()->json(CustomTalk::getConversationsAllById($conversation->id, $offset, $take));
     }
 
     public function makeSeen($messageid)
