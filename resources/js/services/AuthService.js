@@ -6,7 +6,7 @@ const config = {
     }
 }
 
-var path = '/api/auth';
+var path = '/api/auth/user';
 
 class AuthService {
     login(pUsername, pPassword, self){

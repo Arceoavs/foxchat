@@ -30,7 +30,9 @@ class ChatAPI extends Controller
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
             'username' => 'required',
-            'conversationtag' => 'required'
+            'conversationtag' => 'required',
+            'offset' => 'required',
+            'take' => 'required'
         ]);
 
         //Send errors
@@ -40,16 +42,20 @@ class ChatAPI extends Controller
 
         $user = request()->input('username');
         $conversationtag = request()->input('conversationtag');
+        $offset = request()->input('offset');
+        $take = request()->input('take');
 
-        return $this->chatapiservice->getConversationByName($user, $conversationtag);
+        return $this->chatapiservice->getConversationByName($user, $conversationtag, $offset, $take);
     }
 
-    public function getConversationAllName()
+    public function getConversationByNameAll()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
             'username' => 'required',
-            'conversationtag' => 'required'
+            'conversationtag' => 'required',
+            'offset' => 'required',
+            'take' => 'required'
         ]);
 
         //Send errors
@@ -59,8 +65,10 @@ class ChatAPI extends Controller
 
         $user = request()->input('username');
         $conversationtag = request()->input('conversationtag');
+        $offset = request()->input('offset');
+        $take = request()->input('take');
 
-        return $this->chatapiservice->getConversationAllByName($user, $conversationtag);
+        return $this->chatapiservice->getConversationAllByName($user, $conversationtag, $offset, $take);
     }
 
     public function getConversationById()
@@ -68,7 +76,9 @@ class ChatAPI extends Controller
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
             'userid' => 'required',
-            'conversationtag' => 'required'
+            'conversationtag' => 'required',
+            'offset' => 'required',
+            'take' => 'required'
         ]);
 
         //Send errors
@@ -78,16 +88,20 @@ class ChatAPI extends Controller
 
         $user = request()->input('userid');
         $conversationtag = request()->input('conversationtag');
+        $offset = request()->input('offset');
+        $take = request()->input('take');
 
-        return $this->chatapiservice->getConversationById($user, $conversationtag);
+        return $this->chatapiservice->getConversationById($user, $conversationtag, $offset, $take);
     }
 
-    public function getConversationAllById()
+    public function getConversationByIdAll()
     {
         //Check if request contains the necessary inputs
         $validator = Validator::make(request()->all(), [
             'userid' => 'required',
-            'conversationtag' => 'required'
+            'conversationtag' => 'required',
+            'offset' => 'required',
+            'take' => 'required'
         ]);
 
         //Send errors
@@ -97,8 +111,10 @@ class ChatAPI extends Controller
 
         $user = request()->input('userid');
         $conversationtag = request()->input('conversationtag');
+        $offset = request()->input('offset');
+        $take = request()->input('take');
 
-        return $this->chatapiservice->getConversationAllById($user, $conversationtag);
+        return $this->chatapiservice->getConversationAllById($user, $conversationtag, $offset, $take);
     }
 
 

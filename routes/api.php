@@ -25,10 +25,10 @@ Route::group([
 ], function ($router) {
 
     //Login requests for FoxdoxUser
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::get('me', 'AuthController@me');
+    Route::post('user/login', 'AuthController@login');
+    Route::post('user/logout', 'AuthController@logout');
+    Route::post('user/refresh', 'AuthController@refresh');
+    Route::get('user/me', 'AuthController@me');
 
     //Login requests for FoxdoxProviders
     Route::post('provider/login', 'AuthControllerProvider@login');
@@ -49,9 +49,9 @@ Route::group([
     Route::get('getinbox', 'Chat\ChatAPIFoxdoxUser@getInbox');
     Route::get('getinboxall', 'Chat\ChatAPIFoxdoxUser@getInboxAll');
     Route::post('getconversationbyname', 'Chat\ChatAPIFoxdoxUser@getConversationByName');
-    Route::post('getconversationbynameall', 'Chat\ChatAPIFoxdoxUser@getConversationAllByName');
+    Route::post('getconversationbynameall', 'Chat\ChatAPIFoxdoxUser@getConversationByNameAll');
     Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxUser@getConversationById');
-    Route::post('getconversationbyidall', 'Chat\ChatAPIFoxdoxUser@getConversationAllById');
+    Route::post('getconversationbyidall', 'Chat\ChatAPIFoxdoxUser@getConversationByIdAll');
     Route::patch('makeseen', 'Chat\ChatAPIFoxdoxUser@makeSeen');
     Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxUser@deleteMessage');
 
@@ -69,9 +69,9 @@ Route::group([
     Route::get('getinbox', 'Chat\ChatAPIFoxdoxProvider@getInbox');
     Route::get('getinboxall', 'Chat\ChatAPIFoxdoxProvider@getInboxAll');
     Route::post('getconversationbyname', 'Chat\ChatAPIFoxdoxProvider@getConversationByName');
-    Route::post('getconversationbynameall', 'Chat\ChatAPIFoxdoxProvider@getConversationAllByName');
+    Route::post('getconversationbynameall', 'Chat\ChatAPIFoxdoxProvider@getConversationByNameAll');
     Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxProvider@getConversationById');
-    Route::post('getconversationbyidall', 'Chat\ChatAPIFoxdoxProvider@getConversationAllById');
+    Route::post('getconversationbyidall', 'Chat\ChatAPIFoxdoxProvider@getConversationByIdAll');
     Route::patch('makeseen', 'Chat\ChatAPIFoxdoxProvider@makeSeen');
     Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxProvider@deleteMessage');
 
