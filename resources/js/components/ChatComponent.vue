@@ -22,7 +22,7 @@
 
 <script>
 import messageHistory from "./messageHistory";
-import chatParticipants from "./chatProfiles";
+import chatProfiles from "./chatProfiles";
 
 import chatUser from "../services/ChatServiceUser.js";
 
@@ -35,10 +35,15 @@ export default {
       newMessagesCount: 0,
       showTypingIndicator: "",
       alwaysScrollToBottom: false,
-      messageStyling: true
+      messageStyling: true,
+      participants: chatProfiles,
+      messageList: messageHistory,
     };
   },
-  created() {},
+  mounted() {
+    this.participants = chatUser.getParticipants();
+    this.messageList = chatUser.getMessageList();
+  },
   methods: {
     
     sendMessage(text) {
@@ -76,8 +81,7 @@ export default {
     }
   },
   computed: {
-      participants: chatUser.getConversationByProviderName('mein.arbeitgeber'),
-      messageList: chatUser.,
+      
   }
 };
 </script>

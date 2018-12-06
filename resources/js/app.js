@@ -13,8 +13,9 @@ import store from './store.js';
 import router from './router.js';
 import App from './components/App.vue';
 
-Vue.use(Chat);
 Vue.use(BootstrapVue);
+Vue.use(Chat);
+
 
 const app = new Vue({
   el: '#app',

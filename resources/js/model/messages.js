@@ -64,13 +64,13 @@
 
   
   
-class Participant {
+class Message {
     constructor(type, author, pSuggestions, pText, pMeta, pEmoji, pFile){
         this.type = type;
         this.author = author;
+        this.suggestions = pSuggestions;
 
         this.data = {
-            suggestions: pSuggestions,
             text: pText,
             meta: pMeta,
             emoji: pEmoji,

@@ -1,5 +1,6 @@
-import EventBus from './event-bus.js';
-import participants from '../model/participants;
+//import EventBus from './event-bus.js';
+import Participant from '../model/participants.js';
+import Message from '../model/messages.js';
 
 
 const configExt = {
@@ -14,12 +15,26 @@ var path = '/api/chat/user';
 class ChatServiceUser  {
 
     getParticipants(){
-        var partner = this.getInbox.withUser;
+
+        this.sendMessage('mein.arbeitgeber', 'Hello myfirend', 'sometags');
+        this.sendMessage('meine.versicherung', 'Hello myfirend', 'somemoreTags');
+
+        var partner = this.getConversationByProviderName('mein.arbeitgeber', 'allgemein').withUser;
         var you = localStorage.getItem('user');
         return [
-            new Participant(),
-            new Participant(this.getInbox)
-        ]
+            new Participant(you.id, you.name),
+            new Participant(partner.id, partner.name)
+        ];
+    }
+
+    getMessages(){
+        var responseArr = [];
+
+        for(message of this.getConversationByProviderName('mein.arbeitgeber').messages){
+            responseArr.concat(new Message('text', message.sender.name, null, message.message, null, null, null));
+        }
+
+        return responseArr;
     }
 
     /**
@@ -30,7 +45,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
@@ -49,7 +64,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
@@ -67,7 +82,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
@@ -85,7 +100,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
@@ -100,7 +115,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
@@ -115,7 +130,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
@@ -129,7 +144,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
@@ -143,7 +158,7 @@ class ChatServiceUser  {
             .then(response => {
                 return response.data;
             })
-            .error(error => {
+            .catch(error => {
                 console.log('error');
             });
     }
