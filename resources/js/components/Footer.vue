@@ -4,17 +4,26 @@
       <b-row class="mt-5">
         <b-col>
           <div class="footer-text footer-left">
-            <p>Projektseminar: Der digitale Tresor</p>
+            <p>{{footerMessageLeft}}</p>
           </div>
           <div class="footer-right">
-            <a class="footer-text" href="www.d-velop.de/foxdox/foxdox-home">powered by foxdox</a>
+            <a class="footer-text" href="https://www.d-velop.de/foxdox/foxdox-home">{{footerMesageRight}}</a>
           </div>
         </b-col>
       </b-row>
     </mdb-container>
   </mdb-footer>
 </template>
+
 <script>
+export default {
+  data() {
+    return {
+      footerMessageLeft: "Projektseminar: Der digitale Tresor",
+      footerMesageRight: "powered by foxfox"
+    };
+  }
+};
 </script>
 
 <style>

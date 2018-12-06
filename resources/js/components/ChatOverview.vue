@@ -4,9 +4,9 @@
       <b-col>
         <div>
           <b-card>
-            <h3 class="left">{{provider}}</h3>
+            <h4 class="left textColor">{{provider}}</h4>
             <font-awesome-icon
-              class="foxcolor right"
+              class="cardIcon textFox"
               icon="angle-right"
               size="2x"
               @click="showCollapse = !showCollapse"
@@ -15,11 +15,21 @@
               :aria-expanded="showCollapse ? 'true' : 'false'"
             />
           </b-card>
-          <b-collapse class="mt-2" v-model="showCollapse" id="collapse">
-            <b-card>Erster Chat!</b-card>
+          <b-collapse class="mt-2 ml-5" v-model="showCollapse" id="collapse">
+            <b-card class="textColor">
+              {{generalChat}}
+              <div class="cardIcon textFox">
+                <font-awesome-icon icon="comments" size="2x"/>
+              </div>
+            </b-card>
           </b-collapse>
-          <b-collapse class="mt-2" v-model="showCollapse" id="collapse">
-            <b-card>Zweiter Chat!</b-card>
+          <b-collapse class="mt-2 ml-5" v-model="showCollapse" id="collapse">
+            <b-card class="textColor">
+              {{addChat}}
+              <div class="cardIcon textFox">
+                <font-awesome-icon icon="plus-circle" size="2x"/>
+              </div>
+            </b-card>
           </b-collapse>
         </div>
       </b-col>
@@ -32,6 +42,8 @@ export default {
   data() {
     return {
       provider: "d.velop",
+      generalChat: "Allgemeiner Chat",
+      addChat: "Chat hinzufügen",
       showCollapse: false
     };
   }
@@ -39,7 +51,7 @@ export default {
 </script>
 
 <style>
-.right {
+.cardIcon {
   float: right;
 }
 .left {
