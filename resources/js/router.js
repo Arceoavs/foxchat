@@ -63,14 +63,7 @@ const routes = [
     component: ChatOverview,
     meta: {
       requiresAuth: true
-    },
-    children: [
-      {
-        path: 'communication',
-        name: 'Communication with provider',
-        component: ChatComponent
-      }
-    ]
+    }
   },
   {
     path: '/communication',

@@ -13,12 +13,14 @@
             <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
           </b-card>
           <b-collapse class="mt-2 ml-5" v-model="showCollapse" id="collapse">
-            <b-card class="textColor">
-              {{generalChat}}
-              <div class="cardIcon textFox">
-                <font-awesome-icon icon="comments" size="2x"/>
-              </div>
-            </b-card>
+            <router-link to="/communication">
+              <b-card class="textColor">
+                {{generalChat}}
+                <div class="cardIcon textFox">
+                  <font-awesome-icon icon="comments" size="2x"/>
+                </div>
+              </b-card>
+            </router-link>
           </b-collapse>
           <b-collapse class="mt-2 ml-5" v-model="showCollapse" id="collapse">
             <b-card class="textColor">

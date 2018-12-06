@@ -1,18 +1,21 @@
 <template>
-  <mdb-footer class="font-small pt-4 mt-4">
-    <mdb-container fluid>
+  <footer class="font-small pt-4 mt-4">
+    <b-container fluid>
       <b-row class="mt-5">
         <b-col>
           <div class="footer-text footer-left">
             <p>{{footerMessageLeft}}</p>
           </div>
           <div class="footer-right">
-            <a class="footer-text" href="https://www.d-velop.de/foxdox/foxdox-home">{{footerMesageRight}}</a>
+            <a
+              class="footer-text"
+              href="https://www.d-velop.de/foxdox/foxdox-home"
+            >{{footerMesageRight}}</a>
           </div>
         </b-col>
       </b-row>
-    </mdb-container>
-  </mdb-footer>
+    </b-container>
+  </footer>
 </template>
 
 <script>
