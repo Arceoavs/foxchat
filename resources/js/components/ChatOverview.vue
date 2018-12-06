@@ -3,17 +3,14 @@
     <b-row class="mt-3">
       <b-col>
         <div>
-          <b-card>
+          <b-card
+            @click="showCollapse = !showCollapse"
+            :class="showCollapse ? 'collapsed' : null"
+            aria-controls="collapse"
+            :aria-expanded="showCollapse ? 'true' : 'false'"
+          >
             <h4 class="left textColor">{{provider}}</h4>
-            <font-awesome-icon
-              class="cardIcon textFox"
-              icon="angle-right"
-              size="2x"
-              @click="showCollapse = !showCollapse"
-              :class="showCollapse ? 'collapsed' : null"
-              aria-controls="collapse"
-              :aria-expanded="showCollapse ? 'true' : 'false'"
-            />
+            <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
           </b-card>
           <b-collapse class="mt-2 ml-5" v-model="showCollapse" id="collapse">
             <b-card class="textColor">
