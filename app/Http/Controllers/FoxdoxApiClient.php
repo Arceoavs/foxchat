@@ -86,6 +86,14 @@ class FoxdoxApiClient extends Controller
           ]);
           return $response;
     }
+    /**
+     * Gives the ability to change the standard method from 'POST' to another HTTP method.
+     */
+
+    public function setMethod($method)
+    {
+        $this->method=$method;
+    }
 
     /**
      * This method can be use by for any other ApiRquest sent to FoxdoxApiClient.

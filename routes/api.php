@@ -76,3 +76,16 @@ Route::group([
     Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxProvider@deleteMessage');
 
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'foxdoxapi/user'
+
+], function ($router) {
+
+    //Foxdox data requests for FoxdoxUser
+    Route::get('listproviders', 'Foxdox\GeneralFoxdoxController@listProviders');
+    Route::get('listalldocs', 'Foxdox\DocumentFoxdoxController@listAllDocuments');
+  
+});
