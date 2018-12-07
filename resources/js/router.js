@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //Components
-import OverviewComponent from './components/documents/OverviewComponent.vue';
+import DocumentOverview from './components/documents/DocumentOverview.vue';
 import NestedComponent from './components/documents/NestedComponent.vue';
 import NestedComponent2 from './components/documents/NestedComponent.1.vue';
 import ChatOverview from './components/chat/ChatOverview.vue';
@@ -25,7 +25,7 @@ const routes = [
   {
     path: '/index',
     name: 'OverviewIndex',
-    component: OverviewComponent,
+    component: DocumentOverview,
     meta: {
       requiresAuth: true
     },
