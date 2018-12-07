@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="provider in providers" :key="provider.id">
-      <chat-overview-component></chat-overview-component>
+      <chat-overview-component provider = provider.name></chat-overview-component>
     </div>
   </div>
 </template>

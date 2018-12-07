@@ -38,9 +38,11 @@
 
 <script>
 export default {
+  props: [
+    "provider"
+  ],
   data() {
     return {
-      provider: "d.velop",
       generalChat: "Allgemeiner Chat",
       addChat: "Chat hinzufügen",
       showCollapse: false
