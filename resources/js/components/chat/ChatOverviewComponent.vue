@@ -3,6 +3,7 @@
     <b-row class="mt-3">
       <b-col>
         <b-jumbotron bg-variant="secondary" class="chatGroup">
+          <!-- Provider name -->
           <b-card
             @click="showCollapse = !showCollapse"
             :class="showCollapse ? 'collapsed' : null"
@@ -10,9 +11,15 @@
             :aria-expanded="showCollapse ? 'true' : 'false'"
           >
             <h4 class="left textColor">{{provider}}</h4>
-            <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
+            <font-awesome-icon
+              class="cardIcon textFox"
+              icon="angle-right"
+              size="2x"
+              :class="dropdownArrow"
+            />
           </b-card>
 
+          <!-- General Chat -->
           <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
             <router-link to="/communication">
               <b-card class="textColor">
@@ -22,16 +29,14 @@
                 </div>
               </b-card>
             </router-link>
-          </b-collapse>
 
-          <div v-for="documentChat in documentChats" :key="documentChat.id">
-            <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
+            <!-- Document chats -->
+            <div class="mt-2" v-for="documentChat in documentChats" :key="documentChat.id">
               <chat-list-component documentChat="documentChat.title"></chat-list-component>
-            </b-collapse>
-          </div>
+            </div>
 
-          <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
-            <b-card class="textColor">
+            <!-- Add chat -->
+            <b-card class="mt-2 textColor">
               {{addChat}}
               <div class="cardIcon textFox">
                 <font-awesome-icon icon="plus-circle" size="2x"/>
@@ -69,6 +74,15 @@ export default {
   },
   components: {
     ChatListComponent
+  },
+  computed: {
+    dropdownArrow() {
+      let arrow = "rotate-down";
+      if (this.showCollapse === true) {
+        return arrow;
+      }
+      return true;
+    }
   }
 };
 </script>
@@ -77,5 +91,11 @@ export default {
 .chatGroup {
   padding: 0.3em;
   background-color: #fa8452 !important;
+}
+.rotate-down {
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 </style>
