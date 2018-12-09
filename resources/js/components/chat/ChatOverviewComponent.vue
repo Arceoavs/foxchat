@@ -12,6 +12,7 @@
             <h4 class="left textColor">{{provider}}</h4>
             <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
           </b-card>
+
           <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
             <router-link to="/communication">
               <b-card class="textColor">
@@ -22,6 +23,13 @@
               </b-card>
             </router-link>
           </b-collapse>
+
+          <div v-for="documentChat in documentChats" :key="documentChat.id">
+            <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
+              <chat-list-component documentChat="documentChat.title"></chat-list-component>
+            </b-collapse>
+          </div>
+
           <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
             <b-card class="textColor">
               {{addChat}}
@@ -37,14 +45,30 @@
 </template>
 
 <script>
+import ChatListComponent from "./ChatListComponent.vue";
+
 export default {
   props: ["provider"],
   data() {
     return {
       generalChat: "Allgemeiner Chat",
       addChat: "Chat hinzufügen",
-      showCollapse: false
+      showCollapse: false,
+
+      documentChats: [
+        {
+          id: "1",
+          title: "Dokument 1"
+        },
+        {
+          id: "2",
+          title: "Dokument 2"
+        }
+      ]
     };
+  },
+  components: {
+    ChatListComponent
   }
 };
 </script>
@@ -52,6 +76,6 @@ export default {
 <style>
 .chatGroup {
   padding: 0.3em;
-  background-color: #f86a2d !important;
+  background-color: #fa8452 !important;
 }
 </style>
