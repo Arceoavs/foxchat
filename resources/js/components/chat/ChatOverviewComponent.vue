@@ -31,9 +31,12 @@
             </router-link>
 
             <!-- Document chats -->
-            <div class="mt-2" v-for="documentChat in documentChats" :key="documentChat.id">
-              <chat-list-component documentChat="documentChat.title"></chat-list-component>
-            </div>
+            <chat-list-component
+              class="mt-2"
+              v-for="documentChat in documentChats"
+              v-bind:key="documentChat.id"
+              v-bind:title="documentChat.title"
+            ></chat-list-component>
 
             <!-- Add chat -->
             <b-card class="mt-2 textColor">
@@ -53,23 +56,12 @@
 import ChatListComponent from "./ChatListComponent.vue";
 
 export default {
-  props: ["provider"],
+  props: ["provider", "documentChats"],
   data() {
     return {
       generalChat: "Allgemeiner Chat",
       addChat: "Chat hinzufügen",
-      showCollapse: false,
-
-      documentChats: [
-        {
-          id: "1",
-          title: "Dokument 1"
-        },
-        {
-          id: "2",
-          title: "Dokument 2"
-        }
-      ]
+      showCollapse: false
     };
   },
   components: {
