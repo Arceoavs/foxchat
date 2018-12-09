@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import LogoutComponent from "./LogoutComponent.vue";
+import LogoutComponent from "./authentication/LogoutComponent.vue";
 import LoadingComponent from "./LoadingComponent.vue";
 import FooterComponent from "./Footer.vue";
 import BreadcrumbComponent from "./BreadcrumbComponent.vue";

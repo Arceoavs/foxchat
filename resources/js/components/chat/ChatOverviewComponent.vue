@@ -2,7 +2,7 @@
   <b-container>
     <b-row class="mt-3">
       <b-col>
-        <div>
+        <b-jumbotron bg-variant="secondary" class="chatGroup">
           <b-card
             @click="showCollapse = !showCollapse"
             :class="showCollapse ? 'collapsed' : null"
@@ -12,7 +12,7 @@
             <h4 class="left textColor">{{provider}}</h4>
             <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
           </b-card>
-          <b-collapse class="mt-2 ml-5" v-model="showCollapse" id="collapse">
+          <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
             <router-link to="/communication">
               <b-card class="textColor">
                 {{generalChat}}
@@ -22,7 +22,7 @@
               </b-card>
             </router-link>
           </b-collapse>
-          <b-collapse class="mt-2 ml-5" v-model="showCollapse" id="collapse">
+          <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
             <b-card class="textColor">
               {{addChat}}
               <div class="cardIcon textFox">
@@ -30,7 +30,7 @@
               </div>
             </b-card>
           </b-collapse>
-        </div>
+        </b-jumbotron>
       </b-col>
     </b-row>
   </b-container>
@@ -38,9 +38,7 @@
 
 <script>
 export default {
-  props: [
-    "provider"
-  ],
+  props: ["provider"],
   data() {
     return {
       generalChat: "Allgemeiner Chat",
@@ -50,3 +48,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.chatGroup {
+  padding: 0.3em;
+  background-color: #f86a2d !important;
+}
+</style>

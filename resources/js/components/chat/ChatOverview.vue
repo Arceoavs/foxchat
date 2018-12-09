@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <b-container>
     <div v-for="provider in providers" :key="provider.id">
-      <chat-overview-component provider = provider.name></chat-overview-component>
+      <chat-overview-component provider="provider.name"></chat-overview-component>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -13,12 +13,12 @@ export default {
     return {
       providers: [
         {
-          "id": "1",
-          "name": "meine.versicherung"
+          id: "1",
+          name: "meine.versicherung"
         },
         {
-          "id": "2",
-          "name": "mein.arbeitgeber"
+          id: "2",
+          name: "mein.arbeitgeber"
         }
       ]
     };

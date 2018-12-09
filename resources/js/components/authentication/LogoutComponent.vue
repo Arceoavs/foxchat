@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import auth from "../services/AuthService.js";
+import auth from "../../services/AuthService.js";
 
 export default {
   methods: {

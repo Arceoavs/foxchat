@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import auth from "../services/AuthServiceProvider.js";
+import auth from "../../services/AuthServiceProvider.js";
 
 export default {
   data: function() {

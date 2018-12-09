@@ -2,14 +2,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //Components
-import OverviewComponent from './components/OverviewComponent.vue';
-import NestedComponent from './components/NestedComponent.vue';
-import NestedComponent2 from './components/NestedComponent.1.vue';
-import ChatOverview from './components/ChatOverview.vue';
-import ChatComponent from './components/ChatComponent.vue';
-import LoginComponent from './components/LoginComponent.vue';
-import LoginAggr from './components/LoginAggr.vue';
-import LoginComponentProvider from './components/LoginComponentProvider.vue';
+import OverviewComponent from './components/documents/OverviewComponent.vue';
+import NestedComponent from './components/documents/NestedComponent.vue';
+import NestedComponent2 from './components/documents/NestedComponent.1.vue';
+import ChatOverview from './components/chat/ChatOverview.vue';
+import ChatComponent from './components/chat/ChatComponent.vue';
+import LoginComponent from './components/authentication/LoginComponent.vue';
+import LoginAggr from './components/authentication/LoginAggr.vue';
+import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
 
 //Services
 import auth from './services/AuthService.js';
