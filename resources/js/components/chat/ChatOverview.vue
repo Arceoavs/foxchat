@@ -1,11 +1,11 @@
 <template>
   <b-container>
-    <chat-overview-component
-      v-for="provideritem in providers"
-      v-bind:key="provideritem.id"
-      v-bind:provider="provideritem.name"
-      v-bind:documentChats="provideritem.documentChats"
-    ></chat-overview-component>
+      <chat-overview-component
+        v-for="provideritem in providers"
+        v-bind:key="provideritem.id"
+        v-bind:provider="provideritem.name"
+        v-bind:documentChats="provideritem.documentChats"
+      ></chat-overview-component>
   </b-container>
 </template>
 

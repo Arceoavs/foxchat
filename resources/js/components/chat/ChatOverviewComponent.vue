@@ -1,56 +1,54 @@
 <template>
-  <b-container>
-    <b-row class="mt-3">
-      <b-col>
-        <b-jumbotron bg-variant="secondary" class="chatGroup">
-          <!-- Provider name -->
-          <b-card
-            @click="showCollapse = !showCollapse"
-            :class="showCollapse ? 'collapsed' : null"
-            aria-controls="collapse"
-            :aria-expanded="showCollapse ? 'true' : 'false'"
-          >
-            <h4 class="left textColor">{{provider}}</h4>
-            <font-awesome-icon
-              class="cardIcon textFox"
-              icon="angle-right"
-              size="2x"
-              :class="dropdownArrow"
-            />
-          </b-card>
+  <b-row class="mt-3">
+    <b-col>
+      <b-jumbotron bg-variant="secondary" class="chatGroup">
+        <!-- Provider name -->
+        <b-card
+          @click="showCollapse = !showCollapse"
+          :class="showCollapse ? 'collapsed' : null"
+          aria-controls="collapse"
+          :aria-expanded="showCollapse ? 'true' : 'false'"
+        >
+          <h4 class="left textColor">{{provider}}</h4>
+          <font-awesome-icon
+            class="cardIcon textFox"
+            icon="angle-right"
+            size="2x"
+            :class="dropdownArrow"
+          />
+        </b-card>
 
-          <!-- General Chat -->
-          <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-            <router-link to="/communication">
-              <b-card class="textColor">
-                {{generalChat}}
-                <div class="cardIcon textFox">
-                  <font-awesome-icon icon="comments" size="2x"/>
-                </div>
-              </b-card>
-            </router-link>
-
-            <!-- Document chats -->
-            <div>
-              <chat-list-component
-                v-for="documentChat in documentChats"
-                v-bind:key="documentChat.id"
-                v-bind:title="documentChat.title"
-              ></chat-list-component>
-            </div>
-
-            <!-- Add chat -->
-            <b-card class="mt-2 textColor">
-              {{addChat}}
+        <!-- General Chat -->
+        <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
+          <router-link to="/communication">
+            <b-card class="textColor">
+              {{generalChat}}
               <div class="cardIcon textFox">
-                <font-awesome-icon icon="plus-circle" size="2x"/>
+                <font-awesome-icon icon="comments" size="2x"/>
               </div>
             </b-card>
-          </b-collapse>
-        </b-jumbotron>
-      </b-col>
-    </b-row>
-  </b-container>
+          </router-link>
+
+          <!-- Document chats -->
+          <div>
+            <chat-list-component
+              v-for="documentChat in documentChats"
+              v-bind:key="documentChat.id"
+              v-bind:title="documentChat.title"
+            ></chat-list-component>
+          </div>
+
+          <!-- Add chat -->
+          <b-card class="mt-2 textColor">
+            {{addChat}}
+            <div class="cardIcon textFox">
+              <font-awesome-icon icon="plus-circle" size="2x"/>
+            </div>
+          </b-card>
+        </b-collapse>
+      </b-jumbotron>
+    </b-col>
+  </b-row>
 </template>
 
 <script>

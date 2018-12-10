@@ -1,23 +1,17 @@
 <template>
-  <b-container fluid>
-    <b-row class="justify-content-md-center my-3">
-      <b-col md="8" sm="12">
-        <beautiful-chat
-          :participants="participants"
-          :titleImageUrl="titleImageUrl"
-          :onMessageWasSent="onMessageWasSent"
-          :messageList="messageList"
-          :newMessagesCount="newMessagesCount"
-          :isOpen="true"
-          :showEmoji="true"
-          :showFile="true"
-          :showTypingIndicator="showTypingIndicator"
-          :alwaysScrollToBottom="alwaysScrollToBottom"
-          :messageStyling="messageStyling"
-        />
-      </b-col>
-    </b-row>
-  </b-container>
+  <beautiful-chat
+    :participants="participants"
+    :titleImageUrl="titleImageUrl"
+    :onMessageWasSent="onMessageWasSent"
+    :messageList="messageList"
+    :newMessagesCount="newMessagesCount"
+    :isOpen="true"
+    :showEmoji="true"
+    :showFile="true"
+    :showTypingIndicator="showTypingIndicator"
+    :alwaysScrollToBottom="alwaysScrollToBottom"
+    :messageStyling="messageStyling"
+  />
 </template>
 
 <script>
