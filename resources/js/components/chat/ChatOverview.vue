@@ -30,7 +30,7 @@ export default {
     console.log(this.providers);
   },
   watch: {
-    providers:function(){
+    providers: function() {
       this.providers = returnProviderList();
     }
   },
@@ -38,13 +38,7 @@ export default {
     ChatOverviewComponent
   },
   methods: {
-<<<<<<< HEAD
-    getProviderList() {
-      returnProviderList().then(provider => this.providers = providers)
-    }
-=======
     getProviderList() {}
->>>>>>> c0f379df02f1085d650c74f327069b854148f050
   }
 };
 </script>
