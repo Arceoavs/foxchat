@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <b-container>
     <b-row class="mt-3">
       <b-col>
@@ -27,7 +27,16 @@
     </b-row>
   </b-container>
 </template>
+-->
 
+<template>
+  <div>
+    <Tree id="my-tree-id" :custom-options="myCustomOptions" :custom-styles="myCustomStyles" :nodes="treeDisplayData"></Tree>
+  </div>
+</template>
+
+
+<!--
 <script>
 import documentService from "../services/DocumentService.js";
 export default {
@@ -37,10 +46,54 @@ export default {
       document: documentService.getDocumentsByFolderId('d787dc74-f7b4-456a-b622-6cd3ba5d047f'),
       showCollapse: false
     };
+  },
+-->
+
+<script>
+
+export default {
+data() {
+  treeDisplayData: [
+    {
+      text: 'Root 1',
+      nodes: [
+        {
+          text: 'Child 1',
+          nodes: [
+            {
+              text: 'Grandchild 1'
+            },
+            {
+              text: 'Grandchild 2'
+            }
+          ]
+        },
+        {
+          text: 'Child 2'
+        }
+      ]
+    },
+    {
+      text: 'Root 2'
+    }
+  ];
+},
+
+  components: {
+    'vuejs-tree': Tree
+  },
+
+  methods: {
+      getTree: function(treeId) {
+        for (let i = 0; i < this.$children.length; i++) {
+          if (this.$children[i].$props.id == treeId) return this.$children[i]
+        }
+      }
   }
 };
 </script>
 
+<!--
 <style>
 .cardIcon {
   float: right;
@@ -49,3 +102,4 @@ export default {
   float: left;
 }
 </style>
+-->
