@@ -10,7 +10,18 @@ var path = '/api/foxdoxapi/user/listprovidersforoverview';
 import axios from 'axios';
 
 export function returnProviderList() {
-  console.log('Listing Providers...');
-
-  return axios.get(path, config).then(response => response.data);
+  var providerlist = axios.get(path, config).then(response => {
+    console.log('Listing Providers...');
+    providerlist = response.data['Items'];
+    var responseList = [];
+    for (var i = 0; i < providerlist.length; i++) {
+      var providerListElem = new Object();
+      providerListElem.id = ""+i;
+      providerListElem.name = providerlist[i];
+      providerListElem.documentChats = [];
+      responseList.push(providerListElem);
+    }
+    console.log(responseList);
+    return JSON.stringify(responseList);
+  });
 }
