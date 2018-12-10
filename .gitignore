@@ -14,4 +14,5 @@ yarn-error.log
 .env
 .phpunit.result.cache
 /public/js/app.js
+/public/css/app.css
 .eslintrc.json
