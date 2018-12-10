@@ -15,16 +15,27 @@
 
 <script>
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
-import providerList from "./providerList.js";
+//import providerList from "./providerList.js";
+
+import {returnProviderList} from "../../services/ChatOverviewService.js";
 
 export default {
   data() {
     return {
-      providers: providerList
+      providers: {test:"hallo"}
     };
+  },
+  mounted(){
+    this.getProviderList();
+    console.log(this.providers)
   },
   components: {
     ChatOverviewComponent
+  },
+  methods: {
+    getProviderList() {
+      returnProviderList().then(provider => this.providers = provider)
+    }
   }
 };
 </script>

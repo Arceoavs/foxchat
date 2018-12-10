@@ -25,6 +25,6 @@ export default [
   },
   {
     id: '3',
-    name: 'D.velop'
+    name: 'd.velop'
   }
 ];
