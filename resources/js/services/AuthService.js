@@ -2,7 +2,7 @@ import EventBus from './event-bus.js';
 
 const config = {
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
     }
 }
 
@@ -14,6 +14,11 @@ class AuthService {
 
         console.log('Logging In...');
             
+        var jsonsd = {
+            'name': pUsername,
+            'password': pPassword
+        }
+
         var formData = new FormData();
         formData.append('name', pUsername);
         formData.append('password', pPassword);
@@ -22,7 +27,7 @@ class AuthService {
         self.showAlert= false;
         self.noError= true;
 
-        axios.post(path+'/login', formData, config)
+        axios.post(path+'/login', jsonsd, config)
             .then(response => {
                 console.log('Logging In...');
                 localStorage.setItem('bearer', response.data.access_token);
