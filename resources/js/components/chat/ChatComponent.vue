@@ -1,17 +1,17 @@
 <template>
-  <beautiful-chat
-    :participants="participants"
-    :titleImageUrl="titleImageUrl"
-    :onMessageWasSent="onMessageWasSent"
-    :messageList="messageList"
-    :newMessagesCount="newMessagesCount"
-    :isOpen="true"
-    :showEmoji="true"
-    :showFile="true"
-    :showTypingIndicator="showTypingIndicator"
-    :alwaysScrollToBottom="alwaysScrollToBottom"
-    :messageStyling="messageStyling"
-  />
+    <beautiful-chat
+      :participants="participants"
+      :titleImageUrl="titleImageUrl"
+      :onMessageWasSent="onMessageWasSent"
+      :messageList="messageList"
+      :newMessagesCount="newMessagesCount"
+      :isOpen="true"
+      :showEmoji="true"
+      :showFile="true"
+      :showTypingIndicator="showTypingIndicator"
+      :alwaysScrollToBottom="alwaysScrollToBottom"
+      :messageStyling="messageStyling"
+    />
 </template>
 
 <script>
