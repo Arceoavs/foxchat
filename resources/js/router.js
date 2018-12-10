@@ -7,6 +7,7 @@ import NestedComponent from './components/documents/NestedComponent.vue';
 import NestedComponent2 from './components/documents/NestedComponent.1.vue';
 import ChatOverview from './components/chat/ChatOverview.vue';
 import ChatComponent from './components/chat/ChatComponent.vue';
+import ChatView from './components/chat/ChatView.vue';
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
@@ -68,7 +69,7 @@ const routes = [
   {
     path: '/communication',
     name: 'Communication with provider',
-    component: ChatComponent,
+    component: ChatView,
     meta: {
       requiresAuth: true
     }
