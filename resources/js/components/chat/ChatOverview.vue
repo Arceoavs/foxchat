@@ -48,7 +48,7 @@ export default {
           responseList.push(providerListElem);
         }
         console.log(responseList);
-        this.providers= JSON.stringify(responseList);
+        this.providers= responseList;
       });
   }
 };
