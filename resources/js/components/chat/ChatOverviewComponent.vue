@@ -20,7 +20,7 @@
           </b-card>
 
           <!-- General Chat -->
-          <b-collapse class="mt-2 ml-2" v-model="showCollapse" id="collapse">
+          <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
             <router-link to="/communication">
               <b-card class="textColor">
                 {{generalChat}}
@@ -31,12 +31,13 @@
             </router-link>
 
             <!-- Document chats -->
-            <chat-list-component
-              class="mt-2"
-              v-for="documentChat in documentChats"
-              v-bind:key="documentChat.id"
-              v-bind:title="documentChat.title"
-            ></chat-list-component>
+            <div>
+              <chat-list-component
+                v-for="documentChat in documentChats"
+                v-bind:key="documentChat.id"
+                v-bind:title="documentChat.title"
+              ></chat-list-component>
+            </div>
 
             <!-- Add chat -->
             <b-card class="mt-2 textColor">
@@ -82,7 +83,8 @@ export default {
 <style>
 .chatGroup {
   padding: 0.3em;
-  background-color: #fa8452 !important;
+  margin: 0.3em;
+  background-color: rgba(90, 83, 83, 0.1) !important;
 }
 .rotate-down {
   -moz-transform: rotate(90deg);
