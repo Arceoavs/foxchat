@@ -23,9 +23,9 @@ class GeneralFoxdoxController extends Controller
 
     public function validateUserAsUser()
     {
-        if(auth()->user()->isProvider==0){
+        if (auth()->user()->isProvider == 0) {
             return true;
-        }else{
+        } else {
             throw new ChatAuthException("You are not a Foxdox User.");
         }
     }
@@ -34,5 +34,35 @@ class GeneralFoxdoxController extends Controller
     {
         $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/provider/listproviders', []);
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
+    }
+
+    public function listServices($providername)
+    {
+        $body = [
+            "providerShortName" => $providername
+        ];
+        $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/provider/listservices', $body);
+
+        $response = $foxdoxapiclient->apiRequest(auth()->user()->name);
+        return $response;
+    }
+
+    public function listProvidersforOverview()
+    {
+        $listproviders = json_decode($this->listProviders()->getBody()->getContents(), true)['Items'];
+        $newlist = [];
+        for ($x = 0; $x < count($listproviders); $x++) {
+            $element = $listproviders[$x];
+            $serviceresponse = json_decode($this->listServices($element['ProviderShortName'])->getBody()->getContents(), true)['Items'];
+            if (!$serviceresponse == []) {
+                $subscriptions = $serviceresponse[0]['Subscriptions'];
+                if (!$subscriptions == []) {
+                    if($subscriptions[0]['State']==2){
+                        array_push($newlist, $element['ProviderShortName']);
+                    }
+                }
+            }
+        }
+        return ["Items" => $newlist];
     }
 }
