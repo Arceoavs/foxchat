@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getProviderList() {
-      returnProviderList().then(provider => this.providers = provider)
+      returnProviderList().then(provider => this.providers = providers)
     }
   }
 };
