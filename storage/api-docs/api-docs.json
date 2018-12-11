@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Foxchat API",
-        "version": "0.5",
+        "version": "0.5.2",
         "description": "Dies ist die API Dokumentation zum Projektseminars digitaler Tresor."
     },
     "tags": [
@@ -17,10 +17,18 @@
         {
             "name": "ProviderChat",
             "description": "Everything about the ProviderChat - Please make sure to be calling this as a Foxdox Provider"
+        },
+        {
+            "name": "Foxdox-API-Client",
+            "description": "Gateway to Foxdox-Client-API - Please make sure to be calling this as a Foxdox User"
+        },
+        {
+            "name": "Foxdox-API-Provider",
+            "description": "Gateway to Foxdox-Provider-API - Please make sure to be calling this as a Foxdox Provider"
         }
     ],
     "paths": {
-        "/api/auth/login": {
+        "/api/auth/user/login": {
             "post": {
                 "tags": [
                     "Authentication"
@@ -65,7 +73,7 @@
                 }
             }
         },
-        "/api/auth/logout": {
+        "/api/auth/user/logout": {
             "post": {
                 "tags": [
                     "Authentication"
@@ -106,7 +114,7 @@
                 ]
             }
         },
-        "/api/auth/me": {
+        "/api/auth/user/me": {
             "get": {
                 "tags": [
                     "Authentication"
@@ -304,6 +312,46 @@
                 ]
             }
         },
+        "/api/chat/user/getinboxall": {
+            "get": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Get the current Inbox of the User. Including the soft deleted messages.",
+                "description": "Get the current Conversations with each last message & chat partner of the given User.",
+                "operationId": "getInboxFoxdoxUser",
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/inboxResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Receiver not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/api/chat/user/sendmessage": {
             "post": {
                 "tags": [
@@ -352,7 +400,7 @@
                 ]
             }
         },
-        "/api/chat/user/getconversationbyprovidername": {
+        "/api/chat/user/getconversationbyname": {
             "post": {
                 "tags": [
                     "UserChat"
@@ -361,7 +409,7 @@
                 "description": "This request allows a Foxdox User to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
                 "operationId": "getConversationByNameFoxdoxUser",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes username, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -410,16 +458,16 @@
                 ]
             }
         },
-        "/api/chat/user/getconversationbyprovidernameall": {
+        "/api/chat/user/getconversationbynameall": {
             "post": {
                 "tags": [
                     "UserChat"
                 ],
-                "summary": "Get back the conversation with a Foxdox Provider back. Including the soft deleted ones.",
+                "summary": "Get back the conversation with a Foxdox Provider back. Including the soft deleted messages.",
                 "description": "Get the messages of conversation with a given Foxdox Provider-name. This request includes also the soft deleted ones.",
                 "operationId": "getConversationByNameAllFoxdoxUser",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes username, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -468,7 +516,7 @@
                 ]
             }
         },
-        "/api/chat/user/getconversationbyproviderid": {
+        "/api/chat/user/getconversationbyid": {
             "post": {
                 "tags": [
                     "UserChat"
@@ -477,7 +525,7 @@
                 "description": "This request allows a Foxdox User to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
                 "operationId": "getConversationByIdFoxdoxUser",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes userid, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -526,16 +574,16 @@
                 ]
             }
         },
-        "/api/chat/user/getconversationbyprovideridall": {
+        "/api/chat/user/getconversationbyidall": {
             "post": {
                 "tags": [
                     "UserChat"
                 ],
-                "summary": "Get back the conversation with a Foxdox Provider back. Including the soft deleted ones.",
+                "summary": "Get back the conversation with a Foxdox Provider back. Including the soft deleted messages.",
                 "description": "Get the messages of conversation with a given Foxdox Provider-name. This request includes also the soft deleted ones.",
                 "operationId": "getConversationByIdAllFoxdoxUser",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes userid, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -755,6 +803,46 @@
                 ]
             }
         },
+        "/api/chat/provider/getinboxall": {
+            "get": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Get the current Inbox of the User. Including the soft deleted messages.",
+                "description": "Get the current Conversations with each last message & chat partner of the given User.",
+                "operationId": "getInboxFoxdoxProvider",
+                "responses": {
+                    "200": {
+                        "description": "The inbox information.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/inboxResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Receiver not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/api/chat/provider/sendmessage": {
             "post": {
                 "tags": [
@@ -803,7 +891,7 @@
                 ]
             }
         },
-        "/api/chat/provider/getconversationbyprovidername": {
+        "/api/chat/provider/getconversationbyname": {
             "post": {
                 "tags": [
                     "ProviderChat"
@@ -812,7 +900,7 @@
                 "description": "This request allows a Foxdox Provider to send a message to a valid Foxdox Provider. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
                 "operationId": "getConversationByNameFoxdoxProvider",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes username, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -861,16 +949,16 @@
                 ]
             }
         },
-        "/api/chat/provider/getconversationbyprovidernameall": {
+        "/api/chat/provider/getconversationbynameall": {
             "post": {
                 "tags": [
                     "ProviderChat"
                 ],
-                "summary": "Get back the conversation with a Foxdox User back. Including the soft deleted ones.",
+                "summary": "Get back the conversation with a Foxdox User back. Including the soft deleted messages.",
                 "description": "Get the messages of conversation with a given Foxdox User-name. This request includes also the soft deleted ones.",
                 "operationId": "getConversationByNameAllFoxdoxProvider",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes username, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -919,7 +1007,7 @@
                 ]
             }
         },
-        "/api/chat/provider/getconversationbyproviderid": {
+        "/api/chat/provider/getconversationbyid": {
             "post": {
                 "tags": [
                     "ProviderChat"
@@ -928,7 +1016,7 @@
                 "description": "This request allows a Foxdox Provider to send a message to a valid Foxdox User. It also takes a conversationtag which will be allgemeiner chat or the foxdox document id if the chat is document related.",
                 "operationId": "getConversationByIdFoxdoxProvider",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes userid, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -977,16 +1065,16 @@
                 ]
             }
         },
-        "/api/chat/provider/getconversationbyprovideridall": {
+        "/api/chat/provider/getconversationbyidall": {
             "post": {
                 "tags": [
                     "ProviderChat"
                 ],
-                "summary": "Get back the conversation with a Foxdox User back. Including the soft deleted ones.",
+                "summary": "Get back the conversation with a Foxdox User back. Including the soft deleted messages.",
                 "description": "Get the messages of conversation with a given Foxdox User-name. This request includes also the soft deleted ones.",
                 "operationId": "getConversationByIdAllFoxdoxProvider",
                 "requestBody": {
-                    "description": "Takes receivingprovider, message and conversationtag.",
+                    "description": "Takes userid, conversationtag, the offset (for paging) and take(number (must be divisible by 10) of messages).",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -1147,6 +1235,93 @@
                     },
                     "400": {
                         "description": "Messageid not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/foxdoxapi/user/listproviders": {
+            "get": {
+                "tags": [
+                    "Foxdox-API-Client"
+                ],
+                "summary": "For detailed description please take a look to the Foxdox API Documentation.",
+                "responses": {
+                    "200": {},
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/foxdoxapi/user/listalldocs": {
+            "get": {
+                "tags": [
+                    "Foxdox-API-Client"
+                ],
+                "summary": "For detailed description please take a look to the Foxdox API Documentation.",
+                "responses": {
+                    "200": {},
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/foxdoxapi/user/listprovidersforoverview": {
+            "get": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Gives the subscribed Providers back.",
+                "responses": {
+                    "200": {
+                        "description": "The list of subscribed providers.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getSubscribedProvidersResponse"
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Unauthorized",
@@ -1424,6 +1599,12 @@
                     },
                     "conversationtag": {
                         "type": "string"
+                    },
+                    "offset": {
+                        "type": "string"
+                    },
+                    "take": {
+                        "type": "string"
                     }
                 }
             },
@@ -1439,6 +1620,23 @@
                     },
                     "conversationtag": {
                         "type": "string"
+                    },
+                    "offset": {
+                        "type": "string"
+                    },
+                    "take": {
+                        "type": "string"
+                    }
+                }
+            },
+            "getSubscribedProvidersResponse": {
+                "type": "object",
+                "properties": {
+                    "Items": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 }
             },

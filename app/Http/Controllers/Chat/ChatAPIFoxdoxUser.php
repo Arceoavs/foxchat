@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use App\Exceptions\ChatAPIServiceException;
 use App\Exceptions\ChatAuthException;
 
-class ChatAPIFoxdoxUser extends Controller
+class ChatAPIFoxdoxUser extends ChatAPI
 {
     protected $chatapiservice;
     public function __construct()
@@ -24,7 +24,6 @@ class ChatAPIFoxdoxUser extends Controller
 
     public function validateUserAsUser()
     {
-        Log::info(auth()->user()->isProvider);
         if(auth()->user()->isProvider==0){
             return true;
         }else{
@@ -52,126 +51,5 @@ class ChatAPIFoxdoxUser extends Controller
         $conversationtag = request()->input('conversationtag');
 
         return $this->chatapiservice->sendMessage($user, $message, $conversationtag);
-    }
-    
-    public function getInboxForFoxdoxUser()
-    {
-        return $this->chatapiservice->getInbox();
-    }
-
-    public function getInboxAllForFoxdoxUser()
-    {
-        return $this->chatapiservice->getInboxAll();
-    }
-
-    public function getConversationByProviderName()
-    {
-        //Check if request contains the necessary inputs
-        $validator = Validator::make(request()->all(), [
-            'username' => 'required',
-            'conversationtag' => 'required'
-        ]);
-
-        //Send errors
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $user = request()->input('username');
-        $conversationtag = request()->input('conversationtag');
-
-        return $this->chatapiservice->getConversationByName($user, $conversationtag);
-    }
-
-    public function getConversationAllByProviderName()
-    {
-        //Check if request contains the necessary inputs
-        $validator = Validator::make(request()->all(), [
-            'username' => 'required',
-            'conversationtag' => 'required'
-        ]);
-
-        //Send errors
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $user = request()->input('username');
-        $conversationtag = request()->input('conversationtag');
-
-        return $this->chatapiservice->getConversationAllByName($user, $conversationtag);
-    }
-
-    public function getConversationByProviderId()
-    {
-        //Check if request contains the necessary inputs
-        $validator = Validator::make(request()->all(), [
-            'userid' => 'required',
-            'conversationtag' => 'required'
-        ]);
-
-        //Send errors
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $user = request()->input('userid');
-        $conversationtag = request()->input('conversationtag');
-
-        return $this->chatapiservice->getConversationById($user, $conversationtag);
-    }
-
-    public function getConversationAllByProviderId()
-    {
-        //Check if request contains the necessary inputs
-        $validator = Validator::make(request()->all(), [
-            'userid' => 'required',
-            'conversationtag' => 'required'
-        ]);
-
-        //Send errors
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $user = request()->input('userid');
-        $conversationtag = request()->input('conversationtag');
-
-        return $this->chatapiservice->getConversationAllById($user, $conversationtag);
-    }
-
-
-    public function makeSeen()
-    {
-        //Check if request contains the necessary inputs
-        $validator = Validator::make(request()->all(), [
-            'messageid' => 'required'
-        ]);
-
-        //Send errors
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $messageid = request()->input('messageid');
-
-        return $this->chatapiservice->makeSeen($messageid);
-    }
-
-    public function deleteMessage()
-    {
-        //Check if request contains the necessary inputs
-        $validator = Validator::make(request()->all(), [
-            'messageid' => 'required'
-        ]);
-
-        //Send errors
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $messageid = request()->input('messageid');
-
-        return $this->chatapiservice->deleteMessage($messageid);
     }
 }
