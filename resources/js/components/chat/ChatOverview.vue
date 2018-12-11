@@ -25,18 +25,6 @@ export default {
       providers: null
     };
   },
-<<<<<<< HEAD
-  mounted() {
-    this.getProviderList();
-    console.log(this.providers);
-  },
-  watch: {
-    providers: function() {
-      this.providers = returnProviderList();
-    }
-  },
-=======
->>>>>>> 4fc60c73f2635dafb6b5f606a29c0d80cf77a97c
   components: {
     ChatOverviewComponent
   },
