@@ -8,7 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import Chat from 'vue-beautiful-foxchat';
-import Tree from 'vuejs-tree';
+//import Tree from 'vuejs-tree';
 import store from './store.js';
 import router from './router.js';
 import App from './components/App.vue';
@@ -24,7 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.use(Chat);
 Vue.use(BootstrapVue);
-Vue.use(Tree);
+//Vue.use(Tree);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
