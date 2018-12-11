@@ -29,7 +29,6 @@
     "@fortawesome/vue-fontawesome": "^0.1.3",
     "i": "^0.3.6",
     "npm": "^6.4.1",
-    "vue-beautiful-foxchat": "^2.2.2",
-    "vuejs-tree": "^2.0.0-0"
+    "vue-beautiful-foxchat": "^2.2.2"
   }
 }

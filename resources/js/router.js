@@ -3,8 +3,7 @@ import VueRouter from 'vue-router';
 
 //Components
 import DocumentOverview from './components/documents/DocumentOverview.vue';
-import NestedComponent from './components/documents/NestedComponent.vue';
-import NestedComponent2 from './components/documents/NestedComponent.1.vue';
+import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent'
 import ChatOverview from './components/chat/ChatOverview.vue';
 import ChatComponent from './components/chat/ChatComponent.vue';
 import ChatView from './components/chat/ChatView.vue';
@@ -25,20 +24,35 @@ const routes = [
   {
     path: '/index',
     name: 'OverviewIndex',
-    component: DocumentOverview,
+    component: DocumentOverviewComponent,
     meta: {
       requiresAuth: true
     },
     children: [
       {
-        path: 'nested',
+        path: 'owndocument',
         name: 'Nested',
-        component: NestedComponent
+        component: DocumentOverviewComponent
       },
       {
-        path: 'nestedzwei',
-        name: 'Nested 2',
-        component: NestedComponent2
+        path: 'arbeitgeber1',
+        name: 'arbeitgeber',
+        component: DocumentOverviewComponent
+      },
+      {
+        path: 'versicherung1',
+        name: 'versicherung1',
+        component: DocumentOverviewComponent
+      },
+      {
+        path: 'versicherung2',
+        name: 'versicherung2',
+        component: DocumentOverviewComponent
+      },
+      {
+        path: 'inbox',
+        name: 'inbox',
+        component: DocumentOverviewComponent
       }
     ]
   },
