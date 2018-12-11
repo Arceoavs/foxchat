@@ -33,7 +33,6 @@ export default {
     console.log(this.tag);
   },
   data(){
-    console.log(this.$route.params);
     return{
       chatPartner: this.partner,
       conversationTag: this.tag

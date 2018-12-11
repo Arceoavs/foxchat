@@ -17,8 +17,20 @@
 <script>
 import messageHistory from "./messageHistory";
 import chatParticipants from "./chatProfiles";
+import chatService from "../../services/ChatService";
+
 export default {
   name: "app",
+   props: {
+    chatPartner: {
+      type: String,
+      required: true
+    },
+    conversationTag: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       participants: chatParticipants,
@@ -31,7 +43,13 @@ export default {
       messageStyling: true
     };
   },
-  created() {},
+  created() {
+    chatService.init();
+  },
+  mounted(){
+    console.log('Chat Component mounted');
+    chatService.getConversationByName(this.chatPartner, this.conversationTag, 0, 100, this);
+  },
   methods: {
     sendMessage(text) {
       if (text.length > 0) {
@@ -52,7 +70,8 @@ export default {
           : "";
     },
     onMessageWasSent(message) {
-      this.messageList = [...this.messageList, message];
+      chatService.sendMessage(this.chatPartner, message.data.text, this.conversationTag, this);
+      // this.messageList = [...this.messageList, message];
     },
     showStylingInfo() {
       this.$modal.show("dialog", {
