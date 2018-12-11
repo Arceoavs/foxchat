@@ -29,27 +29,13 @@ export default {
     ChatOverviewComponent
   },
   mounted() {
-    axios
-      .get("/api/foxdoxapi/user/listprovidersforoverview", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("bearer")
-        }
-      })
-      .then(response => {
-        console.log("Listing Providers...");
-        var providerlist = response.data["Items"];
-        var responseList = [];
-        for (var i = 0; i < providerlist.length; i++) {
-          var providerListElem = new Object();
-          providerListElem.id = "" + i;
-          providerListElem.name = providerlist[i];
-          providerListElem.documentChats = [];
-          responseList.push(providerListElem);
-        }
-        console.log(responseList);
-        this.providers= responseList;
-      });
+    console.log(
+      "In local Storage: " +
+        JSON.parse(localStorage.getItem("chatOverviewProviderList"))
+    );
+    this.providers = JSON.parse(
+      localStorage.getItem("chatOverviewProviderList")
+    );
   }
 };
 </script>
