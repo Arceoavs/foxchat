@@ -1,4 +1,5 @@
 import EventBus from './event-bus.js';
+import providerListStore from '../store.js';
 
 const config = {
   headers: {
@@ -55,7 +56,6 @@ class AuthService {
   }
 
   getProviderList(self) {
-    localStorage.setItem('chatOverviewProviderList', null);
     axios
       .get('/api/foxdoxapi/user/listprovidersforoverview', {
         headers: {
@@ -75,10 +75,7 @@ class AuthService {
           responseList.push(providerListElem);
         }
         console.log(responseList);
-        localStorage.setItem(
-          'chatOverviewProviderList',
-          JSON.stringify(responseList)
-        );
+        providerListStore.commit('setProviderList', JSON.stringify(responseList) )
       });
   }
 
@@ -113,7 +110,6 @@ class AuthService {
 
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
-    localStorage.removeItem('chatOverviewProviderList');
   }
 
   retrieveUser(self) {

@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 Vue.use(Chat);
 Vue.use(BootstrapVue);
 
+
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 library.add(faCoffee, faAngleRight, faComments, faPlusCircle, faFile);

@@ -69,13 +69,9 @@ export default {
         return arrow;
       }
       return true;
-    },
-    watch: {
-      provider: function() {
-        return JSON.parse(localStorage.getItem("chatOverviewProviderList"));
-      }
     }
   }
+
 };
 </script>
 

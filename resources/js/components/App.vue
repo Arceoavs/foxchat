@@ -36,6 +36,7 @@ import FooterComponent from "./Footer.vue";
 import BreadcrumbComponent from "./BreadcrumbComponent.vue";
 import EventBus from "../services/event-bus.js";
 
+
 export default {
   data: function() {
     return {

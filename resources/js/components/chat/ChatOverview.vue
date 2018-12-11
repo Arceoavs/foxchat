@@ -15,6 +15,7 @@
 
 <script>
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
+import providerListStore from '../../store.js'
 //import providerList from "./providerList.js";
 
 import { returnProviderList } from "../../services/ChatOverviewService.js";
@@ -22,28 +23,19 @@ import { returnProviderList } from "../../services/ChatOverviewService.js";
 export default {
   data() {
     return {
-      providers: null
+      providers: computedProviders
     };
   },
   components: {
     ChatOverviewComponent
   },
   mounted() {
-    var providerListIsComing = new Promise(function(resolve, reject) {
-      if (localStorage.getItem("chatOverviewProviderList") != null) {
-        resolve();
-      } else {
-        reject();
-      }
-    });
-
-    providerListIsComing.then(
-      (this.providers = JSON.parse(
-        localStorage.getItem("chatOverviewProviderList")
-      ))
-    );
-
     console.log("In local Storage: ");
+  },
+  computed: {
+    computedProviders(){
+      return providerListStore.state;
+    }
   }
 };
 </script>
