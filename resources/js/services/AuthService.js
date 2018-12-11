@@ -55,6 +55,7 @@ class AuthService {
   }
 
   getProviderList(self) {
+    localStorage.setItem('chatOverviewProviderList', null);
     axios
       .get('/api/foxdoxapi/user/listprovidersforoverview', {
         headers: {
@@ -74,7 +75,10 @@ class AuthService {
           responseList.push(providerListElem);
         }
         console.log(responseList);
-        localStorage.setItem('chatOverviewProviderList', JSON.stringify(responseList));
+        localStorage.setItem(
+          'chatOverviewProviderList',
+          JSON.stringify(responseList)
+        );
       });
   }
 

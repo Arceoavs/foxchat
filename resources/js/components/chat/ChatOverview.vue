@@ -29,13 +29,24 @@ export default {
     ChatOverviewComponent
   },
   mounted() {
-    console.log(
-      "In local Storage: " +
-        JSON.parse(localStorage.getItem("chatOverviewProviderList"))
+    var providerListIsComing = new Promise(function(resolve, reject) {
+      if (localStorage.getItem("chatOverviewProviderList") != null) {
+        this.providers = JSON.parse(
+          localStorage.getItem("chatOverviewProviderList")
+        );
+        resolve(providers);
+      } else {
+        reject();
+      }
+    });
+
+    providerListIsComing.then(
+      (this.providers = JSON.parse(
+        localStorage.getItem("chatOverviewProviderList")
+      ))
     );
-    this.providers = JSON.parse(
-      localStorage.getItem("chatOverviewProviderList")
-    );
+
+    console.log("In local Storage: ");
   }
 };
 </script>
