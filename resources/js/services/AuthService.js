@@ -75,7 +75,8 @@ class AuthService {
           responseList.push(providerListElem);
         }
         console.log(responseList);
-        providerListStore.commit('setProviderList', JSON.stringify(responseList) )
+        providerListStore.commit('setProviderList', responseList);
+        console.log(providerListStore.state.providerList);
       });
   }
 

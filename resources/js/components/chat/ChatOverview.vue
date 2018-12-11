@@ -15,7 +15,7 @@
 
 <script>
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
-import providerListStore from '../../store.js'
+import providerListStore from "../../store.js";
 //import providerList from "./providerList.js";
 
 import { returnProviderList } from "../../services/ChatOverviewService.js";
@@ -23,18 +23,21 @@ import { returnProviderList } from "../../services/ChatOverviewService.js";
 export default {
   data() {
     return {
-      providers: computedProviders
+      providers
     };
   },
   components: {
     ChatOverviewComponent
   },
-  mounted() {
-    console.log("In local Storage: ");
-  },
   computed: {
-    computedProviders(){
-      return providerListStore.state;
+    providers() {
+      return providerListStore.state.providerList;
+    }
+  },
+  watch: {
+    providers() {
+      // Our fancy notification (2).
+      console.log("Wert aktualisiert");
     }
   }
 };
