@@ -19,6 +19,6 @@ export default {
 
 <style>
 .document-breadcrumb {
-  color: black !important;
+  color:#f86a2d !important;
 }
 </style>

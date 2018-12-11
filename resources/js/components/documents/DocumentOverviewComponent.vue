@@ -1,12 +1,10 @@
 <template>
   <b-col>
-    <div class="document-breadcrumb">
       <b-breadcrumb :items="items"/>
-    </div>
-      <b-list-group>
-        <b-list-group-item href=/mydocuments>Eigene Dokumente</b-list-group-item>
-        <b-list-group-item href=/myproviders>Meine Provider</b-list-group-item>
-        <b-list-group-item href=/mostrecent>Letzte Dokumente</b-list-group-item>
+      <b-list-group class="card">
+        <b-list-group-item href=/mydocuments class ="box">Eigene Dokumente</b-list-group-item>
+        <b-list-group-item href=/myproviders class ="box">Meine Provider</b-list-group-item>
+        <b-list-group-item href=/mostrecent class ="box">Letzte Dokumente</b-list-group-item>
       </b-list-group>
   </b-col>
 </template>
@@ -27,5 +25,12 @@ export default {
 </script>
 
 <style>
+.box{
+  color:#f86a2d !important;
+}
+.card{
+  padding: 0.1em;
+  margin: 0.1em;
+}
 
 </style>
