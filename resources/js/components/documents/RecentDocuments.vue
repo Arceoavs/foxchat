@@ -19,7 +19,10 @@ export default {
     return {
       items: [{
         text: 'Dokumente',
-        href: ''
+        href: '/index'
+      }, {
+          text: 'Letzte Dokumente',
+          href: ''
       }]
     }
   }

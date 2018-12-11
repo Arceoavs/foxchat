@@ -10,6 +10,9 @@ import ChatView from './components/chat/ChatView.vue';
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
+import ProviderDocuments from './components/documents/ProviderDocuments.vue';
+import OwnDocuments from './components/documents/OwnDocuments.vue';
+import RecentDocuments from './components/documents/RecentDocuments.vue';
 
 //Services
 import auth from './services/AuthService.js';
@@ -23,39 +26,32 @@ const routes = [
   },
   {
     path: '/index',
-    name: 'OverviewIndex',
+    name: 'DocumentOverview',
     component: DocumentOverviewComponent,
     meta: {
       requiresAuth: true
     },
-    children: [
-      {
-        path: 'owndocument',
-        name: 'Nested',
-        component: DocumentOverviewComponent
-      },
-      {
-        path: 'arbeitgeber1',
-        name: 'arbeitgeber',
-        component: DocumentOverviewComponent
-      },
-      {
-        path: 'versicherung1',
-        name: 'versicherung1',
-        component: DocumentOverviewComponent
-      },
-      {
-        path: 'versicherung2',
-        name: 'versicherung2',
-        component: DocumentOverviewComponent
-      },
-      {
-        path: 'inbox',
-        name: 'inbox',
-        component: DocumentOverviewComponent
-      }
-    ]
   },
+
+  {
+    path: '/myproviders',
+    name: 'Meine Provider',
+    component: ProviderDocuments
+  },
+
+  {
+    path: '/mydocuments',
+    name: 'Eigene Dokumente',
+    component: OwnDocuments
+  },
+
+  {
+    path: '/mostrecent',
+    name: 'Letzte Dokumente',
+    component: RecentDocuments
+  },
+
+  
   {
     path: '/login',
     component: LoginAggr,
