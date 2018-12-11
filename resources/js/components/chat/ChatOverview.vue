@@ -31,10 +31,7 @@ export default {
   mounted() {
     var providerListIsComing = new Promise(function(resolve, reject) {
       if (localStorage.getItem("chatOverviewProviderList") != null) {
-        this.providers = JSON.parse(
-          localStorage.getItem("chatOverviewProviderList")
-        );
-        resolve(providers);
+        resolve();
       } else {
         reject();
       }
