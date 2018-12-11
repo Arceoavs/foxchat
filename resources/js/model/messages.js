@@ -64,7 +64,7 @@
 
   
   
-class Message {
+export default class Message {
     constructor(type, author, pSuggestions, pText, pMeta, pEmoji, pFile){
         this.type = type;
         this.author = author;

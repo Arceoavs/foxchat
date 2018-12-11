@@ -12,7 +12,7 @@
 // ];
 
 
-class Participant {
+export default class Participant {
     constructor(id, name, imageUrl){
         this.id = id;
         this.name = name;

@@ -1,51 +1,62 @@
 <template>
-  <b-container fluid>
-    <b-row class="justify-content-md-center my-3">
-      <b-col md="8" sm="12">
-        <beautiful-chat
-          :participants="participants"
-          :titleImageUrl="titleImageUrl"
-          :onMessageWasSent="onMessageWasSent"
-          :messageList="messageList"
-          :newMessagesCount="newMessagesCount"
-          :isOpen="true"
-          :showEmoji="true"
-          :showFile="true"
-          :showTypingIndicator="showTypingIndicator"
-          :alwaysScrollToBottom="alwaysScrollToBottom"
-          :messageStyling="messageStyling"
-        />
-      </b-col>
-    </b-row>
-  </b-container>
+  <beautiful-chat
+    :participants="participants"
+    :titleImageUrl="titleImageUrl"
+    :onMessageWasSent="onMessageWasSent"
+    :messageList="messageList"
+    :newMessagesCount="newMessagesCount"
+    :isOpen="true"
+    :showEmoji="true"
+    :showFile="true"
+    :showTypingIndicator="showTypingIndicator"
+    :alwaysScrollToBottom="alwaysScrollToBottom"
+    :messageStyling="messageStyling"
+  />
 </template>
 
 <script>
 import messageHistory from "./messageHistory";
-import chatProfiles from "./chatProfiles";
-
-import chatUser from "../services/ChatServiceUser.js";
+import chatParticipants from "./chatProfiles";
+import chatService from "../../services/ChatService";
+import EventBus from '../../services/event-bus.js';
 
 export default {
   name: "app",
+  props: {
+    chatPartner: {
+      type: String,
+      required: true
+    },
+    conversationTag: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
+      participants: chatParticipants,
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+      messageList: messageHistory,
       newMessagesCount: 0,
       showTypingIndicator: "",
       alwaysScrollToBottom: false,
       messageStyling: true,
-      participants: chatProfiles,
-      messageList: messageHistory,
+      firstime: false
     };
   },
-  mounted() {
-    this.participants = chatUser.getParticipants();
-    this.messageList = chatUser.getMessageList();
+  created(){
+    chatService.init();
+    //chatService.sendMessage('mein.arbeitgeber', 'howdy buddy arbeitgeber von manuel', 'allgemein');
+  },
+
+  mounted(){
+    console.log('Chat Component mounted');
+    chatService.getConversationByName(this.chatPartner, this.conversationTag, 0, 100, this);
+    EventBus.$on("loadedMsg", payload => {
+    });
   },
   methods: {
-    
     sendMessage(text) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen
@@ -58,8 +69,6 @@ export default {
         });
       }
     },
-
-
     handleTyping(text) {
       this.showTypingIndicator =
         text.length > 0
@@ -67,7 +76,8 @@ export default {
           : "";
     },
     onMessageWasSent(message) {
-      this.messageList = [...this.messageList, message];
+      chatService.sendMessage(this.chatPartner, message.data.text, this.conversationTag, this);
+      // this.messageList = [...this.messageList, message];
     },
     showStylingInfo() {
       this.$modal.show("dialog", {
@@ -80,9 +90,7 @@ export default {
       this.messageStyling = e.target.checked;
     }
   },
-  computed: {
-      
-  }
+  computed: {}
 };
 </script>
 
