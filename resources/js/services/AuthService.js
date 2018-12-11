@@ -74,9 +74,7 @@ class AuthService {
           providerListElem.documentChats = [];
           responseList.push(providerListElem);
         }
-        console.log(responseList);
         providerListStore.commit('setProviderList', responseList);
-        console.log(providerListStore.state.providerList);
       });
   }
 
