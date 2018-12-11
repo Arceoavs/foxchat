@@ -4,11 +4,9 @@
       <b-breadcrumb :items="items"/>
     </div>
       <b-list-group>
-        <b-list-group-item href=owndocument>Eigene Dokumente</b-list-group-item>
-        <b-list-group-item href="/arbeitgeber">Arbeitgeber 1</b-list-group-item>
-        <b-list-group-item href="/versicherung1">Versicherung 1</b-list-group-item>
-        <b-list-group-item href="/versicherung2">Versicherung 2</b-list-group-item>
-        <b-list-group-item href="/inbox">Mein Posteingang</b-list-group-item>
+        <b-list-group-item href=/mydocuments>Eigene Dokumente</b-list-group-item>
+        <b-list-group-item href=/myproviders>Meine Provider</b-list-group-item>
+        <b-list-group-item href=/mostrecent>Letzte Dokumente</b-list-group-item>
       </b-list-group>
   </b-col>
 </template>
@@ -20,7 +18,7 @@ export default {
     return {
       items: [
         {
-          text: "Root",
+          text: "Dokumente",
           active: true,
         }
       ]

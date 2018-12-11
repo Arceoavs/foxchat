@@ -4,6 +4,7 @@
       v-for="documentitem in documents"
       v-bind:key="documentitem.id"
       v-bind:documents="documentitem.name"
+      v-bind:href="'/index/' + documents.id"
     >
     </document-overview-component>
   </b-link-group>
