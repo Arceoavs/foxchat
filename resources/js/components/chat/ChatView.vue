@@ -1,8 +1,14 @@
 <template>
   <b-container fluid>
-    <b-row class="justify-content-center my-3">
+    <b-row class="justify-content-center mt-3">
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
-        <chat-overview-component></chat-overview-component>
+        <chat-overview-component
+          class="smaller-heading"
+          v-for="provideritem in providers"
+          v-bind:key="provideritem.id"
+          v-bind:provider="provideritem.name"
+          v-bind:documentChats="provideritem.documentChats"
+        ></chat-overview-component>
       </b-col>
       <b-col md="8" cols="12">
         <chat-component></chat-component>
@@ -14,7 +20,14 @@
 <script>
 import ChatComponent from "./ChatComponent.vue";
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
+
+import providerList from "./providerList.js";
 export default {
+  data() {
+    return {
+      providers: providerList
+    };
+  },
   components: {
     ChatComponent,
     ChatOverviewComponent

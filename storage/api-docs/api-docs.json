@@ -1305,6 +1305,41 @@
                     }
                 ]
             }
+        },
+        "/api/foxdoxapi/user/listprovidersforoverview": {
+            "get": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Gives the subscribed Providers back.",
+                "responses": {
+                    "200": {
+                        "description": "The list of subscribed providers.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getSubscribedProvidersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -1591,6 +1626,17 @@
                     },
                     "take": {
                         "type": "string"
+                    }
+                }
+            },
+            "getSubscribedProvidersResponse": {
+                "type": "object",
+                "properties": {
+                    "Items": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 }
             },

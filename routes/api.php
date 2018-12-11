@@ -86,6 +86,8 @@ Route::group([
 
     //Foxdox data requests for FoxdoxUser
     Route::get('listproviders', 'Foxdox\GeneralFoxdoxController@listProviders');
+    Route::get('listprovidersforoverview', 'Foxdox\GeneralFoxdoxController@listProvidersforOverview');
+    
     Route::get('listalldocs', 'Foxdox\DocumentFoxdoxController@listAllDocuments');
   
 });
