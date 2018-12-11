@@ -30,6 +30,8 @@ class AuthService {
 
         this.retrieveUser(self);
 
+        this.getProviderList(self);
+
         if (self.noError) {
           self.$router.push('/');
           console.log('Logged In');
@@ -49,6 +51,34 @@ class AuthService {
       })
       .finally(param => {
         EventBus.$emit('loaded');
+      });
+  }
+
+  getProviderList(self) {
+    localStorage.setItem('chatOverviewProviderList', null);
+    axios
+      .get('/api/foxdoxapi/user/listprovidersforoverview', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('bearer')
+        }
+      })
+      .then(response => {
+        console.log('Listing Providers...');
+        var providerlist = response.data['Items'];
+        var responseList = [];
+        for (var i = 0; i < providerlist.length; i++) {
+          var providerListElem = new Object();
+          providerListElem.id = '' + i;
+          providerListElem.name = providerlist[i];
+          providerListElem.documentChats = [];
+          responseList.push(providerListElem);
+        }
+        console.log(responseList);
+        localStorage.setItem(
+          'chatOverviewProviderList',
+          JSON.stringify(responseList)
+        );
       });
   }
 
@@ -83,6 +113,7 @@ class AuthService {
 
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
+    localStorage.removeItem('chatOverviewProviderList');
   }
 
   retrieveUser(self) {
