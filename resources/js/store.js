@@ -5,7 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    providerList: Object
+    providerList: [
+      {
+        id: '0',
+        name: 'Loading...'
+      }
+    ]
   },
   getters: {
     getProviderList(state) {
