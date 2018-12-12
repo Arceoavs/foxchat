@@ -20,10 +20,22 @@
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
       <router-link :to="'/communication/'+provider+'/allgemein'">
         <b-card class="textColor">
-          {{generalChat}}
-          <div class="cardIcon textFox">
-            <font-awesome-icon icon="comments" size="2x"/>
-          </div>
+          <b-row>
+            <b-col cols="1">
+              <div class="chatIcons textFox">
+                <font-awesome-icon icon="comments" size="2x"/>
+              </div>
+            </b-col>
+            <b-col cols="3">
+              <p class="font-weight-bold">{{generalChat}}</p>
+            </b-col>
+            <b-col cols="7">
+              <p class="font-weight-light text-left"></p>
+            </b-col>
+            <b-col cols="1">
+              <p class="font-weight-light text-left"></p>
+            </b-col>
+          </b-row>
         </b-card>
       </router-link>
 
@@ -34,15 +46,22 @@
           v-bind:key="documentChat.conversation_id"
           v-bind:title="documentChat.conversation_tag"
           v-bind:message="documentChat.message"
+          v-bind:date="documentChat.updated_at"
         ></chat-list-component>
       </div>
 
       <!-- Add chat -->
       <b-card class="mt-2 textColor">
-        {{addChat}}
-        <div class="cardIcon textFox">
-          <font-awesome-icon icon="plus-circle" size="2x"/>
-        </div>
+        <b-row>
+          <b-col cols="1">
+            <div class="chatIcons textFox">
+              <font-awesome-icon icon="plus-circle" size="2x"/>
+            </div>
+          </b-col>
+          <b-col cols="11">
+            <p class="font-weight-bold">{{addChat}}</p>
+          </b-col>
+        </b-row>
       </b-card>
     </b-collapse>
   </b-jumbotron>
@@ -72,11 +91,13 @@ export default {
       return true;
     }
   }
-
 };
 </script>
 
 <style>
+.chatIcons{
+  float: left;
+}
 .chatGroup {
   padding: 0.3em;
   margin: 0.3em;
