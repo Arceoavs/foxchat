@@ -21,6 +21,7 @@ class AuthService {
       'password': pPassword
     }
 
+
     var formData = new FormData();
     formData.append('name', pUsername);
     formData.append('password', pPassword);
@@ -34,9 +35,8 @@ class AuthService {
         console.log('Logging In...');
         localStorage.setItem('bearer', response.data.access_token);
 
-        this.retrieveUser(self);
-
         ChatOverviewService.getProviderList();
+        this.retrieveUser(self);
 
         if (self.noError) {
           self.$router.push('/');

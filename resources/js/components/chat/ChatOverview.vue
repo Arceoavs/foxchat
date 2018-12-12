@@ -28,6 +28,7 @@ export default {
     ChatOverviewComponent
   },
   mounted(){
+    
   },
   computed: {
     providers: function() {
