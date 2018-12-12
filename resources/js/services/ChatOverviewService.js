@@ -1,6 +1,7 @@
 import { store } from '../store.js';
 
 import axios from 'axios';
+var responseList = [];
 
 class ChatOverviewAPI {
   getProviderList() {
@@ -18,7 +19,6 @@ class ChatOverviewAPI {
       .then(response => {
         console.log('Listing Providers...');
         var providerlist = response.data['Items'];
-        var responseList = [];
         for (var i = 0; i < providerlist.length; i++) {
           var providerListElem = new Object();
           providerListElem.id = '' + i;
@@ -59,14 +59,24 @@ class ChatOverviewAPI {
         var chatList = response.data;
         console.log(chatList);
         var responseChatList = [];
-        for (var i = 0; i < chatList.length; i++) {
-          var providerListElem = new Object();
-          providerListElem.id = '' + i;
-          providerListElem.name = chatList[i];
-          providerListElem.documentChats = [];
-          responseList.push(providerListElem);
+        // console.log("In get inboox" + responseList);
+        for (var i = 0; i < responseList.length; i++) {
+          var responseListElem = responseList[i];
+          for(var j = 0; i < chatList.length; j++){
+            var responseChatList = [];
+            var documentChatsElem = chatList[j];
+            console.log(documentChatsElem['withUser']['name']);
+            if(responseListElem.name == documentChatsElem['withUser']){
+              newDocumentChatElem = new Object();
+              newDocumentChatElem.name = documentChatsElem['Thread']['conversation_tag'];
+              responseChatList.push(newDocumentChatElem);
+            }
+          }
+          responseList[i]['documentChats']=responseChatList;
         }
-        store.commit('setProviderList', responseList);
+
+        console.log(responseList);
+        // store.commit('setProviderList', responseList);
 
         console.log('Got Inbox List');
       })
