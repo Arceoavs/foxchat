@@ -63,14 +63,14 @@ class ChatAPIService extends Controller
         return CustomTalk::sendMessageByUserIdWithTag($receiver->id, $message, $conversationtag);
     }
 
-    public function getInbox()
+    public function getInbox($offset, $take)
     {
-        return CustomTalk::getInbox();
+        return CustomTalk::getInbox('desc',$offset, $take);
     }
 
-    public function getInboxAll()
+    public function getInboxAll($offset, $take)
     {
-        return CustomTalk::getInboxAll();
+        return CustomTalk::getInboxAll('desc',$offset, $take);
     }
     
     public function getConversationByName($username, $conversationtag, $offset, $take)

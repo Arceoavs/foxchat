@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Foxchat API",
-        "version": "0.5.2",
+        "version": "0.6",
         "description": "Dies ist die API Dokumentation zum Projektseminars digitaler Tresor."
     },
     "tags": [
@@ -273,13 +273,20 @@
             }
         },
         "/api/chat/user/getinbox": {
-            "get": {
+            "post": {
                 "tags": [
                     "UserChat"
                 ],
                 "summary": "Get the current Inbox of the User.",
                 "description": "Get the current Conversations with each last message & chat partner of the given User.",
                 "operationId": "getInboxFoxdoxUser",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/getInboxForm"
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "The inbox information.",
@@ -313,13 +320,20 @@
             }
         },
         "/api/chat/user/getinboxall": {
-            "get": {
+            "post": {
                 "tags": [
                     "UserChat"
                 ],
                 "summary": "Get the current Inbox of the User. Including the soft deleted messages.",
                 "description": "Get the current Conversations with each last message & chat partner of the given User.",
                 "operationId": "getInboxFoxdoxUser",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/getInboxForm"
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "The inbox information.",
@@ -764,13 +778,20 @@
             }
         },
         "/api/chat/provider/getinbox": {
-            "get": {
+            "post": {
                 "tags": [
                     "ProviderChat"
                 ],
                 "summary": "Get the current Inbox of the User.",
                 "description": "Get the current Conversations with each last message & chat partner of the given User.",
                 "operationId": "getInboxFoxdoxProvider",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/getInboxForm"
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "The inbox information.",
@@ -804,13 +825,20 @@
             }
         },
         "/api/chat/provider/getinboxall": {
-            "get": {
+            "post": {
                 "tags": [
                     "ProviderChat"
                 ],
                 "summary": "Get the current Inbox of the User. Including the soft deleted messages.",
                 "description": "Get the current Conversations with each last message & chat partner of the given User.",
                 "operationId": "getInboxFoxdoxProvider",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/getInboxForm"
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "The inbox information.",
@@ -1410,6 +1438,21 @@
                         "type": "string"
                     },
                     "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "getInboxForm": {
+                "type": "object",
+                "required": [
+                    "offset",
+                    "take"
+                ],
+                "properties": {
+                    "offset": {
+                        "type": "string"
+                    },
+                    "take": {
                         "type": "string"
                     }
                 }

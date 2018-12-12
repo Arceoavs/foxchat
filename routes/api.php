@@ -46,8 +46,8 @@ Route::group([
 
     //Chat requests for FoxdoxUser
     Route::post('sendmessage', 'Chat\ChatAPIFoxdoxUser@sendMessageByFoxdoxUser');
-    Route::get('getinbox', 'Chat\ChatAPIFoxdoxUser@getInbox');
-    Route::get('getinboxall', 'Chat\ChatAPIFoxdoxUser@getInboxAll');
+    Route::post('getinbox', 'Chat\ChatAPIFoxdoxUser@getInbox');
+    Route::post('getinboxall', 'Chat\ChatAPIFoxdoxUser@getInboxAll');
     Route::post('getconversationbyname', 'Chat\ChatAPIFoxdoxUser@getConversationByName');
     Route::post('getconversationbynameall', 'Chat\ChatAPIFoxdoxUser@getConversationByNameAll');
     Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxUser@getConversationById');
@@ -66,8 +66,8 @@ Route::group([
 
     //Chat requests for FoxdoxUser
     Route::post('sendmessage', 'Chat\ChatAPIFoxdoxProvider@sendMessageByFoxdoxProvider');
-    Route::get('getinbox', 'Chat\ChatAPIFoxdoxProvider@getInbox');
-    Route::get('getinboxall', 'Chat\ChatAPIFoxdoxProvider@getInboxAll');
+    Route::post('getinbox', 'Chat\ChatAPIFoxdoxProvider@getInbox');
+    Route::post('getinboxall', 'Chat\ChatAPIFoxdoxProvider@getInboxAll');
     Route::post('getconversationbyname', 'Chat\ChatAPIFoxdoxProvider@getConversationByName');
     Route::post('getconversationbynameall', 'Chat\ChatAPIFoxdoxProvider@getConversationByNameAll');
     Route::post('getconversationbyid', 'Chat\ChatAPIFoxdoxProvider@getConversationById');

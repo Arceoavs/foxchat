@@ -14,15 +14,41 @@ use App\Exceptions\ChatAuthException;
 class ChatAPI extends Controller
 {
     protected $chatapiservice;
-    
+
     public function getInbox()
     {
-        return $this->chatapiservice->getInbox();
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'offset' => 'required',
+            'take' => 'required'
+        ]);
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $offset = request()->input('offset');
+        $take = request()->input('take');
+
+        return $this->chatapiservice->getInbox($offset, $take);
     }
 
     public function getInboxAll()
     {
-        return $this->chatapiservice->getInboxAll();
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'offset' => 'required',
+            'take' => 'required'
+        ]);
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $offset = request()->input('offset');
+        $take = request()->input('take');
+
+        return $this->chatapiservice->getInboxAll($offset, $take);
     }
 
     public function getConversationByName()
