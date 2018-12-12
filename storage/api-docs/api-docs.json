@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Foxchat API",
-        "version": "0.6",
+        "version": "0.6.1",
         "description": "Dies ist die API Dokumentation zum Projektseminars digitaler Tresor."
     },
     "tags": [
@@ -1339,15 +1339,12 @@
                 "tags": [
                     "UserChat"
                 ],
-                "summary": "Gives the subscribed Providers back.",
+                "summary": "Gives the subscribed Providers back like the normal listproviders api call from Foxdox.",
                 "responses": {
                     "200": {
                         "description": "The list of subscribed providers.",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/getSubscribedProvidersResponse"
-                                }
                             }
                         }
                     },
