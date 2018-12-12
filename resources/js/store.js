@@ -8,8 +8,7 @@ export const store = new Vuex.Store({
   state: {
     providerList: [
       {
-        id: '0',
-        name: 'Loading...'
+        ProviderShortName: 'Loading...'
       }
     ]
   },
@@ -28,8 +27,7 @@ export const store = new Vuex.Store({
     resetState({ commit }) {
       commit('setProviderList', [
         {
-          id: '0',
-          name: 'Loading...'
+          ProviderShortName: 'Loading...'
         }
       ])
     }

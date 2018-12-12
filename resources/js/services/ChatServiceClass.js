@@ -1,6 +1,7 @@
 import EventBus from './event-bus.js';
 import Participant from '../model/participants.js';
 import Message from '../model/messages.js';
+import { store } from '../store.js';
 
 
 const configExt = {
@@ -29,16 +30,58 @@ export default class ChatService  {
      * getInbox
      */
     getInbox(self){
-        axios.get(this.path+'/getinbox', configExt, self)
-            .then(response => {
-                self.response.getInbox = response;
-                console.log('Get Inbox success!');
-            })
-            .catch(error => {
-                console.log(error);                 
-                console.log(JSON.stringify(error));
-            });
-    }
+        var path = '/api/chat/user/getinbox';
+        var config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('bearer')
+          }
+        };
+    
+        var jsonsd = {
+          'offset': '0',
+          'take': '1000'
+        }
+    
+        console.log('Getting Inbox');
+    
+        axios.post(path, jsonsd, config)
+          .then(response => {
+            console.log('Listing Inbox...');
+            var currentProviderList = store.state.providerList;
+            var chatList = response.data;
+            // console.log(chatList);
+            var responseList = [];
+            // console.log("In get inboox" + responseList);
+            for (var i = 0; i < currentProviderList.length; i++) {
+              var responseListElem = currentProviderList[i];
+              var responseChatList = [];
+              for(var j = 0; j < chatList.length; j++){
+                var documentChatsElem = chatList[j];
+                console.log("docelem "+documentChatsElem['withUser']['name']);
+                console.log("responslistelm "+responseListElem.ProviderShortName);
+                if(responseListElem.ProviderShortName == documentChatsElem['withUser']['name']){
+                  var newDocumentChatElem = new Object();
+                  newDocumentChatElem = documentChatsElem['thread'];
+                  responseChatList.push(newDocumentChatElem);
+                  console.log("die aktuelle responseChat list ");
+                  console.log(responseChatList);
+                }
+              }
+              responseListElem.documentChats=responseChatList;
+              responseList.push(responseListElem);
+            }
+            store.commit('setProviderList', responseList);
+            
+    
+            console.log(responseList);
+    
+            console.log('Got Inbox List');
+          })
+          .catch(error => {
+            console.log('Error getting Inbox List: ' + JSON.stringify(error));
+          });
+      }
 
     /**
      * sendMessage

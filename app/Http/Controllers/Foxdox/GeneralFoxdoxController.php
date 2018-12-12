@@ -58,11 +58,11 @@ class GeneralFoxdoxController extends Controller
                 $subscriptions = $serviceresponse[0]['Subscriptions'];
                 if (!$subscriptions == []) {
                     if($subscriptions[0]['State']==2){
-                        array_push($newlist, $element['ProviderShortName']);
+                        array_push($newlist, $element);
                     }
                 }
             }
         }
-        return ["Items" => $newlist];
+        return $newlist;
     }
 }

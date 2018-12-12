@@ -4,8 +4,8 @@
       <b-col>
         <chat-overview-component
           v-for="provideritem in providers"
-          v-bind:key="provideritem.id"
-          v-bind:provider="provideritem.name"
+          v-bind:key="provideritem.ProviderShortName"
+          v-bind:provider="provideritem.ProviderShortName"
           v-bind:documentChats="provideritem.documentChats"
         ></chat-overview-component>
       </b-col>
@@ -15,20 +15,18 @@
 
 <script>
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
-import {store} from "../../store.js";
-import ChatOverviewService from '../../services/ChatOverviewService';
+import { store } from "../../store.js";
+import ChatService from "../../services/ChatService";
 
 export default {
   data() {
-    return {
-      //providers
-    };
+    return {}
   },
   components: {
     ChatOverviewComponent
   },
-  mounted(){
-    
+  mounted() {
+    ChatService.getInboxList();
   },
   computed: {
     providers: function() {
