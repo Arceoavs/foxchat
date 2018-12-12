@@ -18,7 +18,7 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <router-link to="/communication/manuel.barkau/allgemein">
+      <router-link :to="'/communication/'+provider+'/allgemein'">
         <b-card class="textColor">
           {{generalChat}}
           <div class="cardIcon textFox">

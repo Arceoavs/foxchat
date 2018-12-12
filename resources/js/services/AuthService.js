@@ -1,5 +1,5 @@
 import EventBus from './event-bus.js';
-import providerListStore from '../store.js';
+import ChatOverviewService from './ChatOverviewService';
 
 const config = {
     headers: {
@@ -35,7 +35,7 @@ class AuthService {
 
         this.retrieveUser(self);
 
-        this.getProviderList(self);
+        ChatOverviewService.getProviderList();
 
         if (self.noError) {
           self.$router.push('/');
@@ -56,28 +56,6 @@ class AuthService {
       })
       .finally(param => {
         EventBus.$emit('loaded');
-      });
-  }
-
-  getProviderList(self) {
-    axios.get('/api/foxdoxapi/user/listprovidersforoverview', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('bearer')
-        }
-      })
-      .then(response => {
-        console.log('Listing Providers...');
-        var providerlist = response.data['Items'];
-        var responseList = [];
-        for (var i = 0; i < providerlist.length; i++) {
-          var providerListElem = new Object();
-          providerListElem.id = '' + i;
-          providerListElem.name = providerlist[i];
-          providerListElem.documentChats = [];
-          responseList.push(providerListElem);
-        }
-        providerListStore.commit('setProviderList', responseList);
       });
   }
 

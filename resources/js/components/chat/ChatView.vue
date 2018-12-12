@@ -23,8 +23,8 @@
 <script>
 import ChatComponent from "./ChatComponent.vue";
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
+import providerListStore from "../../store.js";
 
-import providerList from "./providerList.js";
 export default {
    props: {
     partner: {
@@ -44,7 +44,11 @@ export default {
     return{
       chatPartner: this.partner,
       conversationTag: this.tag,
-      providers: providerList
+    }
+  },
+  computed: {
+    providers: function() {
+      return providerListStore.state.providerList;
     }
   },
   components: {

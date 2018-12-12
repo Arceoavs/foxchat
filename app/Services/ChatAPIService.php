@@ -77,7 +77,13 @@ class ChatAPIService extends Controller
     {
         $chatpartner = $this->getUserFromDatabase($username);
         if(!$chatpartner){
-            throw new ChatAPIServiceException("Provided Name");
+            //throw new ChatAPIServiceException("Provided Name");
+
+            $chatpartner = User::updateOrCreate(
+                ['name' => $username],
+                ['foxdox-token' => 'notYetRetrieved',
+                 'isProvider' => !(auth()->user()->isProvider) ]
+            );
         }
         $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
         if(!$conversation){
