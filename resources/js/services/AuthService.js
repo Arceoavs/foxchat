@@ -1,5 +1,5 @@
 import EventBus from './event-bus.js';
-import ChatOverviewService from './ChatOverviewService';
+import FoxdoxGeneralService from './FoxdoxGeneralService';
 import {store} from '../store.js';
 
 const config = {
@@ -35,7 +35,7 @@ class AuthService {
         console.log('Logging In...');
         localStorage.setItem('bearer', response.data.access_token);
 
-        ChatOverviewService.getProviderList();
+        FoxdoxGeneralService.getProviderList();
         this.retrieveUser(self);
 
         if (self.noError) {
