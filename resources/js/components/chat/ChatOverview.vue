@@ -1,62 +1,47 @@
 <template>
   <b-container>
-      <chat-overview-component
-        v-for="provideritem in providers"
-        v-bind:key="provideritem.id"
-        v-bind:provider="provideritem.name"
-        v-bind:documentChats="provideritem.documentChats"
-      ></chat-overview-component>
+    <b-row class="mt-3">
+      <b-col>
+        <chat-overview-component
+          v-for="provideritem in providers"
+          v-bind:key="provideritem.id"
+          v-bind:provider="provideritem.name"
+          v-bind:documentChats="provideritem.documentChats"
+        ></chat-overview-component>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
 <script>
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
+import providerListStore from "../../store.js";
+//import providerList from "./providerList.js";
+
+import { returnProviderList } from "../../services/ChatOverviewService.js";
+
 export default {
   data() {
     return {
-      providers: [
-        {
-          id: "1",
-          name: "meine.versicherung",
-          documentChats: [
-            {
-              id: "1",
-              title: "Versicherungsvertrag 1"
-            },
-            {
-              id: "2",
-              title: "Abrechnung vom 06.12.2018"
-            }
-          ]
-        },
-        {
-          id: "2",
-          name: "mein.arbeitgeber",
-          documentChats: [
-            {
-              id: "1",
-              title: "Gehaltsabrechnung Dezember 2018"
-            }
-          ]
-        },
-        {
-          id: "3",
-          name: "D.velop"
-        }
-      ]
+      providers
     };
   },
   components: {
     ChatOverviewComponent
+  },
+  computed: {
+    providers() {
+      return providerListStore.state.providerList;
+    }
+  },
+  watch: {
+    providers() {
+      // Our fancy notification (2).
+      console.log("Wert aktualisiert");
+    }
   }
 };
 </script>
 
 <style>
-.cardIcon {
-  float: right;
-}
-.left {
-  float: left;
-}
 </style>
