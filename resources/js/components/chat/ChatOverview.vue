@@ -26,7 +26,7 @@ export default {
     ChatOverviewComponent
   },
   mounted() {
-    ChatService.getInboxList();
+    ChatService.getInbox();
   },
   computed: {
     providers: function() {
