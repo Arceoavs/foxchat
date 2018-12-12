@@ -33,6 +33,7 @@
           v-for="documentChat in documentChats"
           v-bind:key="documentChat.conversation_id"
           v-bind:title="documentChat.conversation_tag"
+          v-bind:message="documentChat.message"
         ></chat-list-component>
       </div>
 
