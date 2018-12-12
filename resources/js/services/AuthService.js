@@ -1,5 +1,6 @@
 import EventBus from './event-bus.js';
 import ChatOverviewService from './ChatOverviewService';
+import {store} from '../store.js';
 
 const config = {
     headers: {
@@ -89,6 +90,7 @@ class AuthService {
 
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
+    store.dispatch('resetState');
   }
 
   retrieveUser(self) {

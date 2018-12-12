@@ -15,7 +15,7 @@
 
 <script>
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
-import providerListStore from "../../store.js";
+import {store} from "../../store.js";
 import ChatOverviewService from '../../services/ChatOverviewService';
 
 export default {
@@ -28,17 +28,10 @@ export default {
     ChatOverviewComponent
   },
   mounted(){
-    ChatOverviewService.getProviderList();
   },
   computed: {
     providers: function() {
-      return providerListStore.state.providerList;
-    }
-  },
-  watch: {
-    providers() {
-      // Our fancy notification (2).
-      console.log("Wert aktualisiert");
+      return store.state.providerList;
     }
   }
 };

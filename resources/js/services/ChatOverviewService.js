@@ -1,4 +1,4 @@
-import providerListStore from '../store.js';
+import {store } from '../store.js';
 
 
 var path = '/api/foxdoxapi/user';
@@ -29,7 +29,7 @@ class FoxdoxApi {
           providerListElem.documentChats = [];
           responseList.push(providerListElem);
         }
-        providerListStore.commit('setProviderList', responseList);
+        store.commit('setProviderList', responseList);
 
         console.log('Got Provider List');
       })

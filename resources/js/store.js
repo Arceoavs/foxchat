@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate'; 
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
   state: {
     providerList: [
       {
@@ -23,7 +23,17 @@ export default new Vuex.Store({
     setProviderList(state, newProviderList) {
       state.providerList = newProviderList;
     }
+  },
+  actions: {
+    resetState({ commit }) {
+      commit('setProviderList', [
+        {
+          id: '0',
+          name: 'Loading...'
+        }
+      ])
+    }
   }
-  // Obvously you would need some mutations and actions,
-  // but to make example cleaner I'll skip this part.
 });
+
+export default store;
