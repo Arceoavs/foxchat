@@ -122,9 +122,6 @@ export default class ChatService  {
 
         axios.post(this.path+'/sendmessage', body, configExt)
             .then(response => {
-                this.getConversationByName(receivingProvider, conversationTag, 0, 100, self);
-                self.$emit('messageWasSent');
-                
                 console.log('Message send success!');
             })
             .catch(error => {
@@ -132,6 +129,9 @@ export default class ChatService  {
                 console.log(error);                 
                 console.log(JSON.stringify(error));
                 console.log(error.response.status +' '+ error.response.statusText +' message: '+ error.response.data.message);     
+            }).finally(param => {
+                self.$emit('messageWasSent');
+                EventBus.$emit('chatPartnerChanged');
             });
     }
 
@@ -139,6 +139,7 @@ export default class ChatService  {
      * getConversationByProviderName
      */
     getConversationByName(username, conversationTag, offset, take, self){
+        
         EventBus.$emit('loading');
 
         var body = {
@@ -150,7 +151,6 @@ export default class ChatService  {
 
         axios.post(this.path+'/getconversationbyname', body, configExt)
             .then(response => {
-                console.log(response.data)
 
                 var partner = response.data.withUser;
                 var you = JSON.parse(localStorage.getItem('user'));

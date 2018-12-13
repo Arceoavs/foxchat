@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       participants: [
+        
       ],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
@@ -39,25 +40,42 @@ export default {
   },
   mounted() {
     console.log("Chat Component mounted");
+    this.initChat();
 
-        chatService.getConversationByName(
-          this.$route.query.partner,
-          this.$route.query.tag,
-          0,
-          100,
-          this
-        );
-        EventBus.$on("chatPartnerChanged", payload => {
-          chatService.getConversationByName(
-            this.$route.query.partner,
-            this.$route.query.tag,
-            0,
-            100,
-            this
-          );
-        });
+    chatService.getConversationByName(
+      this.$route.query.partner,
+      this.$route.query.tag,
+      0,
+      100,
+      this
+    );
+    EventBus.$on("chatPartnerChanged", payload => {
+      this.initChat();
+      chatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        this
+      );
+    });
+    
   },
   methods: {
+    initChat(){
+      this.participants = [
+        {
+          id: '0',
+          name: this.$route.query.partner,
+          imageUrl: ''
+        }, 
+        {
+          id: '0',
+          name: JSON.parse(localStorage.getItem('user')),
+          imageUrl: ''
+        }
+      ];
+    },
     sendMessage(text) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen
