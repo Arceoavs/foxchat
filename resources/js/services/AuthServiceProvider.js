@@ -1,4 +1,6 @@
 import EventBus from './event-bus.js';
+import ChatService from './ChatService.js';
+
 
 const config = {
   headers: {
@@ -18,6 +20,7 @@ class AuthServiceProvider {
     formData.append('name', pUsername);
     formData.append('password', pPassword);
     formData.append('x-provider', pXProvider);
+    
 
     self.errorMsg = 'Login Fehler: ';
     self.showAlert = false;
@@ -26,8 +29,9 @@ class AuthServiceProvider {
     axios
       .post(path + '/login', formData, config)
       .then(response => {
-        console.log('Logging In...');
+        console.log('Logging in axios...');
         localStorage.setItem('bearer', response.data.access_token);
+        ChatService.getInboxProvider(this);
 
         this.retrieveUser(self);
 
@@ -84,12 +88,13 @@ class AuthServiceProvider {
 
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
+    store.dispatch('resetProviderList');
   }
 
   retrieveUser(self) {
     EventBus.$emit('loading');
 
-    console.log('Getting Userdata...');
+    console.log('Getting Providerdata...');
 
     var configExt = {
       headers: {
@@ -102,7 +107,7 @@ class AuthServiceProvider {
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
 
-        console.log('Got Userdata:');
+        console.log('Got Providerdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
 
         // if( self.noError  ){
@@ -112,7 +117,7 @@ class AuthServiceProvider {
       })
       .catch(error => {
         this.logout(self);
-        console.log('error while fetching user data' + JSON.stringify(error));
+        console.log('error while fetching Providerdata' + JSON.stringify(error));
         self.errorMsg =
           'Login Fehler User: ' +
           error.response.status +

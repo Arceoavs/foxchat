@@ -5,7 +5,7 @@
       <b-card>
         <div slot="header" style="text-align:left;">
           {{userName}}
-          <span style="float:right;">{{timeStamp}}</span>
+          <span style="float:right;">{{cuttedTime}} {{cuttedDate}}</span>
         </div>
         <router-link to="/communication">
           <h4 class="left textColor">{{documentName}}</h4>
@@ -21,15 +21,17 @@
 import ChatListComponent from "./ChatListComponent.vue";
 
 export default {
-  props: ["documentName", "timeStamp", "userName"],
-  data() {
-    return {
-      generalChat: "Allgemeiner Chat", //remove?
-      addChat: "Chat hinzufügen" //remove?
-    };
-  },
+  props: ["documentName", "date", "userName"],
   components: {
     ChatListComponent
+  },
+  computed: {
+    cuttedTime() {
+      return this.date.slice(11, 16);
+    },
+    cuttedDate() {
+      return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
+    }
   }
 };
 </script>

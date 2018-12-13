@@ -10,24 +10,42 @@ export const store = new Vuex.Store({
       {
         ProviderShortName: 'Loading...'
       }
+    ],
+    inboxForProvider:[
+      {
+        document: 'Loading...'
+      }
     ]
   },
   plugins: [createPersistedState()],
   getters: {
     getProviderList(state) {
       return state.providerList;
+    },
+    getProviderInbox(state) {
+      return state.inboxForProvider;
     }
   },
   mutations: {
     setProviderList(state, newProviderList) {
       state.providerList = newProviderList;
+    },
+    setProviderInbox(state, newProviderInbox) {
+      state.inboxForProvider = newProviderInbox;
     }
   },
   actions: {
-    resetState({ commit }) {
+    resetProviderList({ commit }) {
       commit('setProviderList', [
         {
           ProviderShortName: 'Loading...'
+        }
+      ])
+    },
+    resetProviderInbox({ commit }) {
+      commit('setProviderInbox', [
+        {
+          document: 'Loading...'
         }
       ])
     }

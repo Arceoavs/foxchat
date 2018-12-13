@@ -82,6 +82,38 @@ export default class ChatService  {
             console.log('Error getting Inbox List: ' + JSON.stringify(error));
           });
       }
+          /**
+     * getInbox
+     */
+    getInboxProvider(self){
+        var path = '/api/chat/provider/getinbox';
+        var config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('bearer')
+          }
+        };
+    
+        var jsonsd = {
+          'offset': '0',
+          'take': '1000'
+        }
+    
+        console.log('Getting Provider Inbox');
+    
+        axios.post(path, jsonsd, config)
+          .then(response => {
+            console.log('Listing Provider Inbox...');
+            console.log(response.data);
+            store.commit('setProviderInbox', response.data);
+    
+            console.log('Got provider Inbox ');
+          })
+          .catch(error => {
+            console.log('Error getting Provider Inbox: ' + JSON.stringify(error));
+          });
+      }
+
 
     /**
      * sendMessage
