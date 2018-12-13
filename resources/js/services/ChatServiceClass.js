@@ -97,6 +97,7 @@ export default class ChatService  {
         axios.post(this.path+'/sendmessage', body, configExt)
             .then(response => {
                 this.getConversationByName(receivingProvider, conversationTag, 0, 100, self);
+                self.$emit('messageWasSent');
                 
                 console.log('Message send success!');
             })

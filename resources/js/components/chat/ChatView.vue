@@ -14,6 +14,7 @@
         <chat-component
           v-bind:chatPartner="this.partner"
           v-bind:conversationTag="this.tag"
+          v-on:messageWasSent="refreshInbox"
         ></chat-component>
       </b-col>
     </b-row>
@@ -24,9 +25,10 @@
 import ChatComponent from "./ChatComponent.vue";
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
 import providerListStore from "../../store.js";
+import ChatService from "../../services/ChatService";
 
 export default {
-   props: {
+  props: {
     partner: {
       type: String,
       required: true
@@ -36,19 +38,25 @@ export default {
       required: true
     }
   },
-  mounted(){
+  mounted() {
     console.log(this.partner);
     console.log(this.tag);
   },
-  data(){
-    return{
+  data() {
+    return {
       chatPartner: this.partner,
-      conversationTag: this.tag,
-    }
+      conversationTag: this.tag
+    };
   },
   computed: {
     providers: function() {
       return providerListStore.state.providerList;
+    }
+  },
+  methods:{
+    refreshInbox(){
+      console.log("refresh wurde aufgerufen");
+      ChatService.getInbox();
     }
   },
   components: {
