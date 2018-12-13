@@ -4,15 +4,19 @@ import Message from '../model/messages.js';
 import { store } from '../store.js';
 
 
-const configExt = {
+var configExt = {
     headers: {
-        'accept': 'application/json',
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer '+localStorage.getItem('bearer')
     }
 }
 
 export default class ChatService  {
+
+    refresh(){
+        configExt.headers.Authorization = 'Bearer '+localStorage.getItem('bearer');
+    }
 
     init(pPath){
         this.path = pPath;
@@ -30,6 +34,8 @@ export default class ChatService  {
      * getInbox
      */
     getInbox(self){
+        this.refresh();
+        
         var path = '/api/chat/user/getinbox';
         var config = {
           headers: {
@@ -80,6 +86,8 @@ export default class ChatService  {
      * getInbox
      */
     getInboxProvider(self){
+        this.refresh();
+
         var path = '/api/chat/provider/getinbox';
         var config = {
           headers: {
@@ -113,6 +121,8 @@ export default class ChatService  {
      * sendMessage
      */
     sendMessage(receivingProvider, message, conversationTag, self){
+        this.refresh();
+
         var body = {
             'receivinguser': receivingProvider,
             'receivingprovider': receivingProvider,
@@ -139,7 +149,8 @@ export default class ChatService  {
      * getConversationByProviderName
      */
     getConversationByName(username, conversationTag, offset, take, self){
-        
+        this.refresh();
+       
         EventBus.$emit('loading');
 
         var body = {
@@ -151,6 +162,7 @@ export default class ChatService  {
 
         axios.post(this.path+'/getconversationbyname', body, configExt)
             .then(response => {
+                console.log(response);
 
                 var partner = response.data.withUser;
                 var you = JSON.parse(localStorage.getItem('user'));
