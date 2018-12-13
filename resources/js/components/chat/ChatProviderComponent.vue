@@ -7,7 +7,7 @@
           {{userName}}
           <span style="float:right;">{{cuttedTime}} {{cuttedDate}}</span>
         </div>
-        <router-link to="/communication">
+        <router-link :to="'/communication?partner='+userName+'&tag='+documentName">
           <h4 class="left textColor">{{documentName}}</h4>
           <font-awesome-icon class="cardIcon textFox" icon="comments" size="2x"/>
         </router-link>
