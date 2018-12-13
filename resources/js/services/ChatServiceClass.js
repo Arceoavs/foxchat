@@ -145,6 +145,7 @@ export default class ChatService  {
      * getConversationByProviderName
      */
     getConversationByName(username, conversationTag, offset, take, self){
+        EventBus.$emit('loading');
 
         var body = {
             'username': username,
@@ -173,13 +174,15 @@ export default class ChatService  {
                     responseArr.push(new Message('text', sender, null, message.message, null, null, null)); 
                 }
 
-                EventBus.$emit('loadedMsg');
+                
             })
             .catch(error => {
                 console.log('error while getconversationbyname:');
                 console.log(error);
                 console.log(JSON.stringify(error));
                 console.log(error.response.status +' '+ error.response.statusText +' message: '+ JSON.stringify(error.response.data));   
+            }).finally(param => {
+                EventBus.$emit('loaded');
             });
     }
 

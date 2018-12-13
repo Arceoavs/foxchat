@@ -12,8 +12,8 @@
       </b-col>
       <b-col md="8" cols="12">
         <chat-component
-          v-bind:chatPartner="this.partner"
-          v-bind:conversationTag="this.tag"
+          v-bind:partner="this.$route.query.partner"
+          v-bind:tag="this.$route.query.tag"
           v-on:messageWasSent="refreshInbox"
         ></chat-component>
       </b-col>
@@ -27,25 +27,17 @@ import ChatOverviewComponent from "./ChatOverviewComponent.vue";
 import providerListStore from "../../store.js";
 import ChatService from "../../services/ChatService";
 
+
 export default {
-  props: {
-    partner: {
-      type: String,
-      required: true
-    },
-    tag: {
-      type: String,
-      required: true
-    }
-  },
   mounted() {
-    console.log(this.partner);
-    console.log(this.tag);
+    ChatService.getInbox();
+    console.log(this.$route.query.partner);
+    console.log(this.$route.query.tag);
   },
   data() {
     return {
-      chatPartner: this.partner,
-      conversationTag: this.tag
+      chatPartner: this.$route.query.partner,
+      conversationTag: this.$route.query.tag
     };
   },
   computed: {

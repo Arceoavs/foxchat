@@ -15,28 +15,24 @@
 </template>
 
 <script>
-import messageHistory from "./messageHistory";
-import chatParticipants from "./chatProfiles";
 import chatService from "../../services/ChatService";
+
+import EventBus from "../../services/event-bus.js";
 
 export default {
   name: "app",
-   props: {
-    chatPartner: {
-      type: String,
-      required: true
-    },
-    conversationTag: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
-      participants: chatParticipants,
+      participants: [
+          {
+            id: '1',
+            name: 'Loading...',
+            imageUrl: ''
+          }
+      ],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
-      messageList: messageHistory,
+      messageList: [],
       newMessagesCount: 0,
       showTypingIndicator: "",
       alwaysScrollToBottom: false,
@@ -48,7 +44,11 @@ export default {
   },
   mounted(){
     console.log('Chat Component mounted');
-    chatService.getConversationByName(this.chatPartner, this.conversationTag, 0, 100, this);
+    chatService.getConversationByName(this.$route.query.partner, this.$route.query.tag, 0, 100, this);
+
+    EventBus.$on("chatPartnerChanged", payload => {
+      chatService.getConversationByName(this.$route.query.partner, this.$route.query.tag, 0, 100, this);
+    });
   },
   methods: {
     sendMessage(text) {
@@ -70,7 +70,7 @@ export default {
           : "";
     },
     onMessageWasSent(message) {
-      chatService.sendMessage(this.chatPartner, message.data.text, this.conversationTag, this);
+      chatService.sendMessage(this.$route.query.partner, message.data.text, this.$route.query.tag, this);
       // this.messageList = [...this.messageList, message];
     },
     showStylingInfo() {

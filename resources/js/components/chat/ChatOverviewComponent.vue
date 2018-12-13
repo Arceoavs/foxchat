@@ -18,7 +18,7 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <router-link :to="'/communication/'+provider+'/allgemein'">
+      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
         <b-card class="textColor">
           <b-row>
             <b-col cols="1">

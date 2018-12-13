@@ -7,11 +7,13 @@ import NestedComponent from './components/documents/NestedComponent.vue';
 import NestedComponent2 from './components/documents/NestedComponent.1.vue';
 import ChatOverview from './components/chat/ChatOverview.vue';
 import ChatView from './components/chat/ChatView.vue';
-import ChatViewAggr from './components/chat/ChatViewAggr.vue';
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
 import ChatProviderOverview from './components/chat/ChatProviderOverview.vue';
+
+
+import EventBus from "./services/event-bus.js";
 
 //Services
 import auth from './services/AuthService.js';
@@ -76,19 +78,12 @@ const routes = [
     }
   },
   {
-    path: '/communication/:partner',
+    path: '/communication',
     props: true,
-    component: ChatViewAggr,
+    component: ChatView,
     meta: {
       requiresAuth: true
-    },
-    children: [
-      {
-        path: ':tag',
-        props: true,
-        component: ChatView
-      }
-    ]
+    }
   }
 ];
 
@@ -123,6 +118,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+  EventBus.$emit('chatPartnerChanged');
   // uncomment
   // next();
 });

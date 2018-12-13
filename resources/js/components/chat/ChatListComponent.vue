@@ -1,6 +1,6 @@
 <template>
   <div class="mt-2">
-    <router-link :to="'/communication/'+provider+'/'+title">
+    <router-link :to="'/communication?partner='+provider+'&tag='+title">
       <b-card class="textColor">
         <b-row>
           <b-col cols="1">
