@@ -45,6 +45,7 @@
           v-for="documentChat in documentChats"
           v-bind:key="documentChat.conversation_id"
           v-bind:title="documentChat.conversation_tag"
+          v-bind:provider="provider"
           v-bind:message="documentChat.message"
           v-bind:date="documentChat.updated_at"
         ></chat-list-component>

@@ -5,8 +5,8 @@
         <chat-overview-component
           class="smaller-heading"
           v-for="provideritem in providers"
-          v-bind:key="provideritem.id"
-          v-bind:provider="provideritem.name"
+          v-bind:key="provideritem.ProviderShortName"
+          v-bind:provider="provideritem.ProviderShortName"
           v-bind:documentChats="provideritem.documentChats"
         ></chat-overview-component>
       </b-col>
