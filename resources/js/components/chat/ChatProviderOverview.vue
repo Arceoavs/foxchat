@@ -11,14 +11,12 @@
           v-bind:userName="chatItem.withUser.name"
         ></chat-provider-component>
         <!-- Add chat -->
-        <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
           <b-card>
             <h4 class="left textColor">{{addChat}}</h4>
             <div class="cardIcon textFox">
               <font-awesome-icon icon="plus-circle" size="2x"/>
             </div>
           </b-card>
-        </b-jumbotron>
       </b-col>
     </b-row>
   </b-container>
