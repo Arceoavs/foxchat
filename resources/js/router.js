@@ -11,6 +11,7 @@ import ChatViewAggr from './components/chat/ChatViewAggr.vue';
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
+import ChatProviderOverview from './components/chat/ChatProviderOverview.vue';
 
 //Services
 import auth from './services/AuthService.js';
@@ -62,6 +63,14 @@ const routes = [
     path: '/chat',
     name: 'Chat Overview',
     component: ChatOverview,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/provider-chat',
+    name: 'Chat Provider Overview',
+    component: ChatProviderOverview,
     meta: {
       requiresAuth: true
     }

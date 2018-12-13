@@ -28,7 +28,6 @@
 import ChatProviderComponent from "./ChatProviderComponent.vue";
 export default {
   data() {
-    //TODO: Sortieren nach Datum (Idee: return ans Ende, vorher dann sortieren)
     return {
       chats: [
         {

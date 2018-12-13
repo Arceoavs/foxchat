@@ -7,7 +7,6 @@
           {{userName}}
           <span style="float:right;">{{timeStamp}}</span>
         </div>
-        <!--Todo: Provider Communication -->
         <router-link to="/communication">
           <h4 class="left textColor">{{documentName}}</h4>
           <font-awesome-icon class="cardIcon textFox" icon="comments" size="2x"/>
@@ -22,7 +21,7 @@
 import ChatListComponent from "./ChatListComponent.vue";
 
 export default {
-  props: ["documentName", "timeStamp", "userName"], //documentChats
+  props: ["documentName", "timeStamp", "userName"],
   data() {
     return {
       generalChat: "Allgemeiner Chat", //remove?
