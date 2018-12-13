@@ -39,8 +39,7 @@ export default {
   },
   mounted() {
     console.log("Chat Component mounted");
-    if (this.$route.query.tag == "allgemein") {
-      try {
+
         chatService.getConversationByName(
           this.$route.query.partner,
           this.$route.query.tag,
@@ -57,14 +56,6 @@ export default {
             this
           );
         });
-      } catch (error) {
-        console.log(
-          "Allgemeine chat mit" +
-            this.$route.query.partner +
-            "existiert noch nicht in der Datenbank."
-        );
-      }
-    }
   },
   methods: {
     sendMessage(text) {
