@@ -150,6 +150,7 @@ export default class ChatService  {
 
         axios.post(this.path+'/getconversationbyname', body, configExt)
             .then(response => {
+                console.log(response.data)
 
                 var partner = response.data.withUser;
                 var you = JSON.parse(localStorage.getItem('user'));

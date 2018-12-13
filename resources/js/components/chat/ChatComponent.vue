@@ -24,11 +24,6 @@ export default {
   data() {
     return {
       participants: [
-        {
-          id: "1",
-          name: "Loading...",
-          imageUrl: ""
-        }
       ],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
@@ -44,16 +39,8 @@ export default {
   },
   mounted() {
     console.log("Chat Component mounted");
-    if (this.$route.query.tag == "allgemein");
-    try {
-      chatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
-      EventBus.$on("chatPartnerChanged", payload => {
+    if (this.$route.query.tag == "allgemein") {
+      try {
         chatService.getConversationByName(
           this.$route.query.partner,
           this.$route.query.tag,
@@ -61,13 +48,22 @@ export default {
           100,
           this
         );
-      });
-    } catch (error) {
-      console.log(
-        "Allgemeine chat mit" +
-          this.$route.query.partner +
-          "existiert noch nicht in der Datenbank."
-      );
+        EventBus.$on("chatPartnerChanged", payload => {
+          chatService.getConversationByName(
+            this.$route.query.partner,
+            this.$route.query.tag,
+            0,
+            100,
+            this
+          );
+        });
+      } catch (error) {
+        console.log(
+          "Allgemeine chat mit" +
+            this.$route.query.partner +
+            "existiert noch nicht in der Datenbank."
+        );
+      }
     }
   },
   methods: {

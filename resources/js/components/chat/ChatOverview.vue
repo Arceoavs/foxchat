@@ -2,6 +2,7 @@
   <b-container>
     <b-row class="mt-3">
       <b-col>
+        <div v-if="providers.length==0"  class="text-center">Sie haben keine Provider, die sich für den foxChat registriert haben.</div>
         <chat-overview-component
           v-for="provideritem in providers"
           v-bind:key="provideritem.ProviderShortName"
@@ -20,7 +21,7 @@ import ChatService from "../../services/ChatService";
 
 export default {
   data() {
-    return {}
+    return {};
   },
   components: {
     ChatOverviewComponent
