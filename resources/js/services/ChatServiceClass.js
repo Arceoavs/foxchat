@@ -48,30 +48,24 @@ export default class ChatService  {
         axios.post(path, jsonsd, config)
           .then(response => {
             console.log('Listing Inbox...');
-            var currentProviderList = store.state.providerList;
+            var currentProviderList = store.state.inboxForUser;
             var chatList = response.data;
-            // console.log(chatList);
             var responseList = [];
-            // console.log("In get inboox" + responseList);
             for (var i = 0; i < currentProviderList.length; i++) {
               var responseListElem = currentProviderList[i];
               var responseChatList = [];
               for(var j = 0; j < chatList.length; j++){
                 var documentChatsElem = chatList[j];
-                console.log("docelem "+documentChatsElem['withUser']['name']);
-                console.log("responslistelm "+responseListElem.ProviderShortName);
                 if(responseListElem.ProviderShortName == documentChatsElem['withUser']['name']){
                   var newDocumentChatElem = new Object();
                   newDocumentChatElem = documentChatsElem['thread'];
                   responseChatList.push(newDocumentChatElem);
-                  console.log("die aktuelle responseChat list ");
-                  console.log(responseChatList);
                 }
               }
               responseListElem.documentChats=responseChatList;
               responseList.push(responseListElem);
             }
-            store.commit('setProviderList', responseList);
+            store.commit('setUserInbox', responseList);
             
     
             console.log(responseList);

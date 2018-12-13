@@ -34,8 +34,6 @@ class AuthService {
       .then(response => {
         console.log('Logging In...');
         localStorage.setItem('bearer', response.data.access_token);
-
-        FoxdoxGeneralService.getProviderList();
         this.retrieveUser(self);
 
         if (self.noError) {
@@ -57,6 +55,7 @@ class AuthService {
       })
       .finally(param => {
         EventBus.$emit('loaded');
+        FoxdoxGeneralService.getProviderList();
       });
   }
 
@@ -90,7 +89,7 @@ class AuthService {
 
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
-    store.dispatch('resetProviderList');
+    store.dispatch('resetUserInbox');
   }
 
   retrieveUser(self) {

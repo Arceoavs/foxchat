@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     providers: function() {
-      return store.state.providerList;
+      return store.state.inboxForUser;
     }
   }
 };

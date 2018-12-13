@@ -11,7 +11,7 @@
           <b-nav-item to="/index">
             <div>Dokumente</div>
           </b-nav-item>
-          <b-nav-item to="/Chat">
+          <b-nav-item to="/chat">
             <div>Chat</div>
           </b-nav-item>
         </b-navbar-nav>

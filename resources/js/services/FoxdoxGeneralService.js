@@ -1,4 +1,5 @@
 import { store } from '../store.js';
+import ChatService from "./ChatService";
 
 import axios from 'axios';
 
@@ -6,7 +7,7 @@ class ChatOverviewAPI {
   getProviderList() {
     var config = {
       headers: {
-        'Content-Type': 'application/json',
+        'Accept': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem('bearer')
       }
     };
@@ -17,12 +18,14 @@ class ChatOverviewAPI {
     axios.get(path + '/listprovidersforoverview', config)
       .then(response => {
         console.log('Listing Providers...');
-        store.commit('setProviderList', response.data);
-        this.getInboxList();
+        store.commit('setUserInbox', response.data);
+
         console.log('Got Provider List');
       })
       .catch(error => {
         console.log('Error getting Provider List: ' + JSON.stringify(error));
+      }).finally(param => {
+        ChatService.getInbox();
       });
   }
 }

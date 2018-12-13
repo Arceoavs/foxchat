@@ -66,7 +66,9 @@ const routes = [
     name: 'Chat Overview',
     component: ChatOverview,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      requiresToBeUser: true
+      
     }
   },
   {
@@ -74,7 +76,8 @@ const routes = [
     name: 'Chat Provider Overview',
     component: ChatProviderOverview,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      requiresToBeProvider: true
     }
   },
   {
@@ -119,6 +122,25 @@ router.beforeEach((to, from, next) => {
     next();
   }
   EventBus.$emit('chatPartnerChanged');
+
+  if (to.matched.some(record => record.meta.requiresToBeProvider)) {
+    if (JSON.parse(localStorage.getItem("user")).isProvider == 1) {
+      next();
+    } else {
+      next('/chat');
+    }
+  } else {
+    next();
+  }
+  if (to.matched.some(record => record.meta.requiresToBeUser)) {
+    if (JSON.parse(localStorage.getItem("user")).isProvider == 0) {
+      next();
+    } else {
+      next('/provider-chat');
+    }
+  } else {
+    next();
+  }
   // uncomment
   // next();
 });

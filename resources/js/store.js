@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    providerList: [
+    inboxForUser: [
       {
         ProviderShortName: 'Loading...'
       }
@@ -19,24 +19,24 @@ export const store = new Vuex.Store({
   },
   plugins: [createPersistedState()],
   getters: {
-    getProviderList(state) {
-      return state.providerList;
+    getUserInbox(state) {
+      return state.inboxForUser;
     },
     getProviderInbox(state) {
       return state.inboxForProvider;
     }
   },
   mutations: {
-    setProviderList(state, newProviderList) {
-      state.providerList = newProviderList;
+    setUserInbox(state, newProviderList) {
+      state.inboxForUser = newProviderList;
     },
     setProviderInbox(state, newProviderInbox) {
       state.inboxForProvider = newProviderInbox;
     }
   },
   actions: {
-    resetProviderList({ commit }) {
-      commit('setProviderList', [
+    resetUserInbox({ commit }) {
+      commit('setUserInbox', [
         {
           ProviderShortName: 'Loading...'
         }

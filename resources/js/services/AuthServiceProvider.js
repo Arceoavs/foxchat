@@ -88,7 +88,7 @@ class AuthServiceProvider {
 
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
-    store.dispatch('resetProviderList');
+    store.dispatch('resetUserInbox');
   }
 
   retrieveUser(self) {

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FoxdoxApiClient;
 use App\Exceptions\ChatAuthException;
+use App\Services\ChatAPIService;
+use App\User;
+
 
 
 class GeneralFoxdoxController extends Controller
@@ -21,6 +24,7 @@ class GeneralFoxdoxController extends Controller
         $this->middleware('auth:api');
     }
 
+
     public function validateUserAsUser()
     {
         if (auth()->user()->isProvider == 0) {
@@ -28,6 +32,19 @@ class GeneralFoxdoxController extends Controller
         } else {
             throw new ChatAuthException("You are not a Foxdox User.");
         }
+    }
+
+    protected function getUserFromDatabase($username)
+    {
+        return User::where('name', $username)->first();
+    }
+
+    protected function isValidUser($username)
+    {
+        if (!$this->getUserFromDatabase($username)) {
+            return false;
+        }
+        return true;
     }
 
     public function listProviders()
@@ -53,12 +70,14 @@ class GeneralFoxdoxController extends Controller
         $newlist = [];
         for ($x = 0; $x < count($listproviders); $x++) {
             $element = $listproviders[$x];
-            $serviceresponse = json_decode($this->listServices($element['ProviderShortName'])->getBody()->getContents(), true)['Items'];
-            if (!$serviceresponse == []) {
-                $subscriptions = $serviceresponse[0]['Subscriptions'];
-                if (!$subscriptions == []) {
-                    if($subscriptions[0]['State']==2){
-                        array_push($newlist, $element);
+            if ($this->isValidUser($element['ProviderShortName'])) {
+                $serviceresponse = json_decode($this->listServices($element['ProviderShortName'])->getBody()->getContents(), true)['Items'];
+                if (!$serviceresponse == []) {
+                    $subscriptions = $serviceresponse[0]['Subscriptions'];
+                    if (!$subscriptions == []) {
+                        if ($subscriptions[0]['State'] == 2) {
+                            array_push($newlist, $element);
+                        }
                     }
                 }
             }

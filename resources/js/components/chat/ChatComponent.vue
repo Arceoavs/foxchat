@@ -1,17 +1,17 @@
 <template>
-    <beautiful-chat
-      :participants="participants"
-      :titleImageUrl="titleImageUrl"
-      :onMessageWasSent="onMessageWasSent"
-      :messageList="messageList"
-      :newMessagesCount="newMessagesCount"
-      :isOpen="true"
-      :showEmoji="true"
-      :showFile="true"
-      :showTypingIndicator="showTypingIndicator"
-      :alwaysScrollToBottom="alwaysScrollToBottom"
-      :messageStyling="messageStyling"
-    />
+  <beautiful-chat
+    :participants="participants"
+    :titleImageUrl="titleImageUrl"
+    :onMessageWasSent="onMessageWasSent"
+    :messageList="messageList"
+    :newMessagesCount="newMessagesCount"
+    :isOpen="true"
+    :showEmoji="true"
+    :showFile="true"
+    :showTypingIndicator="showTypingIndicator"
+    :alwaysScrollToBottom="alwaysScrollToBottom"
+    :messageStyling="messageStyling"
+  />
 </template>
 
 <script>
@@ -24,11 +24,11 @@ export default {
   data() {
     return {
       participants: [
-          {
-            id: '1',
-            name: 'Loading...',
-            imageUrl: ''
-          }
+        {
+          id: "1",
+          name: "Loading...",
+          imageUrl: ""
+        }
       ],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
@@ -42,13 +42,33 @@ export default {
   created() {
     chatService.init();
   },
-  mounted(){
-    console.log('Chat Component mounted');
-    chatService.getConversationByName(this.$route.query.partner, this.$route.query.tag, 0, 100, this);
-
-    EventBus.$on("chatPartnerChanged", payload => {
-      chatService.getConversationByName(this.$route.query.partner, this.$route.query.tag, 0, 100, this);
-    });
+  mounted() {
+    console.log("Chat Component mounted");
+    if (this.$route.query.tag == "allgemein");
+    try {
+      chatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        this
+      );
+      EventBus.$on("chatPartnerChanged", payload => {
+        chatService.getConversationByName(
+          this.$route.query.partner,
+          this.$route.query.tag,
+          0,
+          100,
+          this
+        );
+      });
+    } catch (error) {
+      console.log(
+        "Allgemeine chat mit" +
+          this.$route.query.partner +
+          "existiert noch nicht in der Datenbank."
+      );
+    }
   },
   methods: {
     sendMessage(text) {
@@ -70,7 +90,12 @@ export default {
           : "";
     },
     onMessageWasSent(message) {
-      chatService.sendMessage(this.$route.query.partner, message.data.text, this.$route.query.tag, this);
+      chatService.sendMessage(
+        this.$route.query.partner,
+        message.data.text,
+        this.$route.query.tag,
+        this
+      );
       // this.messageList = [...this.messageList, message];
     },
     showStylingInfo() {

@@ -32,26 +32,6 @@ import ChatService from "../../services/ChatService";
 export default {
   data() {
     return {
-      // chats: [
-      //   {
-      //     id: "1",
-      //     document: 'Chat zu "Dok. 123"',
-      //     date: "30.11.2018",
-      //     userName: "Dietrich"
-      //   },
-      //   {
-      //     id: "2",
-      //     document: 'Chat zu "Dok. 456"',
-      //     date: "06.12.2018",
-      //     userName: "Jacqueline"
-      //   },
-      //   {
-      //     id: "3",
-      //     document: 'Chat zu "Dok. 789"',
-      //     date: "11.12.2018",
-      //     userName: "Max Mustermann"
-      //   }
-      // ]
       addChat: "Neuen Chat starten"
     };
   },
