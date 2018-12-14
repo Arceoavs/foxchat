@@ -1,6 +1,6 @@
 <?php
 
-namespace App\CustomTalk\Facades;
+namespace App\CustomLaravelTalk\Facade;
 
 use Illuminate\Support\Facades\Facade;
 

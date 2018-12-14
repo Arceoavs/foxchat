@@ -5,7 +5,7 @@ use App\User;
 use App\CustomLaravelTalk\Conversations\CustomConversation;
 use App\CustomLaravelTalk\Messages\CustomMessage;
 use App\Http\Controllers\Controller;
-use App\CustomTalk\Facades\CustomTalk;
+use App\CustomLaravelTalk\Facade\CustomTalk;
 use App\Exceptions\ChatAPIServiceException;
 
 use Illuminate\Support\Facades\Log;

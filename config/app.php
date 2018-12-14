@@ -225,7 +225,7 @@ return [
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         // 'Talk'      => Nahid\Talk\Facades\Talk::class,
-        'CustomTalk' => App\CustomTalk\Facades\CustomTalk::class,
+        'CustomTalk' => App\CustomLaravelTalk\Facade\CustomTalk::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
