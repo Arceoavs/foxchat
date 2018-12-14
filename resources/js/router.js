@@ -2,15 +2,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //Components
-import OverviewComponent from './components/documents/OverviewComponent.vue';
-import NestedComponent from './components/documents/NestedComponent.vue';
-import NestedComponent2 from './components/documents/NestedComponent.1.vue';
 import ChatOverview from './components/chat/ChatOverview.vue';
 import ChatView from './components/chat/ChatView.vue';
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
 import ChatProviderOverview from './components/chat/ChatProviderOverview.vue';
+import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
+import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 
 
 import EventBus from "./services/event-bus.js";
@@ -27,24 +26,19 @@ const routes = [
   },
   {
     path: '/index',
-    name: 'OverviewIndex',
-    component: OverviewComponent,
+    name: 'DocumentOverview',
+    component: DocumentOverviewComponent,
     meta: {
       requiresAuth: true
     },
-    children: [
-      {
-        path: 'nested',
-        name: 'Nested',
-        component: NestedComponent
-      },
-      {
-        path: 'nestedzwei',
-        name: 'Nested 2',
-        component: NestedComponent2
-      }
-    ]
   },
+  
+  {
+    path: '/myproviders',
+    name: 'Meine Provider',
+    component: ProviderDocuments
+  },
+
   {
     path: '/login',
     component: LoginAggr,
