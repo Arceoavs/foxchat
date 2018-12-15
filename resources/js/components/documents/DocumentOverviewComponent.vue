@@ -30,7 +30,6 @@
         </document-list-component>
 
     </b-collapse>
-
     <router-link to="/myproviders" class="box">
     <b-card
       class="box">
@@ -46,6 +45,7 @@
 import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
 import DocumentListComponent from "./DocumentListComponent.vue";
 import recentDocuments from "./recentDocuments.js";
+import FolderService from "../../services/FolderService";
 
 export default {
   data () {

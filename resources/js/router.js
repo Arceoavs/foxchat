@@ -8,7 +8,7 @@ import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
 import ChatProviderOverview from './components/chat/ChatProviderOverview.vue';
-import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
+import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent.vue';
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 
 
@@ -26,13 +26,28 @@ const routes = [
   },
   {
     path: '/index',
-    name: 'DocumentOverview',
-    component: DocumentOverviewComponent,
-    meta: {
-      requiresAuth: true
-    },
+    redirect: { path: '/documents' }
   },
-  
+
+  {
+    path: '/documents',
+    name: 'Dokumente',
+    component: DocumentOverviewComponent,
+      // Routing funktioniert noch nicht mit Children
+    // children: [
+    //   {
+    //     path: 'myproviders',
+    //     name: 'Meine Provider',
+    //     component: ProviderDocuments
+    //   }
+    // ],
+    meta: {
+      requiresAuth: true,
+      requiresToBeUser: true
+    }
+  },
+
+
   {
     path: '/myproviders',
     name: 'Meine Provider',
@@ -62,7 +77,6 @@ const routes = [
     meta: {
       requiresAuth: true,
       requiresToBeUser: true
-      
     }
   },
   {

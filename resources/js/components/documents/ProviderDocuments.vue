@@ -6,9 +6,8 @@
         <b-col>
           <folder-component
             v-for="provider in providers"
-            v-bind:key="provider.id"
-            v-bind:name="provider.name"
-            v-bind:href="'/myproviders/' + provider.name"
+            v-bind:key="provider.ProviderShortName"
+            v-bind:name="provider.ProviderShortName"
           ></folder-component>
         </b-col>
       </b-row>
@@ -21,6 +20,8 @@
 import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
 import FolderComponent from "./FolderComponent.vue";
 import { store } from "../../store.js";
+import ChatOverviewAPI from "../../services/FoxdoxGeneralService.js";
+import FolderService from "../../services/FolderService";
 
 export default {
   data() {
@@ -39,11 +40,12 @@ export default {
   },
   components: {
     FolderComponent,
-    DocumentBreadcrumb
+    DocumentBreadcrumb,
+    ChatOverviewAPI
   },
   computed: {
     providers: function() {
-      return store.state.providerList;
+      return store.state.inboxForUser;
     }
   }
 };

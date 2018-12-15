@@ -29,4 +29,29 @@ class DocumentFoxdoxController extends Controller
         $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/document/listalldocs', []);
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
     }
+
+    public function retrieveRootFolder()
+    {
+        $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/folder/rootfolder', []);
+        return $foxdoxapiclient->apiRequest(auth()->user()->name);
+    }
+
+    public function listFolders($folderId)
+    {
+        $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/folder/listfolders', ['folderId' => $folderId]);
+        return $foxdoxapiclient->apiRequest(auth()->user()->name);
+    }
+
+    public function listDocuments($folderId)
+    {
+        $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/folder/listdocuments', ['folderId' => $folderId]);
+        return $foxdoxapiclient->apiRequest(auth()->user()->name);
+    }
+
+    public function downloadDocument($documentId)
+    {
+        $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/document/getdoc', ['documentId' => $documentId]);
+        $foxdoxapiclient->setMethod('GET');
+        return $foxdoxapiclient->apiRequest(auth()->user()->name);
+    }
 }

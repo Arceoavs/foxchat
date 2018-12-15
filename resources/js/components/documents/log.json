@@ -1,0 +1,29 @@
+{
+    "config": {
+        "transformRequest": {},
+        "transformResponse": {},
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "headers": {
+            "Accept": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": "JFcPlmEsfFGEc4ZZHaOnBL4qstbNQaxyG1cayoyu",
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDQ4MzgxODgsImV4cCI6MTU0NDkyNDU4OCwibmJmIjoxNTQ0ODM4MTg4LCJqdGkiOiJSWm81dUhLTXFmM2JjWDVFIiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.duKXp7bD5UB00_G4UEVK4XmGcu-o8cAlRs_XHQ773wo",
+            "X-XSRF-TOKEN": "eyJpdiI6IlpHNnRkWjhsVnNIck9WUWw1XC9JZFlRPT0iLCJ2YWx1ZSI6ImlrYmFBd3ZBTlZ5cFhVQUJBZno1WXU3MXlkSFRRMHZBNW1WNkVreFVtRmMxNkNQcTlMemx0QVYzU2pyeXRcL0tvIiwibWFjIjoiZWU0MjM2ZjEyNDZmM2ExMmYyMTYwZTAxMjE3NmYxZGE2YzNmMzdkNGNmY2E5MThjZDQ5M2YxYjc1YzNkNGRiMyJ9"
+        },
+        "method": "post",
+        "url": "/api/foxdoxapi/user/listFolders",
+        "data": {}
+    },
+    "request": {},
+    "response": {
+        "data": {
+            "message": "Too few arguments to function App\\Http\\Controllers\\Foxdox\\DocumentFoxdoxController::listFolders(), 0 passed and exactly 1 expected",
+            "exception": "Symfony\\Component\\Debug\\Exception\\FatalThrowableError",
+            "file": "/Users/eric_mdm/Projektseminar/digitaler-tresor/app/Http/Controllers/Foxdox/DocumentFoxdoxController.php",
+            "line": 39
+        }
+    }
+}

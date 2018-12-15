@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
         ProviderShortName: 'Loading...'
       }
     ],
-    inboxForProvider:[
+    inboxForProvider: [
       {
         document: 'Loading...'
       }
