@@ -1,66 +1,42 @@
 <template>
   <div class="mt-2">
-    <div v-if="title == 'allgemein' ">
-      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
-        <b-card class="textColor">
-          <b-row>
-            <b-col cols="1">
-              <div class="chatIcons textFox">
-                <font-awesome-icon icon="comments" size="2x"/>
-              </div>
-            </b-col>
-            <b-col cols="2">
-              <p class="font-weight-bold">{{generalChat}}</p>
-            </b-col>
-            <b-col cols="7">
-              <p class="font-weight-light text-left">{{message}}</p>
-            </b-col>
-            <b-col cols="2">
-              <p class="font-weight-light text-right">{{cuttedDate}} {{cuttedTime}}</p>
-            </b-col>
-          </b-row>
-        </b-card>
-      </router-link>
-    </div>
-    <div v-else>
-      <router-link :to="'/communication?partner='+provider+'&tag='+title">
-        <b-card class="textColor">
-          <b-row>
-            <b-col cols="1">
-              <div class="chatIcons textFox">
-                <font-awesome-icon icon="file" size="2x"/>
-              </div>
-            </b-col>
-            <b-col cols="2">
-              <p class="font-weight-bold">{{title}}</p>
-            </b-col>
-            <b-col cols="7">
-              <p class="font-weight-light text-left">{{message}}</p>
-            </b-col>
-            <b-col cols="2">
-              <p class="font-weight-light text-right">{{cuttedDate}} {{cuttedTime}}</p>
-            </b-col>
-          </b-row>
-        </b-card>
-      </router-link>
-    </div>
+    <router-link :to="'/communication?partner='+provider+'&tag='+title">
+      <b-card class="textColor">
+        <b-row>
+          <b-col cols="1">
+            <div class="chatIcons textFox" >
+              <font-awesome-icon icon="file" size="2x"/>
+            </div>
+          </b-col>
+          <b-col cols="2">
+            <p class="font-weight-bold">{{title}}</p>
+          </b-col>
+          <b-col cols="7">
+            <p class="font-weight-light text-left">{{message}}</p>
+          </b-col>
+          <b-col cols="2">
+            <p class="font-weight-light text-right">{{cuttedDate}} {{cuttedTime}}</p>
+          </b-col>
+        </b-row>
+      </b-card>
+    </router-link>
   </div>
 </template>
 
  <script>
 export default {
-  props: ["title", "provider", "message", "date"],
-  data() {
-    return {
-      generalChat : "Allgemeiner Chat"
-    };
-  },
+  props: ["title", "provider","message", "date"],
+  // ,data() {
+  //   return {
+  //     titel : "Hallo"
+  //   };
+  // }
   computed: {
     cuttedTime() {
       return this.date.slice(11, 16);
     },
-    cuttedDate() {
-      return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
+    cuttedDate(){
+      return (this.date.slice(8, 10)+"."+this.date.slice(5, 7)+".");
     }
   }
 };
