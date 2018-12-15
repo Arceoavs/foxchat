@@ -30,10 +30,10 @@
               <b-col cols="2">
                 <p class="font-weight-bold">{{generalChatTitel}}</p>
               </b-col>
-              <b-col cols="7">
+              <b-col v-if="generalChat" cols="7">
                 <p class="font-weight-light text-left">{{generalChat.message}}</p>
               </b-col>
-              <b-col cols="2">
+              <b-col v-if="generalChat" cols="2">
                 <p
                   class="font-weight-light text-right"
                 >{{cuttedDateForGeneralChat}} {{cuttedTimeForGeneralChat}}</p>
