@@ -18,26 +18,28 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
-        <b-card class="textColor">
-          <b-row>
-            <b-col cols="1">
-              <div class="chatIcons textFox">
-                <font-awesome-icon icon="comments" size="2x"/>
-              </div>
-            </b-col>
-            <b-col cols="3">
-              <p class="font-weight-bold">{{generalChat}}</p>
-            </b-col>
-            <b-col cols="7">
-              <p class="font-weight-light text-left"></p>
-            </b-col>
-            <b-col cols="1">
-              <p class="font-weight-light text-left"></p>
-            </b-col>
-          </b-row>
-        </b-card>
-      </router-link>
+      <div v-if="documentChats.length < 1">
+        <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
+          <b-card class="textColor">
+            <b-row>
+              <b-col cols="1">
+                <div class="chatIcons textFox">
+                  <font-awesome-icon icon="comments" size="2x"/>
+                </div>
+              </b-col>
+              <b-col cols="3">
+                <p class="font-weight-bold">{{generalChat}}</p>
+              </b-col>
+              <b-col cols="7">
+                <p class="font-weight-light text-left"></p>
+              </b-col>
+              <b-col cols="1">
+                <p class="font-weight-light text-left"></p>
+              </b-col>
+            </b-row>
+          </b-card>
+        </router-link>
+      </div>
 
       <!-- Document chats -->
       <div>
@@ -96,7 +98,7 @@ export default {
 </script>
 
 <style>
-.chatIcons{
+.chatIcons {
   float: left;
 }
 .chatGroup {
