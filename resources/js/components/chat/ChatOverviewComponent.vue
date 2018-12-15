@@ -18,26 +18,30 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
-        <b-card class="textColor">
-          <b-row>
-            <b-col cols="1">
-              <div class="chatIcons textFox">
-                <font-awesome-icon icon="comments" size="2x"/>
-              </div>
-            </b-col>
-            <b-col cols="3">
-              <p class="font-weight-bold">{{generalChat}}</p>
-            </b-col>
-            <b-col cols="7">
-              <p class="font-weight-light text-left"></p>
-            </b-col>
-            <b-col cols="1">
-              <p class="font-weight-light text-left"></p>
-            </b-col>
-          </b-row>
-        </b-card>
-      </router-link>
+      <div>
+        <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
+          <b-card class="textColor">
+            <b-row>
+              <b-col cols="1">
+                <div class="chatIcons textFox">
+                  <font-awesome-icon icon="comments" size="2x"/>
+                </div>
+              </b-col>
+              <b-col cols="2">
+                <p class="font-weight-bold">{{generalChatTitel}}</p>
+              </b-col>
+              <b-col v-if="generalChat" cols="7">
+                <p class="font-weight-light text-left">{{generalChat.message}}</p>
+              </b-col>
+              <b-col v-if="generalChat" cols="2">
+                <p
+                  class="font-weight-light text-right"
+                >{{cuttedDateForGeneralChat}} {{cuttedTimeForGeneralChat}}</p>
+              </b-col>
+            </b-row>
+          </b-card>
+        </router-link>
+      </div>
 
       <!-- Document chats -->
       <div>
@@ -72,10 +76,10 @@
 import ChatListComponent from "./ChatListComponent.vue";
 
 export default {
-  props: ["provider", "documentChats"],
+  props: ["provider", "documentChats", "generalChat"],
   data() {
     return {
-      generalChat: "Allgemeiner Chat",
+      generalChatTitel: "Allgemeiner Chat",
       addChat: "Chat hinzufügen",
       showCollapse: false
     };
@@ -90,6 +94,12 @@ export default {
         return arrow;
       }
       return true;
+    },
+    cuttedTimeForGeneralChat() {
+      return this.generalChat.updated_at.slice(11, 16);
+    },
+    cuttedDateForGeneralChat() {
+      return this.generalChat.updated_at.slice(8, 10) + "." + this.generalChat.updated_at.slice(5, 7) + ".";
     }
   }
 };
