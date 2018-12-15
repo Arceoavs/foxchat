@@ -18,6 +18,7 @@
             v-bind:key="provideritem.ProviderShortName"
             v-bind:provider="provideritem.ProviderShortName"
             v-bind:documentChats="provideritem.documentChats"
+            v-bind:generalChat="provideritem.generalChat"
           ></chat-overview-component>
         </div>
       </b-col>

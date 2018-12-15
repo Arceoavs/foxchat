@@ -65,10 +65,15 @@ export default class ChatService  {
                 if(responseListElem.ProviderShortName == documentChatsElem['withUser']['name']){
                   var newDocumentChatElem = new Object();
                   newDocumentChatElem = documentChatsElem['thread'];
-                  responseChatList.push(newDocumentChatElem);
+                  if(newDocumentChatElem.conversation_tag != 'allgemein'){
+                    responseChatList.push(newDocumentChatElem);
+                  }else{
+                      var generalChatElem = newDocumentChatElem;
+                  }
                 }
               }
               responseListElem.documentChats=responseChatList;
+              responseListElem.generalChat=generalChatElem;
               responseList.push(responseListElem);
             }
             store.commit('setUserInbox', responseList);
