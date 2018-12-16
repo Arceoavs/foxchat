@@ -33,6 +33,7 @@ class BroadcastingService {
 
   unsubscribeFromChannel() {
     window.Echo.leave("chat." + store.state.user.name);
+    delete window.Echo;
   }
 }
 
