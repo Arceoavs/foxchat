@@ -1,11 +1,12 @@
 import EventBus from './event-bus.js';
 import FoxdoxGeneralService from './FoxdoxGeneralService';
-import {store} from '../store.js';
+import BroadcastingService from "../services/BroadcastingService.js";
+import { store } from '../store.js';
 
 const config = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
+  headers: {
+    'Content-Type': 'application/json'
+  }
 }
 
 var path = '/api/auth/user';
@@ -54,6 +55,7 @@ class AuthService {
         this.logout(self);
       })
       .finally(param => {
+        BroadcastingService.initialize();
         EventBus.$emit('loaded');
         FoxdoxGeneralService.getProviderList();
       });
@@ -86,7 +88,7 @@ class AuthService {
         self.$router.push('/login');
         EventBus.$emit('loaded');
       });
-
+    BroadcastingService.unsubscribeFromChannel();
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
     store.dispatch('resetUserInbox');
@@ -129,6 +131,7 @@ class AuthService {
         self.noError = !self.showAlert;
       })
       .finally(param => {
+        BroadcastingService.subscribeToChannel();
         EventBus.$emit('loaded');
         EventBus.$emit('UserData loaded');
       });

@@ -2,7 +2,10 @@
   <b-container>
     <b-row class="mt-3">
       <b-col>
-        <div v-if="providers.length==0"  class="text-center">Sie haben keine Provider, die sich für den foxChat registriert haben.</div>
+        <div
+          v-if="providers.length==0"
+          class="text-center"
+        >Sie haben keine Provider, die sich für den foxChat registriert haben.</div>
         <chat-overview-component
           v-for="provideritem in providers"
           v-bind:key="provideritem.ProviderShortName"
@@ -17,12 +20,19 @@
 
 <script>
 import ChatOverviewComponent from "./ChatOverviewComponent.vue";
-import { store } from "../../store.js";
 import ChatService from "../../services/ChatService";
+import EventBus from "../../services/event-bus.js";
+import { store } from "../../store.js";
 
 export default {
   data() {
     return {};
+  },
+  created() {
+    //Load Broadcast after side refresh
+    EventBus.$on("messageWasReceived", payload => {
+      ChatService.getInbox();
+    });
   },
   components: {
     ChatOverviewComponent

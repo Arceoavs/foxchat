@@ -74,6 +74,7 @@
 
 <script>
 import ChatListComponent from "./ChatListComponent.vue";
+import BroadcastingService from "../../services/BroadcastingService.js";
 
 export default {
   props: ["provider", "documentChats", "generalChat"],
@@ -83,6 +84,11 @@ export default {
       addChat: "Chat hinzufügen",
       showCollapse: false
     };
+  },
+  created() {
+    //Load Broadcast after side refresh
+    BroadcastingService.initialize();
+    BroadcastingService.subscribeToChannel();
   },
   components: {
     ChatListComponent
@@ -99,14 +105,19 @@ export default {
       return this.generalChat.updated_at.slice(11, 16);
     },
     cuttedDateForGeneralChat() {
-      return this.generalChat.updated_at.slice(8, 10) + "." + this.generalChat.updated_at.slice(5, 7) + ".";
+      return (
+        this.generalChat.updated_at.slice(8, 10) +
+        "." +
+        this.generalChat.updated_at.slice(5, 7) +
+        "."
+      );
     }
   }
 };
 </script>
 
 <style>
-.chatIcons{
+.chatIcons {
   float: left;
 }
 .chatGroup {

@@ -15,17 +15,14 @@
 </template>
 
 <script>
-import chatService from "../../services/ChatService";
-
+import ChatService from "../../services/ChatService";
 import EventBus from "../../services/event-bus.js";
 
 export default {
   name: "app",
   data() {
     return {
-      participants: [
-        
-      ],
+      participants: [],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
       messageList: [],
@@ -36,22 +33,9 @@ export default {
     };
   },
   created() {
-    chatService.init();
-  },
-  mounted() {
-    console.log("Chat Component mounted");
-    this.initChat();
-
-    chatService.getConversationByName(
-      this.$route.query.partner,
-      this.$route.query.tag,
-      0,
-      100,
-      this
-    );
-    EventBus.$on("chatPartnerChanged", payload => {
-      this.initChat();
-      chatService.getConversationByName(
+    ChatService.init();
+    EventBus.$on("messageWasReceived", payload => {
+      ChatService.getConversationByName(
         this.$route.query.partner,
         this.$route.query.tag,
         0,
@@ -59,20 +43,41 @@ export default {
         this
       );
     });
-    
+  },
+  mounted() {
+    console.log("Chat Component mounted");
+    this.initChat();
+
+    ChatService.getConversationByName(
+      this.$route.query.partner,
+      this.$route.query.tag,
+      0,
+      100,
+      this
+    );
+    EventBus.$on("chatPartnerChanged", payload => {
+      // this.initChat();
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        this
+      );
+    });
   },
   methods: {
-    initChat(){
+    initChat() {
       this.participants = [
         {
-          id: '0',
+          id: "0",
           name: this.$route.query.partner,
-          imageUrl: ''
-        }, 
+          imageUrl: ""
+        },
         {
-          id: '0',
-          name: JSON.parse(localStorage.getItem('user')),
-          imageUrl: ''
+          id: "0",
+          name: JSON.parse(localStorage.getItem("user")),
+          imageUrl: ""
         }
       ];
     },
@@ -95,7 +100,7 @@ export default {
           : "";
     },
     onMessageWasSent(message) {
-      chatService.sendMessage(
+      ChatService.sendMessage(
         this.$route.query.partner,
         message.data.text,
         this.$route.query.tag,

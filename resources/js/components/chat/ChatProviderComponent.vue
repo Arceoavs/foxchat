@@ -19,11 +19,17 @@
 
 <script>
 import ChatListComponent from "./ChatListComponent.vue";
+import BroadcastingService from "../../services/BroadcastingService.js";
 
 export default {
   props: ["documentName", "date", "userName"],
   components: {
     ChatListComponent
+  },
+  created() {
+    //Load Broadcast after side refresh
+    BroadcastingService.initialize();
+    BroadcastingService.subscribeToChannel();
   },
   computed: {
     cuttedTime() {

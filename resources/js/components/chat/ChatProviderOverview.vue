@@ -11,12 +11,12 @@
           v-bind:userName="chatItem.withUser.name"
         ></chat-provider-component>
         <!-- Add chat -->
-          <b-card>
-            <h4 class="left textColor">{{addChat}}</h4>
-            <div class="cardIcon textFox">
-              <font-awesome-icon icon="plus-circle" size="2x"/>
-            </div>
-          </b-card>
+        <b-card>
+          <h4 class="left textColor">{{addChat}}</h4>
+          <div class="cardIcon textFox">
+            <font-awesome-icon icon="plus-circle" size="2x"/>
+          </div>
+        </b-card>
       </b-col>
     </b-row>
   </b-container>
@@ -24,8 +24,9 @@
 
 <script>
 import ChatProviderComponent from "./ChatProviderComponent.vue";
-import { store } from "../../store.js";
 import ChatService from "../../services/ChatService";
+import EventBus from "../../services/event-bus.js";
+import { store } from "../../store.js";
 
 export default {
   data() {
@@ -33,11 +34,16 @@ export default {
       addChat: "Neuen Chat starten"
     };
   },
-    mounted() {
-    ChatService.getInboxProvider();
-    console.log(store.state.inboxForProvider);
+  created() {
+    //Load Broadcast after side refresh
+    EventBus.$on("messageWasReceived", payload => {
+      ChatService.getInboxProvider();
+    });
   },
-    computed: {
+  mounted() {
+    ChatService.getInboxProvider();
+  },
+  computed: {
     chats: function() {
       return store.state.inboxForProvider;
     }

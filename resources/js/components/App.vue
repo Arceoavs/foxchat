@@ -51,15 +51,6 @@ export default {
     EventBus.$on("loaded", payload => {
       this.loggedIn = localStorage.getItem("bearer");
     });
-    EventBus.$on("UserData loaded", payload => {
-      console.log("chat." + store.state.user.name);
-      Echo.channel("chat." + store.state.user.name).listen(
-        ".MessageWasSent",
-        e => {
-          console.log(e);
-        }
-      );
-    });
   },
   components: {
     LogoutComponent,

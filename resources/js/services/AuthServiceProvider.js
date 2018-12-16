@@ -1,5 +1,6 @@
 import EventBus from './event-bus.js';
 import ChatService from './ChatService.js';
+import BroadcastingService from "../services/BroadcastingService.js";
 import { store } from '../store.js';
 
 
@@ -21,7 +22,7 @@ class AuthServiceProvider {
     formData.append('name', pUsername);
     formData.append('password', pPassword);
     formData.append('x-provider', pXProvider);
-    
+
 
     self.errorMsg = 'Login Fehler: ';
     self.showAlert = false;
@@ -55,6 +56,7 @@ class AuthServiceProvider {
       })
       .finally(param => {
         EventBus.$emit('loaded');
+        BroadcastingService.initialize();
       });
   }
 
@@ -86,7 +88,7 @@ class AuthServiceProvider {
         self.$router.push('/login/provider');
         EventBus.$emit('loaded');
       });
-
+    BroadcastingService.unsubscribeFromChannel();
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
     store.dispatch('resetProviderInbox');
@@ -130,6 +132,7 @@ class AuthServiceProvider {
         self.noError = !self.showAlert;
       })
       .finally(param => {
+        BroadcastingService.subscribeToChannel();
         EventBus.$emit('loaded');
         EventBus.$emit('UserData loaded');
       });
