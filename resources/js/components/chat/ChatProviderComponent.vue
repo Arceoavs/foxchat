@@ -2,7 +2,7 @@
   <div>
     <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
       <!-- Document Name -->
-      <b-card>
+      <b-card @click="informChatComponent()">
         <div slot="header" style="text-align:left;">
           {{userName}}
           <span style="float:right;">{{cuttedTime}} {{cuttedDate}}</span>
@@ -20,6 +20,8 @@
 <script>
 import ChatListComponent from "./ChatListComponent.vue";
 import BroadcastingService from "../../services/BroadcastingService.js";
+import EventBus from '../../services/event-bus';
+
 
 export default {
   props: ["documentName", "date", "userName"],
@@ -37,6 +39,11 @@ export default {
     },
     cuttedDate() {
       return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
+    }
+  },
+  methods: {
+    informChatComponent: function() {
+      EventBus.$emit("chatPartnerChanged");
     }
   }
 };

@@ -42,7 +42,11 @@ import { store } from "../../store.js";
 
 export default {
   mounted() {
-    ChatService.getInbox();
+    if (store.state.user.isProvider) {
+      ChatService.getInboxProvider();
+    } else {
+      ChatService.getInbox();
+    }
     console.log(this.$route.query.partner);
     console.log(this.$route.query.tag);
     console.log("in chatview");
@@ -69,7 +73,11 @@ export default {
   methods: {
     refreshInbox() {
       console.log("refresh wurde aufgerufen");
-      ChatService.getInbox();
+      if (store.state.user.isProvider) {
+        ChatService.getInboxProvider();
+      } else {
+        ChatService.getInbox();
+      }
     }
   },
   components: {
