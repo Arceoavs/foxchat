@@ -1,4 +1,5 @@
 import Echo from 'laravel-echo';
+import EventBus from './event-bus';
 import { store } from "../store.js";
 
 class BroadcastingService {
