@@ -19,13 +19,15 @@ class BroadcastingService {
   }
 
   subscribeToChannel() {
-    window.Echo.private("chat." + store.state.user.name).listen(
-      ".MessageWasSent",
-      e => {
-        console.log(e);
-        EventBus.$emit("messageWasReceived");
-      }
-    );
+    if(store.state.user.name != undefined){
+      window.Echo.private("chat." + store.state.user.name).listen(
+        ".MessageWasSent",
+        e => {
+          console.log(e);
+          EventBus.$emit("messageWasReceived");
+        }
+      );
+    }
   }
 
   unsubscribeFromChannel() {
