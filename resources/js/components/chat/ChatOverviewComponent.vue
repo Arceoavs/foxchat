@@ -20,7 +20,7 @@
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
       <div>
         <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
-          <b-card class="textColor">
+          <b-card class="textColor" @click="informChatComponent()">
             <b-row>
               <b-col cols="1">
                 <div class="chatIcons textFox">
@@ -75,6 +75,7 @@
 <script>
 import ChatListComponent from "./ChatListComponent.vue";
 import BroadcastingService from "../../services/BroadcastingService.js";
+import EventBus from "../../services/event-bus";
 
 export default {
   props: ["provider", "documentChats", "generalChat"],
@@ -111,6 +112,11 @@ export default {
         this.generalChat.updated_at.slice(5, 7) +
         "."
       );
+    }
+  },
+  methods: {
+    informChatComponent: function() {
+      EventBus.$emit("chatPartnerChanged");
     }
   }
 };

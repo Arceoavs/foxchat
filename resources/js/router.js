@@ -115,7 +115,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-  EventBus.$emit('chatPartnerChanged');
 
   if (to.matched.some(record => record.meta.requiresToBeProvider)) {
     if (JSON.parse(localStorage.getItem("user")).isProvider == 1) {

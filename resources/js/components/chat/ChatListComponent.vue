@@ -1,10 +1,10 @@
-<template>
+<template >
   <div class="mt-2">
     <router-link :to="'/communication?partner='+provider+'&tag='+title">
-      <b-card class="textColor">
+      <b-card class="textColor" @click="informChatComponent()">
         <b-row>
           <b-col cols="1">
-            <div class="chatIcons textFox" >
+            <div class="chatIcons textFox">
               <font-awesome-icon icon="file" size="2x"/>
             </div>
           </b-col>
@@ -24,8 +24,10 @@
 </template>
 
  <script>
+import EventBus from "../../services/event-bus";
+
 export default {
-  props: ["title", "provider","message", "date"],
+  props: ["title", "provider", "message", "date"],
   // ,data() {
   //   return {
   //     titel : "Hallo"
@@ -35,8 +37,13 @@ export default {
     cuttedTime() {
       return this.date.slice(11, 16);
     },
-    cuttedDate(){
-      return (this.date.slice(8, 10)+"."+this.date.slice(5, 7)+".");
+    cuttedDate() {
+      return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
+    }
+  },
+  methods: {
+    informChatComponent: function() {
+      EventBus.$emit("chatPartnerChanged");
     }
   }
 };

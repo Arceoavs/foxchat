@@ -43,18 +43,6 @@ export default {
         this
       );
     });
-  },
-  mounted() {
-    console.log("Chat Component mounted");
-    this.initChat();
-
-    ChatService.getConversationByName(
-      this.$route.query.partner,
-      this.$route.query.tag,
-      0,
-      100,
-      this
-    );
     EventBus.$on("chatPartnerChanged", payload => {
       // this.initChat();
       ChatService.getConversationByName(
@@ -65,6 +53,19 @@ export default {
         this
       );
     });
+  },
+  mounted() {
+    console.log("Chat Component mounted");
+    this.initChat();
+    if (this.$route.query.partner && this.$route.query.tag) {
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        this
+      );
+    }
   },
   methods: {
     initChat() {
