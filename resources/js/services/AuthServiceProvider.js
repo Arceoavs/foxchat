@@ -1,5 +1,6 @@
 import EventBus from './event-bus.js';
 import ChatService from './ChatService.js';
+import { store } from '../store.js';
 
 
 const config = {
@@ -88,7 +89,8 @@ class AuthServiceProvider {
 
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
-    store.dispatch('resetUserInbox');
+    store.dispatch('resetProviderInbox');
+    store.dispatch('resetUser');
   }
 
   retrieveUser(self) {
@@ -106,6 +108,7 @@ class AuthServiceProvider {
       .get(path + '/me', configExt)
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
+        store.commit('setUser', response.data);
 
         console.log('Got Providerdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
@@ -128,6 +131,7 @@ class AuthServiceProvider {
       })
       .finally(param => {
         EventBus.$emit('loaded');
+        EventBus.$emit('UserData loaded');
       });
   }
 }

@@ -12,6 +12,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "nahid/talk": "^2.2",
+        "pusher/pusher-php-server": "^3.2",
         "symfony/psr-http-message-bridge": "^1.1",
         "tymon/jwt-auth": "1.0.0-RC3"
     },

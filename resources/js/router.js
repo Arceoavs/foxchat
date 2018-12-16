@@ -102,7 +102,7 @@ router.beforeEach((to, from, next) => {
       next('/login');
     } else {
       if (localStorage.getItem('user') == null) {
-        auth.retrieveUser(self);
+        // auth.retrieveUser(self);
         if (self.noError) {
           next();
         } else {

@@ -35,7 +35,7 @@ import LoadingComponent from "./LoadingComponent.vue";
 import FooterComponent from "./Footer.vue";
 import BreadcrumbComponent from "./BreadcrumbComponent.vue";
 import EventBus from "../services/event-bus.js";
-
+import { store } from "../store.js";
 
 export default {
   data: function() {
@@ -50,6 +50,15 @@ export default {
     });
     EventBus.$on("loaded", payload => {
       this.loggedIn = localStorage.getItem("bearer");
+    });
+    EventBus.$on("UserData loaded", payload => {
+      console.log("chat." + store.state.user.name);
+      Echo.channel("chat." + store.state.user.name).listen(
+        ".MessageWasSent",
+        e => {
+          console.log(e);
+        }
+      );
     });
   },
   components: {

@@ -11,11 +11,11 @@ export const store = new Vuex.Store({
         ProviderShortName: 'Loading...'
       }
     ],
-    inboxForProvider:[
+    inboxForProvider: [
       {
         document: 'Loading...'
       }
-    ]
+    ], user: {}
   },
   plugins: [createPersistedState()],
   getters: {
@@ -24,6 +24,9 @@ export const store = new Vuex.Store({
     },
     getProviderInbox(state) {
       return state.inboxForProvider;
+    },
+    getUser(state) {
+      return state.user;
     }
   },
   mutations: {
@@ -32,6 +35,9 @@ export const store = new Vuex.Store({
     },
     setProviderInbox(state, newProviderInbox) {
       state.inboxForProvider = newProviderInbox;
+    },
+    setUser(state, newUser) {
+      state.user = newUser;
     }
   },
   actions: {
@@ -48,7 +54,12 @@ export const store = new Vuex.Store({
           document: 'Loading...'
         }
       ])
-    }
+    },
+    resetUser({ commit }) {
+      commit('setUser', [
+        {}
+      ])
+    },
   }
 });
 

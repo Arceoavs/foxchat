@@ -90,6 +90,7 @@ class AuthService {
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
     store.dispatch('resetUserInbox');
+    store.dispatch('resetUser');
   }
 
   retrieveUser(self) {
@@ -107,7 +108,7 @@ class AuthService {
       .get(path + '/me', configExt)
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
-
+        store.commit('setUser', response.data);
         console.log('Got Userdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
 
@@ -129,6 +130,7 @@ class AuthService {
       })
       .finally(param => {
         EventBus.$emit('loaded');
+        EventBus.$emit('UserData loaded');
       });
   }
 }

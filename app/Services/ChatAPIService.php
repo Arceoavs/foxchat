@@ -7,15 +7,18 @@ use App\CustomLaravelTalk\Messages\CustomMessage;
 use App\Http\Controllers\Controller;
 use App\CustomLaravelTalk\Facade\CustomTalk;
 use App\Exceptions\ChatAPIServiceException;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Support\Facades\Log;
+use App\Events\MessageWasSent;
 
 class ChatAPIService extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:api');
-        if(auth()->user()){
+        if(Auth::check()){
             CustomTalk::setAuthUserId(auth()->user()->id);
         }  
     }
@@ -60,7 +63,9 @@ class ChatAPIService extends Controller
             throw new ChatAPIServiceException("Receiver");
         }
         $receiver = $this->getUserFromDatabase($receiver);
-        return CustomTalk::sendMessageByUserIdWithTag($receiver->id, $message, $conversationtag);
+        $sentMessage = CustomTalk::sendMessageByUserIdWithTag($receiver->id, $message, $conversationtag);
+        event(new MessageWasSent(Auth::user(), $receiver));
+        return $sentMessage;
     }
 
     public function getInbox($offset, $take)
