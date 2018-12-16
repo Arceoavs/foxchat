@@ -11,6 +11,7 @@
           <h4 class="left textColor">{{documentName}}</h4>
           <font-awesome-icon class="cardIcon textFox" icon="comments" size="2x"/>
         </router-link>
+        <p class="card-text" align="center" >{{message}}</p>
       </b-card>
     </b-jumbotron>
   </div>
@@ -24,7 +25,7 @@ import EventBus from '../../services/event-bus';
 
 
 export default {
-  props: ["documentName", "date", "userName"],
+  props: ["documentName", "date", "userName", "message"],
   components: {
     ChatListComponent
   },

@@ -9,6 +9,7 @@
             v-bind:documentName="chatItem.thread.conversation_tag"
             v-bind:date="chatItem.thread.updated_at"
             v-bind:userName="chatItem.withUser.name"
+            v-bind:message="chatItem.thread.message"
           ></chat-provider-component>
         </div>
         <div v-else>

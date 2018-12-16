@@ -7,6 +7,7 @@
           v-for="chatItem in chats"
           v-bind:key="chatItem.thread.conversation_id"
           v-bind:documentName="chatItem.thread.conversation_tag"
+          v-bind:message="chatItem.thread.message"
           v-bind:date="chatItem.thread.updated_at"
           v-bind:userName="chatItem.withUser.name"
         ></chat-provider-component>
