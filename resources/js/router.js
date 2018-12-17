@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //Components
-import ChatOverview from './components/chat/ChatOverview.vue';
+import ChatClientOverview from './components/chat/ChatClientOverview.vue';
 import ChatView from './components/chat/ChatView.vue';
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginAggr from './components/authentication/LoginAggr.vue';
@@ -58,7 +58,7 @@ const routes = [
   {
     path: '/chat',
     name: 'Chat Overview',
-    component: ChatOverview,
+    component: ChatClientOverview,
     meta: {
       requiresAuth: true,
       requiresToBeUser: true

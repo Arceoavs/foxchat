@@ -13,14 +13,14 @@
           ></chat-provider-component>
         </div>
         <div v-else>
-          <chat-overview-component
+          <chat-client-component
             class="smaller-heading"
             v-for="provideritem in providers"
             v-bind:key="provideritem.ProviderShortName"
             v-bind:provider="provideritem.ProviderShortName"
             v-bind:documentChats="provideritem.documentChats"
             v-bind:generalChat="provideritem.generalChat"
-          ></chat-overview-component>
+          ></chat-client-component>
         </div>
       </b-col>
       <b-col md="8" cols="12">
@@ -36,7 +36,7 @@
 
 <script>
 import ChatComponent from "./ChatComponent.vue";
-import ChatOverviewComponent from "./ChatOverviewComponent.vue";
+import ChatClientComponent from "./ChatClientComponent.vue";
 import ChatProviderComponent from "./ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import { store } from "../../store.js";
@@ -83,7 +83,7 @@ export default {
   },
   components: {
     ChatComponent,
-    ChatOverviewComponent,
+    ChatClientComponent,
     ChatProviderComponent
   }
 };

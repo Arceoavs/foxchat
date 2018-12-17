@@ -6,20 +6,20 @@
           v-if="providers.length==0"
           class="text-center"
         >Sie haben keine Provider, die sich für den foxChat registriert haben.</div>
-        <chat-overview-component
+        <chat-client-component
           v-for="provideritem in providers"
           v-bind:key="provideritem.ProviderShortName"
           v-bind:provider="provideritem.ProviderShortName"
           v-bind:documentChats="provideritem.documentChats"
           v-bind:generalChat="provideritem.generalChat"
-        ></chat-overview-component>
+        ></chat-client-component>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import ChatOverviewComponent from "./ChatOverviewComponent.vue";
+import ChatClientComponent from "./ChatClientComponent.vue";
 import ChatService from "../../services/ChatService";
 import EventBus from "../../services/event-bus.js";
 import { store } from "../../store.js";
@@ -35,7 +35,7 @@ export default {
     });
   },
   components: {
-    ChatOverviewComponent
+    ChatClientComponent
   },
   mounted() {
     ChatService.getInbox();
