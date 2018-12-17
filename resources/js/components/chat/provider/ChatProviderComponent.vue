@@ -9,15 +9,13 @@
         </div>
         <router-link :to="'/communication?partner='+userName+'&tag='+documentName">
           <b-row>
-            <b-col cols="1" class="text-center">
-              <div class="textFox">
-                <font-awesome-icon class="textFox" icon="comments" size="2x"/>
-              </div>
+            <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
+              <font-awesome-icon class="textFox" icon="comments" size="2x"/>
             </b-col>
             <b-col cols="5">
               <h4 class="textColor">{{documentName}}</h4>
             </b-col>
-            <b-col cols="6">
+            <b-col>
               <p class="card-text" align="center">{{message}}</p>
             </b-col>
           </b-row>
@@ -60,6 +58,9 @@ export default {
 </script>
 
 <style>
+.chatIcon{
+  min-width: 3em;
+}
 .chatGroup {
   padding: 0.3em;
   margin: 0.3em;

@@ -18,30 +18,26 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <div>
-        <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
-          <b-card class="textColor" @click="informChatComponent()">
-            <b-row>
-              <b-col cols="1">
-                <div class="chatIcons textFox">
-                  <font-awesome-icon icon="comments" size="2x"/>
-                </div>
-              </b-col>
-              <b-col cols="2">
-                <p class="font-weight-bold">{{generalChatTitel}}</p>
-              </b-col>
-              <b-col v-if="generalChat" cols="7">
-                <p class="font-weight-light text-left">{{generalChat.message}}</p>
-              </b-col>
-              <b-col v-if="generalChat" cols="2">
-                <p
-                  class="font-weight-light text-right"
-                >{{cuttedDateForGeneralChat}} {{cuttedTimeForGeneralChat}}</p>
-              </b-col>
-            </b-row>
-          </b-card>
-        </router-link>
-      </div>
+      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
+        <b-card class="textColor" @click="informChatComponent()">
+          <b-row>
+            <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
+              <font-awesome-icon icon="comments" size="2x"/>
+            </b-col>
+            <b-col>
+              <p class="font-weight-bold">{{generalChatTitel}}</p>
+            </b-col>
+            <b-col v-if="generalChat">
+              <p class="font-weight-light text-left">{{generalChat.message}}</p>
+            </b-col>
+            <b-col v-if="generalChat">
+              <p
+                class="font-weight-light text-right d-none d-md-block d-lg-block d-xl-block"
+              >{{cuttedDateForGeneralChat}} {{cuttedTimeForGeneralChat}}</p>
+            </b-col>
+          </b-row>
+        </b-card>
+      </router-link>
 
       <!-- Document chats -->
       <div>
@@ -58,12 +54,12 @@
       <!-- Add chat -->
       <b-card class="mt-2 textColor">
         <b-row>
-          <b-col cols="1">
+          <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
             <div class="chatIcons textFox">
               <font-awesome-icon icon="plus-circle" size="2x"/>
             </div>
           </b-col>
-          <b-col cols="11">
+          <b-col>
             <p class="font-weight-bold">{{addChat}}</p>
           </b-col>
         </b-row>
@@ -123,8 +119,8 @@ export default {
 </script>
 
 <style>
-.chatIcons {
-  float: left;
+.chatIcon {
+  min-width: 3em;
 }
 .chatGroup {
   padding: 0.3em;

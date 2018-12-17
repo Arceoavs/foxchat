@@ -15,10 +15,8 @@
         <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
           <b-card>
             <b-row>
-              <b-col cols="1" class="text-center">
-                <div class="textFox">
-                  <font-awesome-icon icon="plus-circle" size="2x"/>
-                </div>
+              <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
+                <font-awesome-icon icon="plus-circle" size="2x"/>
               </b-col>
               <b-col>
                 <h4 class="textColor">{{addChat}}</h4>
@@ -64,6 +62,9 @@ export default {
 </script>
 
 <style>
+.chatIcon{
+  min-width: 3em;
+}
 .right {
   float: right;
 }
