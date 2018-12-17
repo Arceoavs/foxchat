@@ -36,8 +36,8 @@
 
 <script>
 import ChatComponent from "./ChatComponent.vue";
-import ChatClientComponent from "./ChatClientComponent.vue";
-import ChatProviderComponent from "./ChatProviderComponent.vue";
+import ChatClientComponent from "./client/ChatClientComponent.vue";
+import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import { store } from "../../store.js";
 

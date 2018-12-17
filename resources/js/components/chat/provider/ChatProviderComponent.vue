@@ -19,9 +19,9 @@
 
 
 <script>
-import ChatListComponent from "./ChatListComponent.vue";
-import BroadcastingService from "../../services/BroadcastingService.js";
-import EventBus from '../../services/event-bus';
+import ChatListComponent from "../client/ChatListComponent.vue";
+import BroadcastingService from "../../../services/BroadcastingService.js";
+import EventBus from '../../../services/event-bus';
 
 
 export default {

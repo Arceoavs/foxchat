@@ -25,9 +25,9 @@
 
 <script>
 import ChatProviderComponent from "./ChatProviderComponent.vue";
-import ChatService from "../../services/ChatService";
-import EventBus from "../../services/event-bus.js";
-import { store } from "../../store.js";
+import ChatService from "../../../services/ChatService";
+import EventBus from "../../../services/event-bus.js";
+import { store } from "../../../store.js";
 
 export default {
   data() {

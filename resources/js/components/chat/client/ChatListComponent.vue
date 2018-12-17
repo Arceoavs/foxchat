@@ -24,7 +24,7 @@
 </template>
 
  <script>
-import EventBus from "../../services/event-bus";
+import EventBus from "../../../services/event-bus";
 
 export default {
   props: ["title", "provider", "message", "date"],

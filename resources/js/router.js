@@ -1,21 +1,21 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-//Components
-import ChatClientOverview from './components/chat/ChatClientOverview.vue';
-import ChatView from './components/chat/ChatView.vue';
+//COMPONENTS
+//Login
 import LoginComponent from './components/authentication/LoginComponent.vue';
-import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
-import ChatProviderOverview from './components/chat/ChatProviderOverview.vue';
+import LoginAggr from './components/authentication/LoginAggr.vue';
+//Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
-
-
-import EventBus from "./services/event-bus.js";
-
+//Chat
+import ChatView from './components/chat/ChatView.vue';
+import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
+import ChatProviderOverview from './components/chat/provider/ChatProviderOverview.vue';
 //Services
 import auth from './services/AuthService.js';
+import EventBus from './services/event-bus.js';
 
 Vue.use(VueRouter);
 
@@ -30,9 +30,9 @@ const routes = [
     component: DocumentOverviewComponent,
     meta: {
       requiresAuth: true
-    },
+    }
   },
-  
+
   {
     path: '/myproviders',
     name: 'Meine Provider',
@@ -62,7 +62,6 @@ const routes = [
     meta: {
       requiresAuth: true,
       requiresToBeUser: true
-      
     }
   },
   {
@@ -117,7 +116,7 @@ router.beforeEach((to, from, next) => {
   }
 
   if (to.matched.some(record => record.meta.requiresToBeProvider)) {
-    if (JSON.parse(localStorage.getItem("user")).isProvider == 1) {
+    if (JSON.parse(localStorage.getItem('user')).isProvider == 1) {
       next();
     } else {
       next('/chat');
@@ -126,7 +125,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (to.matched.some(record => record.meta.requiresToBeUser)) {
-    if (JSON.parse(localStorage.getItem("user")).isProvider == 0) {
+    if (JSON.parse(localStorage.getItem('user')).isProvider == 0) {
       next();
     } else {
       next('/provider-chat');
