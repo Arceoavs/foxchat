@@ -8,10 +8,20 @@
           <span style="float:right;">{{cuttedTime}} {{cuttedDate}}</span>
         </div>
         <router-link :to="'/communication?partner='+userName+'&tag='+documentName">
-          <h4 class="left textColor">{{documentName}}</h4>
-          <font-awesome-icon class="cardIcon textFox" icon="comments" size="2x"/>
+          <b-row>
+            <b-col cols="1" class="text-center">
+              <div class="textFox">
+                <font-awesome-icon class="textFox" icon="comments" size="2x"/>
+              </div>
+            </b-col>
+            <b-col cols="5">
+              <h4 class="textColor">{{documentName}}</h4>
+            </b-col>
+            <b-col cols="6">
+              <p class="card-text" align="center">{{message}}</p>
+            </b-col>
+          </b-row>
         </router-link>
-        <p class="card-text" align="center" >{{message}}</p>
       </b-card>
     </b-jumbotron>
   </div>
@@ -21,8 +31,7 @@
 <script>
 import ChatListComponent from "../client/ChatListComponent.vue";
 import BroadcastingService from "../../../services/BroadcastingService.js";
-import EventBus from '../../../services/event-bus';
-
+import EventBus from "../../../services/event-bus";
 
 export default {
   props: ["documentName", "date", "userName", "message"],
@@ -55,11 +64,5 @@ export default {
   padding: 0.3em;
   margin: 0.3em;
   background-color: rgba(90, 83, 83, 0.1) !important;
-}
-.rotate-down {
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
 }
 </style>

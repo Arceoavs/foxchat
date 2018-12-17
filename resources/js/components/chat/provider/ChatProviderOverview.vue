@@ -12,12 +12,20 @@
           v-bind:userName="chatItem.withUser.name"
         ></chat-provider-component>
         <!-- Add chat -->
-        <b-card>
-          <h4 class="left textColor">{{addChat}}</h4>
-          <div class="cardIcon textFox">
-            <font-awesome-icon icon="plus-circle" size="2x"/>
-          </div>
-        </b-card>
+        <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
+          <b-card>
+            <b-row>
+              <b-col cols="1" class="text-center">
+                <div class="textFox">
+                  <font-awesome-icon icon="plus-circle" size="2x"/>
+                </div>
+              </b-col>
+              <b-col>
+                <h4 class="textColor">{{addChat}}</h4>
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-jumbotron>
       </b-col>
     </b-row>
   </b-container>
@@ -56,7 +64,7 @@ export default {
 </script>
 
 <style>
-.cardIcon {
+.right {
   float: right;
 }
 .left {
