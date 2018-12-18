@@ -5,20 +5,17 @@ use App\User;
 use App\CustomLaravelTalk\Conversations\CustomConversation;
 use App\CustomLaravelTalk\Messages\CustomMessage;
 use App\Http\Controllers\Controller;
-use App\CustomLaravelTalk\Facade\CustomTalk;
+use App\CustomTalk\Facades\CustomTalk;
 use App\Exceptions\ChatAPIServiceException;
-use Illuminate\Support\Facades\Auth;
-
 
 use Illuminate\Support\Facades\Log;
-use App\Events\MessageWasSent;
 
 class ChatAPIService extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:api');
-        if(Auth::check()){
+        if(auth()->user()){
             CustomTalk::setAuthUserId(auth()->user()->id);
         }  
     }
@@ -63,9 +60,7 @@ class ChatAPIService extends Controller
             throw new ChatAPIServiceException("Receiver");
         }
         $receiver = $this->getUserFromDatabase($receiver);
-        $sentMessage = CustomTalk::sendMessageByUserIdWithTag($receiver->id, $message, $conversationtag);
-        event(new MessageWasSent(Auth::user(), $receiver));
-        return $sentMessage;
+        return CustomTalk::sendMessageByUserIdWithTag($receiver->id, $message, $conversationtag);
     }
 
     public function getInbox($offset, $take)
@@ -81,12 +76,15 @@ class ChatAPIService extends Controller
     public function getConversationByName($username, $conversationtag, $offset, $take)
     {
         $chatpartner = $this->getUserFromDatabase($username);
-
-
         if(!$chatpartner){
-            throw new ChatAPIServiceException("Provided Name");
-        }
+            //throw new ChatAPIServiceException("Provided Name");
 
+            $chatpartner = User::updateOrCreate(
+                ['name' => $username],
+                ['foxdox-token' => 'notYetRetrieved',
+                 'isProvider' => !(auth()->user()->isProvider) ]
+            );
+        }
         $conversation = CustomConversation::where(["user_one"=> $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
         if(!$conversation){
             $conversation = CustomConversation::where(["user_one"=> auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();

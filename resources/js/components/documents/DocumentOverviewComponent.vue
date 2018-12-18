@@ -31,7 +31,7 @@
 
     </b-collapse>
 
-    <router-link to="/myproviders" class="box">
+    <router-link to="/Provider" class="box">
     <b-card
       class="box">
     <div class="box">Meine Provider</div>

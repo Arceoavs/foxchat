@@ -1,12 +1,17 @@
 <template>
+<b-col>
+<b-container>
   <b-jumbotron bg-variant="secondary" class="folderGroup">
     <!-- Folder name -->
-    <b-card
-      @click="openFolder()">
-    <div class="box">{{name}}
-    </div>
-    </b-card>
+    <router-link :to="{path: '/Provider/' + name}" class="box">
+      <b-card>
+        <div class="box">{{name}}
+        </div>
+      </b-card>
+    </router-link>
   </b-jumbotron>
+</b-container>
+</b-col>
 </template>
 
 <script>
@@ -14,9 +19,7 @@
 export default {
   props: ["name"],
   methods: {
-     openFolder() {
-       alert("Ordner " + this.name + " wird geöffnet");
-     }
+     
   },
 };
 </script>

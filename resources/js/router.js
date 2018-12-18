@@ -8,7 +8,10 @@ import LoginComponentProvider from './components/authentication/LoginComponentPr
 import LoginAggr from './components/authentication/LoginAggr.vue';
 //Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
+import DocumentListComponent from './components/documents/DocumentListComponent';
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
+import FolderComponent from './components/documents/FolderComponent.vue';
+import FolderComponentView from './components/documents/FolderComponentView.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
@@ -22,22 +25,33 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: { path: '/index' }
+    redirect: { path: '/Dokumente' }
   },
   {
-    path: '/index',
+    path: '/Dokumente',
     name: 'DocumentOverview',
     component: DocumentOverviewComponent,
+    meta: {
+      requiresAuth: true
+    },
+  },
+
+  {
+    path: '/Provider',
+    name: 'Meine Provider',
+    component: ProviderDocuments,
     meta: {
       requiresAuth: true
     }
   },
 
   {
-    path: '/myproviders',
-    name: 'Meine Provider',
-    component: ProviderDocuments
-  },
+    path: '/Provider/:provider',
+    props: true,
+    component: FolderComponentView,
+    meta: {
+      requiresAuth: true
+    }}, 
 
   {
     path: '/login',
