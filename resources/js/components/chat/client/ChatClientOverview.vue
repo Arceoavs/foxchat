@@ -1,5 +1,10 @@
 <template>
   <b-container>
+    <b-row class="mt-4 pl-2">
+      <b-col>
+        <h2 class="textColor">{{pageTitle}}</h2>
+      </b-col>
+    </b-row>
     <b-row class="mt-3">
       <b-col>
         <div
@@ -26,7 +31,9 @@ import { store } from "../../../store.js";
 
 export default {
   data() {
-    return {};
+    return {
+      pageTitle: "Ihre Chats mit Providern"
+    };
   },
   created() {
     //Load Broadcast after side refresh
