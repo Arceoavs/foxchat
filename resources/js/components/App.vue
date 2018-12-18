@@ -6,6 +6,7 @@
       <b-navbar-brand to="/">
         <img class="img-logo" src="/img/FoxdoxChat.png">
       </b-navbar-brand>
+
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav v-show="loggedIn">
           <b-nav-item to="/index">
@@ -15,16 +16,14 @@
             <div>Chat</div>
           </b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav class="ml-auto foxcolor max-height-nav" v-show="loggedIn">
-          <b-nav-item right class="logout-link">
-            <logout-component></logout-component>
-          </b-nav-item>
+        <b-navbar-nav class="ml-auto sm-1 foxcolor max-height-nav" v-show="loggedIn">
+          <logout-component></logout-component>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
     <!--<div class="clearfisx"></div>-->
     <router-view></router-view>
-      <footer-component></footer-component>
+    <footer-component></footer-component>
   </div>
 </template>
 
