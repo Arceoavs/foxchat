@@ -8,7 +8,6 @@
             v-for="provider in providers"
             v-bind:key="provider.id"
             v-bind:name="provider.name"
-            v-bind:href="'/myproviders/' + provider.name"
           ></folder-component>
         </b-col>
       </b-row>
@@ -28,10 +27,10 @@ export default {
       items: [
         {
           text: "Dokumente",
-          href: "/index"
+          href: "/Dokumente"
         },
         {
-          text: "Meine Provider",
+          text: "Provider",
           href: ""
         }
       ],
@@ -39,7 +38,7 @@ export default {
   },
   components: {
     FolderComponent,
-    DocumentBreadcrumb
+    DocumentBreadcrumb,
   },
   computed: {
     providers: function() {

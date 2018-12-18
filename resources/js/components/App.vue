@@ -9,7 +9,7 @@
 
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav v-show="loggedIn">
-          <b-nav-item to="/index">
+          <b-nav-item to="/Dokumente">
             <div>Dokumente</div>
           </b-nav-item>
           <b-nav-item to="/chat">
