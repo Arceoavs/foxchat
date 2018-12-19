@@ -1,43 +1,45 @@
 <template>
-  <div>
-    <b-container-fluid>
-      <b-row>
-        <b-col>
-          <b-breadcrumb :items="items"/>
-        </b-col>
-      </b-row>
-    </b-container-fluid>
-    <b-container>
-      <b-row>
-        <b-col>
-          <router-link to="/myproviders" class="box">
-            <b-jumbotron bg-variant="secondary" class="chatGroup">
-              <b-card class="box">
-                <h3 class="left textColor">{{myProvidersTitle}}</h3>
-                <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
-              </b-card>
-            </b-jumbotron>
-          </router-link>
-        </b-col>
-      </b-row>
-      <b-row class="mt-4 pl-3">
-        <b-col>
-          <h2 class="textColor">{{lastDocumentTitle}}</h2>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <b-jumbotron bg-variant="secondary" class="chatGroup">
-            <document-list-component
-              v-for="document in documents"
-              v-bind:key="document.id"
-              v-bind:name="document.name"
-            ></document-list-component>
-          </b-jumbotron>
-        </b-col>
-      </b-row>
-    </b-container>
-  </div>
+  <b-col>
+      <b-breadcrumb :items="items"/>
+    
+    <b-card
+      class="box"
+      @click="showCollapse = !showCollapse"
+      :class="showCollapse ? 'collapsed' : null"
+      aria-controls="collapse"
+      :aria-expanded="showCollapse ? 'true' : 'false'"
+    >
+      <div class="box">Letzte Dokumente</div>
+      <font-awesome-icon
+        class="cardIcon textFox"
+        icon="angle-right"
+        size="2x"
+        :class="dropdownArrow"
+      />
+
+    </b-card>
+
+      <b-collapse class="box" v-model="showCollapse" id="collapse">
+
+      <!-- Recent documents -->
+        <document-list-component
+          v-for="document in documents"
+          v-bind:key="document.id"
+          v-bind:name="document.name"
+        >
+        </document-list-component>
+
+    </b-collapse>
+    <div id="app">
+    <router-link :to="{name: 'Meine Provider'}" class="box">
+    <b-card
+      class="box">
+    <div class="box">Meine Provider</div>
+    </b-card>
+    </router-link>
+    </div>
+
+  </b-col>
 </template>
 
 

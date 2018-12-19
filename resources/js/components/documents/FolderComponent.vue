@@ -6,6 +6,12 @@
     <div class="box">{{name}}
     </div>
     </b-card>
+    <router-link :to="{path: '/dokumente/provider/' + name}" class="box">
+      <b-card>
+        <div class="box">{{name}}
+        </div>
+      </b-card>
+    </router-link>
   </b-jumbotron>
 </template>
 
