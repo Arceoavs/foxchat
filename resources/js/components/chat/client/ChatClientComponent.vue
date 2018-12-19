@@ -18,22 +18,28 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'">
+      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'" class="undecorated">
         <b-card class="textColor" @click="informChatComponent()">
           <b-row>
             <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
               <font-awesome-icon icon="comments" size="2x"/>
             </b-col>
             <b-col>
-              <p class="font-weight-bold">{{generalChatTitel}}</p>
-            </b-col>
-            <b-col v-if="generalChat">
-              <p class="font-weight-light text-left">{{generalChat.message}}</p>
-            </b-col>
-            <b-col v-if="generalChat">
-              <p
-                class="font-weight-light text-right d-none d-md-block d-lg-block d-xl-block"
-              >{{cuttedDateForGeneralChat}} {{cuttedTimeForGeneralChat}}</p>
+              <b-row>
+                <b-col>
+                  <p class="font-weight-bold">{{generalChatTitel}}</p>
+                </b-col>
+                <b-col v-if="generalChat">
+                  <p
+                    class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+                  >{{dateTimerForGeneralChat}}</p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col v-if="generalChat">
+                  <p class="font-weight-light text-left">{{generalChatMessagePreview}}</p>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
         </b-card>
@@ -98,6 +104,26 @@ export default {
       }
       return true;
     },
+    generalChatMessagePreview() {
+      var messagePreviewLength = 70;
+      if (this.generalChat.message.length > messagePreviewLength)
+        return (
+          this.generalChat.message.substring(0, messagePreviewLength) + "..."
+        );
+      else return this.generalChat.message;
+    },
+    dateTimerForGeneralChat() {
+      // Create date from input value
+      var inputDate = new Date(this.generalChat.updated_at);
+      // Get today's date
+      var todaysDate = new Date();
+
+      // call setHours to take the time out of the comparison
+      if (inputDate.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0))
+        // Date equals today's date
+        return this.cuttedTimeForGeneralChat;
+      else return this.cuttedDateForGeneralChat;
+    },
     cuttedTimeForGeneralChat() {
       return this.generalChat.updated_at.slice(11, 16);
     },
@@ -119,6 +145,9 @@ export default {
 </script>
 
 <style>
+.chatDateTime {
+  font-size: 0.8em;
+}
 .chatIcon {
   min-width: 3em;
 }

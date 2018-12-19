@@ -1,30 +1,35 @@
 <template>
-  <div>
-    <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
-      <!-- Document Name -->
-      <b-card @click="informChatComponent()">
-        <div slot="header" style="text-align:left;">
-          {{userName}}
-          <span style="float:right;">{{cuttedTime}} {{cuttedDate}}</span>
-        </div>
-        <router-link :to="'/communication?partner='+userName+'&tag='+documentName">
-          <b-row>
-            <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
-              <font-awesome-icon class="textFox" icon="comments" size="2x"/>
-            </b-col>
-            <b-col cols="5">
-              <h4 class="textColor">{{documentName}}</h4>
-            </b-col>
-            <b-col>
-              <p class="card-text" align="center">{{message}}</p>
-            </b-col>
-          </b-row>
-        </router-link>
-      </b-card>
-    </b-jumbotron>
-  </div>
-</template>
+  <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
+    <router-link :to="'/communication?partner='+userName+'&tag='+documentName" class="undecorated">
+      <b-card @click="informChatComponent()" class="textColor">
+        <div slot="header" style="text-align:left;">{{userName}}</div>
 
+        <b-row>
+          <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
+            <font-awesome-icon class="textFox" icon="comments" size="2x"/>
+          </b-col>
+          <b-col>
+            <b-row>
+              <b-col cols="5">
+                <h5>{{documentName}}</h5>
+              </b-col>
+              <b-col>
+                <p
+                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+                >{{dateTimeForProviders}}</p>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col>
+                <p class="font-weight-light text-left">{{message}}</p>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+      </b-card>
+    </router-link>
+  </b-jumbotron>
+</template>
 
 <script>
 import ChatListComponent from "../client/ChatListComponent.vue";
@@ -42,6 +47,18 @@ export default {
     BroadcastingService.subscribeToChannel();
   },
   computed: {
+    dateTimeForProviders() {
+      // Create date from input value
+      var inputDate = new Date(this.date);
+      // Get today's date
+      var todaysDate = new Date();
+
+      // call setHours to take the time out of the comparison
+      if (inputDate.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0))
+        // Date equals today's date
+        return this.cuttedTime;
+      else return this.cuttedDate;
+    },
     cuttedTime() {
       return this.date.slice(11, 16);
     },
@@ -58,7 +75,10 @@ export default {
 </script>
 
 <style>
-.chatIcon{
+.chatDateTime {
+  font-size: 0.8em;
+}
+.chatIcon {
   min-width: 3em;
 }
 .chatGroup {

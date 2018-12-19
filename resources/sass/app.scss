@@ -66,7 +66,9 @@ body {
 .bold {
   font-weight: bold;
 }
-
+.undecorated {
+  text-decoration: none !important;
+}
 .foxcolor-inverted {
   color: $foxi;
   background-color: rgb(255, 255, 255);

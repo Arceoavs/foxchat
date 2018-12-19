@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style>
-.chatIcon{
+.chatIcon {
   min-width: 3em;
 }
 .right {
