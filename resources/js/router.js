@@ -27,7 +27,6 @@ const routes = [
     path: '/',
     redirect: { path: '/dokumente' }
   },
-
   {
     path: '/dokumente',
     name: 'DocumentOverview',
