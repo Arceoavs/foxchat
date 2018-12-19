@@ -42,6 +42,7 @@ export default {
   },
   computed: {
     providers: function() {
+      console.log(store.state.inboxForUser)
       return store.state.providerList;
     }
   }

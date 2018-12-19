@@ -27,7 +27,7 @@ const routes = [
     path: '/',
     redirect: { path: '/dokumente' }
   },
-  
+
   {
     path: '/dokumente',
     name: 'DocumentOverview',
@@ -52,7 +52,8 @@ const routes = [
     component: FolderComponentView,
     meta: {
       requiresAuth: true
-    }},
+    }
+  },
 
   {
     path: '/login',
