@@ -3,7 +3,7 @@
 <b-container>
   <b-jumbotron bg-variant="secondary" class="folderGroup">
     <!-- Folder name -->
-    <router-link :to="{path: '/Provider/' + name}" class="box">
+    <router-link :to="{path: '/dokumente/provider/' + name}" class="box">
       <b-card>
         <div class="box">{{name}}
         </div>
