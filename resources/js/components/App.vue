@@ -8,7 +8,7 @@
       </b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav v-show="loggedIn">
-          <b-nav-item to="/Dokumente">
+          <b-nav-item to="/dokumente">
             <div>Dokumente</div>
           </b-nav-item>
           <b-nav-item to="/chat">

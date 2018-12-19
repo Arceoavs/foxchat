@@ -25,19 +25,20 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: { path: '/Dokumente' }
+    redirect: { path: '/dokumente' }
   },
+  
   {
-    path: '/Dokumente',
+    path: '/dokumente',
     name: 'DocumentOverview',
     component: DocumentOverviewComponent,
     meta: {
       requiresAuth: true
-    },
+    }
   },
 
   {
-    path: '/Provider',
+    path: '/dokumente/provider',
     name: 'Meine Provider',
     component: ProviderDocuments,
     meta: {
@@ -46,12 +47,12 @@ const routes = [
   },
 
   {
-    path: '/Provider/:provider',
+    path: '/dokumente/provider/:provider',
     props: true,
     component: FolderComponentView,
     meta: {
       requiresAuth: true
-    }}, 
+    }},
 
   {
     path: '/login',
