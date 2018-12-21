@@ -28,7 +28,7 @@ class ChatAPIFoxdoxProvider extends ChatAPI
         if(auth()->user()->isProvider==1){
             return true;
         }else{
-            throw new ChatAuthException("You are not a Foxdox User.");
+            throw new ChatAuthException("You are not a Foxdox Provider.");
         }
     }
 
