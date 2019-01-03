@@ -1,10 +1,8 @@
 <template>
-  <b-jumbotron bg-variant="secondary" class="folderGroup">
     <!-- Folder name -->
-    <b-card @click="openFolder()">
-      <div class="box">{{name}}</div>
+    <b-card class="box" @click="openFolder()">
+      <font-awesome-icon class="fox" icon="folder-open" size="2x"/>{{name}}
     </b-card>
-  </b-jumbotron>
 </template>
 
 <script>
@@ -14,9 +12,9 @@ export default {
   props: ["name", "id"],
   methods: {
     openFolder(){
-      //FolderService.getRootFolder();
-      var folderId = '4b6c05d5-02e4-407d-9928-b5a2183d2886';
-      FolderService.listSubFolders(folderId);
+      console.log('listing content of '+this.id);
+      // FolderService.getRootFolder();
+      FolderService.listSubFolders(this.id);
     }
   }
 };
@@ -36,5 +34,12 @@ export default {
 .box:hover {
   color: #f86a2d !important;
   cursor: pointer;
+}
+
+.fox {
+  color: #f86a2d !important;
+}
+.folder{
+  text-align: right !important;
 }
 </style>

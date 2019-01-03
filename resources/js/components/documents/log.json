@@ -7,23 +7,53 @@
         "xsrfHeaderName": "X-XSRF-TOKEN",
         "maxContentLength": -1,
         "headers": {
-            "Accept": "application/json",
+            "Accept": "application/json, text/plain, */*",
             "X-Requested-With": "XMLHttpRequest",
-            "X-CSRF-TOKEN": "JFcPlmEsfFGEc4ZZHaOnBL4qstbNQaxyG1cayoyu",
-            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDQ4MzgxODgsImV4cCI6MTU0NDkyNDU4OCwibmJmIjoxNTQ0ODM4MTg4LCJqdGkiOiJSWm81dUhLTXFmM2JjWDVFIiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.duKXp7bD5UB00_G4UEVK4XmGcu-o8cAlRs_XHQ773wo",
-            "X-XSRF-TOKEN": "eyJpdiI6IlpHNnRkWjhsVnNIck9WUWw1XC9JZFlRPT0iLCJ2YWx1ZSI6ImlrYmFBd3ZBTlZ5cFhVQUJBZno1WXU3MXlkSFRRMHZBNW1WNkVreFVtRmMxNkNQcTlMemx0QVYzU2pyeXRcL0tvIiwibWFjIjoiZWU0MjM2ZjEyNDZmM2ExMmYyMTYwZTAxMjE3NmYxZGE2YzNmMzdkNGNmY2E5MThjZDQ5M2YxYjc1YzNkNGRiMyJ9"
+            "X-CSRF-TOKEN": "57jd19Et95YhVVpNW2KgC7sDBpLCOQUWh1R8uEXT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-XSRF-TOKEN": "eyJpdiI6Indab21lbEYzZXBtUFwvR1lpeVpmbWFRPT0iLCJ2YWx1ZSI6Ikh0VVQxbmFGYWJ4bWR5ejFKeDFKYXlBZlhRTmZKb2d3a3J4ckJ6U0lzQlF3dm0zcXc5eTh4dGpmb2wyYVErOG0iLCJtYWMiOiJiMjRhMmY1ZDQ0ZDIxZjk5NjBiMTUwOTk1YjFkMDU4MWJmYTgxZjQzN2Y3ZmNlZGFlM2ZjY2Y3ZmNjZDFjNjJjIn0="
         },
         "method": "post",
         "url": "/api/foxdoxapi/user/listFolders",
-        "data": {}
+        "data": "{\"headers\":{\"Accept\":\"application/json\",\"Content-Type\":\"application/x-www-form-urlencoded\",\"Authorization\":\"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDY1MzUwNjksImV4cCI6MTU0NjYyMTQ2OSwibmJmIjoxNTQ2NTM1MDY5LCJqdGkiOiJWZGIxTmV0RzZVdnF6R0x3Iiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.OyO4HR6yRa2_lHOzvSx0_qbdELtY8BAZAh4hUGXHT7g\"},\"body\":{\"folderId\":\"e90741ae-8b8e-4f7e-90d3-1c57936c700c\"}}"
     },
     "request": {},
     "response": {
         "data": {
-            "message": "Too few arguments to function App\\Http\\Controllers\\Foxdox\\DocumentFoxdoxController::listFolders(), 0 passed and exactly 1 expected",
-            "exception": "Symfony\\Component\\Debug\\Exception\\FatalThrowableError",
-            "file": "/Users/eric_mdm/Projektseminar/digitaler-tresor/app/Http/Controllers/Foxdox/DocumentFoxdoxController.php",
-            "line": 39
-        }
+            "errors": {
+                "status": 401,
+                "message": "Unauthorized"
+            }
+        },
+        "status": 401,
+        "statusText": "Unauthorized",
+        "headers": {
+            "date": "Thu, 03 Jan 2019 18:50:24 GMT",
+            "cache-control": "no-cache, private",
+            "server": "nginx/1.15.6",
+            "connection": "keep-alive",
+            "x-powered-by": "PHP/7.2.11",
+            "transfer-encoding": "chunked",
+            "content-type": "application/json"
+        },
+        "config": {
+            "transformRequest": {},
+            "transformResponse": {},
+            "timeout": 0,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "headers": {
+                "Accept": "application/json, text/plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": "57jd19Et95YhVVpNW2KgC7sDBpLCOQUWh1R8uEXT",
+                "Content-Type": "application/json;charset=utf-8",
+                "X-XSRF-TOKEN": "eyJpdiI6Indab21lbEYzZXBtUFwvR1lpeVpmbWFRPT0iLCJ2YWx1ZSI6Ikh0VVQxbmFGYWJ4bWR5ejFKeDFKYXlBZlhRTmZKb2d3a3J4ckJ6U0lzQlF3dm0zcXc5eTh4dGpmb2wyYVErOG0iLCJtYWMiOiJiMjRhMmY1ZDQ0ZDIxZjk5NjBiMTUwOTk1YjFkMDU4MWJmYTgxZjQzN2Y3ZmNlZGFlM2ZjY2Y3ZmNjZDFjNjJjIn0="
+            },
+            "method": "post",
+            "url": "/api/foxdoxapi/user/listFolders",
+            "data": "{\"headers\":{\"Accept\":\"application/json\",\"Content-Type\":\"application/x-www-form-urlencoded\",\"Authorization\":\"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDY1MzUwNjksImV4cCI6MTU0NjYyMTQ2OSwibmJmIjoxNTQ2NTM1MDY5LCJqdGkiOiJWZGIxTmV0RzZVdnF6R0x3Iiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.OyO4HR6yRa2_lHOzvSx0_qbdELtY8BAZAh4hUGXHT7g\"},\"body\":{\"folderId\":\"e90741ae-8b8e-4f7e-90d3-1c57936c700c\"}}"
+        },
+        "request": {}
     }
 }

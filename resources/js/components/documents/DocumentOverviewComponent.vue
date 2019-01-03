@@ -1,12 +1,10 @@
 <template>
   <div>
-    <b-container-fluid>
       <b-row>
         <b-col>
           <b-breadcrumb :items="items"/>
         </b-col>
       </b-row>
-    </b-container-fluid>
     <b-container>
       <b-row>
         <b-col>
@@ -28,11 +26,12 @@
       <b-row>
         <b-col>
           <b-jumbotron bg-variant="secondary" class="chatGroup">
-            <document-list-component
+            <document-component
               v-for="document in documents"
-              v-bind:key="document.id"
-              v-bind:name="document.name"
-            ></document-list-component>
+              v-bind:key="document.Id"
+              v-bind:id="document.Id"
+              v-bind:name="document.Name"
+            ></document-component>
           </b-jumbotron>
         </b-col>
       </b-row>
@@ -43,8 +42,8 @@
 
 <script>
 import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
-import DocumentListComponent from "./DocumentListComponent.vue";
-import recentDocuments from "./recentDocuments.js";
+import DocumentComponent from "./DocumentComponent.vue";
+import recentDocuments from "./recentDocuments.json";
 
 export default {
   data() {
@@ -56,14 +55,15 @@ export default {
         }
       ],
       showCollapse: false,
-      documents: recentDocuments,
+      documents: recentDocuments.Items,
       lastDocumentTitle: "neueste Dokumente",
-      myProvidersTitle: "meine Provider"
+      myProvidersTitle: "meine Provider",
     };
   },
   components: {
     DocumentBreadcrumb,
-    DocumentListComponent
+    DocumentComponent,
+    recentDocuments
   },
   computed: {
     dropdownArrow() {
@@ -73,8 +73,10 @@ export default {
       }
       return true;
     }
-  }
+  },
 };
+
+console.log(recentDocuments.Items);
 </script>
 
 <style>

@@ -5,7 +5,7 @@ import Document from '../model/document.js';
 var configExt = {
     headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Bearer ' + localStorage.getItem('bearer')
     }
 }
@@ -35,15 +35,24 @@ class FolderService {
 
     // Angeblich werden irgendwo zu wenige Parameter übergeben
     listSubFolders(folderId) {
-        console.log('Getting sub folders');
+        console.log('Getting sub folders for ' + folderId);
+        var config = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer ' + localStorage.getItem('bearer')
+            },
+            body: {
+                'folderId': folderId
+            }
+        }
 
-        var formData = new FormData();
-        formData.append('folderId', folderId);
+        console.log(config);
 
-        axios.post(path + '/listFolders', formData, configExt)
+        axios.post(path + '/listFolders', config)
             .then(response => {
                 console.log('Retrieving subfolders...');
-                console.log(response.data.Id);
+                console.log(response.data);
                 console.log('Got subfolders');
             })
             .catch(error => {

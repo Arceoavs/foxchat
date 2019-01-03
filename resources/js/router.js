@@ -9,7 +9,7 @@ import LoginAggr from './components/authentication/LoginAggr.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
 import ChatProviderOverview from './components/chat/ChatProviderOverview.vue';
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent.vue';
-import ProviderDocuments from './components/documents/ProviderDocuments.vue';
+import ListComponent from './components/documents/ListComponent.vue';
 
 
 import EventBus from "./services/event-bus.js";
@@ -51,7 +51,7 @@ const routes = [
   {
     path: '/myproviders',
     name: 'Meine Provider',
-    component: ProviderDocuments
+    component: ListComponent
   },
 
   {
