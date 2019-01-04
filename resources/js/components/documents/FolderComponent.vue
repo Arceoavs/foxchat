@@ -1,19 +1,22 @@
 <template>
     <!-- Folder name -->
+    <router-link v-bind:to="{ path: name}" append>
     <b-card class="box" @click="openFolder()">
       <font-awesome-icon class="fox" icon="folder-open" size="2x"/>{{name}}
     </b-card>
+    </router-link>
 </template>
 
 <script>
 import FolderService from "../../services/FolderService.js";
 import Folder from '../../model/folder.js';
+import ListComponent from './ListComponent.vue';
 
 export default {
   props: ["name", "id"],
   methods: {
     openFolder(){
-      FolderService.getProviderFolder();
+      // FolderService.getProviderFolder();
       // FolderService.listSubFolders(this.id);
       // FolderService.listDocuments(this.id);
     }

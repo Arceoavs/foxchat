@@ -16,7 +16,7 @@ export default {
   methods: {
     openDocument() {
       alert("Dokument " + this.id + " wird heruntergeladen");
-      DocumentService.downloadDocument(this.id);
+      // DocumentService.downloadDocument(this.id);
     },
     startChat() {
       alert("Sie starten nun einen Chat zu Dokument " + this.name);

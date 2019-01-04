@@ -53,11 +53,10 @@ class FolderService {
         for (let index = 0; index < subFolders.length; index++) {
             if (subFolders[index].Name == myProviderFolder) {
                 console.log(subFolders[index].Id);
+                return subFolders[index].Id;
             }
         }
-        //var providers = subFolders.Items[""];
-        //console.log('hallo '+root);
-        //var subFolders = this.listSubFolders(root).Items;
+        console.log('Found myprovider folder')
     }
 
     listSubFolders(folderId) {

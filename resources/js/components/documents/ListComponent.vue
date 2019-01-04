@@ -5,10 +5,10 @@
       <b-row>
         <b-col>
           <folder-component
-            v-for="provider in providers"
-            v-bind:key="provider.Id"
-            v-bind:id="provider.Id"
-            v-bind:name="provider.Name"
+            v-for="folder in folders"
+            v-bind:key="folder.Id"
+            v-bind:id="folder.Id"
+            v-bind:name="folder.Name"
           ></folder-component>
           <document-component
             v-for="document in documents"
@@ -35,6 +35,7 @@ import recentDocuments from "./recentDocuments.json";
 import recentFolders from "./recentFolders.json";
 
 export default {
+  props: ["name", "id"],
   data() {
     return {
       items: [
@@ -47,7 +48,7 @@ export default {
           href: ""
         }
       ],
-      providers: recentFolders.Items,
+      folders: recentFolders.Items,
       documents: recentDocuments.Items
     };
   },
@@ -55,8 +56,7 @@ export default {
     FolderComponent,
     DocumentComponent,
     DocumentBreadcrumb
-  }
-
+  },
 
 };
 </script>
