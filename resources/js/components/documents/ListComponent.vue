@@ -39,7 +39,7 @@ export default {
       items: [
         {
           text: "Dokumente",
-          href: "/index"
+          href: "/documents"
         },
         {
           text: "Meine Provider",

@@ -9,26 +9,27 @@
         "headers": {
             "Accept": "application/json, text/plain, */*",
             "X-Requested-With": "XMLHttpRequest",
-            "X-CSRF-TOKEN": "57jd19Et95YhVVpNW2KgC7sDBpLCOQUWh1R8uEXT",
-            "Content-Type": "application/json;charset=utf-8",
-            "X-XSRF-TOKEN": "eyJpdiI6Indab21lbEYzZXBtUFwvR1lpeVpmbWFRPT0iLCJ2YWx1ZSI6Ikh0VVQxbmFGYWJ4bWR5ejFKeDFKYXlBZlhRTmZKb2d3a3J4ckJ6U0lzQlF3dm0zcXc5eTh4dGpmb2wyYVErOG0iLCJtYWMiOiJiMjRhMmY1ZDQ0ZDIxZjk5NjBiMTUwOTk1YjFkMDU4MWJmYTgxZjQzN2Y3ZmNlZGFlM2ZjY2Y3ZmNjZDFjNjJjIn0="
+            "X-CSRF-TOKEN": "Q6laxzrbXpJunet55gQ7AeOPnpaRdFOTWKEi5cey",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDY1MzUwNjksImV4cCI6MTU0NjYyMTQ2OSwibmJmIjoxNTQ2NTM1MDY5LCJqdGkiOiJWZGIxTmV0RzZVdnF6R0x3Iiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.OyO4HR6yRa2_lHOzvSx0_qbdELtY8BAZAh4hUGXHT7g",
+            "X-XSRF-TOKEN": "eyJpdiI6Ilg0MlZubEJoaXZSSlFPb1FLSHlYR1E9PSIsInZhbHVlIjoiQ1hcL2Z4V2MyaVwvNUFYSzNFQ0RIUzUzZTVmc2JncFFXRDkrSjdVdWl3MnhZZTF6bjR1cXAyUklKeWIyYWlDZE5DIiwibWFjIjoiMmI1YjY5YTUxNWI4OTE5ODg0MWNkMjNjNjczYWZkNTU4ZTMwZWI3YzYxNzRiN2Q0OWE4NzNlMDAzNWQyMTlkOCJ9"
         },
         "method": "post",
         "url": "/api/foxdoxapi/user/listFolders",
-        "data": "{\"headers\":{\"Accept\":\"application/json\",\"Content-Type\":\"application/x-www-form-urlencoded\",\"Authorization\":\"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDY1MzUwNjksImV4cCI6MTU0NjYyMTQ2OSwibmJmIjoxNTQ2NTM1MDY5LCJqdGkiOiJWZGIxTmV0RzZVdnF6R0x3Iiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.OyO4HR6yRa2_lHOzvSx0_qbdELtY8BAZAh4hUGXHT7g\"},\"body\":{\"folderId\":\"e90741ae-8b8e-4f7e-90d3-1c57936c700c\"}}"
+        "data": "{\"folderId\":\"e90741ae-8b8e-4f7e-90d3-1c57936c700c\"}"
     },
     "request": {},
     "response": {
         "data": {
             "errors": {
-                "status": 401,
-                "message": "Unauthorized"
+                "status": 405,
+                "message": "Method not allowed! Please check your method."
             }
         },
-        "status": 401,
-        "statusText": "Unauthorized",
+        "status": 405,
+        "statusText": "Method Not Allowed",
         "headers": {
-            "date": "Thu, 03 Jan 2019 18:50:24 GMT",
+            "date": "Thu, 03 Jan 2019 22:33:27 GMT",
             "cache-control": "no-cache, private",
             "server": "nginx/1.15.6",
             "connection": "keep-alive",
@@ -46,13 +47,14 @@
             "headers": {
                 "Accept": "application/json, text/plain, */*",
                 "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-TOKEN": "57jd19Et95YhVVpNW2KgC7sDBpLCOQUWh1R8uEXT",
-                "Content-Type": "application/json;charset=utf-8",
-                "X-XSRF-TOKEN": "eyJpdiI6Indab21lbEYzZXBtUFwvR1lpeVpmbWFRPT0iLCJ2YWx1ZSI6Ikh0VVQxbmFGYWJ4bWR5ejFKeDFKYXlBZlhRTmZKb2d3a3J4ckJ6U0lzQlF3dm0zcXc5eTh4dGpmb2wyYVErOG0iLCJtYWMiOiJiMjRhMmY1ZDQ0ZDIxZjk5NjBiMTUwOTk1YjFkMDU4MWJmYTgxZjQzN2Y3ZmNlZGFlM2ZjY2Y3ZmNjZDFjNjJjIn0="
+                "X-CSRF-TOKEN": "Q6laxzrbXpJunet55gQ7AeOPnpaRdFOTWKEi5cey",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDY1MzUwNjksImV4cCI6MTU0NjYyMTQ2OSwibmJmIjoxNTQ2NTM1MDY5LCJqdGkiOiJWZGIxTmV0RzZVdnF6R0x3Iiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.OyO4HR6yRa2_lHOzvSx0_qbdELtY8BAZAh4hUGXHT7g",
+                "X-XSRF-TOKEN": "eyJpdiI6Ilg0MlZubEJoaXZSSlFPb1FLSHlYR1E9PSIsInZhbHVlIjoiQ1hcL2Z4V2MyaVwvNUFYSzNFQ0RIUzUzZTVmc2JncFFXRDkrSjdVdWl3MnhZZTF6bjR1cXAyUklKeWIyYWlDZE5DIiwibWFjIjoiMmI1YjY5YTUxNWI4OTE5ODg0MWNkMjNjNjczYWZkNTU4ZTMwZWI3YzYxNzRiN2Q0OWE4NzNlMDAzNWQyMTlkOCJ9"
             },
             "method": "post",
             "url": "/api/foxdoxapi/user/listFolders",
-            "data": "{\"headers\":{\"Accept\":\"application/json\",\"Content-Type\":\"application/x-www-form-urlencoded\",\"Authorization\":\"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kaWdpdGFsZXItdHJlc29yLnRlc3RcL2FwaVwvYXV0aFwvdXNlclwvbG9naW4iLCJpYXQiOjE1NDY1MzUwNjksImV4cCI6MTU0NjYyMTQ2OSwibmJmIjoxNTQ2NTM1MDY5LCJqdGkiOiJWZGIxTmV0RzZVdnF6R0x3Iiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.OyO4HR6yRa2_lHOzvSx0_qbdELtY8BAZAh4hUGXHT7g\"},\"body\":{\"folderId\":\"e90741ae-8b8e-4f7e-90d3-1c57936c700c\"}}"
+            "data": "{\"folderId\":\"e90741ae-8b8e-4f7e-90d3-1c57936c700c\"}"
         },
         "request": {}
     }

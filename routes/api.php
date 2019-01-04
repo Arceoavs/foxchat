@@ -90,7 +90,7 @@ Route::group([
     
     Route::get('listalldocs', 'Foxdox\DocumentFoxdoxController@listAllDocuments');
     Route::get('retrieveRootFolder', 'Foxdox\DocumentFoxdoxController@retrieveRootFolder');
-    Route::post('listFolders', 'Foxdox\DocumentAPI@listFolders');
+    Route::get('listFolders', 'Foxdox\DocumentFoxdoxController@listFolders');
     Route::post('listDocuments', 'Foxdox\DocumentFoxdoxController@listDocuments');
     Route::post('downloadDocument', 'Foxdox\DocumentFoxdoxController@downloadDocument');
 

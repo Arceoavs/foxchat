@@ -1,11 +1,11 @@
 import axios from 'axios';
 import Folder from '../model/folder.js';
 import Document from '../model/document.js';
+import { stringify } from 'querystring';
 
 var configExt = {
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('bearer')
     }
 }
@@ -35,28 +35,21 @@ class FolderService {
 
     // Angeblich werden irgendwo zu wenige Parameter übergeben
     listSubFolders(folderId) {
+        this.refresh();
         console.log('Getting sub folders for ' + folderId);
-        var config = {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + localStorage.getItem('bearer')
-            },
-            body: {
-                'folderId': folderId
-            }
-        }
 
-        console.log(config);
+        var f = folderId.toString()
+        var body = {'folderId': 'e90741ae-8b8e-4f7e-90d3-1c57936c700c'};
 
-        axios.post(path + '/listFolders', config)
+        console.log('Request body: ' + body);
+        axios.post(path + '/listFolders', body, configExt)
             .then(response => {
                 console.log('Retrieving subfolders...');
                 console.log(response.data);
                 console.log('Got subfolders');
             })
             .catch(error => {
-                console.log('Error getting root folder: ' + JSON.stringify(error));
+                console.log('Error getting subfolders: ' + JSON.stringify(error));
             });
     }
 

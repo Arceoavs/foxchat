@@ -1,5 +1,5 @@
 <template>
-  <b-card class="listcomponent">
+  <b-card class="box">
     <font-awesome-icon class="fox" icon="file" size="2x"/>
     <button type="button" class="listcomponent" @click="openDocument()">{{name}}</button>
     <div class="cardIcon textFox">
@@ -14,7 +14,7 @@ export default {
   props: ["id", "name"],
   methods: {
     openDocument() {
-        console.log(this.id + ' ' + this.name);
+      console.log(this.id + " " + this.name);
       alert("Dokument " + this.id + " wird heruntergeladen");
     },
     startChat() {
@@ -30,12 +30,27 @@ export default {
 }
 
 .listcomponent {
+  font-size: 16pt;
+  font-weight: 400;
+  background-color: Transparent;
+  background-repeat: no-repeat;
   border: none;
-  color: rgba(108, 117, 125, 1) !important;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: rgba(86, 86, 86, 1) !important;
   text-decoration: none;
   margin: 0.2em !important;
 }
 .listcomponent :hover {
   color: #f86a2d !important;
+}
+
+.box {
+  border: none;
+  outline: none;
+  color: rgba(108, 117, 125, 1) !important;
+  text-decoration: none;
+  margin: 0.2em !important;
 }
 </style>
