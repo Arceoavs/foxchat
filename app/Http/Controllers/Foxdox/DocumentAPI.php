@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\ChatAuthException;
 
-class DocumentAPI
+class DocumentAPI extends Controller
 {
     protected $documentapiservice;
     public function __construct()
