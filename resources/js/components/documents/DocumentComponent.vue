@@ -10,12 +10,13 @@
 </template>
 
  <script>
+ import DocumentService from '../../services/DocumentService.js';
 export default {
   props: ["id", "name"],
   methods: {
     openDocument() {
-      console.log(this.id + " " + this.name);
       alert("Dokument " + this.id + " wird heruntergeladen");
+      DocumentService.downloadDocument(this.id);
     },
     startChat() {
       alert("Sie starten nun einen Chat zu Dokument " + this.name);

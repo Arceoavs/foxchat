@@ -4,6 +4,7 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FoxdoxApiClient;
+use App\Exceptions\ChatAuthException;
 
 use Illuminate\Support\Facades\Log;
 
@@ -50,7 +51,9 @@ class DocumentAPIService extends Controller
 
     public function downloadDocument($documentId)
     {
-        $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/document/getdoc', ['documentId' => $documentId]);
+        // NON NUMERIC VALUE APPEARED???
+        $url = 'https://api.foxdox.de/document/getdoc?id=' + $documentId;
+        $foxdoxapiclient = new FoxdoxApiClient($url, ['documentId' => $documentId]);
         $foxdoxapiclient->setMethod('GET');
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
     }

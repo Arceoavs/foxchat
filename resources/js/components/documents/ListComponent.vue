@@ -29,6 +29,7 @@ import FolderComponent from "./FolderComponent.vue";
 import { store } from "../../store.js";
 import ChatOverviewAPI from "../../services/FoxdoxGeneralService.js";
 import FolderService from "../../services/FolderService";
+import DocumentService from '../../services/DocumentService';
 import DocumentComponent from "./DocumentComponent.vue";
 import recentDocuments from "./recentDocuments.json";
 import recentFolders from "./recentFolders.json";
@@ -55,6 +56,8 @@ export default {
     DocumentComponent,
     DocumentBreadcrumb
   }
+
+
 };
 </script>
 

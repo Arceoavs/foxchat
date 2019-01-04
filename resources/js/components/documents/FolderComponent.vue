@@ -7,14 +7,15 @@
 
 <script>
 import FolderService from "../../services/FolderService.js";
+import Folder from '../../model/folder.js';
 
 export default {
   props: ["name", "id"],
   methods: {
     openFolder(){
-      console.log('listing content of '+this.id);
-      // FolderService.getRootFolder();
-      FolderService.listSubFolders(this.id);
+      FolderService.getProviderFolder();
+      // FolderService.listSubFolders(this.id);
+      // FolderService.listDocuments(this.id);
     }
   }
 };

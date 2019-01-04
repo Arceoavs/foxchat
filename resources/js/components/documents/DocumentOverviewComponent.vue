@@ -44,6 +44,7 @@
 import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
 import DocumentComponent from "./DocumentComponent.vue";
 import recentDocuments from "./recentDocuments.json";
+import FolderService from '../../services/FolderService';
 
 export default {
   data() {
@@ -58,6 +59,7 @@ export default {
       documents: recentDocuments.Items,
       lastDocumentTitle: "neueste Dokumente",
       myProvidersTitle: "meine Provider",
+      //myProvidersId: FolderService.getProviderFolder()
     };
   },
   components: {
@@ -75,8 +77,6 @@ export default {
     }
   },
 };
-
-console.log(recentDocuments.Items);
 </script>
 
 <style>

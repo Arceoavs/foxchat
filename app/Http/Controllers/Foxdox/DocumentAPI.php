@@ -47,4 +47,60 @@ class DocumentAPI extends Controller
 
         return $this->documentapiservice->listFolders($folder);
     }
+
+    public function listDocuments()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'folderId' => 'required',
+        ]);
+
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //Get all the informations from the request
+        $folder = request()->input('folderId');
+
+        return $this->documentapiservice->listDocuments($folder);
+    }
+
+    public function downloadDocument()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'documentId' => 'required',
+        ]);
+
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //Get all the informations from the request
+        $document = request()->input('documentId');
+
+        return $this->documentapiservice->downloadDocument($document);
+    }
+
+    public function retrieveRootFolder()
+    {
+
+        //TODO: HIER MIT VALIDATOR SCHAUEN (KEINE ARGUMENTE -> BRAUCHT MAN DEN DANN???)
+
+
+        
+        //Check if request contains the necessary inputs
+        // $validator = Validator::make(request()->all());
+
+        //Send errors
+        // if ($validator->fails()) {
+            // return response()->json($validator->errors(), 400);
+        // }
+
+        return $this->documentapiservice->retrieveRootFolder();
+    }
+
+    
 }

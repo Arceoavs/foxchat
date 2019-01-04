@@ -88,11 +88,11 @@ Route::group([
     Route::get('listproviders', 'Foxdox\GeneralFoxdoxController@listProviders');
     Route::get('listprovidersforoverview', 'Foxdox\GeneralFoxdoxController@listProvidersforOverview');
     
-    Route::get('listalldocs', 'Foxdox\DocumentFoxdoxController@listAllDocuments');
-    Route::get('retrieveRootFolder', 'Foxdox\DocumentFoxdoxController@retrieveRootFolder');
-    Route::post('listFolders', 'Foxdox\DocumentAPI@listFolders');
-    Route::post('listDocuments', 'Foxdox\DocumentFoxdoxController@listDocuments');
-    Route::post('downloadDocument', 'Foxdox\DocumentFoxdoxController@downloadDocument');
+    Route::get('listalldocs', 'Foxdox\DocumentAPI@listAllDocuments');
+    Route::get('retrieverootfolder', 'Foxdox\DocumentAPI@retrieveRootFolder');
+    Route::post('listfolders', 'Foxdox\DocumentAPI@listFolders');
+    Route::post('listdocuments', 'Foxdox\DocumentAPI@listDocuments');
+    Route::post('downloaddocument', 'Foxdox\DocumentAPI@downloadDocument');
 
   
 });
