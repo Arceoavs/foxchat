@@ -1,5 +1,5 @@
 <template>
-  <container-fluid>
+  <div>
 
     <loading-component></loading-component>
     <b-navbar toggleable="md" class="navbar-laravel">
@@ -26,7 +26,7 @@
       <b-row class="mt-5"></b-row>
       <footer-component></footer-component>
 
-  </container-fluid>
+  </div>
 </template>
 
 <script>
