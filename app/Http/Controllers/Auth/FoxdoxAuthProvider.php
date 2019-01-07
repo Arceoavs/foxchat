@@ -17,7 +17,6 @@ class FoxdoxAuthProvider extends EloquentUserProvider
 {
     protected $foxdoxapiclient;
     protected $response;
-
     /**
      * Retrieve a user by their unique identifier and "remember me" token.
      *
@@ -27,10 +26,10 @@ class FoxdoxAuthProvider extends EloquentUserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        if($this->foxdoxapiclient === null){
+        if ($this->foxdoxapiclient === null) {
             $this->createNewFoxdoxApiClient($credentials);
         }
-        if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
+        if ($this->response->getStatusCode() === HTTPSTATUSCODES::HTTP_OK) {
             return User::where('name', $credentials['name'])->first();
         }
     }
@@ -41,8 +40,8 @@ class FoxdoxAuthProvider extends EloquentUserProvider
      * entry will be updated.
      */
     public function createNewFoxdoxApiClient($credentials)
-    {   
-        if(array_key_exists('x-provider', $credentials)){
+    {
+        if (array_key_exists('x-provider', $credentials)) {
             //Provider section
             $name = $credentials['name'];
             $password = $credentials['password'];
@@ -52,43 +51,47 @@ class FoxdoxAuthProvider extends EloquentUserProvider
                 'password' => $password,
             ];
             //Create an Foxdox API Client and request an Foxdox Token
-            $foxdoxapiclient = new FoxdoxApiClient('https://papi.foxdox.de/auth/requesttoken', $body);
+            $foxdoxapiclient = new FoxdoxApiClient('https://mein.foxdox.de/identity/login', $body);
             //Set the special Header for Foxdox Provider requests "X-PROVIDER"
-            $foxdoxapiclient->setHeader('X-PROVIDER',$xprovider);
+            $foxdoxapiclient->setHeader('X-PROVIDER', $xprovider);
             $this->response = $foxdoxapiclient->loginRequest();
-            $this->response=(json_decode($this->response->getBody()));
-            $token = $this->response->Token;
+            $token = json_decode($this->response->getBody())->token;
             
             //Check if response gives valid tokens
-            if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
+            if ($this->response->getStatusCode() === HTTPSTATUSCODES::HTTP_OK) {
                 //The first array verfies the second array fill optional columns
                 User::updateOrCreate(
                     ['name' => $name],
-                    ['foxdox-token' => $token,
-                     'isProvider' => true]
+                    [
+                        'foxdox-token' => $token,
+                        'isProvider' => true
+                    ]
                 );
             }
-        }else {
+        } else {
             //User section 
             $name = $credentials['name'];
             $password = $credentials['password'];
             $body = [
                 'username' => $name,
-                'password' => $password,
+                'password' => $password
             ];
+
             //Create an Foxdox API Client and request an Foxdox Token
-            $foxdoxapiclient = new FoxdoxApiClient('https://api.foxdox.de/auth/requesttoken', $body);
+            $foxdoxapiclient = new FoxdoxApiClient('https://mein.foxdox.de/identity/login', $body);
+            $foxdoxapiclient->setHeader('Content-Type', 'application/json');
             $this->response = $foxdoxapiclient->loginRequest();
-            $this->response=(json_decode($this->response->getBody()));
-            $token = $this->response->Token;
+            $token = json_decode($this->response->getBody())->token;
 
             //Check if response gives valid tokens
-            if($this->response->Status===HTTPSTATUSCODES::HTTP_OK){
+            if ($this->response->getStatusCode() === HTTPSTATUSCODES::HTTP_OK) {
                 //The first array verfies the second array fill optional columns
                 User::updateOrCreate(
                     ['name' => $name],
-                    ['foxdox-token' => $token,
-                     'isProvider' => false]
+                    [
+                        'foxdox-token' => $token,
+                        'isProvider' => false
+                    ]
                 );
             }
         }
@@ -102,10 +105,10 @@ class FoxdoxAuthProvider extends EloquentUserProvider
      */
     public function validateCredentials(UserContract $user, array $credentials)
     {
-        if($this->foxdoxapiclient === null){
+        if ($this->foxdoxapiclient === null) {
             $this->createNewFoxdoxApiClient($credentials);
         }
-        if($this->response->Status == HTTPSTATUSCODES::HTTP_OK){
+        if ($this->response->getStatusCode() == HTTPSTATUSCODES::HTTP_OK) {
             return true;
         }
         return false;

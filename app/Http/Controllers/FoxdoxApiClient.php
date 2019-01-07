@@ -39,8 +39,8 @@ class FoxdoxApiClient extends Controller
         $this->client = new Client();
         $this->method = 'POST';
         $this->url = $url;
-        $this->headers = 
-        [
+        $this->headers =
+            [
             'X-DEVID' => 'KbYjzdwUSqmNU84nNek2',
             'X-APPID' => 'chXhweSqLsyUdAyZVz9a',
             'X-LANG' => 'de',
@@ -79,12 +79,12 @@ class FoxdoxApiClient extends Controller
 
     public function loginRequest()
     {
-        $response = $this->client->request($this->method, $this->url, 
-        [
-            'form_params' => $this->body,
-            'headers' => $this->headers,
-          ]);
-          return $response;
+        $response = $this->client->request('POST', $this->url, [
+            'json' => $this->body,
+            'headers' => $this->headers
+        ]);
+        return $response;
+
     }
     /**
      * Gives the ability to change the standard method from 'POST' to another HTTP method.
@@ -92,7 +92,7 @@ class FoxdoxApiClient extends Controller
 
     public function setMethod($method)
     {
-        $this->method=$method;
+        $this->method = $method;
     }
 
     /**
@@ -105,14 +105,17 @@ class FoxdoxApiClient extends Controller
     {
         # $foxdoxUsername = session('foxdoxUsername');
         $token = User::where('name', $foxdoxUsername)
-                        ->pluck('foxdox-token')
-                        ->first();
+            ->pluck('foxdox-token')
+            ->first();
         $this->setHeader('X-TOKEN', $token);
-        $response = $this->client->request($this->method, $this->url, 
-        [
-            'form_params' => $this->body,
-            'headers' => $this->headers,
-        ]);
+        $response = $this->client->request(
+            $this->method,
+            $this->url,
+            [
+                'form_params' => $this->body,
+                'headers' => $this->headers,
+            ]
+        );
         return $response;
     }
 }
