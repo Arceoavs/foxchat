@@ -1,11 +1,12 @@
 <template>
   <b-jumbotron bg-variant="secondary" class="folderGroup">
     <!-- Folder name -->
-    <b-card
-      @click="openFolder()">
-    <div class="box">{{name}}
-    </div>
-    </b-card>
+    <router-link :to="{path: '/dokumente/provider/' + name}" class="box">
+      <b-card>
+        <div class="box">{{name}}
+        </div>
+      </b-card>
+    </router-link>
   </b-jumbotron>
 </template>
 
