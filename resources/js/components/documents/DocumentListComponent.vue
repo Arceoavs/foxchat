@@ -15,14 +15,13 @@
 
  <script>
 export default {
-  props: ["name"], //,"provider"
+  props: ["name"],
   methods: {
     openDocument() {
-      alert("Dokument " + this.name + " wird heruntergeladen von "); //+ this.provider
+      alert("Dokument " + this.name + " wird heruntergeladen von ");
     },
     startChat() {
-      //alert("Sie starten nun einen Chat zu Dokument " + this.name);
-      var providerName = 'test'; //TODO: providerName von DocumentOverviewComponent (Zugriff?)
+      var providerName = 'test';
       this.$router.push({name: 'ConfirmChatToDocument', params:{docName: this.name, provName: providerName}});
     }
   }
