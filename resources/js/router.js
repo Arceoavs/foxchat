@@ -10,7 +10,6 @@ import LoginAggr from './components/authentication/LoginAggr.vue';
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 import FolderComponent from './components/documents/FolderComponent.vue';
-import FolderComponentView from './components/documents/FolderComponentView.vue';
 import ProviderChildDocuments from './components/documents/ProviderChildDocuments.vue';
 import DocumentAggr from './components/documents/DocumentAggr.vue';
 //Chat
