@@ -6,13 +6,13 @@
         <b-col>
 
           <div class="footer-text footer-left">
-            <p>{{footerMessageLeft}}</p>
+            <p v-text= "$ml.get('footer_message_left')" />
           </div>
 
           <div class="footer-text footer-right">
             <a class="footer-text"
               href="https://www.d-velop.de/foxdox/foxdox-home"
-            >{{footerMesageRight}}</a>
+            v-text = "$ml.get('footer_message_right')"/>
           </div>
 
         </b-col>

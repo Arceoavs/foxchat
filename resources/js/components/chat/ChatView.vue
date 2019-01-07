@@ -13,6 +13,11 @@
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
         <!--Wenn Provider-->
         <div v-if="isProvider">
+          <b-row class="mt-4 pl-2">
+            <b-col>
+              <h2 class="textColor" v-text="$ml.get('provider_list_title_chat_overview')" />
+            </b-col>
+          </b-row>
           <chat-provider-component
             v-for="chatItem in chats"
             v-bind:key="chatItem.thread.conversation_id"
@@ -24,6 +29,11 @@
         </div>
         <!--Wenn Client-->
         <div v-else>
+          <b-row class="mt-4 mb-2 pl-4">
+            <b-col>
+                <h2 class="textColor" v-text = "$ml.get('client_list_title_chat_overview')" />
+            </b-col>
+          </b-row>
           <chat-client-component
             class="smaller-heading"
             v-for="provideritem in providers"
@@ -69,8 +79,8 @@ export default {
     return {
       chatPartner: this.$route.query.partner,
       conversationTag: this.$route.query.tag,
-      providerListTitle: "Weitere Chats",
-      clientListTitle: "Andere Provider"
+      //providerListTitle: "Weitere Chats",
+      //clientListTitle: "Andere Provider"
     };
   },
   computed: {

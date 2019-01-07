@@ -19,7 +19,7 @@
                 <font-awesome-icon icon="plus-circle" size="2x"/>
               </b-col>
               <b-col>
-                <h4 class="textColor">{{addChat}}</h4>
+                <h4 class="textColor" v-text = "ml.get('add_chat')" />
               </b-col>
             </b-row>
           </b-card>

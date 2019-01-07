@@ -13,7 +13,7 @@
           <router-link :to="{name: 'myproviders'}" class="box" append>            
             <b-jumbotron bg-variant="secondary" class="chatGroup">
               <b-card class="box">
-                <h3 class="left textColor">{{myProvidersTitle}}</h3>
+                <h3 class="left textColor" v-text="$ml.get('my_providers_title_doc_overview')" />
                 <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
               </b-card>
             </b-jumbotron>
@@ -23,7 +23,7 @@
       </b-row>
       <b-row class="mt-4 pl-3">
         <b-col>
-          <h2 class="textColor">{{lastDocumentTitle}}</h2>
+          <h2 class="textColor" v-text="$ml.get('last_document_title_doc_overview')" />
         </b-col>
       </b-row>
       <b-row>

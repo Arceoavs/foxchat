@@ -2,7 +2,7 @@
   <b-container>
     <b-row class="mt-4 pl-2">
       <b-col>
-        <h2 class="textColor">{{pageTitle}}</h2>
+        <h2 class="textColor" v-text="$ml.get('chat_client_overview_title')"/>
       </b-col>
     </b-row>
     <b-row class="mt-3">
@@ -32,7 +32,7 @@ import { store } from "../../../store.js";
 export default {
   data() {
     return {
-      pageTitle: "Ihre Chats mit Providern"
+      //pageTitle: "Ihre Chats mit Providern"
     };
   },
   created() {
