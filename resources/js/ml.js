@@ -22,7 +22,11 @@ export default new MLCreate({
       provider_list_title_chat_overview: "Weitere Chats",
       client_list_title_chat_overview: "Andere Provider",
       chat_hinzufuegen: "Chat hinzufügen",
-
+      last_document_title_doc_overview: "neueste Dokumente",
+      my_providers_title_doc_overview: "meine Provider",
+      footer_message_left: "Projektseminar: Digitaler Tresor",
+      footer_message_right: "powered by foxdox",
+      start_chat_document: "Chat starten",
     }),
  
     new MLanguage('en').create({
@@ -40,6 +44,11 @@ export default new MLCreate({
       provider_list_title_chat_overview: "Further Chats",
       client_list_title_chat_overview: "Further Provider",
       chat_hinzufuegen: "Add Chat",
+      last_document_title_doc_overview: "New Documents",
+      my_providers_title_doc_overview: "My Providers",
+      footer_message_left: "Seminar: Digital Safe",
+      footer_message_right: "powered by foxdox",
+      start_chat_document: "Start Chat",
     })
   ]
 })
