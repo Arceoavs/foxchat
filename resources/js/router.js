@@ -10,7 +10,6 @@ import LoginAggr from './components/authentication/LoginAggr.vue';
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 import FolderComponent from './components/documents/FolderComponent.vue';
-import FolderComponentView from './components/documents/FolderComponentView.vue';
 import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
@@ -28,7 +27,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: {path: '/index'}
+      redirect: { path: '/index' }
     },
     {
       path: '/index',
@@ -38,13 +37,11 @@ const router = new VueRouter({
         requiresAuth: true
       }
     },
-
     {
       path: '/myproviders',
       name: 'Meine Provider',
       component: ProviderDocuments
     },
-
     {
       path: '/login',
       component: LoginAggr,
@@ -85,54 +82,55 @@ const router = new VueRouter({
       component: ChatView,
       meta: {
         requiresAuth: true
-  },
-  {
-    path: '/confirm-chat',
-    name: 'ConfirmChatToDocument',
-    component: ConfirmChatToDoc,
-    meta: {
-      requiresAuth: true
-    },
-  },
-  {
-    path: '/confirm-chat',
-    name: 'ConfirmChatToDocument',
-    component: ConfirmChatToDoc,
-    meta: {
-      requiresAuth: true
-    },
-  },
-  {
-    path: '/Provider',
-    name: 'Meine Provider',
-    component: ProviderDocuments,
-    meta: {
-      requiresAuth: true
-    }
-  },
-
-  {
-    path: '/Provider/:provider',
-    props: true,
-    component: FolderComponentView,
-    meta: {
-      requiresAuth: true
-    }
-  }, 
-  {
-    path: '/login',
-    component: LoginAggr,
-    children: [
-      {
-        path: 'provider',
-        name: 'Provider Login',
-        component: LoginComponentProvider
-      },
-      {
-        path: '',
-        name: 'Login',
-        component: LoginComponent
       }
+    },
+    {
+      path: '/confirm-chat',
+      name: 'ConfirmChatToDocument',
+      component: ConfirmChatToDoc,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/confirm-chat',
+      name: 'ConfirmChatToDocument',
+      component: ConfirmChatToDoc,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/Provider',
+      name: 'Meine Provider',
+      component: ProviderDocuments,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/Provider/:provider',
+      props: true,
+      component: FolderComponent,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/login',
+      component: LoginAggr,
+      children: [
+        {
+          path: 'provider',
+          name: 'Provider Login',
+          component: LoginComponentProvider
+        },
+        {
+          path: '',
+          name: 'Login',
+          component: LoginComponent
+        }
+      ]
     }
   ]
 });
