@@ -5,7 +5,7 @@
         <div v-if="isProvider">
           <b-row class="mt-4 pl-2">
             <b-col>
-              <h2 class="textColor">{{providerListTitle}}</h2>
+              <h2 class="textColor" v-text="$ml.get('provider_list_title_chat_overview')" />
             </b-col>
           </b-row>
           <chat-provider-component
@@ -20,7 +20,7 @@
         <div v-else>
           <b-row class="mt-4 mb-2 pl-4">
             <b-col>
-                <h2 class="textColor">{{clientListTitle}}</h2>
+                <h2 class="textColor" v-text = "$ml.get('client_list_title_chat_overview')" />
             </b-col>
           </b-row>
           <chat-client-component
@@ -68,8 +68,8 @@ export default {
     return {
       chatPartner: this.$route.query.partner,
       conversationTag: this.$route.query.tag,
-      providerListTitle: "Weitere Chats",
-      clientListTitle: "Andere Provider"
+      //providerListTitle: "Weitere Chats",
+      //clientListTitle: "Andere Provider"
     };
   },
   computed: {

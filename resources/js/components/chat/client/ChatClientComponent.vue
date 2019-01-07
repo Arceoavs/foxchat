@@ -27,7 +27,7 @@
             <b-col>
               <b-row>
                 <b-col>
-                  <p class="font-weight-bold">{{generalChatTitel}}</p>
+                  <p class="font-weight-bold" v-text="$ml.get('general_chat')" />
                 </b-col>
                 <b-col v-if="generalChat">
                   <p
@@ -66,7 +66,7 @@
             </div>
           </b-col>
           <b-col>
-            <p class="font-weight-bold">{{addChat}}</p>
+            <p class="font-weight-bold" v-text="$ml.get('add_chat')" />
           </b-col>
         </b-row>
       </b-card>
@@ -83,8 +83,8 @@ export default {
   props: ["provider", "documentChats", "generalChat"],
   data() {
     return {
-      generalChatTitel: "Allgemeiner Chat",
-      addChat: "Chat hinzufügen",
+      //generalChatTitel: "Allgemeiner Chat",
+      //addChat: "Chat hinzufügen",
       showCollapse: false
     };
   },

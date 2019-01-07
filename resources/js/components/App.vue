@@ -14,7 +14,7 @@
             <p v-text="$ml.get('dokumente')" />
           </b-nav-item>
           <b-nav-item to="/chat">
-            <div>Chat</div>
+            <div><p v-text="$ml.get('chat')" /></div>
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto sm-1 foxcolor max-height-nav" v-show="loggedIn">
@@ -54,11 +54,6 @@ export default {
       this.loggedIn = localStorage.getItem("bearer");
     });
   },
-  /*computed: {
-    mlDokumente () {
-      return new MLBuilder('dokumente');
-    }
-  },*/
   components: {
     LogoutComponent,
     LoadingComponent,

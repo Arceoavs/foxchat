@@ -3,8 +3,8 @@
     <b-row class="justify-content-center mt-5">
       <b-col md="4" sm="6" cols="8">
         <div class="panel">
-          <h2>Anmeldung</h2>
-          <p>Bitte melden Sie sich mit Ihrem foxdox Konto an:</p>
+          <h2 v-text="$ml.get('anmeldung')" />
+          <p v-text="$ml.get('login_text')" />
         </div>
       </b-col>
     </b-row>
@@ -31,10 +31,10 @@
             >{{ errorMsg }}</b-alert>
 
             <router-link class="description" to="/login">
-              <p>Zum Benutzer-Login</p>
+              <p v-text="$ml.get('user_login')" />
             </router-link>
           </div>
-          <button type="button" v-on:click="sendPassword()" class="btn btn-primary">Anmelden</button>
+          <button type="button" v-on:click="sendPassword()" class="btn btn-primary"><p v-text="$ml.get('login_button')"/></button>
         </div>
       </b-col>
     </b-row>

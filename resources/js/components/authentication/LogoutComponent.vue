@@ -1,6 +1,6 @@
 <template>
   <b-nav-item right class="logout-link" v-on:click="logout()">
-    <a class="foxcolor">{{logoutText}}</a>
+    <a class="foxcolor" v-text="$ml.get('abmelden')"/>
   </b-nav-item>
 </template>
 
@@ -10,7 +10,6 @@ import auth from "../../services/AuthService.js";
 export default {
   data() {
     return {
-      logoutText: "Abmelden"
     };
   },
   methods: {
