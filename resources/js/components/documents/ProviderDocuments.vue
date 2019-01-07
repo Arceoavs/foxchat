@@ -15,7 +15,6 @@
   </b-col>
 </template>
 
-
 <script>
 import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
 import FolderComponent from "./FolderComponent.vue";
@@ -23,16 +22,24 @@ import { store } from "../../store.js";
 
 export default {
   data() {
+    console.log(this.$route);
+    console.log(this.$route.currentRoute);
     return {
+      
       items: [
         {
           text: "Dokumente",
-          href: "/Dokumente"
+          href: "/dokumente"
         },
         {
-          text: "Provider",
-          href: ""
-        }
+          text: "provider",
+          href: "/dokumente/provider"
+        },
+        {
+          text: "child",
+          href: "/dokumente/provider/child"
+        },
+
       ],
     };
   },

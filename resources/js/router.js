@@ -12,6 +12,7 @@ import DocumentListComponent from './components/documents/DocumentListComponent'
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 import FolderComponent from './components/documents/FolderComponent.vue';
 import FolderComponentView from './components/documents/FolderComponentView.vue';
+import ProviderChildDocuments from './components/documents/ProviderChildDocuments.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
@@ -29,21 +30,38 @@ const routes = [
   },
   {
     path: '/dokumente',
-    name: 'DocumentOverview',
     component: DocumentOverviewComponent,
-    meta: {
-      requiresAuth: true
-    }
+    meta: {requiresAuth: true},
+
+    /*subRoutes: {
+      name: 'myproviders',
+      path: 'provider',
+      component: ProviderDocuments,
+      subRoutes: {
+        name: 'providerchild',
+        path: '/child',
+        component: ProviderChildDocuments,
+    },
+  },*/   
+
+    children: [{
+      path: 'provider',
+      name: 'myproviders',
+      component: ProviderDocuments,
+
+      children: [{
+        path: 'child',
+        name: 'providerchild',
+        component: ProviderChildDocuments,
+      }]
+    }],
   },
 
-  {
+  /*{
     path: '/dokumente/provider',
     name: 'Meine Provider',
     component: ProviderDocuments,
-    meta: {
-      requiresAuth: true
-    }
-  },
+  },*/
 
   {
     path: '/dokumente/provider/:provider',
@@ -95,7 +113,8 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  
 ];
 
 const router = new VueRouter({
