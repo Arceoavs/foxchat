@@ -34,13 +34,13 @@
               v-bind:key="document.id"
               v-bind:name="document.name"
             ></document-list-component>
+            <!-- v-bind:proider:="document.myProvidersTitle" -->
           </b-jumbotron>
         </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
-
 
 <script>
 import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
