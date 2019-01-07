@@ -1,13 +1,18 @@
 <template>
   <b-container fluid>
-    <b-row class="justify-content-center mt-3">
+    <!--Headings-->
+    <b-row class="mt-4 mb-2 pl-4">
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
+        <h2 class="textColor">{{chatList}}</h2>
+      </b-col>
+      <b-col>
+        <h2 class="textColor">Ihr Chat mit User</h2>
+      </b-col>
+    </b-row>
+    <b-row class="mt-3">
+      <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
+        <!--Wenn Provider-->
         <div v-if="isProvider">
-          <b-row class="mt-4 pl-2">
-            <b-col>
-              <h2 class="textColor">{{providerListTitle}}</h2>
-            </b-col>
-          </b-row>
           <chat-provider-component
             v-for="chatItem in chats"
             v-bind:key="chatItem.thread.conversation_id"
@@ -17,12 +22,8 @@
             v-bind:message="chatItem.thread.message"
           ></chat-provider-component>
         </div>
+        <!--Wenn Client-->
         <div v-else>
-          <b-row class="mt-4 mb-2 pl-4">
-            <b-col>
-                <h2 class="textColor">{{clientListTitle}}</h2>
-            </b-col>
-          </b-row>
           <chat-client-component
             class="smaller-heading"
             v-for="provideritem in providers"
@@ -81,6 +82,10 @@ export default {
     },
     chats: function() {
       return store.state.inboxForProvider;
+    },
+    chatList() {
+      if (this.isProvider) return "Weitere Chats";
+      else return "Andere Provider";
     }
   },
   methods: {
