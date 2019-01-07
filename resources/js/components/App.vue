@@ -10,7 +10,8 @@
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav v-show="loggedIn">
           <b-nav-item to="/index">
-            <div>Dokumente</div>
+            <!--<div> <p v-test = "$ml.get('Dokumente')" /> </div>-->
+            <p v-text="$ml.get('dokumente')" />
           </b-nav-item>
           <b-nav-item to="/chat">
             <div>Chat</div>
@@ -36,6 +37,7 @@ import FooterComponent from "./Footer.vue";
 import BreadcrumbComponent from "./BreadcrumbComponent.vue";
 import EventBus from "../services/event-bus.js";
 import { store } from "../store.js";
+import { MLBuilder } from 'vue-multilanguage';
 
 export default {
   data: function() {
@@ -52,6 +54,11 @@ export default {
       this.loggedIn = localStorage.getItem("bearer");
     });
   },
+  /*computed: {
+    mlDokumente () {
+      return new MLBuilder('dokumente');
+    }
+  },*/
   components: {
     LogoutComponent,
     LoadingComponent,
