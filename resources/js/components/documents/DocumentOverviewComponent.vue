@@ -1,17 +1,16 @@
 <template>
   <div>
-    <b-container-fluid>
+    <b-container fluid>
       <b-row>
         <b-col>
-          <b-breadcrumb :items="items"/>
         </b-col>
       </b-row>
-    </b-container-fluid>
+    </b-container>
     <b-container>
       <b-row>
         <b-col>
-          <router-link :to="{name: 'myproviders'}" class="box" append>
-            <router-view></router-view>
+          <div>
+          <router-link :to="{name: 'myproviders'}" class="box" append>            
             <b-jumbotron bg-variant="secondary" class="chatGroup">
               <b-card class="box">
                 <h3 class="left textColor">{{myProvidersTitle}}</h3>
@@ -19,6 +18,7 @@
               </b-card>
             </b-jumbotron>
           </router-link>
+          </div>
         </b-col>
       </b-row>
       <b-row class="mt-4 pl-3">
@@ -50,12 +50,7 @@ import recentDocuments from "./recentDocuments.js";
 export default {
   data() {
     return {
-      items: [
-        {
-          text: "Dokumente",
-          href: ""
-        }
-      ],
+
       showCollapse: false,
       documents: recentDocuments,
       lastDocumentTitle: "neueste Dokumente",

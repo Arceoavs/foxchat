@@ -12,6 +12,7 @@ import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 import FolderComponent from './components/documents/FolderComponent.vue';
 import FolderComponentView from './components/documents/FolderComponentView.vue';
 import ProviderChildDocuments from './components/documents/ProviderChildDocuments.vue';
+import DocumentAggr from './components/documents/DocumentAggr.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
@@ -23,28 +24,38 @@ import EventBus from './services/event-bus.js';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  base: '/',
   mode: 'hash',
   routes: [
     {
       path: '/',
-      redirect: {path: '/index'}
-    },
-    {
-      path: '/index',
-      name: 'DocumentOverview',
-      component: DocumentOverviewComponent,
-      meta: {
-        requiresAuth: true
-      }
+      redirect: { path: '/dokumente' }
     },
 
     {
-      path: '/myproviders',
-      name: 'Meine Provider',
-      component: ProviderDocuments
-    },
+      //aggregiert die Dokumentensicht für die router-views und breadcrumbs
+      path: '/dokumente',
+      component: DocumentAggr,
 
+      children: [
+        {
+        path: 'provider',
+        name: 'myproviders',
+        component: ProviderDocuments,
+
+        children: [{
+          path: 'child',
+          name: 'children',
+          component: ProviderChildDocuments,
+        }]
+        },
+        {
+          path: '',
+          name: 'Dokumente',
+          component: DocumentOverviewComponent,
+        }
+      ],
+    },
+  
     {
       path: '/login',
       component: LoginAggr,
@@ -86,7 +97,8 @@ const router = new VueRouter({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    
   ]
 });
 
