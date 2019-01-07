@@ -7,12 +7,10 @@
         <div class="textFox mt-4 mb-4">
           <font-awesome-icon icon="file" size="2x"/>
           <p class="card-text">{{documentName}}</p>
-          <!--<p class="card-text">{{this.$route.params.docName}}</p>-->
         </div>
         <div>
           <button type="button" class="btn btn-success btn-md mr-1 buttonCC" @click="startChat()">Chat starten</button>
           <button type="button" class="btn btn-danger btn-md ml-1 buttonCC" @click="abort()">Abbruch</button>
-          <!--<a href="/" class="btn btn-danger btn-md ml-1 buttonCC">Abbruch</a>-->
         </div>
       </div>
     </div>
