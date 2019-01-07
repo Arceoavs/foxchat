@@ -9,6 +9,9 @@ import LoginAggr from './components/authentication/LoginAggr.vue';
 //Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
+import FolderComponent from './components/documents/FolderComponent.vue';
+import FolderComponentView from './components/documents/FolderComponentView.vue';
+import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
@@ -82,6 +85,45 @@ const router = new VueRouter({
       component: ChatView,
       meta: {
         requiresAuth: true
+  },
+  {
+    path: '/confirm-chat',
+    name: 'ConfirmChatToDocument',
+    component: ConfirmChatToDoc,
+    meta: {
+      requiresAuth: true
+    },
+  },
+  {
+    path: '/Provider',
+    name: 'Meine Provider',
+    component: ProviderDocuments,
+    meta: {
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: '/Provider/:provider',
+    props: true,
+    component: FolderComponentView,
+    meta: {
+      requiresAuth: true
+    }
+  }, 
+  {
+    path: '/login',
+    component: LoginAggr,
+    children: [
+      {
+        path: 'provider',
+        name: 'Provider Login',
+        component: LoginComponentProvider
+      },
+      {
+        path: '',
+        name: 'Login',
+        component: LoginComponent
       }
     }
   ]
