@@ -19,74 +19,72 @@ import EventBus from './services/event-bus.js';
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: '/',
-    redirect: { path: '/index' }
-  },
-  {
-    path: '/index',
-    name: 'DocumentOverview',
-    component: DocumentOverviewComponent,
-    meta: {
-      requiresAuth: true
-    }
-  },
-
-  {
-    path: '/myproviders',
-    name: 'Meine Provider',
-    component: ProviderDocuments
-  },
-
-  {
-    path: '/login',
-    component: LoginAggr,
-    children: [
-      {
-        path: 'provider',
-        name: 'Provider Login',
-        component: LoginComponentProvider
-      },
-      {
-        path: '',
-        name: 'Login',
-        component: LoginComponent
-      }
-    ]
-  },
-  {
-    path: '/chat',
-    name: 'Chat Overview',
-    component: ChatClientOverview,
-    meta: {
-      requiresAuth: true,
-      requiresToBeUser: true
-    }
-  },
-  {
-    path: '/provider-chat',
-    name: 'Chat Provider Overview',
-    component: ChatProviderOverview,
-    meta: {
-      requiresAuth: true,
-      requiresToBeProvider: true
-    }
-  },
-  {
-    path: '/communication',
-    props: true,
-    component: ChatView,
-    meta: {
-      requiresAuth: true
-    }
-  }
-];
-
 const router = new VueRouter({
   base: '/',
-  mode: 'history',
-  routes: routes
+  mode: 'hash',
+  routes: [
+    {
+      path: '/',
+      redirect: {path: '/index'}
+    },
+    {
+      path: '/index',
+      name: 'DocumentOverview',
+      component: DocumentOverviewComponent,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
+    {
+      path: '/myproviders',
+      name: 'Meine Provider',
+      component: ProviderDocuments
+    },
+
+    {
+      path: '/login',
+      component: LoginAggr,
+      children: [
+        {
+          path: 'provider',
+          name: 'Provider Login',
+          component: LoginComponentProvider
+        },
+        {
+          path: '',
+          name: 'Login',
+          component: LoginComponent
+        }
+      ]
+    },
+    {
+      path: '/chat',
+      name: 'Chat Overview',
+      component: ChatClientOverview,
+      meta: {
+        requiresAuth: true,
+        requiresToBeUser: true
+      }
+    },
+    {
+      path: '/provider-chat',
+      name: 'Chat Provider Overview',
+      component: ChatProviderOverview,
+      meta: {
+        requiresAuth: true,
+        requiresToBeProvider: true
+      }
+    },
+    {
+      path: '/communication',
+      props: true,
+      component: ChatView,
+      meta: {
+        requiresAuth: true
+      }
+    }
+  ]
 });
 
 var self = {
