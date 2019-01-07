@@ -95,6 +95,14 @@ const router = new VueRouter({
     },
   },
   {
+    path: '/confirm-chat',
+    name: 'ConfirmChatToDocument',
+    component: ConfirmChatToDoc,
+    meta: {
+      requiresAuth: true
+    },
+  },
+  {
     path: '/Provider',
     name: 'Meine Provider',
     component: ProviderDocuments,
