@@ -13,7 +13,7 @@
           <router-link to="/myproviders" class="box">
             <b-jumbotron bg-variant="secondary" class="chatGroup">
               <b-card class="box">
-                <h3 class="left textColor">{{myProvidersTitle}}</h3>
+                <h3 class="left textColor">{{myProvidersTitle}}</h3> 
                 <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
               </b-card>
             </b-jumbotron>
@@ -33,13 +33,13 @@
               v-bind:key="document.id"
               v-bind:name="document.name"
             ></document-list-component>
+            <!-- v-bind:proider:="document.myProvidersTitle" -->
           </b-jumbotron>
         </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
-
 
 <script>
 import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";

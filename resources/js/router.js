@@ -12,6 +12,7 @@ import DocumentListComponent from './components/documents/DocumentListComponent'
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 import FolderComponent from './components/documents/FolderComponent.vue';
 import FolderComponentView from './components/documents/FolderComponentView.vue';
+import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
@@ -35,7 +36,14 @@ const routes = [
       requiresAuth: true
     },
   },
-
+  {
+    path: '/confirm-chat',
+    name: 'ConfirmChatToDocument',
+    component: ConfirmChatToDoc,
+    meta: {
+      requiresAuth: true
+    },
+  },
   {
     path: '/Provider',
     name: 'Meine Provider',
@@ -51,8 +59,8 @@ const routes = [
     component: FolderComponentView,
     meta: {
       requiresAuth: true
-    }}, 
-
+    }
+  }, 
   {
     path: '/login',
     component: LoginAggr,
