@@ -9,6 +9,9 @@ import LoginAggr from './components/authentication/LoginAggr.vue';
 //Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import ProviderDocuments from './components/documents/ProviderDocuments.vue';
+import FolderComponent from './components/documents/FolderComponent.vue';
+import FolderComponentView from './components/documents/FolderComponentView.vue';
+import ProviderChildDocuments from './components/documents/ProviderChildDocuments.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';

@@ -10,7 +10,8 @@
     <b-container>
       <b-row>
         <b-col>
-          <router-link :to="{name: 'Meine Provider'}" class="box">
+          <router-link :to="{name: 'myproviders'}" class="box" append>
+            <router-view></router-view>
             <b-jumbotron bg-variant="secondary" class="chatGroup">
               <b-card class="box">
                 <h3 class="left textColor">{{myProvidersTitle}}</h3>
