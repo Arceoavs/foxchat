@@ -30,7 +30,6 @@ const router = new VueRouter({
       path: '/',
       redirect: { path: '/dokumente' }
     },
-
     {
       //aggregiert die Dokumentensicht für die router-views und breadcrumbs
       path: '/dokumente',
@@ -57,7 +56,6 @@ const router = new VueRouter({
         }
       ]
     },
-
     {
       path: '/login',
       component: LoginAggr,
@@ -108,38 +106,6 @@ const router = new VueRouter({
         requiresAuth: true
       }
     },
-    {
-      path: '/Provider',
-      name: 'Meine Provider',
-      component: ProviderDocuments,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/login',
-      component: LoginAggr,
-      children: [
-        {
-          path: 'provider',
-          name: 'Provider Login',
-          component: LoginComponentProvider
-        },
-        {
-          path: '',
-          name: 'Login',
-          component: LoginComponent
-        }
-      ]
-    },
-    {
-      path: '/confirm-chat',
-      name: 'ConfirmChatToDocument',
-      component: ConfirmChatToDoc,
-      meta: {
-        requiresAuth: true
-      }
-    }
   ]
 });
 
