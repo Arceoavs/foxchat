@@ -22,9 +22,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './ml';
 
-Vue.config.productionTip = false;
-
-
 Vue.use(BootstrapVue);
 Vue.use(Chat);
 
