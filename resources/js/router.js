@@ -8,7 +8,7 @@ import LoginComponentProvider from './components/authentication/LoginComponentPr
 import LoginAggr from './components/authentication/LoginAggr.vue';
 //Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
-import ProviderDocuments from './components/documents/ProviderDocuments.vue';
+import ProviderDocuments from './components/documents/ProviderComponent.vue';
 import ProviderChildDocuments from './components/documents/ProviderChildDocuments.vue';
 import DocumentAggr from './components/documents/DocumentAggr.vue';
 import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';

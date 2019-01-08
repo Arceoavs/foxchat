@@ -24,17 +24,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <router-link :to="{name:'children'}" append>
-          <provider-list-component
-            v-for="provideritem in providers"
-            v-bind:key="provideritem.ProviderShortName"
-            v-bind:provider="provideritem.ProviderShortName"
-            v-bind:documentChats="provideritem.documentChats"
-            v-bind:generalChat="provideritem.generalChat"
-          ></provider-list-component>
-          <button v-on:click="test">Teste!</button>
-          <router-view></router-view>
-        </router-link>
+        <provider-component></provider-component>
         <!--<router-link :to="{name: 'myproviders'}" class="box" append>
             <b-jumbotron bg-variant="secondary" class="chatGroup">
               <b-card class="box">
@@ -53,8 +43,7 @@ import DocumentComponent from "./DocumentComponent.vue";
 import FolderService from "../../services/FolderService";
 import { store } from "../../store.js";
 import FolderComponent from "./FolderComponent.vue";
-import ListComponent from "./ListComponent.vue";
-import ProviderListComponent from "./ProviderListComponent.vue";
+import ProviderComponent from "./ProviderComponent.vue";
 
 export default {
   data() {
@@ -83,15 +72,14 @@ export default {
     test() {
       //console.log("Hole mir den Root: " + FolderService.getRootFolder());
       console.log(
-        "Hole mir den Privider Folder " + FolderService.listSubFolders()
+        "Hole mir den Provider Folder " + FolderService.listSubFolders()
       );
     }
   },
   components: {
     DocumentComponent,
     FolderComponent,
-    ProviderListComponent,
-    ListComponent
+    ProviderComponent
   }
 };
 </script>

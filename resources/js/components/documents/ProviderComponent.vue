@@ -1,22 +1,23 @@
 <template>
-  <b-card>
-    <router-link :to="{name:'children'}" append>
-      <provider-list-component
-        v-for="provideritem in providers"
-        v-bind:key="provideritem.ProviderShortName"
-        v-bind:provider="provideritem.ProviderShortName"
-        v-bind:documentChats="provideritem.documentChats"
-        v-bind:generalChat="provideritem.generalChat"
-      ></provider-list-component>
-      <button v-on:click="test">Teste!</button>
+  <b-row>
+    <b-col>
+      <router-link :to="{name:'children'}" append>
+        <provider-list-component
+          v-for="provideritem in providers"
+          v-bind:key="provideritem.ProviderShortName"
+          v-bind:provider="provideritem.ProviderShortName"
+          v-bind:documentChats="provideritem.documentChats"
+          v-bind:generalChat="provideritem.generalChat"
+        ></provider-list-component>
+        <button v-on:click="test">Teste!</button>
+      </router-link>
       <router-view></router-view>
-    </router-link>
-  </b-card>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
 import FolderComponent from "./FolderComponent.vue";
-import ListComponent from "./ListComponent.vue";
 import ProviderListComponent from "./ProviderListComponent.vue";
 import FolderService from "../../services/FolderService.js";
 import { store } from "../../store.js";
@@ -30,8 +31,7 @@ export default {
   mounted() {},
   components: {
     FolderComponent,
-    ProviderListComponent,
-    ListComponent
+    ProviderListComponent
   },
   computed: {
     providers: function() {

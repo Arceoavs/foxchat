@@ -17,9 +17,6 @@
             </div>
           </b-nav-item>
         </b-navbar-nav>
-        <div>
-          <button v-for="lang in $ml.list" :key="lang" @click="$ml.change(lang)" v-text="lang"/>
-        </div>
         <b-navbar-nav class="ml-auto sm-1 foxcolor max-height-nav" v-show="loggedIn">
           <logout-component></logout-component>
         </b-navbar-nav>
@@ -36,7 +33,6 @@
 import LogoutComponent from "./authentication/LogoutComponent.vue";
 import LoadingComponent from "./LoadingComponent.vue";
 import FooterComponent from "./Footer.vue";
-import BreadcrumbComponent from "./BreadcrumbComponent.vue";
 import EventBus from "../services/event-bus.js";
 import { store } from "../store.js";
 import { MLBuilder } from "vue-multilanguage";
@@ -59,8 +55,7 @@ export default {
   components: {
     LogoutComponent,
     LoadingComponent,
-    FooterComponent,
-    BreadcrumbComponent
+    FooterComponent
   }
 };
 </script>
