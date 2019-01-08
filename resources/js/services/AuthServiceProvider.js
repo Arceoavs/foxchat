@@ -1,8 +1,7 @@
 import EventBus from './event-bus.js';
 import ChatService from './ChatService.js';
-import BroadcastingService from "../services/BroadcastingService.js";
+import BroadcastingService from '../services/BroadcastingService.js';
 import { store } from '../store.js';
-
 
 const config = {
   headers: {
@@ -22,7 +21,6 @@ class AuthServiceProvider {
     formData.append('name', pUsername);
     formData.append('password', pPassword);
     formData.append('x-provider', pXProvider);
-
 
     self.errorMsg = 'Login Fehler: ';
     self.showAlert = false;
@@ -122,7 +120,9 @@ class AuthServiceProvider {
       })
       .catch(error => {
         this.logout(self);
-        console.log('error while fetching Providerdata' + JSON.stringify(error));
+        console.log(
+          'error while fetching Providerdata' + JSON.stringify(error)
+        );
         self.errorMsg =
           'Login Fehler User: ' +
           error.response.status +

@@ -15,7 +15,6 @@ import Folder from "../../model/folder.js";
 export default {
   props: ["id", "name"],
   mounted(){
-    
   },
   methods: {
     openFolder() {
