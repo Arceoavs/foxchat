@@ -12,10 +12,10 @@
       <b-col md="4" sm="6" cols="8">
         <div @keyup.enter="sendPassword()">
           <div class="form-group">
-            <input v-model="username" class="form-control" placeholder="foxdox-Benutzername">
+            <input v-model="username" class="form-control" v-bind:placeholder="$ml.get('fox_username')">
           </div>
           <div class="form-group">
-            <input v-model="password" type="password" class="form-control" placeholder="Passwort">
+            <input v-model="password" type="password" class="form-control" v-bind:placeholder="$ml.get('password')">
           </div>
           <div class="description">
             <b-alert

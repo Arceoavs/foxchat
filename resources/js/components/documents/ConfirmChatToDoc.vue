@@ -31,7 +31,7 @@
 export default {
   methods: {
     startChat() {
-      alert("Sie starten nun einen Chat zu Dokument " + this.documentName);
+      alert(this.$ml.get('starting_chat_to_doc') + this.documentName);
       //TODO: Starte Chat zu Dokument
     },
     abort() {
@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     mlProviderName() {
-      return this.$ml.get("willkommen_bei") + this.providerName;
+      return this.$ml.get('willkommen_bei') + this.providerName;
     }
   }
 };

@@ -4,7 +4,7 @@ import { MLInstaller, MLCreate, MLanguage } from 'vue-multilanguage'
 Vue.use(MLInstaller)
 
 export default new MLCreate({
-  initial: 'en',
+  initial: 'de',
   save: process.env.NODE_ENV === 'production',
   languages: [
     new MLanguage('de').create({
@@ -32,9 +32,18 @@ export default new MLCreate({
       chat_list_client: "Andere Provider",
       keine_provider_msg: "Sie haben keine Provider, die sich für den foxChat registriert haben.",
       willkommen_bei: "Willkommen bei ",
-      starting_chat_to_doc: "Sie starten einen Chat zu folgendem Dokument:",
+      starting_chat_to_doc: "Sie starten einen Chat zu folgendem Dokument: ",
       abbruch: "Abbruch",
       chat_starten: "Chat starten",
+      dokument: "Dokument ",
+      being_downloaded: " wird nun heruntergeladen. ",
+      ordner: "Ordner ",
+      wird_geoeffnet: " wird geöffnet. ",
+      go_to_chat: " Zum Chat ",
+      fox_username: "foxdox-Benutzername",
+      password: "Passwort",
+      benutzername: "Benutzername",
+
     }),
 
     new MLanguage('en').create({
@@ -62,9 +71,17 @@ export default new MLCreate({
       chat_list_client: "Other providers",
       keine_Provider_msg: "You don't have any Providers that registered for foxChat.",
       willkommen_bei: "Welcome to ",
-      starting_chat_to_doc: "You are starting a chat with the following document:",
+      starting_chat_to_doc: "You are starting a chat with the following document: ",
       abbruch: "Cancel",
       chat_starten: "Start chat",
+      dokument: "Document ",
+      being_downloaded: " is now downloaded. ",
+      ordner: "Folder ",
+      wird_geoeffnet: " is opened. ",
+      go_to_chat: " go to chat ",
+      fox_username: "foxdox-username",
+      password: "Password",
+      benutzername: "Username",
     })
   ]
 })

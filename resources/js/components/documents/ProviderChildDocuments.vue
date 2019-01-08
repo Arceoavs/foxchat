@@ -2,7 +2,7 @@
     <b-col>
         <b-breadcrumb items:="items">
         </b-breadcrumb>
-        <a>go to chat</a>
+        <a v-text = "$ml.get('go_to_chat')" />
     </b-col>
 </template>
 

@@ -16,7 +16,7 @@ export default {
   props: ["name"],
   methods: {
      openFolder() {
-       alert("Ordner " + this.name + " wird geöffnet");
+       alert(this.$ml.get('ordner') + this.name + this.$ml.get('wird_geoeffnet'));
      }
   },
 };
