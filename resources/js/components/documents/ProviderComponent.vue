@@ -9,8 +9,8 @@
           v-bind:documentChats="provideritem.documentChats"
           v-bind:generalChat="provideritem.generalChat"
         ></provider-list-component>
-        <button v-on:click="test">Teste!</button>
       </router-link>
+      <button v-on:click="test">Teste!</button>
       <router-view></router-view>
     </b-col>
   </b-row>
@@ -41,10 +41,11 @@ export default {
   },
   methods: {
     test() {
-      //console.log("Hole mir den Root: " + FolderService.getRootFolder());
-      console.log(
-        "Hole mir den Privider Folder " + FolderService.listSubFolders()
-      );
+      console.log("Hole mir den Root: " + FolderService.getRootFolder());
+      //console.log(
+      //  "Hole mir den Privider Folder " +
+      //    FolderService.listSubFolders(store.state.userRootFolder)
+      //);
     }
   }
 };

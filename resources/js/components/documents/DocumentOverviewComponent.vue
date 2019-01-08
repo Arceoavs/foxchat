@@ -15,6 +15,15 @@
             v-bind:name="document.Name"
           ></document-component>
         </b-jumbotron>
+
+        <b-jumbotron bg-variant="secondary" class="chatGroup">
+          <folder-component
+            v-for="folder in folders"
+            v-bind:key="folder.Id"
+            v-bind:id="folder.Id"
+            v-bind:name="folder.Name"
+          ></folder-component>
+        </b-jumbotron>
       </b-col>
     </b-row>
     <b-row>
@@ -55,6 +64,9 @@ export default {
     documents: function() {
       console.log(store.state.recentDocuments);
       return store.state.recentDocuments;
+    },
+    folders: function() {
+      return FolderService.listSubFolders();
     },
     providers: function() {
       //return store.state.providerList;

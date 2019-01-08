@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
     ],
     user: {},
     userRootFolder: {
-      rootFolder: ''
+      rootFolder: '123'
     },
     recentDocuments: [
       {

@@ -1,13 +1,14 @@
 import EventBus from './event-bus.js';
 import FoxdoxGeneralService from './FoxdoxGeneralService';
-import BroadcastingService from "../services/BroadcastingService.js";
+import FolderService from './FolderService';
+import BroadcastingService from '../services/BroadcastingService.js';
 import { store } from '../store.js';
 
 const config = {
   headers: {
     'Content-Type': 'application/json'
   }
-}
+};
 
 var path = '/api/auth/user';
 
@@ -18,10 +19,9 @@ class AuthService {
     console.log('Logging In...');
 
     var jsonsd = {
-      'name': pUsername,
-      'password': pPassword
-    }
-
+      name: pUsername,
+      password: pPassword
+    };
 
     var formData = new FormData();
     formData.append('name', pUsername);
@@ -31,7 +31,8 @@ class AuthService {
     self.showAlert = false;
     self.noError = true;
 
-    axios.post(path + '/login', jsonsd, config)
+    axios
+      .post(path + '/login', jsonsd, config)
       .then(response => {
         console.log('Logging In...');
         localStorage.setItem('bearer', response.data.access_token);
@@ -58,6 +59,7 @@ class AuthService {
         BroadcastingService.initialize();
         EventBus.$emit('loaded');
         FoxdoxGeneralService.getProviderList();
+        FolderService.getRootFolder();
       });
   }
 
@@ -77,7 +79,8 @@ class AuthService {
       }
     };
 
-    axios.post(path + '/logout', formData, configExt)
+    axios
+      .post(path + '/logout', formData, configExt)
       .then(response => {
         console.log('Logged Out.');
       })

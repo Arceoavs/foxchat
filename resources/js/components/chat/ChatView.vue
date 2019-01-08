@@ -83,8 +83,8 @@ export default {
     },
     chatList() {
       if (this.isProvider)
-        return "Weitere Chats";
-      else return "Andere Provider";
+        return this.$ml.get("provider_list_title_chat_overview");
+      else return this.$ml.get("client_list_title_chat_overview");
     }
   },
   methods: {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../store';
 
 var configExt = {
   headers: {
@@ -16,20 +17,16 @@ class FolderService {
       'Bearer ' + localStorage.getItem('bearer');
   }
 
-  getRootFolder() {
-    console.log('Getting root folder');
-
-    axios
-      .get(path + '/retrieverootfolder', configExt)
-      .then(response => {
-        console.log('Retrieving root folder...');
-        console.log(response.data.Id);
-        console.log('Got root folder');
-        return response.data.Id;
-      })
-      .catch(error => {
-        console.log('Error getting root folder: ' + JSON.stringify(error));
-      });
+  async getRootFolder() {
+    try {
+      const response = await axios.get(path + '/retrieverootfolder', configExt);
+      console.log('Retrieving root folder...');
+      console.log(response.data.Id);
+      console.log('Got root folder');
+      store.commit('setRootFolder', response.data.Id);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   getProviderFolder() {
@@ -189,7 +186,7 @@ class FolderService {
     console.log('Found myprovider folder');
   }
 
-  listSubFolders_orig(folderId) {
+  listSubFolders(folderId) {
     this.refresh();
 
     var body = { folderId: folderId };
@@ -207,7 +204,7 @@ class FolderService {
       });
   }
 
-  listSubFolders() {
+  listSubFolders_get() {
     this.refresh;
     //var body = { folderId: folderId };
 
