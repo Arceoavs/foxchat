@@ -17,6 +17,9 @@ export const store = new Vuex.Store({
       }
     ],
     user: {},
+    userRootFolder: {
+      rootFolder: ''
+    },
     recentDocuments: [
       {
         CanRead: true,
@@ -239,6 +242,15 @@ export const store = new Vuex.Store({
     },
     getUser(state) {
       return state.user;
+    },
+    getRecentDocuments(state) {
+      return state.recentDocuments;
+    },
+    getRecentFolders(state) {
+      return state.recentFolders;
+    },
+    getUserRootFolder(state) {
+      return state.rootFolder;
     }
   },
   mutations: {
@@ -250,6 +262,15 @@ export const store = new Vuex.Store({
     },
     setUser(state, newUser) {
       state.user = newUser;
+    },
+    setRecentDocuments(state, newDocumentList) {
+      state.recentDocuments = newDocumentList;
+    },
+    setRecentFolders(state, newFolderList) {
+      state.recentFolders = newFolderList;
+    },
+    setRootFolder(state, newRootFolder) {
+      state.rootFolder = newRootFolder;
     }
   },
   actions: {

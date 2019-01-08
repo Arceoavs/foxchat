@@ -1,8 +1,6 @@
 <template>
   <b-card>
     <router-link :to="{name:'children'}" append>
-      <p>lol</p>
-      <router-view></router-view>
       <provider-list-component
         v-for="provideritem in providers"
         v-bind:key="provideritem.ProviderShortName"
@@ -10,30 +8,43 @@
         v-bind:documentChats="provideritem.documentChats"
         v-bind:generalChat="provideritem.generalChat"
       ></provider-list-component>
+      <button v-on:click="test">Teste!</button>
+      <router-view></router-view>
     </router-link>
   </b-card>
 </template>
 
 <script>
 import FolderComponent from "./FolderComponent.vue";
+import ListComponent from "./ListComponent.vue";
 import ProviderListComponent from "./ProviderListComponent.vue";
+import FolderService from "../../services/FolderService.js";
 import { store } from "../../store.js";
 
 export default {
   data() {
-    console.log(this.$route);
-    console.log(this.$route.currentRoute);
+    //console.log(this.$route);
+    //console.log(this.$route.currentRoute);
     return {};
   },
+  mounted() {},
   components: {
     FolderComponent,
-    ProviderListComponent
+    ProviderListComponent,
+    ListComponent
   },
   computed: {
     providers: function() {
-      console.log(store.state.inboxForUser);
       //return store.state.providerList;
       return store.state.inboxForUser;
+    }
+  },
+  methods: {
+    test() {
+      //console.log("Hole mir den Root: " + FolderService.getRootFolder());
+      console.log(
+        "Hole mir den Privider Folder " + FolderService.listSubFolders()
+      );
     }
   }
 };

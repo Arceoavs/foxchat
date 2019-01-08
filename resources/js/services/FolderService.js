@@ -1,8 +1,4 @@
 import axios from 'axios';
-import Folder from '../model/folder.js';
-import Document from '../model/document.js';
-import { stringify } from 'querystring';
-import EventBus from './event-bus';
 
 var configExt = {
   headers: {
@@ -42,10 +38,8 @@ class FolderService {
     // 2 GET SUBFOLDERS OF ROOT
     // 3 GET FOLDER ID FOR FOLDER 'Meine Provider'
 
-    // var root = this.getRootFolder();
-    var root = '4b6c05d5-02e4-407d-9928-b5a2183d2886';
-
-    //var subFolders = this.listSubFolders(root);
+    //var root = this.getRootFolder();
+    //var root = '4b6c05d5-02e4-407d-9928-b5a2183d2886';
     var subFolders = [
       {
         Created: 'Wed, 07 Nov 2018 20:39:46 GMT',
@@ -183,6 +177,7 @@ class FolderService {
         FolderCount: 0
       }
     ];
+    //var subFolders = this.listSubFolders(root);
 
     // LOOK FOR MYPROVIDER FOLDER IN SUBFOLDERS OF ROOT
     for (let index = 0; index < subFolders.length; index++) {
@@ -194,7 +189,7 @@ class FolderService {
     console.log('Found myprovider folder');
   }
 
-  listSubFolders(folderId) {
+  listSubFolders_orig(folderId) {
     this.refresh();
 
     var body = { folderId: folderId };
@@ -206,6 +201,23 @@ class FolderService {
         console.log(JSON.stringify(response.data.Items));
         console.log('Got subfolders');
         return response.data.Items;
+      })
+      .catch(error => {
+        console.log('Error getting subfolders: ' + JSON.stringify(error));
+      });
+  }
+
+  listSubFolders() {
+    this.refresh;
+    //var body = { folderId: folderId };
+
+    axios
+      .get(path + '/listfolders', configExt)
+      .then(response => {
+        console.log('Retrieving subfolders...');
+        console.log(response.data.Id);
+        console.log('Got subfolders');
+        return response.data.Id;
       })
       .catch(error => {
         console.log('Error getting subfolders: ' + JSON.stringify(error));

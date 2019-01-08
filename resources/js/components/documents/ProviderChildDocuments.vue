@@ -1,21 +1,25 @@
 <template>
-    <b-col>
-        <b-breadcrumb items:="items">
-        </b-breadcrumb>
-        <a>go to chat</a>
-    </b-col>
+  <b-container>
+    <b-row>
+      <b-col>
+        <b-card>Child</b-card>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 export default {
-    data(){
-        return {
-            items: [{
-                text: "child",
-                href: "/dokumente/provider/child",
-            }]
+  //props: [providerName, folders],
+  data() {
+    return {
+      items: [
+        {
+          text: "child",
+          href: "/dokumente/provider/child"
         }
-    }
-}
+      ]
+    };
+  }
+};
 </script>
-
