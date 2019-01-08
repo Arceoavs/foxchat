@@ -62,11 +62,13 @@ export default {
   },
   computed: {
     documents: function() {
-      console.log(store.state.recentDocuments);
       return store.state.recentDocuments;
     },
     folders: function() {
-      return FolderService.listSubFolders();
+      console.log(
+        "Alle Folders:" + JSON.stringify(store.state.recentFolders.Items)
+      );
+      return store.state.recentFolders.Items;
     },
     providers: function() {
       //return store.state.providerList;
@@ -80,14 +82,7 @@ export default {
       return true;
     }
   },
-  methods: {
-    test() {
-      //console.log("Hole mir den Root: " + FolderService.getRootFolder());
-      console.log(
-        "Hole mir den Provider Folder " + FolderService.listSubFolders()
-      );
-    }
-  },
+  methods: {},
   components: {
     DocumentComponent,
     FolderComponent,

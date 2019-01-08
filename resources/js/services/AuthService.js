@@ -56,10 +56,12 @@ class AuthService {
         this.logout(self);
       })
       .finally(param => {
+        //Alles was bei Anmeldung async nachgeladen werden muss:
         BroadcastingService.initialize();
         EventBus.$emit('loaded');
         FoxdoxGeneralService.getProviderList();
         FolderService.getRootFolder();
+        //getRootFolder holt dann Subfolder und Dokumente in rootFolder
       });
   }
 
@@ -92,10 +94,14 @@ class AuthService {
         EventBus.$emit('loaded');
       });
     BroadcastingService.unsubscribeFromChannel();
+    //Alle Daten wieder loeschen
     localStorage.removeItem('bearer');
     localStorage.removeItem('user');
     store.dispatch('resetUserInbox');
     store.dispatch('resetUser');
+    store.dispatch('resetRootFolder');
+    store.dispatch('resetRecentFolders');
+    store.dispatch('resetRecentDocuments');
   }
 
   retrieveUser(self) {

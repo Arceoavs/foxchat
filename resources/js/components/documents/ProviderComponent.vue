@@ -41,11 +41,12 @@ export default {
   },
   methods: {
     test() {
-      console.log("Hole mir den Root: " + FolderService.getRootFolder());
-      //console.log(
-      //  "Hole mir den Privider Folder " +
-      //    FolderService.listSubFolders(store.state.userRootFolder)
-      //);
+      //console.log("Hole mir den Root: " + store.state.userRootFolder.Id);
+      // console.log("Hole mir den Privider Folder " +FolderService.getSubFolders(store.state.userRootFolder));
+      console.log(
+        "Hole Dokumente " +
+          FolderService.getDocuments(store.state.userRootFolder.Id)
+      );
     }
   }
 };
