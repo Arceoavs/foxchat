@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import { MLInstaller, MLCreate, MLanguage } from 'vue-multilanguage'
- 
+
 Vue.use(MLInstaller)
- 
+
 export default new MLCreate({
   initial: 'en',
   save: process.env.NODE_ENV === 'production',
@@ -27,8 +27,16 @@ export default new MLCreate({
       footer_message_left: "Projektseminar: Digitaler Tresor",
       footer_message_right: "powered by foxdox",
       start_chat_document: "Chat starten",
+      your_chat: "Ihr Chat mit Nutzer",
+      chat_list_provider: "Weitere Chats",
+      chat_list_client: "Andere Provider",
+      keine_provider_msg: "Sie haben keine Provider, die sich für den foxChat registriert haben.",
+      willkommen_bei: "Willkommen bei ",
+      starting_chat_to_doc: "Sie starten einen Chat zu folgendem Dokument:",
+      abbruch: "Abbruch",
+      chat_starten: "Chat starten",
     }),
- 
+
     new MLanguage('en').create({
       dokumente: 'Documents',
       chat: 'Chat',
@@ -49,6 +57,14 @@ export default new MLCreate({
       footer_message_left: "Seminar: Digital Safe",
       footer_message_right: "powered by foxdox",
       start_chat_document: "Start Chat",
+      your_chat: 'Your chat with user',
+      chat_list_provider: "More chats",
+      chat_list_client: "Other providers",
+      keine_Provider_msg: "You don't have any Providers that registered for foxChat.",
+      willkommen_bei: "Welcome to ",
+      starting_chat_to_doc: "You are starting a chat with the following document:",
+      abbruch: "Cancel",
+      chat_starten: "Start chat",
     })
   ]
 })

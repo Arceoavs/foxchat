@@ -25,11 +25,11 @@
 export default {
   data() {
     return {
-      footerMessageLeft: "Projektseminar: Der digitale Tresor",
-      footerMesageRight: "powered by foxdox"
+      //footerMessageLeft: "Projektseminar: Der digitale Tresor",
+      //footerMesageRight: "powered by foxdox"
     };
   }
-};
+}
 </script>
 
 <style>
