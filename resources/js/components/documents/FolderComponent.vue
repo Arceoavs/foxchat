@@ -1,24 +1,27 @@
 <template>
-  <b-jumbotron bg-variant="secondary" class="folderGroup">
-    <!-- Folder name -->
-    <router-link :to="{path: '/dokumente/provider/' + name}" class="box">
-      <b-card>
-        <div class="box">{{name}}
-        </div>
-      </b-card>
-    </router-link>
-  </b-jumbotron>
+  <!-- Folder name -->
+  <router-link v-bind:to="{ path: name}" append>
+    <b-card class="box" @click="openFolder()">
+      <font-awesome-icon class="fox" icon="folder-open" size="2x"/>
+      {{name}}
+    </b-card>
+  </router-link>
 </template>
 
 <script>
+import FolderService from "../../services/FolderService.js";
+import Folder from "../../model/folder.js";
+import ListComponent from "./ListComponent.vue";
 
 export default {
-  props: ["name"],
+  props: ["name", "id"],
   methods: {
-     openFolder() {
-       alert("Ordner " + this.name + " wird geöffnet");
-     }
-  },
+    openFolder() {
+      // FolderService.getProviderFolder();
+      // FolderService.listSubFolders(this.id);
+      // FolderService.listDocuments(this.id);
+    }
+  }
 };
 </script>
 
@@ -29,12 +32,19 @@ export default {
   background-color: rgba(241, 241, 241, 0.1) !important;
   cursor: pointer;
 }
-.box{
-  color:rgba(108, 117, 125, 1) !important;
+.box {
+  color: rgba(108, 117, 125, 1) !important;
   text-decoration: none !important;
 }
-.box:hover{
-  color:#f86a2d !important;
+.box:hover {
+  color: #f86a2d !important;
   cursor: pointer;
+}
+
+.fox {
+  color: #f86a2d !important;
+}
+.folder {
+  text-align: right !important;
 }
 </style>

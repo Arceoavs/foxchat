@@ -17,7 +17,8 @@ import {
   faAngleRight,
   faComments,
   faPlusCircle,
-  faFile
+  faFile,
+  faFolderOpen
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './ml';
@@ -29,7 +30,7 @@ Vue.use(Chat);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-library.add(faCoffee, faAngleRight, faComments, faPlusCircle, faFile);
+library.add(faCoffee, faAngleRight, faComments, faPlusCircle, faFile, faFolderOpen);
 
 const app = new Vue({
   el: '#app',
