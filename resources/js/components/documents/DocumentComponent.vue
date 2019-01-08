@@ -10,7 +10,7 @@
 </template>
 
  <script>
- import DocumentService from '../../services/DocumentService.js';
+import DocumentService from "../../services/DocumentService.js";
 export default {
   props: ["id", "name"],
   methods: {

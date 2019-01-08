@@ -12,7 +12,6 @@ import ProviderDocuments from './components/documents/ProviderDocuments.vue';
 import ProviderChildDocuments from './components/documents/ProviderChildDocuments.vue';
 import DocumentAggr from './components/documents/DocumentAggr.vue';
 import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
-import FolderComponent from './components/documents/FolderComponent.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
@@ -49,11 +48,6 @@ const router = new VueRouter({
           path: '',
           name: 'Dokumente',
           component: DocumentOverviewComponent
-        },
-        {
-          path: 'folder',
-          name: 'Folder',
-          component: FolderComponent
         }
       ]
     },

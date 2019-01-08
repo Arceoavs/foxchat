@@ -8,7 +8,7 @@
       </b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav v-show="loggedIn">
-          <b-nav-item to="/dokumente">
+          <b-nav-item to="/">
             <p v-text="$ml.get('dokumente')"/>
           </b-nav-item>
           <b-nav-item to="/chat">

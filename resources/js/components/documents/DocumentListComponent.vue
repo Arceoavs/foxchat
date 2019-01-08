@@ -5,7 +5,12 @@
         <font-awesome-icon class="fox" icon="file" size="2x"/>
         <button type="button" class="listcomponent" @click="openDocument()">{{name}}</button>
         <div class="cardIcon textFox">
-          <button type="button" class="listcomponent" @click="startChat()" v-text = "$ml.get('start_chat_document')" />
+          <button
+            type="button"
+            class="listcomponent"
+            @click="startChat()"
+            v-text="$ml.get('start_chat_document')"
+          />
           <font-awesome-icon class="fox" icon="comments" size="2x"/>
         </div>
       </b-card>
@@ -22,8 +27,11 @@ export default {
     },
     startChat() {
       //alert("Sie starten nun einen Chat zu Dokument " + this.name);
-      var providerName = 'test'; //TODO: providerName von DocumentOverviewComponent (Zugriff?)
-      this.$router.push({name: 'ConfirmChatToDocument', params:{docName: this.name, provName: providerName}});
+      var providerName = "test"; //TODO: providerName von DocumentOverviewComponent (Zugriff?)
+      this.$router.push({
+        name: "ConfirmChatToDocument",
+        params: { docName: this.name, provName: providerName }
+      });
     }
   }
 };

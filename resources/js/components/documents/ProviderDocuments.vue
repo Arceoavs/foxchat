@@ -1,31 +1,39 @@
 <template>
   <b-card>
-    <router-link :to="{name:'children'}" append><p>lol</p>
-    <router-view></router-view>
+    <router-link :to="{name:'children'}" append>
+      <p>lol</p>
+      <router-view></router-view>
+      <provider-list-component
+        v-for="provideritem in providers"
+        v-bind:key="provideritem.ProviderShortName"
+        v-bind:provider="provideritem.ProviderShortName"
+        v-bind:documentChats="provideritem.documentChats"
+        v-bind:generalChat="provideritem.generalChat"
+      ></provider-list-component>
     </router-link>
   </b-card>
 </template>
 
 <script>
-import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
 import FolderComponent from "./FolderComponent.vue";
+import ProviderListComponent from "./ProviderListComponent.vue";
 import { store } from "../../store.js";
 
 export default {
   data() {
     console.log(this.$route);
     console.log(this.$route.currentRoute);
-    return {
-    };
+    return {};
   },
   components: {
     FolderComponent,
-    DocumentBreadcrumb
+    ProviderListComponent
   },
   computed: {
     providers: function() {
-      console.log(store.state.inboxForUser)
-      return store.state.providerList;
+      console.log(store.state.inboxForUser);
+      //return store.state.providerList;
+      return store.state.inboxForUser;
     }
   }
 };

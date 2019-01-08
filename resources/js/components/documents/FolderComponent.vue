@@ -1,20 +1,22 @@
 <template>
-  <!-- Folder name -->
   <router-link v-bind:to="{ path: name}" append>
-    <b-card class="box" @click="openFolder()">
+    <b-card class="box">
       <font-awesome-icon class="fox" icon="folder-open" size="2x"/>
-      {{name}}
+      <button type="button" class="listcomponent" @click="openFolder()">{{name}}</button>
     </b-card>
   </router-link>
 </template>
 
-<script>
+ <script>
+import DocumentService from "../../services/DocumentService.js";
 import FolderService from "../../services/FolderService.js";
 import Folder from "../../model/folder.js";
-import ListComponent from "./ListComponent.vue";
 
 export default {
-  props: ["name", "id"],
+  props: ["id", "name"],
+  mounted(){
+    
+  },
   methods: {
     openFolder() {
       // FolderService.getProviderFolder();
@@ -24,27 +26,34 @@ export default {
   }
 };
 </script>
-
-<style>
-.folderGroup {
-  padding: 0.1em;
-  margin: 0.1em;
-  background-color: rgba(241, 241, 241, 0.1) !important;
-  cursor: pointer;
-}
-.box {
-  color: rgba(108, 117, 125, 1) !important;
-  text-decoration: none !important;
-}
-.box:hover {
-  color: #f86a2d !important;
-  cursor: pointer;
-}
-
+ 
+ <style>
 .fox {
   color: #f86a2d !important;
 }
-.folder {
-  text-align: right !important;
+
+.listcomponent {
+  font-size: 16pt;
+  font-weight: 400;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: rgba(86, 86, 86, 1) !important;
+  text-decoration: none;
+  margin: 0.2em !important;
+}
+.listcomponent :hover {
+  color: #f86a2d !important;
+}
+
+.box {
+  border: none;
+  outline: none;
+  color: rgba(108, 117, 125, 1) !important;
+  text-decoration: none;
+  margin: 0.2em !important;
 }
 </style>

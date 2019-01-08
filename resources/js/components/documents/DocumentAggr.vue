@@ -1,29 +1,29 @@
 <template>
   <div>
-      <b-breadcrumb :items="items"/>
+    <b-breadcrumb :items="items"/>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       items: [
         {
           text: "Dokumente",
-          to: {name: 'Dokumente'}
+          to: { name: "Dokumente" }
         },
         {
           text: "Provider",
-          to: {name: 'myproviders'}
+          to: { name: "myproviders" }
         },
         {
           text: "Child",
-          to: {name: 'children'}
+          to: { name: "children" }
         }
       ]
-    }
+    };
   },
 
   mounted() {

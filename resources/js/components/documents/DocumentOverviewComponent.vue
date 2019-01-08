@@ -42,26 +42,24 @@
 </template>
 
 <script>
-import DocumentBreadcrumb from "./DocumentBreadcrumb.vue";
 import DocumentComponent from "./DocumentComponent.vue";
-import recentDocuments from "./recentDocuments.json";
 import FolderService from "../../services/FolderService";
+import { store } from "../../store.js";
 
 export default {
   data() {
     return {
-      showCollapse: false,
-      documents: recentDocuments,
-      lastDocumentTitle: "neueste Dokumente",
-      myProvidersTitle: "meine Provider"
+      showCollapse: false
     };
   },
   components: {
-    DocumentBreadcrumb,
-    DocumentComponent,
-    recentDocuments
+    DocumentComponent
   },
   computed: {
+    documents: function() {
+      console.log(store.state.recentDocuments);
+      return store.state.recentDocuments;
+    },
     dropdownArrow() {
       let arrow = "rotate-down";
       if (this.showCollapse === true) {
