@@ -16,6 +16,13 @@ body {
 .navbar-laravel {
   background-color: #fff !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  height: 60px;
+}
+
+.navbar-element{
+  // color: $foxi !important;
+  font-size: 120%;
 }
 
 .navbar-light .navbar-nav .show > .nav-link,
@@ -38,12 +45,13 @@ body {
 .foxcolor {
   background-color: $foxi;
   color: white !important;
+  // font-weight: bold;
 }
 
-.navbar {
-  padding: 0rem 1rem !important;
-  padding-right: 0rem !important;
-}
+// .navbar {
+//   padding: 0rem 1rem !important;
+//   padding-right: 0rem !important;
+// }
 
 .max-height-nav {
   height: 60px;
