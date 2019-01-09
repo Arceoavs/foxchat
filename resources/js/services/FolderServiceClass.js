@@ -52,9 +52,11 @@ export default class FolderService {
     try {
       const response = await axios.post(path + '/listfolders', body, configExt);
       console.log('Retrieving subfolders of ' + folderId + ' . . .');
-      console.log(response.data.Items);
+      //console.log(response.data.Items);
       console.log('Got subfolders');
-      store.commit('setCurrentFolder', response.data);
+      store.commit('setCurrentFolder', response.data.Items);
+      console.log(store.state.currentFolder);
+      //return response.data.Items;
     } catch (error) {
       console.log('Error getting subfolders: ' + error);
     }
