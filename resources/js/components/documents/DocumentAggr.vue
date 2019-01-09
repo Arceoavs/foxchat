@@ -1,29 +1,30 @@
 <template>
   <div>
-    <b-breadcrumb :items="items"/>
+    <breadcrumb v-bind:items="items"></breadcrumb>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Breadcrumb from "./Breadcrumb.vue";
+
 export default {
-  data() {
-    return {
-      items: [
+  computed: {
+    items: function() {
+      return [
         {
-          text: "Dokumente",
-          to: { name: "Dokumente" }
+          text: "Dokumente"
+          //to: { name: "Dokumente" }
         },
         {
-          text: "Child",
-          to: { name: "children" }
+          text: "Child"
+          //to: { name: "children" }
         }
-      ]
-    };
+      ];
+    }
   },
-
-  mounted() {
-    console.log("Nested Component mounted.");
+  components: {
+    Breadcrumb
   }
 };
 </script>
