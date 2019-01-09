@@ -14,16 +14,24 @@ import Folder from "../../model/folder.js";
 import { store } from "../../store.js";
 
 export default {
-  props: ["id", "name", "folde"],
+  props: ["id", "name"],
   mounted() {},
   methods: {
     openFolder() {
+      console.log(this.buildURL());
       FolderService.getSubFolders(this.id).data;
       FolderService.getDocuments(this.id);
       this.$router.push({
-        path: this.$route.path + this.name,
-        query: { parent: this.id }
+        name: "FolderChild",
+        params: { name: this.buildURL() }
       });
+    },
+    /**
+     * Builds the URL for an subfolder.
+     * Appends the name of the subfolder without spaces to the current route that begins after the /documents/ part
+     */
+    buildURL() {
+      return this.$route.path.substring(11) + "-" + this.name.replace(/ /g, "");
     }
   }
 };

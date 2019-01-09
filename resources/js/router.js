@@ -16,10 +16,6 @@ import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
 import ChatProviderOverview from './components/chat/provider/ChatProviderOverview.vue';
-//Services
-import auth from './services/AuthService.js';
-import EventBus from './services/event-bus.js';
-import { store } from './store';
 
 Vue.use(VueRouter);
 
@@ -40,9 +36,8 @@ const router = new VueRouter({
       children: [
         {
           path: ':name',
-          name: 'folderChild',
-          component: FolderChild,
-          props: true
+          name: 'FolderChild',
+          component: FolderChild
         },
         {
           path: '',

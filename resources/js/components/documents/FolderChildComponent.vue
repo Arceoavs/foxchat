@@ -12,9 +12,7 @@
       v-bind:key="folder.Id"
       v-bind:id="folder.Id"
       v-bind:name="folder.Name"
-      v-bind:currentfolder="folder"
     ></folder-component>
-    <p>{{parent}}</p>
     <button v-on:click="test">Teste!</button>
   </b-container>
 </template>
@@ -28,7 +26,7 @@ import FolderComponent from "./FolderComponent.vue";
 export default {
   data() {
     return {
-      parent: this.$route.query.parent
+      //parent: this.$route.query.parent
     };
   },
   computed: {
@@ -45,11 +43,11 @@ export default {
   },
   methods: {
     test() {
-      console.log("Teste!");
+      //console.log("Teste!");
       //FolderService.getSubFolders(this.parent);
       //console.log(this.folders);
-      FolderService.getDocuments(this.parent);
-      console.log(this.documents);
+      //FolderService.getDocuments(this.parent);
+      //console.log(this.documents);
     }
   }
 };

@@ -22,7 +22,6 @@
             v-bind:key="folder.Id"
             v-bind:id="folder.Id"
             v-bind:name="folder.Name"
-            v-bind:currentfolder="folder"
           ></folder-component>
         </b-jumbotron>
       </b-col>
