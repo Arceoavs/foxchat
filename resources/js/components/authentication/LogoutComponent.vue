@@ -1,7 +1,6 @@
 <template>
-  <b-nav-item right class="logout-link" v-on:click="logout()">
-    <a class="foxcolor" v-text="$ml.get('abmelden')"/>
-  </b-nav-item>
+  <!-- <span class="foxcolor " v-text="$ml.get('abmelden')"/> -->
+  <button class="btn logout-btn" v-text="$ml.get('abmelden')" v-on:click="logout()"/>
 </template>
 
 <script>
@@ -9,8 +8,7 @@ import auth from "../../services/AuthService.js";
 
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     logout: function() {
@@ -23,3 +21,27 @@ export default {
   }
 };
 </script>
+
+<style>
+.logout-btn {
+  background: #f86a2d;
+  border-color: #f86a2d;
+  color: white !important;
+  width: 120px;
+  font-size: 100%;
+  line-height: 250%;
+  padding: 0px;
+}
+@media (max-width: 767px) {
+  .logout-btn {
+    background: #f86a2d;
+    border-color: #f86a2d;
+    color: white !important;
+    width: 100%;
+    font-size: 100%;
+    line-height: 250%;
+    padding: 0px;
+  }
+}
+</style>
+
