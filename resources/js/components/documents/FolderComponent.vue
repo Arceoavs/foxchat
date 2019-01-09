@@ -1,10 +1,10 @@
 <template>
-  <router-link v-bind:to="{ path: name}" append>
-    <b-card class="box">
-      <font-awesome-icon class="fox" icon="folder-open" size="2x"/>
-      <button type="button" class="listcomponent" @click="openFolder()">{{name}}</button>
-    </b-card>
-  </router-link>
+  <!--<router-link v-bind:to="{ path: name}" append>-->
+  <b-card class="box">
+    <font-awesome-icon class="fox" icon="folder-open" size="2x"/>
+    <button type="button" class="listcomponent" @click="openFolder()">{{name}}</button>
+  </b-card>
+  <!--</router-link>-->
 </template>
 
  <script>
@@ -13,13 +13,15 @@ import FolderService from "../../services/FolderService.js";
 import Folder from "../../model/folder.js";
 
 export default {
-  props: ["id", "name"],
-  mounted(){
-  },
+  props: ["id", "name", "folder"],
+  mounted() {},
   methods: {
     openFolder() {
       // FolderService.getProviderFolder();
-      // FolderService.listSubFolders(this.id);
+      console.log(FolderService.getSubFolders(this.id));
+      console.log(this.$router);
+      this.$router.push({ path: "documents/" + this.name });
+
       // FolderService.listDocuments(this.id);
     }
   }

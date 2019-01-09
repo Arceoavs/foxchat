@@ -21,7 +21,8 @@ export const store = new Vuex.Store({
     recentDocuments: {
       Name: 'Loading...'
     },
-    recentFolders: []
+    recentFolders: [],
+    currentFolder: []
   },
   plugins: [createPersistedState()],
   getters: {
@@ -42,6 +43,9 @@ export const store = new Vuex.Store({
     },
     getUserRootFolder(state) {
       return state.userRootFolder;
+    },
+    getCurrentFolder(state) {
+      return state.currentFolder;
     }
   },
   mutations: {
@@ -62,6 +66,9 @@ export const store = new Vuex.Store({
     },
     setRootFolder(state, newRootFolder) {
       state.userRootFolder = newRootFolder;
+    },
+    setCurrentFolder(state, newCurrentFolder) {
+      state.currentFolder = newCurrentFolder;
     }
   },
   actions: {
@@ -90,6 +97,9 @@ export const store = new Vuex.Store({
     },
     resetRecentDocuments({ commit }) {
       commit('setRecentDocuments', [{}]);
+    },
+    resetCurrentFolder({ commit }) {
+      commit('setCurrentFolder', [{}]);
     }
   }
 });

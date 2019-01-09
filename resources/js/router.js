@@ -9,7 +9,7 @@ import LoginAggr from './components/authentication/LoginAggr.vue';
 //Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import ProviderDocuments from './components/documents/ProviderComponent.vue';
-import ProviderChildDocuments from './components/documents/ProviderChildDocuments.vue';
+import FolderChild from './components/documents/FolderChildComponent.vue';
 import DocumentAggr from './components/documents/DocumentAggr.vue';
 import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
 //Chat
@@ -32,26 +32,23 @@ const router = new VueRouter({
 
       children: [
         {
-          path: 'provider',
-          name: 'myproviders',
-          component: ProviderDocuments,
-
-          children: [
-            {
-              path: 'child',
-              name: 'children',
-              component: ProviderChildDocuments
-            }
-          ]
-        },
-        {
           path: '',
           name: 'Dokumente',
           component: DocumentOverviewComponent
         }
       ]
     },
-    ,
+    {
+      path: '/documents',
+      component: DocumentAggr,
+      children: [
+        {
+          path: ':name',
+          name: 'foldercomponent',
+          component: FolderChild
+        }
+      ]
+    },
     {
       path: '/login',
       component: LoginAggr,

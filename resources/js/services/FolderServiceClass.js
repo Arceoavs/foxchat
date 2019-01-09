@@ -25,10 +25,24 @@ export default class FolderService {
       console.log(response.data);
       console.log('Got root folder');
       store.commit('setRootFolder', response.data);
-      this.getSubFolders(response.data.Id);
+      this.getSubFoldersOfRoot(response.data.Id);
       this.getDocuments(response.data.Id);
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async getSubFoldersOfRoot(folderId) {
+    this.refresh();
+    var body = { folderId: folderId };
+    try {
+      const response = await axios.post(path + '/listfolders', body, configExt);
+      console.log('Retrieving subfolders of ' + folderId + ' . . .');
+      console.log(response.data.Items);
+      console.log('Got subfolders');
+      store.commit('setRecentFolders', response.data);
+    } catch (error) {
+      console.log('Error getting subfolders: ' + error);
     }
   }
 
@@ -40,7 +54,7 @@ export default class FolderService {
       console.log('Retrieving subfolders of ' + folderId + ' . . .');
       console.log(response.data.Items);
       console.log('Got subfolders');
-      store.commit('setRecentFolders', response.data);
+      store.commit('setCurrentFolder', response.data);
     } catch (error) {
       console.log('Error getting subfolders: ' + error);
     }

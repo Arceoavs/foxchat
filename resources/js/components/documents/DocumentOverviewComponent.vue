@@ -22,6 +22,7 @@
             v-bind:key="folder.Id"
             v-bind:id="folder.Id"
             v-bind:name="folder.Name"
+            v-bind:currentfolder="folder"
           ></folder-component>
         </b-jumbotron>
       </b-col>
@@ -34,14 +35,6 @@
     <b-row>
       <b-col>
         <provider-component></provider-component>
-        <!--<router-link :to="{name: 'myproviders'}" class="box" append>
-            <b-jumbotron bg-variant="secondary" class="chatGroup">
-              <b-card class="box">
-                <h3 class="left textColor" v-text="$ml.get('my_providers_title_doc_overview')"/>
-                <font-awesome-icon class="cardIcon textFox" icon="angle-right" size="2x"/>
-              </b-card>
-            </b-jumbotron>
-        </router-link>-->
       </b-col>
     </b-row>
   </b-container>

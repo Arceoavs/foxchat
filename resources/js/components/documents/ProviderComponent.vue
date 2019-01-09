@@ -1,15 +1,15 @@
 <template>
   <b-row>
     <b-col>
-      <router-link :to="{name:'children'}" append>
-        <provider-list-component
-          v-for="provideritem in providers"
-          v-bind:key="provideritem.ProviderShortName"
-          v-bind:provider="provideritem.ProviderShortName"
-          v-bind:documentChats="provideritem.documentChats"
-          v-bind:generalChat="provideritem.generalChat"
-        ></provider-list-component>
-      </router-link>
+      <!--  <router-link :to="{name:'children'}" append>-->
+      <provider-list-component
+        v-for="provideritem in providers"
+        v-bind:key="provideritem.ProviderShortName"
+        v-bind:provider="provideritem.ProviderShortName"
+        v-bind:documentChats="provideritem.documentChats"
+        v-bind:generalChat="provideritem.generalChat"
+      ></provider-list-component>
+      <!-- </router-link>-->
       <!--<button v-on:click="test">Teste!</button>-->
       <router-view></router-view>
     </b-col>
