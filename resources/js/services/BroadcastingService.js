@@ -32,8 +32,10 @@ class BroadcastingService {
   }
 
   unsubscribeFromChannel() {
-    window.Echo.leave('chat.' + store.state.user.name);
-    delete window.Echo;
+    if (window.Echo) {
+      window.Echo.leave('chat.' + store.state.user.name);
+      delete window.Echo;
+    }
   }
 }
 
