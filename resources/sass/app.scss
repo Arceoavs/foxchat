@@ -31,9 +31,9 @@ body {
 //   color: #777777;
 // }
 
-// .navbar-light .nav-item:active .nav-link{
-//   color: #777777;
-// }
+.navbar-light .nav-item .nav-link {
+  color: #777777;
+}
 
 // .navbar-light .nav-item .nav-link:focus{
 //   color: #777777;
@@ -44,10 +44,10 @@ body {
 }
 
 
-.navbar .navbar-item .show > .nav-link,
-.navbar .navbar-item .active > .nav-link,
-.navbar .navbar-item .nav-link.show,
-.navbar .navbar-item .nav-link.active {
+// .navbar-light .nav-item .show > .nav-link,
+// .navbar-light .nav-item .active > .nav-link,
+.navbar-light .nav-item .nav-link.show,
+.navbar-light .nav-item .nav-link.active {
   color: $foxi !important;
 }
 
