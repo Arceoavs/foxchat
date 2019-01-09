@@ -49,7 +49,10 @@ const router = new VueRouter({
           name: 'Dokumente',
           component: DocumentOverviewComponent
         }
-      ]
+      ],
+      meta: {
+        requiresAuth: true
+      }
     },
     ,
     {
@@ -66,7 +69,7 @@ const router = new VueRouter({
           name: 'Login',
           component: LoginComponent
         }
-      ]
+      ],
     },
     {
       path: '/chat',
