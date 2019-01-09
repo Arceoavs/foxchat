@@ -4,10 +4,10 @@ import { MLInstaller, MLCreate, MLanguage } from 'vue-multilanguage'
 Vue.use(MLInstaller)
 
 export default new MLCreate({
-  initial: 'de',
+  initial: 'Deutsch',
   save: process.env.NODE_ENV === 'production',
   languages: [
-    new MLanguage('de').create({
+    new MLanguage('Deutsch').create({
       dokumente: 'Dokumente',
       chat: 'Chat',
       anmeldung: 'Anmeldung',
@@ -47,7 +47,7 @@ export default new MLCreate({
 
     }),
 
-    new MLanguage('en').create({
+    new MLanguage('English').create({
       dokumente: 'Documents',
       chat: 'Chat',
       anmeldung: 'Login',
