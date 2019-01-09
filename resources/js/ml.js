@@ -43,6 +43,7 @@ export default new MLCreate({
       fox_username: "foxdox-Benutzername",
       password: "Passwort",
       benutzername: "Benutzername",
+      sprache: "Sprache",
 
     }),
 
@@ -82,6 +83,7 @@ export default new MLCreate({
       fox_username: "foxdox-username",
       password: "Password",
       benutzername: "Username",
+      sprache: "Language",
     })
   ]
 })
