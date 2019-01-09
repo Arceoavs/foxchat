@@ -9,8 +9,9 @@
       <b-col>
         <div
           v-if="providers.length==0"
-          class="text-center"
-        >Sie haben keine Provider, die sich für den foxChat registriert haben.</div>
+          class="text-center">
+          <p v-text="this.get('keine_Provider_msg')" />
+        </div>
         <chat-client-component
           v-for="provideritem in providers"
           v-bind:key="provideritem.ProviderShortName"
