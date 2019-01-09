@@ -19,6 +19,7 @@ import ChatProviderOverview from './components/chat/provider/ChatProviderOvervie
 //Services
 import auth from './services/AuthService.js';
 import EventBus from './services/event-bus.js';
+import { store } from './store';
 
 Vue.use(VueRouter);
 
@@ -64,7 +65,7 @@ const router = new VueRouter({
           name: 'Login',
           component: LoginComponent
         }
-      ],
+      ]
     },
     {
       path: '/chat',

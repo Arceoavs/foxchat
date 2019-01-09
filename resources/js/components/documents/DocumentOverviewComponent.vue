@@ -45,6 +45,7 @@ import DocumentComponent from "./DocumentComponent.vue";
 import FolderService from "../../services/FolderService";
 import { store } from "../../store.js";
 import FolderComponent from "./FolderComponent.vue";
+import FolderChildComponent from "./FolderChildComponent.vue";
 import ProviderComponent from "./ProviderComponent.vue";
 
 export default {
@@ -79,7 +80,8 @@ export default {
   components: {
     DocumentComponent,
     FolderComponent,
-    ProviderComponent
+    ProviderComponent,
+    FolderChildComponent
   }
 };
 </script>
