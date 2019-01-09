@@ -44,6 +44,7 @@ export default new MLCreate({
       password: "Passwort",
       benutzername: "Benutzername",
       sprache: "Sprache",
+      sprache_waehlen: "Sprache wählen:",
 
     }),
 
@@ -84,6 +85,7 @@ export default new MLCreate({
       password: "Password",
       benutzername: "Username",
       sprache: "Language",
+      sprache_waehlen: "Choose language:",
     })
   ]
 })

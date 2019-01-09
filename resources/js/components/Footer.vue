@@ -5,13 +5,18 @@
       <b-row>
         <b-col class="text-center">
           <b-dropdown id="ddown1" v-bind:text="$ml.get('sprache')" class="m-md-2">
-            <b-dropdown-item
+            <b-dropdown-header v-text="$ml.get('sprache_waehlen')"></b-dropdown-header>
+            <b-dropdown-item 
               v-for="lang in $ml.list"
               :key="lang"
               @click="$ml.change(lang)"
               v-text="lang"
-            ></b-dropdown-item>
+            >
+            </b-dropdown-item>
           </b-dropdown>
+          
+
+          
         </b-col>
       </b-row>
 
@@ -51,4 +56,10 @@
   /* font-size: 10pt; */
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.btn-secondary{
+  background:rgb(255, 255, 255) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
 </style>
