@@ -28,7 +28,7 @@ const router = new VueRouter({
     {
       //aggregiert die Dokumentensicht für die router-views und breadcrumbs
       path: '/',
-      redirect: '/documents',
+      redirect: '/documents/',
       //component: DocumentAggr,
 
       children: []

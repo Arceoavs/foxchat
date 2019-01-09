@@ -1,3 +1,3 @@
-import FolderService from './FolderServiceClass';
+import FolderService from './FolderServiceClass.js';
 
 export default new FolderService();

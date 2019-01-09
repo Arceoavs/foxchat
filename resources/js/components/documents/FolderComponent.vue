@@ -19,6 +19,7 @@ export default {
   methods: {
     openFolder() {
       FolderService.getSubFolders(this.id).data;
+      FolderService.getDocuments(this.id);
       this.$router.push({
         path: this.$route.path + this.name,
         query: { parent: this.id }

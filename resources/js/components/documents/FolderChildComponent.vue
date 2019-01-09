@@ -1,5 +1,12 @@
 <template>
   <b-container>
+    <document-component
+      v-for="document in documents"
+      v-bind:key="document.Id"
+      v-bind:id="document.Id"
+      v-bind:name="document.Name"
+    ></document-component>
+
     <folder-component
       v-for="folder in folders"
       v-bind:key="folder.Id"
@@ -26,7 +33,7 @@ export default {
   },
   computed: {
     documents: function() {
-      return store.state.recentDocuments;
+      return store.state.currentDocuments;
     },
     folders: function() {
       return store.state.currentFolder;
@@ -39,8 +46,10 @@ export default {
   methods: {
     test() {
       console.log("Teste!");
-      FolderService.getSubFolders(this.parent);
-      console.log(this.folders);
+      //FolderService.getSubFolders(this.parent);
+      //console.log(this.folders);
+      FolderService.getDocuments(this.parent);
+      console.log(this.documents);
     }
   }
 };
