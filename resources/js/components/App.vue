@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="container">
     <loading-component></loading-component>
     <b-navbar toggleable="md" class="navbar-laravel">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -23,9 +23,11 @@
       </b-collapse>
     </b-navbar>
     <!--<div class="clearfisx"></div>-->
+    <div id="body">
     <router-view></router-view>
+    </div>
     <b-row class="mt-5"></b-row>
-    <footer-component></footer-component>
+    <footer-component id="footer"></footer-component>
   </div>
 </template>
 
@@ -59,3 +61,27 @@ export default {
   }
 };
 </script>
+
+<style>
+html,
+
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+#body {
+   padding:10px;
+   padding-bottom:150px;   /*Height of the footer - ÄNDERN FÜR KLEINEREN ABSTAND UNTEN */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+}
+</style>
+

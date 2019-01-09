@@ -40,8 +40,7 @@
 
 <style>
 .footer {
-  position: absolute;
-  bottom: 0;
+  position: sticky; 
   width: 100%;
   /*height: 50px;*/
   /* width: 100%; */
