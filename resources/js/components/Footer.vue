@@ -4,7 +4,16 @@
     <b-container class="text-left">
       <b-row>
         
-
+<b-container class="bv-example-row">
+    <b-row>
+        <b-col> <p v-text="$ml.get('footer_message_left')"/></b-col>
+        <b-col><a
+                href="https://www.d-velop.de/foxdox/foxdox-home"
+                v-text="$ml.get('footer_message_right')"
+              /></b-col>
+        <b-col><a href="#!">Impressum</a></b-col>
+    </b-row>
+</b-container>
 
           <!-- Text Projektseminar: ... -->
         <b-col sm="6">
