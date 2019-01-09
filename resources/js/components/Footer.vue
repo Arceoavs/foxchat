@@ -28,7 +28,7 @@
         </b-col>
 
         <b-col>
-          <a href="#!">Impressum</a>
+          <a href="#!" v-text="$ml.get('impressum')"></a>
         </b-col>
       </b-row>
     </b-container>

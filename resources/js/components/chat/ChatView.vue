@@ -3,7 +3,8 @@
     <!--Headings-->
     <b-row class="mt-4 mb-2 pl-4">
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
-        <h2 class="textColor">{{chatList}}</h2>
+        <h2 v-if= "this.isProvider" class="textColor" v-text="$ml.get('provider_list_title_chat_overview')"></h2>
+        <h2 v-else class="textColor" v-text="$ml.get('client_list_title_chat_overview')"></h2>
       </b-col>
       <b-col>
         <h2 class="textColor" v-text="$ml.get('your_chat')"> </h2>
@@ -82,11 +83,6 @@ export default {
     chats: function() {
       return store.state.inboxForProvider;
     },
-    chatList() {
-      if (this.isProvider)
-        return this.$ml.get("provider_list_title_chat_overview");
-      else return this.$ml.get("client_list_title_chat_overview");
-    }
   },
   methods: {
     refreshInbox() {

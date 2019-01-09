@@ -28,11 +28,6 @@ import EventBus from "../../../services/event-bus";
 
 export default {
   props: ["title", "provider", "message", "date"],
-  // ,data() {
-  //   return {
-  //     titel : "Hallo"
-  //   };
-  // }
   computed: {
     cuttedTime() {
       return this.date.slice(11, 16);

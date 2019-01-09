@@ -29,7 +29,6 @@ export default new MLCreate({
       start_chat_document: "Chat starten",
       your_chat: "Ihr Chat mit Nutzer",
       chat_list_provider: "Weitere Chats",
-      chat_list_client: "Andere Provider",
       keine_provider_msg: "Sie haben keine Provider, die sich für den foxChat registriert haben.",
       willkommen_bei: "Willkommen bei ",
       starting_chat_to_doc: "Sie starten einen Chat zu folgendem Dokument: ",
@@ -44,6 +43,7 @@ export default new MLCreate({
       password: "Passwort",
       benutzername: "Benutzername",
       sprache: "Sprache",
+      impressum: "Impressum"
 
     }),
 
@@ -60,7 +60,7 @@ export default new MLCreate({
       add_chat: 'Add Chat',
       chat_client_overview_title: 'Your Chats with Providers',
       provider_list_title_chat_overview: "Further Chats",
-      client_list_title_chat_overview: "Further Provider",
+      client_list_title_chat_overview: "Further Providers",
       chat_hinzufuegen: "Add Chat",
       last_document_title_doc_overview: "New Documents",
       my_providers_title_doc_overview: "My Providers",
@@ -84,6 +84,7 @@ export default new MLCreate({
       password: "Password",
       benutzername: "Username",
       sprache: "Language",
+      impressum: "Impressum"
     })
   ]
 })
