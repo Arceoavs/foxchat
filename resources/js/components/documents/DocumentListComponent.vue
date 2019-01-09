@@ -23,7 +23,7 @@ export default {
   props: ["name"], //,"provider"
   methods: {
     openDocument() {
-      alert("Dokument " + this.name + " wird heruntergeladen von "); //+ this.provider
+      alert(this.$ml.get('dokument') + this.name + this.$ml.get('being_downloaded')); //+ this.provider
     },
     startChat() {
       //alert("Sie starten nun einen Chat zu Dokument " + this.name);

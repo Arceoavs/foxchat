@@ -12,11 +12,11 @@
       <b-col md="4" sm="6" cols="8">
         <div @keyup.enter="sendPassword()">
           <div class="form-group">
-            <input v-model="username" class="form-control" placeholder="Benutzername">
+            <input v-model="username" class="form-control" v-bind:placeholder="$ml.get('benutzername')">
           </div>
 
           <div class="form-group">
-            <input v-model="password" type="password" class="form-control" placeholder="Passwort">
+            <input v-model="password" type="password" class="form-control" v-bind:placeholder="$ml.get('password')">
           </div>
 
           <div class="form-group">

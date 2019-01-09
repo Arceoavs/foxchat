@@ -1,72 +1,71 @@
 <template>
+  <!-- Footer -->
   <footer class="font-small pt-4 mt-4 footer">
-    <b-container fluid>
+    <b-container class="text-left">
       <b-row>
-        <b-col>
-          <div class="footer-text footer-left">
-            <p v-text="$ml.get('footer_message_left')"/>
-          </div>
+        
+
+
+          <!-- Text Projektseminar: ... -->
+        <b-col sm="6">
+          <p v-text="$ml.get('footer_message_left')"/>
         </b-col>
-        <b-col>
-          <b-row class="justify-content-center footer-text">
-            <p>Sprache:</p>
-            <p v-for="lang in $ml.list" :key="lang" @click="$ml.change(lang)" v-text="lang"/>
-          </b-row>
-        </b-col>
-        <b-col>
-          <div class="footer-text footer-right">
-            <a
-              class="footer-text"
-              href="https://www.d-velop.de/foxdox/foxdox-home"
-              v-text="$ml.get('footer_message_right')"
-            />
-          </div>
+        <b-col sm="6">
+
+            <ul>
+              <!-- Text powered by foxdox -->
+            <li class="list-unstyled">
+              <a
+                href="https://www.d-velop.de/foxdox/foxdox-home"
+                v-text="$ml.get('footer_message_right')"
+              />
+            </li>
+
+          <!-- Platzhalter für ein Impressum -->
+            <li class="list-unstyled">
+              <a href="#!">Impressum</a>
+            </li>
+          
+
+          <!-- Switch für Sprachen -->
+          <p v-for="lang in $ml.list" :key="lang" @click="$ml.change(lang)" v-text="lang"/>
+
+          </ul>
+
         </b-col>
       </b-row>
     </b-container>
+<!-- Copyright-Text Bereich -->
+    
+    <div class="footer-copyright text-center py-3">
+      <b-container fluid>
+        &copy; 2018 Copyright:
+        <a
+          href="https://www.d-velop.de/foxdox/foxdox-home"
+        > foxdox </a>
+      </b-container>
+
+    </div>
   </footer>
 </template>
 
 <script>
-import { MLBuilder } from "vue-multilanguage";
-export default {
-  data() {
-    return {
-      footerMessageLeft: "Projektseminar: Der digitale Tresor",
-      footerMesageRight: "powered by foxdox"
-    };
-  }
-};
+
 </script>
 
 <style>
-.footer-text {
-  color: #000000;
-  font-size: 10pt;
-  vertical-align: middle;
-  margin-top: -15px;
-}
-
-.footer-left {
-  float: left;
-  padding-left: 10px;
-}
-
-.footer-right {
-  float: right;
-  padding-right: 10px;
-}
 
 .footer {
-  height: 30px;
+  /*height: 50px;*/ 
   width: 100%;
   background: rgb(255, 255, 255);
-  position: fixed;
-  bottom: 0;
-  z-index: 100;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  font-size: 10pt;
+  /* position: fixed; */
+  /* bottom: 0; */
+  /* z-index: 100; */
+  color: rgb(0, 0, 0);
+  text-align: central;
+  /* font-size: 10pt; */
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
-}
+} 
+
 </style>

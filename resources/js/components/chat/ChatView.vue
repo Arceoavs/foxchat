@@ -6,7 +6,7 @@
         <h2 class="textColor">{{chatList}}</h2>
       </b-col>
       <b-col>
-        <h2 class="textColor">Ihr Chat mit User</h2>
+        <h2 class="textColor" v-text="$ml.get('your_chat')"> </h2>
       </b-col>
     </b-row>
     <b-row class="mt-3">
@@ -51,6 +51,7 @@ import ChatClientComponent from "./client/ChatClientComponent.vue";
 import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import { store } from "../../store.js";
+import { MLBuilder } from 'vue-multilanguage';
 
 export default {
   mounted() {
