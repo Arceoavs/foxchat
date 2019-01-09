@@ -2,7 +2,8 @@
   <b-container>
     <div class="card text-center border-dark mt-3">
       <div class="card-body">
-        <h5 class="card-title">{{mlProviderName}}</h5>
+        <h5 class="card-title" v-text= "$ml.get('willkommen_bei')"></h5>
+        <h5> {{mlProviderName}} </h5>
         <p class="card-text" v-text="$ml.get('starting_chat_to_doc')"/>
         <div class="textFox mt-4 mb-4">
           <font-awesome-icon icon="file" size="2x"/>
@@ -46,7 +47,7 @@ export default {
   },
   computed: {
     mlProviderName() {
-      return this.$ml.get('willkommen_bei') + this.providerName;
+      return this.providerName;
     }
   }
 };
