@@ -7,37 +7,17 @@
         <img class="img-logo" src="/img/FoxdoxChat.png">
       </b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
-        <b-navbar-nav v-show="loggedIn">
-          <b-nav-item to="/">
-            <span class="navbar-element" v-text="$ml.get('dokumente')"/>
-          </b-nav-item>
-          <b-nav-item to="/chat">
-            <span class="navbar-element" v-text="$ml.get('chat')"/>
-          </b-nav-item>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto sm-1 foxcolor max-height-nav" v-show="loggedIn">
-          <logout-component></logout-component>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-    <!-- <b-navbar toggleable="md" class="navbar-laravel">
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <b-navbar-brand to="/">
-        <img class="img-logo" src="/img/FoxdoxChat.png">
-      </b-navbar-brand>
-      <b-collapse is-nav id="nav_collapse">
-        <b-nav-item to="/">
+        <b-nav-item active v-show="loggedIn" to="/">
           <span class="navbar-element" v-text="$ml.get('dokumente')"/>
         </b-nav-item>
-        <b-nav-item to="/chat">
+        <b-nav-item v-show="loggedIn" to="/chat">
           <span class="navbar-element" v-text="$ml.get('chat')"/>
         </b-nav-item>
-        <b-nav-item class="ml-auto sm-1 foxcolor max-height-nav">
+        <b-nav-item v-show="loggedIn" right class="ml-auto" >
           <logout-component></logout-component>
         </b-nav-item>
       </b-collapse>
-    </b-navbar> -->
-
+    </b-navbar>
     <div id="body">
       <router-view></router-view>
     </div>

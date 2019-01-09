@@ -17,30 +17,47 @@ body {
   background-color: #fff !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   list-style-type: none;
-  height: 60px;
+  // height: 60px;
 }
 
 .navbar-element{
-  // color: $foxi !important;
+  // color:#6c757d;
   font-size: 120%;
+  // height: 70px;
 }
 
-.navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .nav-link.active {
+
+// .navbar-light .nav-item .active .nav-link{
+//   color: #777777;
+// }
+
+// .navbar-light .nav-item:active .nav-link{
+//   color: #777777;
+// }
+
+// .navbar-light .nav-item .nav-link:focus{
+//   color: #777777;
+// }
+
+.navbar-light .nav-item:hover .nav-link {
+    color: $foxi !important;
+}
+
+
+.navbar .navbar-item .show > .nav-link,
+.navbar .navbar-item .active > .nav-link,
+.navbar .navbar-item .nav-link.show,
+.navbar .navbar-item .nav-link.active {
   color: $foxi !important;
 }
 
 .logout-link {
   padding-top: 6px !important;
+  padding-bottom: 6px !important;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
 }
 
-.navbar-light .navbar-nav .nav-link:hover {
-  color: $foxi !important;
-}
 
 .foxcolor {
   background-color: $foxi;
