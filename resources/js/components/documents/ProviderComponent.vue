@@ -10,7 +10,7 @@
           v-bind:generalChat="provideritem.generalChat"
         ></provider-list-component>
       </router-link>
-      <button v-on:click="test">Teste!</button>
+      <!--<button v-on:click="test">Teste!</button>-->
       <router-view></router-view>
     </b-col>
   </b-row>
