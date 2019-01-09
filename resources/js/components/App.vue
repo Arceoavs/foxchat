@@ -17,9 +17,6 @@
             </div>
           </b-nav-item>
         </b-navbar-nav>
-        <div>
-          <button v-for="lang in $ml.list" :key="lang" @click="$ml.change(lang)" v-text="lang"/>
-        </div>
         <b-navbar-nav class="ml-auto sm-1 foxcolor max-height-nav" v-show="loggedIn">
           <logout-component></logout-component>
         </b-navbar-nav>
