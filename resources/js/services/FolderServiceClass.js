@@ -25,36 +25,30 @@ export default class FolderService {
       console.log(response.data);
       console.log('Got root folder');
       store.commit('setRootFolder', response.data);
-      this.getSubFoldersOfRoot(response.data.Id);
-      this.getDocuments(response.data.Id);
+      this.getSubFolders(response.data.Id, true);
+      this.getDocuments(response.data.Id, true);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async getSubFoldersOfRoot(folderId) {
+  /**
+   * Gets Subfolders of the parent folder of which the ID is given.
+   * When getting subfolders of root folder, the subfolders are stored in userRootFolder in store (permanently)
+   * Otherwise all other folders are stored in currentFolder
+   */
+  async getSubFolders(folderId, gettingRoot = false) {
     this.refresh();
     var body = { folderId: folderId };
     try {
       const response = await axios.post(path + '/listfolders', body, configExt);
       console.log('Retrieving subfolders of ' + folderId + ' . . .');
-      console.log(response.data.Items);
+      //If getting root subfolders: store in recentFolders
+      if (gettingRoot) store.commit('setRecentFolders', response.data);
+      //Otherwise: store in currentFolder
+      else store.commit('setCurrentFolder', response.data.Items);
       console.log('Got subfolders');
-      store.commit('setRecentFolders', response.data);
-    } catch (error) {
-      console.log('Error getting subfolders: ' + error);
-    }
-  }
-
-  async getSubFolders(folderId) {
-    this.refresh();
-    var body = { folderId: folderId };
-    try {
-      const response = await axios.post(path + '/listfolders', body, configExt);
-      console.log('Retrieving subfolders of ' + folderId + ' . . .');
-      console.log(response.data.Items);
-      console.log('Got subfolders');
-      store.commit('setCurrentFolder', response.data);
+      //console.log(store.state.currentFolder);
     } catch (error) {
       console.log('Error getting subfolders: ' + error);
     }
@@ -217,7 +211,7 @@ export default class FolderService {
     console.log('Found myprovider folder');
   }
 
-  async getDocuments(folderId) {
+  async getDocuments(folderId, gettingRoot = false) {
     this.refresh();
     var body = { folderId: folderId };
 
@@ -230,7 +224,8 @@ export default class FolderService {
       console.log('Retrieving documents of ' + folderId + ' . . .');
       console.log(JSON.stringify(response.data));
       console.log('Got documents');
-      store.commit('setRecentDocuments', response.data.Items);
+      if (gettingRoot) store.commit('setRecentDocuments', response.data.Items);
+      else store.commit('setCurrentDocuments', response.data.Items);
     } catch (error) {
       console.log('Error getting subfolders: ' + error);
     }

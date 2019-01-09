@@ -1,5 +1,12 @@
 <template>
   <b-container>
+    <document-component
+      v-for="document in documents"
+      v-bind:key="document.Id"
+      v-bind:id="document.Id"
+      v-bind:name="document.Name"
+    ></document-component>
+
     <folder-component
       v-for="folder in folders"
       v-bind:key="folder.Id"
@@ -7,6 +14,8 @@
       v-bind:name="folder.Name"
       v-bind:currentfolder="folder"
     ></folder-component>
+    <p>{{parent}}</p>
+    <button v-on:click="test">Teste!</button>
   </b-container>
 </template>
 
@@ -17,18 +26,31 @@ import { store } from "../../store.js";
 import FolderComponent from "./FolderComponent.vue";
 
 export default {
-  props: ["id", "name", "folder"],
+  data() {
+    return {
+      parent: this.$route.query.parent
+    };
+  },
   computed: {
     documents: function() {
-      return store.state.recentDocuments;
+      return store.state.currentDocuments;
     },
     folders: function() {
-      return store.state.recentFolders.Items;
+      return store.state.currentFolder;
     }
   },
   components: {
     DocumentComponent,
     FolderComponent
+  },
+  methods: {
+    test() {
+      console.log("Teste!");
+      //FolderService.getSubFolders(this.parent);
+      //console.log(this.folders);
+      FolderService.getDocuments(this.parent);
+      console.log(this.documents);
+    }
   }
 };
 </script>

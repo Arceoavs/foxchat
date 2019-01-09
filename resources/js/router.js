@@ -28,18 +28,10 @@ const router = new VueRouter({
     {
       //aggregiert die Dokumentensicht für die router-views und breadcrumbs
       path: '/',
-      component: DocumentAggr,
+      redirect: '/documents/',
+      //component: DocumentAggr,
 
-      children: [
-        {
-          path: '',
-          name: 'Dokumente',
-          component: DocumentOverviewComponent
-        }
-      ],
-      meta: {
-        requiresAuth: true
-      }
+      children: []
     },
     {
       path: '/documents',
@@ -47,8 +39,14 @@ const router = new VueRouter({
       children: [
         {
           path: ':name',
-          name: 'foldercomponent',
-          component: FolderChild
+          name: 'folderChild',
+          component: FolderChild,
+          props: true
+        },
+        {
+          path: '',
+          name: 'Dokumente',
+          component: DocumentOverviewComponent
         }
       ]
     },

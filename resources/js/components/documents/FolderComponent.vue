@@ -11,18 +11,19 @@
 import DocumentService from "../../services/DocumentService.js";
 import FolderService from "../../services/FolderService.js";
 import Folder from "../../model/folder.js";
+import { store } from "../../store.js";
 
 export default {
-  props: ["id", "name", "folder"],
+  props: ["id", "name", "folde"],
   mounted() {},
   methods: {
     openFolder() {
-      // FolderService.getProviderFolder();
-      console.log(FolderService.getSubFolders(this.id));
-      console.log(this.$router);
-      this.$router.push({ path: "documents/" + this.name });
-
-      // FolderService.listDocuments(this.id);
+      FolderService.getSubFolders(this.id).data;
+      FolderService.getDocuments(this.id);
+      this.$router.push({
+        path: this.$route.path + this.name,
+        query: { parent: this.id }
+      });
     }
   }
 };

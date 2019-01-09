@@ -15,10 +15,6 @@ export default {
           to: { name: "Dokumente" }
         },
         {
-          text: "Provider",
-          to: { name: "myproviders" }
-        },
-        {
           text: "Child",
           to: { name: "children" }
         }
