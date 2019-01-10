@@ -17,3 +17,6 @@ yarn-error.log
 /public/css/app.css
 .eslintrc.json
 package-lock.json
+mix-manifest.json
+/public/images/vendor/vue-beautfiul-foxchat/close.svg
+/public/images/vendor/vue-beautfiul-foxchat/file.svg
