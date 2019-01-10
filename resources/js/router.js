@@ -16,6 +16,7 @@ import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
 import ChatProviderOverview from './components/chat/provider/ChatProviderOverview.vue';
+import ChatAggr from './components/chat/ChatAggr.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,9 @@ const router = new VueRouter({
     {
       path: '/documents',
       component: DocumentAggr,
+      meta: {
+        requiresAuth: true,
+      },
       children: [
         {
           path: ':name',
@@ -64,48 +68,62 @@ const router = new VueRouter({
     },
     {
       path: '/chat',
-      name: 'Chat Overview',
-      component: ChatClientOverview,
+      // name: 'Chat Foxdox Client',
+      component: ChatAggr,
       meta: {
         requiresAuth: true,
         requiresToBeUser: true
-      }
+      },
+      children: [
+        {
+          path: '',
+          name: 'Chat Foxdox Client Overview',
+          component: ChatClientOverview,
+          meta: {
+            requiresAuth: true,
+            requiresToBeUser: true
+          }
+        },
+        {
+          path: 'communication',
+          props: true,
+          component: ChatView,
+          meta: {
+            requiresAuth: true,
+            requiresToBeUser: true
+          }
+        }
+      ]
     },
     {
       path: '/provider-chat',
-      name: 'Chat Provider Overview',
-      component: ChatProviderOverview,
+      // name: 'Chat Provider Overview',
+      component: ChatAggr,
       meta: {
         requiresAuth: true,
         requiresToBeProvider: true
-      }
+      },
+      children: [
+        {
+          path: '',
+          name: 'Chat Foxdox Provider Overview',
+          component: ChatProviderOverview,
+          meta: {
+            requiresAuth: true,
+            requiresToBeProvider: true
+          },
+        },
+        {
+          path: 'communication',
+          props: true,
+          component: ChatView,
+          meta: {
+            requiresAuth: true,
+            requiresToBeProvider: true
+          },
+        }
+      ]
     },
-    {
-      path: 'provider-chat/communication',
-      props: true,
-      component: ChatView,
-      meta: {
-        requiresAuth: true,
-        requiresToBeProvider: true
-      }
-    },
-    {
-      path: 'chat/communication',
-      props: true,
-      component: ChatView,
-      meta: {
-        requiresAuth: true,
-        requiresToBeUser: true
-      }
-    },
-    // {
-    //   path: '/communication',
-    //   props: true,
-    //   component: ChatView,
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
     {
       path: '/confirm-chat',
       name: 'ConfirmChatToDocument',
@@ -124,6 +142,34 @@ var self = {
 };
 
 router.beforeEach((to, from, next) => {
+
+  if (to.matched.some(record => record.meta.requiresToBeProvider)) {
+    if (localStorage.getItem('user') != null) {
+      if (JSON.parse(localStorage.getItem('user')).isProvider == 1) {
+        next();
+      } else {
+        next('/chat');
+      }
+    } else {
+      next('/login');
+    }
+  } else {
+    next();
+  }
+
+  if (to.matched.some(record => record.meta.requiresToBeUser)) {
+    if (localStorage.getItem('user') != null) {
+      if (JSON.parse(localStorage.getItem('user')).isProvider == 0) {
+        next();
+      } else {
+        next('/provider-chat');
+      }
+    } else {
+      next('/login');
+    }
+  } else {
+    next();
+  }
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem('bearer') == null) {
       next('/login');
@@ -133,7 +179,7 @@ router.beforeEach((to, from, next) => {
         if (self.noError) {
           next();
         } else {
-          next('login');
+          next('/login');
         }
       } else {
         next();
@@ -143,24 +189,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 
-  if (to.matched.some(record => record.meta.requiresToBeProvider)) {
-    if (JSON.parse(localStorage.getItem('user')).isProvider == 1) {
-      next();
-    } else {
-      next('/chat');
-    }
-  } else {
-    next();
-  }
-  if (to.matched.some(record => record.meta.requiresToBeUser)) {
-    if (JSON.parse(localStorage.getItem('user')).isProvider == 0) {
-      next();
-    } else {
-      next('/provider-chat');
-    }
-  } else {
-    next();
-  }
   // uncomment
   // next();
 });
