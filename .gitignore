@@ -18,5 +18,5 @@ yarn-error.log
 .eslintrc.json
 package-lock.json
 /public/mix-manifest.json
-/public/images/vendor/vue-beautfiul-foxchat/close.svg
-/public/images/vendor/vue-beautfiul-foxchat/file.svg
+/public/images/vendor/vue-beautiful-foxchat/src/close.svg
+/public/images/vendor/vue-beautiful-foxchat/src/file.svg
