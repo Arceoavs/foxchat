@@ -26,18 +26,10 @@ body {
   // height: 70px;
 }
 
-
-// .navbar-light .nav-item .active .nav-link{
-//   color: #777777;
-// }
-
 .navbar-light .nav-item .nav-link {
   color: #777777;
 }
 
-// .navbar-light .nav-item .nav-link:focus{
-//   color: #777777;
-// }
 
 .navbar-light .nav-item:hover .nav-link {
     color: $foxi !important;
@@ -239,4 +231,13 @@ ul {
 }
 .left {
   float: left;
+}
+
+linkInOverviewComponents:active{
+  color: black;
+}
+
+linkInOverviewComponents:hover{
+  color: black;
+  cursor: pointer;
 }
