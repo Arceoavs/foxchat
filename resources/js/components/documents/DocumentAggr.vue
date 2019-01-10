@@ -21,6 +21,7 @@ export default {
           breadcrumbPath.push({
             text: item
           });
+          
       });
       console.log(JSON.stringify(breadcrumbPath));
 

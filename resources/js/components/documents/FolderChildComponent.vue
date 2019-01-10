@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     test() {
+      this.$router.go(-1);
       //console.log("Teste!");
       //FolderService.getSubFolders(this.parent);
       //console.log(this.folders);

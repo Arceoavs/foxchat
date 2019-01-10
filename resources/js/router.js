@@ -41,13 +41,19 @@ const router = new VueRouter({
         {
           path: ':name',
           name: 'FolderChild',
-          component: FolderChild
+          component: FolderChild,
+          meta: {
+            requiresAuth: true,
+          },
         },
         {
           path: '',
           name: 'Dokumente',
-          component: DocumentOverviewComponent
-        }
+          component: DocumentOverviewComponent,
+          meta: {
+            requiresAuth: true,
+          },
+        },
       ]
     },
     {
@@ -57,14 +63,28 @@ const router = new VueRouter({
         {
           path: 'provider',
           name: 'Provider Login',
-          component: LoginComponentProvider
+          component: LoginComponentProvider,
+          meta: {
+            requiresAuth: true,
+          },
         },
         {
           path: '',
           name: 'Login',
-          component: LoginComponent
+          component: LoginComponent,
+          meta: {
+            requiresAuth: true,
+          },
         }
       ]
+    },
+    {
+      path: '/documents/confirm-chat',
+      name: 'ConfirmChatToDocument',
+      component: ConfirmChatToDoc,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/chat',
@@ -124,14 +144,6 @@ const router = new VueRouter({
         }
       ]
     },
-    {
-      path: '/confirm-chat',
-      name: 'ConfirmChatToDocument',
-      component: ConfirmChatToDoc,
-      meta: {
-        requiresAuth: true
-      }
-    }
   ]
 });
 

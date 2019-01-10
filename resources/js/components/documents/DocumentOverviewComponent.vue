@@ -1,5 +1,15 @@
 <template>
   <b-container>
+     <b-row>
+      <b-col>
+        <h2 class="textColor">Provider</h2>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <provider-component></provider-component>
+      </b-col>
+    </b-row>
     <b-row class="mt-4 pl-3">
       <b-col>
         <h2 class="textColor" v-text="$ml.get('last_document_title_doc_overview')"/>
@@ -24,16 +34,6 @@
             v-bind:name="folder.Name"
           ></folder-component>
         </b-jumbotron>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <h2 class="textColor">Provider</h2>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <provider-component></provider-component>
       </b-col>
     </b-row>
   </b-container>
