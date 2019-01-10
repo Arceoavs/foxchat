@@ -81,13 +81,31 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/communication',
+      path: 'provider-chat/communication',
       props: true,
       component: ChatView,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresToBeProvider: true
       }
     },
+    {
+      path: 'chat/communication',
+      props: true,
+      component: ChatView,
+      meta: {
+        requiresAuth: true,
+        requiresToBeUser: true
+      }
+    },
+    // {
+    //   path: '/communication',
+    //   props: true,
+    //   component: ChatView,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
     {
       path: '/confirm-chat',
       name: 'ConfirmChatToDocument',

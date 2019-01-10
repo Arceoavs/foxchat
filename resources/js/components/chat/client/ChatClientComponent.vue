@@ -18,7 +18,7 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'" class="undecorated">
+      <router-link :to="'/chat/communication?partner='+provider+'&tag=allgemein'" class="undecorated">
         <b-card class="textColor" @click="informChatComponent()">
           <b-row>
             <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
