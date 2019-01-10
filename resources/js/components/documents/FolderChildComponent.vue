@@ -13,7 +13,7 @@
       v-bind:id="folder.Id"
       v-bind:name="folder.Name"
     ></folder-component>
-    <button v-on:click="test">Teste!</button>
+    <!--<button v-on:click="test">Teste!</button>-->
   </b-container>
 </template>
 

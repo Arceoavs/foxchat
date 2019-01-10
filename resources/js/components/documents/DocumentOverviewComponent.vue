@@ -2,30 +2,27 @@
   <b-container>
     <b-row>
       <b-col>
-        <b-jumbotron bg-variant="secondary" class="chatGroup">
-          <folder-component
-            v-for="folder in folders"
-            v-bind:key="folder.Id"
-            v-bind:id="folder.Id"
-            v-bind:name="folder.Name"
-          ></folder-component>
-        </b-jumbotron>
-
-    <b-row class="mt-4 pl-3">
-      <b-col>
-        <h2 class="textColor" v-text="$ml.get('last_document_title_doc_overview')"/>
-      </b-col>
-    </b-row>
-        <b-jumbotron bg-variant="secondary" class="chatGroup">
-          <document-component
-            v-for="document in documents"
-            v-bind:key="document.Id"
-            v-bind:id="document.Id"
-            v-bind:name="document.Name"
-          ></document-component>
-        </b-jumbotron>
-
-        
+        <b-row class="mt-4 pl-3">
+          <b-col>
+            <h2 class="textColor" v-text="$ml.get('last_document_title_doc_overview')"/>
+          </b-col>
+        </b-row>
+        <b-card>
+          <b-list-group flush>
+            <document-component
+              v-for="document in documents"
+              v-bind:key="document.Id"
+              v-bind:id="document.Id"
+              v-bind:name="document.Name"
+            />
+            <folder-component
+              v-for="folder in folders"
+              v-bind:key="folder.Id"
+              v-bind:id="folder.Id"
+              v-bind:name="folder.Name"
+            />
+          </b-list-group>
+        </b-card>
       </b-col>
     </b-row>
   </b-container>
