@@ -29,7 +29,7 @@ export default new MLCreate({
       start_chat_document: "Chat starten",
       your_chat: "Ihr Chat mit Nutzer",
       chat_list_provider: "Weitere Chats",
-      keine_provider_msg: "Sie haben keine Provider, die sich für den foxChat registriert haben.",
+      keine_Provider_msg: "Sie haben keine Provider, die sich für den foxChat registriert haben.",
       willkommen_bei: "Willkommen bei ",
       starting_chat_to_doc: "Sie starten einen Chat zu folgendem Dokument: ",
       abbruch: "Abbruch",
