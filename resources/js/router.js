@@ -63,18 +63,12 @@ const router = new VueRouter({
         {
           path: 'provider',
           name: 'Provider Login',
-          component: LoginComponentProvider,
-          meta: {
-            requiresAuth: true,
-          },
+          component: LoginComponentProvider
         },
         {
           path: '',
           name: 'Login',
-          component: LoginComponent,
-          meta: {
-            requiresAuth: true,
-          },
+          component: LoginComponent
         }
       ]
     },
