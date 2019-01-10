@@ -11,16 +11,20 @@ import Breadcrumb from "./Breadcrumb.vue";
 export default {
   computed: {
     items: function() {
-      return [
-        {
-          text: "Dokumente"
-          //to: { name: "Dokumente" }
-        },
-        {
-          text: "Child"
-          //to: { name: "children" }
-        }
-      ];
+      //get current route, split the components and delete the - and / characters with a regex expression
+      var routePath = this.$route.path.split(/[-\/\/]/);
+      console.log(routePath);
+      var breadcrumbPath = [];
+
+      routePath.map(function(item) {
+        if (item != "")
+          breadcrumbPath.push({
+            text: item
+          });
+      });
+      console.log(JSON.stringify(breadcrumbPath));
+
+      return breadcrumbPath;
     }
   },
   components: {
