@@ -85,8 +85,8 @@ Route::group([
 ], function ($router) {
 
     //Foxdox data requests for FoxdoxUser
-    Route::get('listproviders', 'Foxdox\GeneralFoxdoxController@listProviders');
-    Route::get('listprovidersforoverview', 'Foxdox\GeneralFoxdoxController@listProvidersforOverview');
+    Route::get('listproviders', 'Foxdox\UserFoxdoxController@listProviders');
+    Route::get('listprovidersforoverview', 'Foxdox\UserFoxdoxController@listProvidersforOverview');
     
     Route::get('listalldocs', 'Foxdox\DocumentAPI@listAllDocuments');
     Route::get('retrieverootfolder', 'Foxdox\DocumentAPI@retrieveRootFolder');
@@ -94,5 +94,18 @@ Route::group([
     Route::post('listdocuments', 'Foxdox\DocumentAPI@listDocuments');
     Route::post('downloaddocument', 'Foxdox\DocumentAPI@downloadDocument');
 
+  
+});
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'foxdoxapi/provider'
+
+], function ($router) {
+
+    //Foxdox data requests for FoxdoxUser
+    Route::get('listusers', 'Foxdox\ProviderFoxdoxController@listProviders');
+    Route::get('listprovidersforoverview', 'Foxdox\ProviderFoxdoxController@listProvidersforOverview');
   
 });

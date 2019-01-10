@@ -11,10 +11,10 @@ use App\User;
 
 
 
-class GeneralFoxdoxController extends Controller
+class UserFoxdoxController extends Controller
 {
     /**
-     * Create a new GeneralFoxdoxController instance.
+     * Create a new UserFoxdoxController instance.
      *
      * @return void
      */
