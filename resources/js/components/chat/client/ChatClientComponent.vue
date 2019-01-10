@@ -21,8 +21,7 @@
       <b-card class="textColor" @click="changeChatPartner()">
         <router-link
           :to="'/chat/communication?partner='+provider+'&tag=allgemein'"
-          class="textColor"
-          tag="linkInOverviewComponents"
+          class="textColor chat-overview-link"
         >
           <b-row>
             <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
@@ -149,6 +148,7 @@ export default {
 </script>
 
 <style>
+
 .chatDateTime {
   font-size: 0.8em;
 }

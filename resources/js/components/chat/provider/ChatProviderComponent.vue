@@ -3,7 +3,7 @@
     <b-card @click="informChatComponent()" class="textColor">
       <router-link
         :to="'/provider-chat/communication?partner='+userName+'&tag='+documentName"
-        class="textColor" tag="linkInOverviewComponents"
+        class="textColor chat-overview-link"
       >
         <div slot="header" style="text-align:left;">{{userName}}</div>
 

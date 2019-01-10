@@ -233,11 +233,7 @@ ul {
   float: left;
 }
 
-linkInOverviewComponents:active{
+.chat-overview-link:hover, .chat-overview-link:active{
   color: black;
-}
-
-linkInOverviewComponents:hover{
-  color: black;
-  cursor: pointer;
+  text-decoration: none;
 }
