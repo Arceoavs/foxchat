@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <b-container fluid>
     <breadcrumb v-bind:items="items"></breadcrumb>
     <router-view></router-view>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -21,7 +21,6 @@ export default {
           breadcrumbPath.push({
             text: item
           });
-          
       });
       console.log(JSON.stringify(breadcrumbPath));
 

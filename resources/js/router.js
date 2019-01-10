@@ -26,13 +26,13 @@ const router = new VueRouter({
     {
       //aggregiert die Dokumentensicht für die router-views und breadcrumbs
       path: '/',
-      redirect: '/documents/',
+      redirect: '/Documents/',
       //component: DocumentAggr,
 
       children: []
     },
     {
-      path: '/documents',
+      path: '/Documents',
       component: DocumentAggr,
       meta: {
         requiresAuth: true,
