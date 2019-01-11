@@ -1,9 +1,9 @@
 <template>
   <!--<router-link v-bind:to="{ path: name}" append>-->
-  <b-card class="box">
+  <b-list-group-item href="#" @click="openFolder()">
     <font-awesome-icon class="fox" icon="folder-open" size="2x"/>
-    <button type="button" class="listcomponent" @click="openFolder()">{{name}}</button>
-  </b-card>
+    <button type="button" class="listcomponent">{{name}}</button>
+  </b-list-group-item>
   <!--</router-link>-->
 </template>
 
