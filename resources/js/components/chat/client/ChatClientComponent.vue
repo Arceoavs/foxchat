@@ -18,8 +18,11 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <router-link :to="'/communication?partner='+provider+'&tag=allgemein'" class="undecorated">
-        <b-card class="textColor" @click="informChatComponent()">
+      <b-card class="textColor" @click="changeChatPartner()">
+        <router-link
+          :to="'/chat/communication?partner='+provider+'&tag=allgemein'"
+          class="textColor chat-overview-link"
+        >
           <b-row>
             <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
               <font-awesome-icon icon="comments" size="2x"/>
@@ -27,7 +30,7 @@
             <b-col>
               <b-row>
                 <b-col>
-                  <p class="font-weight-bold" v-text="$ml.get('general_chat')" />
+                  <p class="font-weight-bold" v-text="$ml.get('general_chat')"/>
                 </b-col>
                 <b-col v-if="generalChat">
                   <p
@@ -42,8 +45,8 @@
               </b-row>
             </b-col>
           </b-row>
-        </b-card>
-      </router-link>
+        </router-link>
+      </b-card>
 
       <!-- Document chats -->
       <div>
@@ -66,7 +69,7 @@
             </div>
           </b-col>
           <b-col>
-            <p class="font-weight-bold" v-text="$ml.get('add_chat')" />
+            <p class="font-weight-bold" v-text="$ml.get('add_chat')"/>
           </b-col>
         </b-row>
       </b-card>
@@ -137,7 +140,7 @@ export default {
     }
   },
   methods: {
-    informChatComponent: function() {
+    changeChatPartner: function() {
       EventBus.$emit("chatPartnerChanged");
     }
   }
@@ -145,6 +148,7 @@ export default {
 </script>
 
 <style>
+
 .chatDateTime {
   font-size: 0.8em;
 }

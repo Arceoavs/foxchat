@@ -16,34 +16,51 @@ body {
 .navbar-laravel {
   background-color: #fff !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  // height: 60px;
 }
 
-.navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .nav-link.active {
+.navbar-element{
+  // color:#6c757d;
+  font-size: 120%;
+  // height: 70px;
+}
+
+.navbar-light .nav-item .nav-link {
+  color: #777777;
+}
+
+
+.navbar-light .nav-item:hover .nav-link {
+    color: $foxi !important;
+}
+
+
+// .navbar-light .nav-item .show > .nav-link,
+// .navbar-light .nav-item .active > .nav-link,
+.navbar-light .nav-item .nav-link.show,
+.navbar-light .nav-item .nav-link.active {
   color: $foxi !important;
 }
 
 .logout-link {
   padding-top: 6px !important;
+  padding-bottom: 6px !important;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
 }
 
-.navbar-light .navbar-nav .nav-link:hover {
-  color: $foxi !important;
-}
 
 .foxcolor {
   background-color: $foxi;
   color: white !important;
+  // font-weight: bold;
 }
 
-.navbar {
-  padding: 0rem 1rem !important;
-  padding-right: 0rem !important;
-}
+// .navbar {
+//   padding: 0rem 1rem !important;
+//   padding-right: 0rem !important;
+// }
 
 .max-height-nav {
   height: 60px;
@@ -214,4 +231,9 @@ ul {
 }
 .left {
   float: left;
+}
+
+.chat-overview-link:hover, .chat-overview-link:active{
+  color: black;
+  text-decoration: none;
 }

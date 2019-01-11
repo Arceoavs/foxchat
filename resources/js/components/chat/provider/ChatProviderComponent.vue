@@ -1,7 +1,10 @@
 <template>
   <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
-    <router-link :to="'/communication?partner='+userName+'&tag='+documentName" class="undecorated">
-      <b-card @click="informChatComponent()" class="textColor">
+    <b-card @click="informChatComponent()" class="textColor">
+      <router-link
+        :to="'/provider-chat/communication?partner='+userName+'&tag='+documentName"
+        class="textColor chat-overview-link"
+      >
         <div slot="header" style="text-align:left;">{{userName}}</div>
 
         <b-row>
@@ -26,8 +29,8 @@
             </b-row>
           </b-col>
         </b-row>
-      </b-card>
-    </router-link>
+      </router-link>
+    </b-card>
   </b-jumbotron>
 </template>
 

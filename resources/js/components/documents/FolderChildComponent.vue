@@ -13,7 +13,7 @@
       v-bind:id="folder.Id"
       v-bind:name="folder.Name"
     ></folder-component>
-    <button v-on:click="test">Teste!</button>
+    <!--<button v-on:click="test">Teste!</button>-->
   </b-container>
 </template>
 
@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     test() {
+      this.$router.go(-1);
       //console.log("Teste!");
       //FolderService.getSubFolders(this.parent);
       //console.log(this.folders);
