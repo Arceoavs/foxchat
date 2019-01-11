@@ -16,7 +16,7 @@ use function GuzzleHttp\json_decode;
 
 class AuthController extends Controller
 {
-    
+
     /**
      * Create a new AuthController instance.
      *
@@ -26,7 +26,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login']]);
     }
-    
+
 
     /**
      * Get a JWT via given credentials.
@@ -38,7 +38,7 @@ class AuthController extends Controller
         //Check if provided requests contains the needed parameters
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
-            'password'=> 'required'
+            'password' => 'required'
         ]);
 
         //Send errors
@@ -47,13 +47,16 @@ class AuthController extends Controller
         }
 
         //Check if the username is an email
-        if(strpos(request()['name'], '@')){
-            return response()->json(['error' => 'e-mail not allowed!'], 400);
+        if (strpos(request()['name'], '@')) {
+            return response()->json(['errors' => [
+                'status' => 401,
+                'message' => 'Email not allowed!'
+            ]], 400);
         }
         
         //Try to login
         $credentials = request(['name', 'password']);
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

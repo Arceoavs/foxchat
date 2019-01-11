@@ -45,11 +45,13 @@ class AuthService {
       })
       .catch(error => {
         console.log('error while Login' + JSON.stringify(error));
+        console.log(error.response);
         self.errorMsg =
-          'Login Fehler Token: ' +
-          error.response.status +
-          error.response.statusText +
-          error.response.data.message;
+          'Login Fehler: ' +
+          // error.response.status + " "+
+          // error.response.statusText +
+          error.response.data.errors.message;
+          
         self.showAlert = true;
         self.noError = !self.showAlert;
 
