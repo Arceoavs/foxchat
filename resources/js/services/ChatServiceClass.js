@@ -210,6 +210,8 @@ export default class ChatService {
             ' message: ' +
             JSON.stringify(error.response.data)
         );
+
+        self.resetChat();
       })
       .finally(param => {
         EventBus.$emit('loaded');
