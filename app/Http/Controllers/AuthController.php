@@ -45,6 +45,11 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+
+        //Check if the username is an email
+        if(strpos(request()['name'], '@')){
+            return response()->json(['error' => 'e-mail not allowed!'], 400);
+        }
         
         //Try to login
         $credentials = request(['name', 'password']);

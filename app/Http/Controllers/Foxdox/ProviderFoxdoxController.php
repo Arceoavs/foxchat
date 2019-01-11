@@ -27,14 +27,16 @@ class ProviderFoxdoxController extends Controller
 
     public function validateUserAsProvider()
     {
-        if (auth()->user()->isProvider == 1) {
-            return true;
-        } else {
-            throw new ChatAuthException("You are not a Foxdox Provider.");
+        if (auth()->check()) {
+            if (auth()->user()->isProvider == 1) {
+                return true;
+            } else {
+                throw new ChatAuthException("You are not a Foxdox Provider.");
+            }
         }
     }
 
 
-    
+
 
 }

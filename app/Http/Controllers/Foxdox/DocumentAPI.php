@@ -15,7 +15,7 @@ class DocumentAPI extends Controller
     protected $documentapiservice;
     public function __construct()
     {
-        if($this->validateUserAsUser()){
+        if ($this->validateUserAsUser()) {
             $this->documentapiservice = new DocumentAPIService();
         }
         $this->middleware('auth:api');
@@ -23,10 +23,12 @@ class DocumentAPI extends Controller
 
     public function validateUserAsUser()
     {
-        if(auth()->user()->isProvider==0){
-            return true;
-        }else{
-            throw new ChatAuthException("You are not a Foxdox User.");
+        if (auth()->check()) {
+            if (auth()->user()->isProvider == 0) {
+                return true;
+            } else {
+                throw new ChatAuthException("You are not a Foxdox User.");
+            }
         }
     }
 
@@ -102,5 +104,5 @@ class DocumentAPI extends Controller
         return $this->documentapiservice->retrieveRootFolder();
     }
 
-    
+
 }

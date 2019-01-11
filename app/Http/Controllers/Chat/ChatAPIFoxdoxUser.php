@@ -24,10 +24,12 @@ class ChatAPIFoxdoxUser extends ChatAPI
 
     public function validateUserAsUser()
     {
-        if(auth()->user()->isProvider==0){
-            return true;
-        }else{
-            throw new ChatAuthException("You are not a Foxdox User.");
+        if(auth()->check()){
+            if(auth()->user()->isProvider==0){
+                return true;
+            }else{
+                throw new ChatAuthException("You are not a Foxdox User.");
+            }
         }
     }
 
