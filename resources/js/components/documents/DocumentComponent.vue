@@ -12,7 +12,7 @@
  <script>
 import DocumentService from "../../services/DocumentService.js";
 export default {
-  props: ["id", "name"],
+  props: ["id", "name", "folderPath"],
   methods: {
     openDocument() {
       alert("Dokument " + this.id + " wird heruntergeladen");
@@ -20,7 +20,8 @@ export default {
     },
     startChat() {
       //alert("Sie starten nun einen Chat zu Dokument " + this.name);
-      var providerName = "test";
+      var providerName = DocumentService.getProviderName(this.folderPath);
+  
       this.$router.push({
         name: "ConfirmChatToDocument",
         params: { docName: this.name, provName: providerName }

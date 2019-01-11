@@ -5,6 +5,7 @@
       v-bind:key="document.Id"
       v-bind:id="document.Id"
       v-bind:name="document.Name"
+      v-bind:folderPath="document.FolderPath"
     ></document-component>
 
     <folder-component

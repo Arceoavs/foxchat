@@ -73,7 +73,7 @@ const router = new VueRouter({
       ]
     },
     {
-      path: '/documents/confirm-chat',
+      path: '/Documents/confirm-chat',
       name: 'ConfirmChatToDocument',
       component: ConfirmChatToDoc,
       meta: {
@@ -100,6 +100,7 @@ const router = new VueRouter({
         },
         {
           path: 'communication',
+          name: 'Chat',
           props: true,
           component: ChatView,
           meta: {

@@ -34,5 +34,10 @@ class DocumentService {
         console.log('Error getting document: ' + JSON.stringify(error));
       });
   }
+  getProviderName(path) {
+    return path.split("/")[1];
+  }
 }
+
+
 export default new DocumentService();

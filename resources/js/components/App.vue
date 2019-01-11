@@ -7,7 +7,7 @@
         <img class="img-logo" src="/img/FoxdoxChat.png">
       </b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
-        <b-nav-item v-show="loggedIn" to="/documents">
+        <b-nav-item v-show="loggedIn" to="/Documents">
           <span class="navbar-element" v-text="$ml.get('dokumente')"/>
         </b-nav-item>
         <b-nav-item v-show="loggedIn" v-bind:to="chatUrl">

@@ -32,11 +32,11 @@
 export default {
   methods: {
     startChat() {
-      alert(this.$ml.get('starting_chat_to_doc') + this.documentName);
-      //TODO: Starte Chat zu Dokument
+      this.$router.push({name: 'Chat',
+      query: { partner: this.providerName, tag: this.documentName }})
     },
     abort() {
-      window.location.replace("/#/documents");
+      this.$router.push({name: 'Dokumente'});
     }
   },
   data() {
