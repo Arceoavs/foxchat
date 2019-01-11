@@ -105,7 +105,7 @@ Route::group([
 ], function ($router) {
 
     //Foxdox data requests for FoxdoxUser
-    Route::get('listAllServices', 'Foxdox\ProviderFoxdoxController@listAllServices');
-    Route::post('listSubscribers', 'Foxdox\ProviderFoxdoxController@listSubscribers');
-    Route::get('listAggregatedSubscribers', 'Foxdox\ProviderFoxdoxController@listAggregatedSubscribers');
+    Route::get('listusers', 'Foxdox\ProviderFoxdoxController@listProviders');
+    Route::get('listprovidersforoverview', 'Foxdox\ProviderFoxdoxController@listProvidersforOverview');
+  
 });
