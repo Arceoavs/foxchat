@@ -167,7 +167,7 @@ export default class ChatService {
   getConversationByName(username, conversationTag, offset, take, self) {
     this.refresh();
 
-    EventBus.$emit('loading');
+    // EventBus.$emit('loading');
 
     var body = {
       username: username,
@@ -215,7 +215,7 @@ export default class ChatService {
         self.resetChat();
       })
       .finally(param => {
-        EventBus.$emit('loaded');
+        // EventBus.$emit('loaded');
       });
   }
 
