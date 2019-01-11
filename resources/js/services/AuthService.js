@@ -42,28 +42,29 @@ class AuthService {
           self.$router.push('/');
           console.log('Logged In');
         }
-      })
-      .catch(error => {
-        console.log('error while Login' + JSON.stringify(error));
-        console.log(error.response);
-        self.errorMsg =
-          'Login Fehler: ' +
-          // error.response.status + " "+
-          // error.response.statusText +
-          error.response.data.errors.message;
-          
-        self.showAlert = true;
-        self.noError = !self.showAlert;
-
-        this.logout(self);
-      })
-      .finally(param => {
+        
         //Alles was bei Anmeldung async nachgeladen werden muss:
         BroadcastingService.initialize();
         EventBus.$emit('loaded');
         FoxdoxGeneralService.getProviderList();
         FolderService.getRootFolder();
         //getRootFolder holt dann Subfolder und Dokumente in rootFolder
+      })
+      .catch(error => {
+        console.log('error while Login' + JSON.stringify(error));
+        self.errorMsg =
+          'Login Fehler: ' +
+          // error.response.status + " "+
+          // error.response.statusText +
+          error.response.data.errors.message;
+
+        self.showAlert = true;
+        self.noError = !self.showAlert;
+
+        this.logout(self);
+      })
+      .finally(param => {
+
       });
   }
 
