@@ -1,7 +1,7 @@
 <template >
   <div class="mt-2">
-    <router-link :to="'/chat/communication?partner='+provider+'&tag='+title">
-      <b-card class="textColor" @click="informChatComponent()">
+    <b-card class="textColor" @click="informChatComponent()">
+      <router-link :to="'/chat/communication?partner='+provider+'&tag='+title">
         <b-row>
           <b-col cols="1">
             <div class="chatIcons textFox">
@@ -18,8 +18,8 @@
             <p class="font-weight-light text-right">{{cuttedDate}} {{cuttedTime}}</p>
           </b-col>
         </b-row>
-      </b-card>
-    </router-link>
+      </router-link>
+    </b-card>
   </div>
 </template>
 
