@@ -78,6 +78,7 @@ export default class ChatService {
           responseListElem.documentChats = responseChatList;
           responseListElem.generalChat = generalChatElem;
           responseList.push(responseListElem);
+          generalChatElem = null;
         }
         store.commit('setUserInbox', responseList);
 
