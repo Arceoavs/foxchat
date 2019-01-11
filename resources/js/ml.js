@@ -72,7 +72,7 @@ export default new MLCreate({
       starting_chat_to_doc:
         'You are starting a chat with the following document: ',
       abbruch: 'Cancel',
-      chat_starten: 'Start chat',
+      chat_starten: 'Start Chat',
       dokument: 'Document ',
       being_downloaded: ' is now downloaded. ',
       ordner: 'Folder ',
