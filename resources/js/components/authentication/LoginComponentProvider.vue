@@ -38,7 +38,6 @@
         </div>
       </b-col>
     </b-row>
-    <router-view></router-view>
   </b-container>
 </template>
 

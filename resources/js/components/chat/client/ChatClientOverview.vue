@@ -2,7 +2,7 @@
   <b-container>
     <b-row class="mt-4 pl-2">
       <b-col>
-        <h2 v-if="providers.length==1" class="textColor" v-text="$ml.get('chat_client_overview_title')"/>
+        <h2 class="textColor" v-text="$ml.get('chat_client_overview_title')"/>
       </b-col>
     </b-row>
     <b-row class="mt-3">
@@ -10,7 +10,7 @@
         <div
           v-if="providers.length==0"
           class="text-center">
-          <p v-text="$ml.get('keine_Provider_msg')" />
+          <p v-text="this.get('keine_Provider_msg')" />
         </div>
         <chat-client-component
           v-for="provideritem in providers"

@@ -1,8 +1,8 @@
 <template>
-  <b-container fluid>
+  <div>
     <breadcrumb v-bind:items="items"></breadcrumb>
     <router-view></router-view>
-  </b-container>
+  </div>
 </template>
 
 <script>

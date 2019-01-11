@@ -18,13 +18,12 @@
               <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
                 <font-awesome-icon icon="plus-circle" size="2x"/>
               </b-col>
-              <b-col><h4 class="textColor" v-text = "$ml.get('add_chat')" /></b-col>
+              <b-col><h4 class="textColor" v-text = $ml.get('add_chat') /></b-col>
             </b-row>
           </b-card>
         </b-jumbotron>
       </b-col>
     </b-row>
-    <router-view></router-view>
   </b-container>
 </template>
 

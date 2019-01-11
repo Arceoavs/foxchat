@@ -36,7 +36,7 @@ export default {
       //TODO: Starte Chat zu Dokument
     },
     abort() {
-      window.location.replace("/#/documents");
+      window.location.replace("/");
     }
   },
   data() {

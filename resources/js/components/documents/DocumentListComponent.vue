@@ -9,7 +9,7 @@
             type="button"
             class="listcomponent"
             @click="startChat()"
-            v-text="$ml.get('chat_starten')"
+            v-text="$ml.get('start_chat_document')"
           />
           <font-awesome-icon class="fox" icon="comments" size="2x"/>
         </div>

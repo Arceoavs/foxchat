@@ -7,19 +7,24 @@
         <img class="img-logo" src="/img/FoxdoxChat.png">
       </b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
-        <b-nav-item v-show="loggedIn" to="/documents">
-          <span class="navbar-element" v-text="$ml.get('dokumente')"/>
-        </b-nav-item>
-        <b-nav-item v-show="loggedIn" v-bind:to="chatUrl">
-          <span class="navbar-element" v-text="$ml.get('chat')"/>
-        </b-nav-item>
-        <b-nav-item v-show="loggedIn" right class="ml-auto">
+        <b-navbar-nav v-show="loggedIn">
+          <b-nav-item to="/">
+            <p v-text="$ml.get('dokumente')"/>
+          </b-nav-item>
+          <b-nav-item to="/chat">
+            <div>
+              <p v-text="$ml.get('chat')"/>
+            </div>
+          </b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav class="ml-auto sm-1 foxcolor max-height-nav" v-show="loggedIn">
           <logout-component></logout-component>
-        </b-nav-item>
+        </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <!--<div class="clearfisx"></div>-->
     <div id="body">
-      <router-view></router-view>
+    <router-view></router-view>
     </div>
     <b-row class="mt-5"></b-row>
     <footer-component id="footer"></footer-component>
@@ -49,17 +54,6 @@ export default {
       this.loggedIn = localStorage.getItem("bearer");
     });
   },
-  computed: {
-    isProvider() {
-      return store.state.user.isProvider;
-    },
-    chatUrl(){
-      if (store.state.user.isProvider == 1){
-        return "/provider-chat";
-      }
-      else return "/chat";
-    }
-  },
   components: {
     LogoutComponent,
     LoadingComponent,
@@ -70,23 +64,24 @@ export default {
 
 <style>
 html,
+
 body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+   margin:0;
+   padding:0;
+   height:100%;
 }
 #container {
-  min-height: 100%;
-  position: relative;
+   min-height:100%;
+   position:relative;
 }
 #body {
-  padding: 10px;
-  padding-bottom: 150px; /*Height of the footer - ÄNDERN FÜR KLEINEREN ABSTAND UNTEN */
+   padding:10px;
+   padding-bottom:150px;   /*Height of the footer - ÄNDERN FÜR KLEINEREN ABSTAND UNTEN */
 }
 #footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+   position:absolute;
+   bottom:0;
+   width:100%;
 }
 </style>
 
