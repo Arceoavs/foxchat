@@ -78,6 +78,7 @@ export default class ChatService {
           responseListElem.documentChats = responseChatList;
           responseListElem.generalChat = generalChatElem;
           responseList.push(responseListElem);
+          generalChatElem = null;
         }
         store.commit('setUserInbox', responseList);
 
@@ -166,7 +167,7 @@ export default class ChatService {
   getConversationByName(username, conversationTag, offset, take, self) {
     this.refresh();
 
-    EventBus.$emit('loading');
+    // EventBus.$emit('loading');
 
     var body = {
       username: username,
@@ -210,9 +211,11 @@ export default class ChatService {
             ' message: ' +
             JSON.stringify(error.response.data)
         );
+
+        self.resetChat();
       })
       .finally(param => {
-        EventBus.$emit('loaded');
+        // EventBus.$emit('loaded');
       });
   }
 

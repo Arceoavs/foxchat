@@ -1,21 +1,30 @@
 <template >
   <div class="mt-2">
     <b-card class="textColor" @click="informChatComponent()">
-      <router-link :to="'/chat/communication?partner='+provider+'&tag='+title">
+      <router-link
+        :to="'/chat/communication?partner='+provider+'&tag='+title"
+        class="textColor chat-overview-link"
+      >
         <b-row>
-          <b-col cols="1">
-            <div class="chatIcons textFox">
-              <font-awesome-icon icon="file" size="2x"/>
-            </div>
+          <b-col class="chatIcons textFox" cols="1" sm="2" md="1">
+            <font-awesome-icon icon="file" size="2x"/>
           </b-col>
-          <b-col cols="2">
-            <p class="font-weight-bold">{{title}}</p>
-          </b-col>
-          <b-col cols="7">
-            <p class="font-weight-light text-left">{{message}}</p>
-          </b-col>
-          <b-col cols="2">
-            <p class="font-weight-light text-right">{{cuttedDate}} {{cuttedTime}}</p>
+          <b-col>
+            <b-row>
+              <b-col>
+                <p class="font-weight-bold">{{title}}</p>
+              </b-col>
+              <b-col>
+                <p
+                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+                >{{cuttedDate}} {{cuttedTime}}</p>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col>
+                <p class="font-weight-light text-left">{{message}}</p>
+              </b-col>
+            </b-row>
           </b-col>
         </b-row>
       </router-link>

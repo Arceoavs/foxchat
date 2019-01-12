@@ -16,7 +16,7 @@ class ChatAPIFoxdoxProvider extends ChatAPI
     protected $chatapiservice;
     public function __construct()
     {
-        if($this->validateUserAsProvider()){
+        if ($this->validateUserAsProvider()) {
             $this->chatapiservice = new ChatAPIService();
         }
         $this->middleware('auth:api');
@@ -24,11 +24,12 @@ class ChatAPIFoxdoxProvider extends ChatAPI
 
     public function validateUserAsProvider()
     {
-        // Log::info(auth()->user()->isProvider);
-        if(auth()->user()->isProvider==1){
-            return true;
-        }else{
-            throw new ChatAuthException("You are not a Foxdox Provider.");
+        if (auth()->check()) {
+            if (auth()->user()->isProvider == 1) {
+                return true;
+            } else {
+                throw new ChatAuthException("You are not a Foxdox Provider.");
+            }
         }
     }
 

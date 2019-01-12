@@ -118,6 +118,10 @@ export default {
     },
     messageStylingToggled(e) {
       this.messageStyling = e.target.checked;
+    },
+    resetChat(){
+      this.initChat();
+      this.messageList = [];
     }
   },
   computed: {}

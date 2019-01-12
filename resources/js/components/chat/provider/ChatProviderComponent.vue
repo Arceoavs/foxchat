@@ -13,8 +13,12 @@
           </b-col>
           <b-col>
             <b-row>
+              <b-col cols="3">
+                <h5>Chat mit: {{userName}}</h5>
+              </b-col>
               <b-col cols="5">
-                <h5>{{documentName}}</h5>
+                <h5 v-if="documentName != 'allgemein'">Chat zu Dokument: {{documentName}}</h5>
+                <h5 v-if="documentName == 'allgemein'">Dies ist der allgemeine Servicechat. </h5>
               </b-col>
               <b-col>
                 <p
