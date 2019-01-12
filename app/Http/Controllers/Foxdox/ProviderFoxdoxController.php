@@ -29,10 +29,12 @@ class ProviderFoxdoxController extends Controller
 
     public function validateProviderAsUser()
     {
-        if (auth()->user()->isProvider == 1) {
-            return true;
-        } else {
-            throw new ChatAuthException("You are not a Foxdox Provider.");
+        if (auth()->check()) {
+            if (auth()->user()->isProvider == 1) {
+                return true;
+            } else {
+                throw new ChatAuthException("You are not a Foxdox Provider.");
+            }
         }
     }
 
@@ -61,12 +63,14 @@ class ProviderFoxdoxController extends Controller
         return $this->listSubscribersHelp($serviceId);
     }
 
-    protected function getUserFromDatabase($username){
+    protected function getUserFromDatabase($username)
+    {
         return User::where('name', $username)->first();
     }
 
-    protected function isValidUser($username){
-        if(!$this->getUserFromDatabase($username)){
+    protected function isValidUser($username)
+    {
+        if (!$this->getUserFromDatabase($username)) {
             return false;
         }
         return true;
@@ -75,7 +79,7 @@ class ProviderFoxdoxController extends Controller
     protected function listSubscribersHelp($serviceId)
     {
         $body = [
-            "providerServiceId" =>  $serviceId
+            "providerServiceId" => $serviceId
         ];
 
         $foxdoxapiclient = new FoxdoxApiClient('https://papi.foxdox.de/service/listsubscribers', $body);
@@ -93,7 +97,7 @@ class ProviderFoxdoxController extends Controller
 
         $aggrSubscribers = [];
 
-        foreach($services as $item){
+        foreach ($services as $item) {
             $serviceId = $item->Id;
             $subscribers = json_decode($this->listSubscribersHelp($serviceId)->getBody())->Items;
             $aggrSubscribers = array_merge($aggrSubscribers, $subscribers);
@@ -101,15 +105,15 @@ class ProviderFoxdoxController extends Controller
 
         $subscribersInDatabase = [];
 
-        foreach($aggrSubscribers as $item){
+        foreach ($aggrSubscribers as $item) {
             $booleanExistsAlready = false == strpos(json_encode($subscribersInDatabase), $item->SubscriptionId);
-            if($this->isValidUser($item->UserProfile->UserName) && $booleanExistsAlready){
+            if ($this->isValidUser($item->UserProfile->UserName) && $booleanExistsAlready) {
                 array_push($subscribersInDatabase, $item);
             }
         }
 
         return $subscribersInDatabase;
     }
-    
+
 
 }
