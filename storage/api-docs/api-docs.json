@@ -1334,6 +1334,103 @@
                 ]
             }
         },
+		"/api/foxdoxapi/provider/listAllServices": {
+            "get": {
+                "tags": [
+                    "Foxdox-API-Provider"
+                ],
+                "summary": "Listing all services provided by logged in provider.",
+                "responses": {
+                    "200": {},
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+		"/api/foxdoxapi/provider/listSubscribers": {
+            "post": {
+                "tags": [
+                    "Foxdox-API-Provider"
+                ],
+                "summary": "Listing all subscribers for the specific service identified by serviceId.",
+				"requestBody": {
+                    "description": "Takes a serviceId.",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+								"required": {
+									"serviceId"
+								},
+                                "properties": {
+                                    "serviceId": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {},
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+		"/api/foxdoxapi/provider/listAggregatedSubscribers": {
+            "get": {
+                "tags": [
+                    "Foxdox-API-Provider"
+                ],
+                "summary": "Listing all subscribers from all services provided by logged in provider",
+                "responses": {
+                    "200": {},
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/api/foxdoxapi/user/listprovidersforoverview": {
             "get": {
                 "tags": [

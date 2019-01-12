@@ -97,6 +97,7 @@ Route::group([
   
 });
 
+
 Route::group([
 
     'middleware' => 'api',
@@ -105,7 +106,7 @@ Route::group([
 ], function ($router) {
 
     //Foxdox data requests for FoxdoxUser
-    Route::get('listusers', 'Foxdox\ProviderFoxdoxController@listProviders');
-    Route::get('listprovidersforoverview', 'Foxdox\ProviderFoxdoxController@listProvidersforOverview');
-  
+    Route::get('listAllServices', 'Foxdox\ProviderFoxdoxController@listAllServices');
+    Route::post('listSubscribers', 'Foxdox\ProviderFoxdoxController@listSubscribers');
+    Route::get('listAggregatedSubscribers', 'Foxdox\ProviderFoxdoxController@listAggregatedSubscribers');
 });
