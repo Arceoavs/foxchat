@@ -7,7 +7,9 @@
         <h2 v-else class="textColor" v-text="$ml.get('client_list_title_chat_overview')"></h2>
       </b-col>
       <b-col>
-        <h2 class="textColor" v-text="$ml.get('your_chat')"></h2>
+        <h3 class="textColor" v-text="this.userName"> </h3>
+        <h4 class="textColor" v-if="this.$route.query.tag == 'allgemein'" v-text="$ml.get('general_chat')"></h4>
+        <h4 class="textColor" v-else> Dokument: {{this.$route.query.tag}} </h4>
       </b-col>
     </b-row>
     <b-row class="mt-3">
@@ -85,6 +87,9 @@ export default {
     chats: function() {
       return store.state.inboxForProvider;
     },
+    userName: function (){
+      return this.$ml.get('your_chat') + " " + this.$route.query.partner;
+    }
   },
   methods: {
     refreshInbox() {

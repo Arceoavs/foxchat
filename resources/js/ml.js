@@ -20,12 +20,12 @@ export default new MLCreate({
       add_chat: 'Chat hinzufügen mit',
       chat_client_overview_title: 'Ihre Chats mit Providern',
       provider_list_title_chat_overview: 'Weitere Chats',
-      client_list_title_chat_overview: 'Andere Provider',
+      client_list_title_chat_overview: 'Chatübersicht',
       last_document_title_doc_overview: 'Ihre Dokumente',
       my_providers_title_doc_overview: 'Meine Provider',
       footer_message_left: 'Projektseminar: Digitaler Tresor',
       footer_message_right: 'powered by foxdox',
-      your_chat: 'Ihr Chat mit Nutzer',
+      your_chat: 'Ihr Chat mit: ',
       chat_list_provider: 'Weitere Chats',
       keine_Provider_msg:
         'Sie haben keine Provider, die sich für den foxChat registriert haben.',
@@ -45,7 +45,8 @@ export default new MLCreate({
       benutzername: 'Benutzername',
       sprache: 'Sprache',
       impressum: 'Impressum',
-      sprache_waehlen: 'Sprache wählen:'
+      sprache_waehlen: 'Sprache wählen:',
+      this_is_the_general_chat: 'Dies ist der allgemeine Servicechat.'
     }),
 
     new MLanguage('English').create({
@@ -61,12 +62,12 @@ export default new MLCreate({
       add_chat: 'Add chat with',
       chat_client_overview_title: 'Your chats with providers',
       provider_list_title_chat_overview: 'Other chats',
-      client_list_title_chat_overview: 'Other providers',
+      client_list_title_chat_overview: 'Chat overview',
       last_document_title_doc_overview: 'Your documents',
       my_providers_title_doc_overview: 'My providers',
       footer_message_left: 'Seminar: Digital Safe',
       footer_message_right: 'powered by foxdox',
-      your_chat: 'Your chat with user',
+      your_chat: 'Your chat with: ',
       chat_list_provider: 'More chats',
       chat_list_client: 'Other providers',
       keine_Provider_msg: "You don't have any registered providers in foxChat.",
@@ -87,7 +88,8 @@ export default new MLCreate({
       benutzername: 'Username',
       sprache: 'Language',
       impressum: 'Imprint',
-      sprache_waehlen: 'Choose language:'
+      sprache_waehlen: 'Choose language:',
+      this_is_the_general_chat: 'This is the general service chat.'
     })
   ]
 });
