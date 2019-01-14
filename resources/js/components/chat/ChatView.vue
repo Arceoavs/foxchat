@@ -69,6 +69,7 @@ export default {
     console.log("in chatview");
     console.log(this.providers);
     console.log(this.isProvider);
+    console.log({userName});
   },
   data() {
     return {
