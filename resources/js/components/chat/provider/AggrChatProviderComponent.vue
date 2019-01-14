@@ -15,6 +15,11 @@
           v-bind:key="subscriber.SubscriptionId"
           v-bind:username="subscriber.UserName">
         </add-chat-provider>
+        <div
+          v-if="chats.length==0 && subscribers.length==0"
+          class="text-center">
+          <p v-text="$ml.get('keine_User_msg')" />
+        </div>
       </b-col>
     </b-row>
 </template>

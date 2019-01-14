@@ -118,12 +118,17 @@ class ProviderFoxdoxController extends Controller{
     public function listSubscribersWithoutGeneralChat(){
         $allSubs = $this->listAggregatedSubscribers();
         $chats = $this->getAllChats();
-        $encodedChats = json_encode($chats);
-
+        $encodedUsers = "";
+        
+        foreach($chats as $chat){
+            if($chat->thread->conversation_tag === "allgemein"){
+                $encodedUsers = $encodedUsers . $chat->withUser->name;
+            }
+        }
+        
         $output = [];
-
         foreach($allSubs as $sub){
-            if(!strpos($encodedChats, $sub->UserProfile->UserName)){
+            if(!strpos($encodedUsers, $sub->UserProfile->UserName)){
                 array_push($output, $sub);
             }
         }

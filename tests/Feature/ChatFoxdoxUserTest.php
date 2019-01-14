@@ -18,7 +18,7 @@ class ChatFoxdoxUserTest extends TestCase
         $data = [
             "receivingprovider" => "meine.versicherung",
             "message" => "Hello",
-            "conversationtag" => "Allgemein"
+            "conversationtag" => "allgemein"
         ];
         $response = $this->json('POST', '/api/chat/user/sendmessage', $data);
         $response->assertStatus(201);
@@ -60,7 +60,7 @@ class ChatFoxdoxUserTest extends TestCase
         $data = [
             "receivingprovider" => "meine.versicherung",
             "message" => "Hello",
-            "conversationtag" => "Allgemein"
+            "conversationtag" => "allgemein"
         ];
         $response = $this->json('POST', '/api/chat/user/sendmessage', $data);
         $response->assertStatus(400);
