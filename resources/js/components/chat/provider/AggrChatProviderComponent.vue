@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import ExistentChatProviderComponent from "./ExistentChatProviderComponent.vue";
+import ChatProviderComponent from "./ChatProviderComponent.vue";
 import FoxdoxSubscriberService from "../../../services/FoxdoxSubscriberService.js";
 import AddChatProvider from "./AddChatProvider.vue";
 import ChatService from "../../../services/ChatService";
@@ -59,7 +59,7 @@ export default {
     }
   },
   components: {
-    ExistentChatProviderComponent,
+    ChatProviderComponent,
     AddChatProvider
   }
 };
