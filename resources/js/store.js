@@ -11,6 +11,8 @@ export const store = new Vuex.Store({
         ProviderShortName: 'Loading...'
       }
     ],
+    subscriberList: [
+    ],
     inboxForProvider: [
       {
         document: 'Loading...'
@@ -29,6 +31,9 @@ export const store = new Vuex.Store({
   getters: {
     getUserInbox(state) {
       return state.inboxForUser;
+    },
+    getSubscriberList(state) {
+      return state.subscriberList;
     },
     getProviderInbox(state) {
       return state.inboxForProvider;
@@ -55,6 +60,9 @@ export const store = new Vuex.Store({
   mutations: {
     setUserInbox(state, newProviderList) {
       state.inboxForUser = newProviderList;
+    },
+    setSubscriberList(state, newSubscriberList) {
+      state.subscriberList = newSubscriberList;
     },
     setProviderInbox(state, newProviderInbox) {
       state.inboxForProvider = newProviderInbox;
@@ -85,6 +93,9 @@ export const store = new Vuex.Store({
           ProviderShortName: 'Loading...'
         }
       ]);
+    },
+    resetSubscriberList() {
+      commit('setSubscriberList', []);
     },
     resetProviderInbox({ commit }) {
       commit('setProviderInbox', [

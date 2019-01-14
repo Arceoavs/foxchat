@@ -14,14 +14,14 @@
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
         <!--Wenn Provider-->
         <div v-if="isProvider">
-          <chat-provider-component
+          <aggr-chat-provider-component
             v-for="chatItem in chats"
             v-bind:key="chatItem.thread.conversation_id"
             v-bind:documentName="chatItem.thread.conversation_tag"
             v-bind:date="chatItem.thread.updated_at"
             v-bind:userName="chatItem.withUser.name"
             v-bind:message="chatItem.thread.message"
-          ></chat-provider-component>
+          ></aggr-chat-provider-component>
         </div>
         <!--Wenn Client-->
         <div v-else>
@@ -50,7 +50,7 @@
 <script>
 import ChatComponent from "./ChatComponent.vue";
 import ChatClientComponent from "./client/ChatClientComponent.vue";
-import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
+import AggrChatProviderComponent from "./provider/AggrChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import { store } from "../../store.js";
 import { MLBuilder } from 'vue-multilanguage';
@@ -98,7 +98,7 @@ export default {
   components: {
     ChatComponent,
     ChatClientComponent,
-    ChatProviderComponent
+    AggrChatProviderComponent
   }
 };
 </script>

@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FoxdoxApiClient;
 use App\Exceptions\ChatAuthException;
-use App\Services\ChatAPIService;
+use App\Services\ChatAPIService as ChatAPIService;
+use App\Exceptions\ChatAPIServiceException;
 use App\User;
 use Validator;
 use GuzzleHttp\Stream\Stream;
 
 
 
-class ProviderFoxdoxController extends Controller
-{
+class ProviderFoxdoxController extends Controller{
+
+    protected $chatapiservice;
+
     /**
      * Create a new ProviderFoxdoxController instance.
      *
@@ -30,6 +33,7 @@ class ProviderFoxdoxController extends Controller
     public function validateProviderAsUser()
     {
         if (auth()->user()->isProvider == 1) {
+            $this->chatapiservice = new ChatAPIService();
             return true;
         } else {
             throw new ChatAuthException("You are not a Foxdox Provider.");
@@ -102,13 +106,43 @@ class ProviderFoxdoxController extends Controller
         $subscribersInDatabase = [];
 
         foreach($aggrSubscribers as $item){
-            $booleanExistsAlready = false == strpos(json_encode($subscribersInDatabase), $item->SubscriptionId);
-            if($this->isValidUser($item->UserProfile->UserName) && $booleanExistsAlready){
+            $notExistentinList = !(strpos(json_encode($subscribersInDatabase), $item->SubscriptionId));
+            if(/*$this->isValidUser($item->UserProfile->UserName) &&*/ $notExistentinList){
                 array_push($subscribersInDatabase, $item);
             }
         }
 
         return $subscribersInDatabase;
+    }
+
+    public function listSubscribersWithoutGeneralChat(){
+        $allSubs = $this->listAggregatedSubscribers();
+        $chats = $this->getAllChats();
+        $encodedChats = json_encode($chats);
+
+        $output = [];
+
+        foreach($allSubs as $sub){
+            if(!strpos($encodedChats, $sub->UserProfile->UserName)){
+                array_push($output, $sub);
+            }
+        }
+
+        return $output;
+    }
+
+    protected function getAllChats(){
+        $chats = $this->chatapiservice->getInboxAll(0, 10);
+
+        if(is_array($chats)){
+            $i = 1;
+            do{
+                $chatsNext = $this->chatapiservice->getInboxAll($i, 10);
+                $chats = array_merge($chats, $chatsNext);
+                $i++;
+            } while(count($chatsNext) > 0);
+        }
+        return $chats;
     }
     
 

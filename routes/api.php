@@ -109,4 +109,5 @@ Route::group([
     Route::get('listAllServices', 'Foxdox\ProviderFoxdoxController@listAllServices');
     Route::post('listSubscribers', 'Foxdox\ProviderFoxdoxController@listSubscribers');
     Route::get('listAggregatedSubscribers', 'Foxdox\ProviderFoxdoxController@listAggregatedSubscribers');
+    Route::get('listSubscribersWithoutGeneralChat', 'Foxdox\ProviderFoxdoxController@listSubscribersWithoutGeneralChat');
 });
