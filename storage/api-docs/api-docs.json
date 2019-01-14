@@ -1431,6 +1431,32 @@
                 ]
             }
         },
+        "/api/foxdoxapi/provider/listSubscribersWithoutGeneralChat": {
+            "get": {
+                "tags": [
+                    "Foxdox-API-Provider"
+                ],
+                "summary": "Listing all subscribers, who have not yet a general chat with the provider",
+                "responses": {
+                    "200": {},
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/api/foxdoxapi/user/listprovidersforoverview": {
             "get": {
                 "tags": [
