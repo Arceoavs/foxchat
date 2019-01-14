@@ -2,14 +2,14 @@
     <b-row class="mt-3">
       <b-col>
         <!-- Chats -->
-        <existent-chat-provider-component
+        <chat-provider-component
           v-for="chatItem in chats"
           v-bind:key="chatItem.thread.conversation_id"
           v-bind:documentName="chatItem.thread.conversation_tag"
           v-bind:message="chatItem.thread.message"
           v-bind:date="chatItem.thread.updated_at"
           v-bind:userName="chatItem.withUser.name"
-        ></existent-chat-provider-component>
+        ></chat-provider-component>
         <add-chat-provider
           v-for="subscriber in subscribers"
           v-bind:key="subscriber.SubscriptionId"
