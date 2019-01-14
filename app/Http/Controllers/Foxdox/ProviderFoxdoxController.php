@@ -116,11 +116,32 @@ class ProviderFoxdoxController extends Controller{
     }
 
     public function listSubscribersWithoutGeneralChat(){
+        $allSubs = $this->listAggregatedSubscribers();        
+        
+        $output = [];
+        foreach($allSubs as $sub){
+            $response = $this->chatapiservice->getConversationByName($sub->UserProfile->UserName, "allgemein", 0, 1);
+            if($response->getStatusCode() != 200){
+                array_push($output, $sub);
+            }
+        }
+
+        return $output;
+    }
+    
+
+    /*public function listSubscribersWithoutGeneralChatHelp(){
         $allSubs = $this->listAggregatedSubscribers();
         $chats = $this->getAllChats();
         $encodedUsers = "";
         
-        foreach($chats as $chat){
+        if(is_array($chats)){
+            foreach($chats as $chat){
+                if($chat->thread->conversation_tag === "allgemein"){
+                    $encodedUsers = $encodedUsers . $chat->withUser->name;
+                }
+            }
+        }else if($chats != null){
             if($chat->thread->conversation_tag === "allgemein"){
                 $encodedUsers = $encodedUsers . $chat->withUser->name;
             }
@@ -134,7 +155,7 @@ class ProviderFoxdoxController extends Controller{
         }
 
         return $output;
-    }
+    }    
 
     protected function getAllChats(){
         $chats = $this->chatapiservice->getInboxAll(0, 10);
@@ -149,6 +170,6 @@ class ProviderFoxdoxController extends Controller{
         }
         return $chats;
     }
-    
+    */
 
 }

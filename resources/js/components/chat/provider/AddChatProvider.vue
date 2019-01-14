@@ -2,7 +2,7 @@
     <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">   
         <b-card>
         <router-link
-          :to="'/chat/communication?partner='+this.username+'&tag=allgemein'"
+          :to="'/provider-chat/communication?partner='+this.username+'&tag=allgemein'"
           class="textColor chat-overview-link">
             <b-row>
                 <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
