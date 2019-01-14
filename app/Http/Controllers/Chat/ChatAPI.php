@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use App\Exceptions\ChatAPIServiceException;
 use App\Exceptions\ChatAuthException;
 
-class ChatAPI extends Controller
+abstract class ChatAPI extends Controller
 {
     protected $chatapiservice;
 

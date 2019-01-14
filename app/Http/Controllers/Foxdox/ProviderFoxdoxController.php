@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FoxdoxApiClient;
 use App\Exceptions\ChatAuthException;
-use App\Services\ChatAPIService;
+use App\Services\ChatAPIService as ChatAPIService;
+use App\Exceptions\ChatAPIServiceException;
 use App\User;
 use Validator;
 use GuzzleHttp\Stream\Stream;
 
 
 
-class ProviderFoxdoxController extends Controller
-{
+class ProviderFoxdoxController extends Controller{
+
+    protected $chatapiservice;
+
     /**
      * Create a new ProviderFoxdoxController instance.
      *
@@ -29,12 +32,11 @@ class ProviderFoxdoxController extends Controller
 
     public function validateProviderAsUser()
     {
-        if (auth()->check()) {
-            if (auth()->user()->isProvider == 1) {
-                return true;
-            } else {
-                throw new ChatAuthException("You are not a Foxdox Provider.");
-            }
+        if (auth()->user()->isProvider == 1) {
+            $this->chatapiservice = new ChatAPIService();
+            return true;
+        } else {
+            throw new ChatAuthException("You are not a Foxdox Provider.");
         }
     }
 
@@ -93,8 +95,6 @@ class ProviderFoxdoxController extends Controller
     {
         $services = json_decode($this->listAllServices()->getBody())->Items;
 
-        array_push($services, json_decode("{\"Id\":\"0b1fb13f-0d7c-498d-82e3-96184896dd0d\"}"));
-
         $aggrSubscribers = [];
 
         foreach ($services as $item) {
@@ -105,9 +105,9 @@ class ProviderFoxdoxController extends Controller
 
         $subscribersInDatabase = [];
 
-        foreach ($aggrSubscribers as $item) {
-            $booleanExistsAlready = false == strpos(json_encode($subscribersInDatabase), $item->SubscriptionId);
-            if ($this->isValidUser($item->UserProfile->UserName) && $booleanExistsAlready) {
+        foreach($aggrSubscribers as $item){
+            $notExistentinList = !(strpos(json_encode($subscribersInDatabase), $item->SubscriptionId));
+            if($this->isValidUser($item->UserProfile->UserName) && $notExistentinList){
                 array_push($subscribersInDatabase, $item);
             }
         }
@@ -115,5 +115,61 @@ class ProviderFoxdoxController extends Controller
         return $subscribersInDatabase;
     }
 
+    public function listSubscribersWithoutGeneralChat(){
+        $allSubs = $this->listAggregatedSubscribers();        
+        
+        $output = [];
+        foreach($allSubs as $sub){
+            $response = $this->chatapiservice->getConversationByName($sub->UserProfile->UserName, "allgemein", 0, 1);
+            if($response->getStatusCode() != 200){
+                array_push($output, $sub);
+            }
+        }
+
+        return $output;
+    }
+    
+
+    /*public function listSubscribersWithoutGeneralChatHelp(){
+        $allSubs = $this->listAggregatedSubscribers();
+        $chats = $this->getAllChats();
+        $encodedUsers = "";
+        
+        if(is_array($chats)){
+            foreach($chats as $chat){
+                if($chat->thread->conversation_tag === "allgemein"){
+                    $encodedUsers = $encodedUsers . $chat->withUser->name;
+                }
+            }
+        }else if($chats != null){
+            if($chat->thread->conversation_tag === "allgemein"){
+                $encodedUsers = $encodedUsers . $chat->withUser->name;
+            }
+        }
+        
+        $output = [];
+        foreach($allSubs as $sub){
+            if(!strpos($encodedUsers, $sub->UserProfile->UserName)){
+                array_push($output, $sub);
+            }
+        }
+
+        return $output;
+    }    
+
+    protected function getAllChats(){
+        $chats = $this->chatapiservice->getInboxAll(0, 10);
+
+        if(is_array($chats)){
+            $i = 1;
+            do{
+                $chatsNext = $this->chatapiservice->getInboxAll($i, 10);
+                $chats = array_merge($chats, $chatsNext);
+                $i++;
+            } while(count($chatsNext) > 0);
+        }
+        return $chats;
+    }
+    */
 
 }

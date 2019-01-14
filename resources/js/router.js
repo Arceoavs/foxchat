@@ -36,7 +36,9 @@ const router = new VueRouter({
 
       //es werden Subroutes mit Hilfe von children und router-views umgesetzt
       //children haben dabei grundsätzlich kein Slash im Pfad, da dies automatisch ergänzt wird
-  
+      meta: {
+        requiresAuth: true,
+      },
 
       children: []
     },

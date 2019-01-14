@@ -17,7 +17,7 @@ export default new MLCreate({
       user_login: 'Zum Benutzer-Login',
       abmelden: 'Abmelden',
       general_chat: 'Allgemeiner Chat',
-      add_chat: 'Chat hinzufügen',
+      add_chat: 'Chat hinzufügen mit',
       chat_client_overview_title: 'Ihre Chats mit Providern',
       provider_list_title_chat_overview: 'Weitere Chats',
       client_list_title_chat_overview: 'Chatübersicht',
@@ -29,6 +29,8 @@ export default new MLCreate({
       chat_list_provider: 'Weitere Chats',
       keine_Provider_msg:
         'Sie haben keine Provider, die sich für den foxChat registriert haben.',
+      keine_User_msg:
+        'Sie haben keine Subscriber, die sich für den foxChat registriert haben.',
       willkommen_bei: 'Willkommen bei ',
       starting_chat_to_doc: 'Sie starten einen Chat zu folgendem Dokument: ',
       abbruch: 'Abbruch',
@@ -57,7 +59,7 @@ export default new MLCreate({
       user_login: 'User - Login',
       abmelden: 'Logout',
       general_chat: 'General Chat',
-      add_chat: 'Add chat',
+      add_chat: 'Add chat with',
       chat_client_overview_title: 'Your chats with providers',
       provider_list_title_chat_overview: 'Other chats',
       client_list_title_chat_overview: 'Chat overview',
@@ -69,6 +71,8 @@ export default new MLCreate({
       chat_list_provider: 'More chats',
       chat_list_client: 'Other providers',
       keine_Provider_msg: "You don't have any registered providers in foxChat.",
+      keine_User_msg:
+        "You don't have any registered subscribers in foxChat.",
       willkommen_bei: 'Welcome to ',
       starting_chat_to_doc:
         'You are starting a chat with the following document: ',
