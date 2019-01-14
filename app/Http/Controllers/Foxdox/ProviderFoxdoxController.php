@@ -95,8 +95,6 @@ class ProviderFoxdoxController extends Controller{
     {
         $services = json_decode($this->listAllServices()->getBody())->Items;
 
-        array_push($services, json_decode("{\"Id\":\"0b1fb13f-0d7c-498d-82e3-96184896dd0d\"}"));
-
         $aggrSubscribers = [];
 
         foreach ($services as $item) {
