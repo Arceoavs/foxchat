@@ -9,26 +9,36 @@
 
         <b-row>
           <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
-            <font-awesome-icon class="textFox" icon="comments" size="2x"/>
+            <font-awesome-icon
+              v-if="documentName == 'allgemein'"
+              class="textFox"
+              icon="comments"
+              size="2x"
+            />
+            <font-awesome-icon v-if="documentName != 'allgemein'" icon="file" size="2x"/>
           </b-col>
           <b-col>
             <b-row>
-              <b-col cols="3">
-                <h5>Chat mit: {{userName}}</h5>
-              </b-col>
-              <b-col cols="5">
-                <h5 v-if="documentName != 'allgemein'">Chat zu Dokument: {{documentName}}</h5>
-                <h5 v-if="documentName == 'allgemein'">Dies ist der allgemeine Servicechat. </h5>
+              <b-col>
+                <h5 class="text-left" v-if="documentName != 'allgemein'">Dokument: {{documentName}}</h5>
+                <h5
+                  class="text-left"
+                  v-if="documentName == 'allgemein'"
+                  v-text="$ml.get('this_is_the_general_chat')"
+                ></h5>
               </b-col>
               <b-col>
-                <p
-                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
-                >{{dateTimeForProviders}}</p>
+                <h5 class="text-right">Chat mit: {{userName}}</h5>
               </b-col>
             </b-row>
             <b-row>
               <b-col>
                 <p class="font-weight-light text-left">{{message}}</p>
+              </b-col>
+              <b-col>
+                <p
+                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+                >{{dateTimeForProviders}}</p>
               </b-col>
             </b-row>
           </b-col>
