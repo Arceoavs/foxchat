@@ -7,7 +7,7 @@
         <h2 v-else class="textColor" v-text="$ml.get('client_list_title_chat_overview')"></h2>
       </b-col>
       <b-col>
-        <h2 class="textColor" v-text="$ml.get('your_chat')"> </h2>
+        <h2 class="textColor" v-text="$ml.get('your_chat')"></h2>
       </b-col>
     </b-row>
     <b-row class="mt-3">
@@ -67,6 +67,7 @@ export default {
     console.log("in chatview");
     console.log(this.providers);
     console.log(this.isProvider);
+    console.log({userName});
   },
   data() {
     return {

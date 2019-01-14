@@ -21,13 +21,22 @@ import ChatAggr from './components/chat/ChatAggr.vue';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+  //Hash mode erzeugt URLs mit /#/beispiel; Im Vergleich zum History Mode, müssen keine fallback Methoden
+  //geschrieben werden. Allerdings ist die Indexierung bei Subroutes für Suchmaschinen wie Google problematisch.
+
   mode: 'hash',
   routes: [
     {
       //aggregiert die Dokumentensicht für die router-views und breadcrumbs
+      //Die Komponenten werden in die Komponente DocumentAggr geladen. So müssen Funktionen, welche
+      //für alle Unterkomponenten ebenfalls benötigt werden, nicht mehrfach implementiert werden.
       path: '/',
       redirect: '/Documents/',
       //component: DocumentAggr,
+
+      //es werden Subroutes mit Hilfe von children und router-views umgesetzt
+      //children haben dabei grundsätzlich kein Slash im Pfad, da dies automatisch ergänzt wird
+  
 
       children: []
     },
@@ -39,6 +48,8 @@ const router = new VueRouter({
       },
       children: [
         {
+          //:name ist ein prop, welche dynamische named routes ermöglicht. In diesem Fall würde alles, das mit dem prop
+          //name übergeben wird, bspw. /Documents/Fotos in der dafür vorgesehen Komponente "FolderChild" gerendert
           path: ':name',
           name: 'FolderChild',
           component: FolderChild,
@@ -56,6 +67,8 @@ const router = new VueRouter({
         },
       ]
     },
+
+    //Routing Teil für den Login. Hier wird ebenfalls die Grundstruktur über die LoginAggr Komponente aggregiert
     {
       path: '/login',
       component: LoginAggr,
@@ -72,6 +85,10 @@ const router = new VueRouter({
         }
       ]
     },
+
+    //Hier wird ConfirmChat zwar als root Pfad definiert, fungiert jedoch als Subroute.
+    //Dies ist notwendig, da /Documents/:name definiert ist und ansonsten eine andere Komponente (in diesem Fall
+    //FolderChild) gerendert würde, da die Routen entsprechend der Reihenfolge im Code priorisiert werden.
     {
       path: '/Documents/confirm-chat',
       name: 'ConfirmChatToDocument',
@@ -80,6 +97,8 @@ const router = new VueRouter({
         requiresAuth: true
       }
     },
+
+    //Der Chat-Teil für den Client wird ebenfalls aggregiert
     {
       path: '/chat',
       // name: 'Chat Foxdox Client',
@@ -110,6 +129,8 @@ const router = new VueRouter({
         }
       ]
     },
+
+    //Es wird zwischen Provider und Client unterschieden. Hier erfolgt eine Aggregation für die Providerseite.
     {
       path: '/provider-chat',
       // name: 'Chat Provider Overview',
@@ -142,14 +163,18 @@ const router = new VueRouter({
   ]
 });
 
+//diese Variable wird für Fehler beim Login ausgegeben
 var self = {
   errorMsg: 'Login Fehler: ',
   showAlert: false,
   noError: true
 };
 
+//Diese Methode prüft, ob es sich bei dem Nutzer von FoxChat um einen User oder einen Provider handelt
 router.beforeEach((to, from, next) => {
 
+  //Wenn es sich um einen User handelt und ein gültiger Token besteht, wird weitergeleitet auf den Chat, ansonsten
+  //auf die Login-Seite
   if (to.matched.some(record => record.meta.requiresToBeProvider)) {
     if (localStorage.getItem('user') != null) {
       if (JSON.parse(localStorage.getItem('user')).isProvider == 1) {
@@ -164,6 +189,8 @@ router.beforeEach((to, from, next) => {
     next();
   }
 
+  //Wenn es sich um einen Provider handelt und ein gültiger Token besteht, wird weitergeleitet auf den Chat, ansonsten
+  //auf die Login-Seite
   if (to.matched.some(record => record.meta.requiresToBeUser)) {
     if (localStorage.getItem('user') != null) {
       if (JSON.parse(localStorage.getItem('user')).isProvider == 0) {
@@ -177,6 +204,10 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+
+  //Wenn kein Token für den Nutzer vorliegt, wird die auf Login-Seite weitergeleitet.
+  //Wenn zu dem Nutzer kein Konto in der Datenbank vorliegt, wird ein Fehler ausgegeben und erneut
+  //auf die Login-Seite weitergeleitet.
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem('bearer') == null) {
       next('/login');
