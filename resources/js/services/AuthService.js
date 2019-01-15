@@ -60,7 +60,7 @@ class AuthService {
 
         self.showAlert = true;
         self.noError = !self.showAlert;
-
+        EventBus.$emit('loaded');
         this.logout(self);
       })
       .finally(param => {
