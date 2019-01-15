@@ -21,7 +21,7 @@
     <div id="body">
       <router-view></router-view>
     </div>
-    <b-row class="mt-5"></b-row>
+    <!-- <b-row class="mt-5"></b-row> -->
     <footer-component id="footer"></footer-component>
   </div>
 </template>
@@ -81,7 +81,7 @@ body {
 }
 #body {
   padding: 10px;
-  /* padding-bottom: 150px; */
+  padding-bottom: 105px;
 }
 #footer {
   position: absolute;
