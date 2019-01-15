@@ -11,13 +11,10 @@
     },
     "devDependencies": {
         "axios": "^0.18",
-        "bootstrap": "^4.2.1",
         "bootstrap-vue": "^2.0.0-rc.11",
         "cross-env": "^5.1",
-        "jquery": "^3.2",
-        "laravel-mix": "^4.0.14",
+        "laravel-mix": "^4.0",
         "lodash": "^4.17.5",
-        "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.16.0",
         "sass-loader": "^7.1.0",
@@ -33,10 +30,10 @@
         "@fortawesome/vue-fontawesome": "^0.1.5",
         "i": "^0.3.6",
         "laravel-echo": "^1.5.2",
-        "mdbvue": "^4.10.1",
         "npm": "^6.4.1",
         "pusher-js": "^4.3.1",
-        "vue-beautiful-foxchat": "^2.3.0",
+        "vue-beautiful-foxchat": "^2.3.1",
+        "vue-loader": "^15.5.1",
         "vue-multilanguage": "^4.0.7",
         "vuex-persistedstate": "^2.5.4"
     }
