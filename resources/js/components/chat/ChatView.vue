@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <!--Headings-->
-    <b-row class="mt-4 mb-2 pl-4">
+    <b-row class="mt-3">
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
         <h2
           v-if="this.isProvider"
@@ -11,16 +11,18 @@
         <h2 v-else class="textColor" v-text="$ml.get('client_list_title_chat_overview')"></h2>
       </b-col>
       <b-col>
-        <h3 class="textColor" v-text="this.nameForOverview"></h3>
-        <h4
-          class="textColor"
-          v-if="this.$route.query.tag == 'allgemein'"
-          v-text="$ml.get('general_chat')"
-        ></h4>
-        <h4 class="textColor" v-else>Dokument: {{this.$route.query.tag}}</h4>
+        <div class="chatTitle overViewTitle">
+          <h4 class="" v-text="this.nameForOverview"></h4>
+          <h5
+            class=""
+            v-if="this.$route.query.tag == 'allgemein'"
+            v-text="$ml.get('general_chat')"
+          ></h5>
+          <h5 class="" v-else>Dokument: {{this.$route.query.tag}}</h5>
+        </div>
       </b-col>
     </b-row>
-    <b-row class="mt-3">
+    <b-row>
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
         <!--Wenn Provider-->
         <div v-if="isProvider">
@@ -111,4 +113,7 @@ export default {
 </script>
 
 <style>
+.overViewTitle{
+  color: white;
+}
 </style>

@@ -9,7 +9,7 @@
     :showEmoji="true"
     :showFile="true"
     :showTypingIndicator="showTypingIndicator"
-    :alwaysScrollToBottom="alwaysScrollToBottom"
+    :alwaysScrollToBottom="true"
     :messageStyling="messageStyling"
   />
 </template>
@@ -22,7 +22,10 @@ export default {
   name: "app",
   data() {
     return {
-      participants: [],
+      participants: [{
+        id : "",
+        name: ""
+      }],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
       messageList: [],
