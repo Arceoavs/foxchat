@@ -3,12 +3,14 @@
     <!--Headings-->
     <b-row class="mt-3">
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
-        <h2
-          v-if="this.isProvider"
-          class="textColor"
-          v-text="$ml.get('provider_list_title_chat_overview')"
-        ></h2>
-        <h2 v-else class="textColor" v-text="$ml.get('client_list_title_chat_overview')"></h2>
+        <div class="overViewChatsTitle">
+          <h2
+            v-if="this.isProvider"
+            class="textColor"
+            v-text="$ml.get('provider_list_title_chat_overview')"
+          ></h2>
+          <h2 v-else class="textColor" v-text="$ml.get('client_list_title_chat_overview')"></h2>
+        </div>
       </b-col>
       <b-col>
         <div class="chatTitle overViewTitle">
@@ -111,12 +113,18 @@ export default {
 </script>
 
 <style>
+.overViewChatsTitle {
+  text-align: center;
+}
 .overViewTitle {
   color: white;
 }
-.leftSideOfChat{
-  height: 527px;
+.leftSideOfChat {
+  height: 650px;
   overflow-y: scroll;
-  overflow-x:hidden;
+  overflow-x: hidden;
+  border-style: solid;
+  border-color: lightgray;
+  border-radius: 5px;
 }
 </style>

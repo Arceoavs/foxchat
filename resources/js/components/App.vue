@@ -81,7 +81,7 @@ body {
 }
 #body {
   padding: 10px;
-  padding-bottom: 150px; /*Height of the footer - ÄNDERN FÜR KLEINEREN ABSTAND UNTEN */
+  /* padding-bottom: 150px; */
 }
 #footer {
   position: absolute;
