@@ -61,7 +61,7 @@
       </div>
 
       <!-- Add chat -->
-      <b-card class="mt-2 textColor">
+      <!-- <b-card class="mt-2 textColor">
         <b-row>
           <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
             <div class="chatIcons textFox">
@@ -72,7 +72,7 @@
             <p class="font-weight-bold" v-text="$ml.get('add_chat')"/>
           </b-col>
         </b-row>
-      </b-card>
+      </b-card> -->
     </b-collapse>
   </b-jumbotron>
 </template>
