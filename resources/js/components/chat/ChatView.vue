@@ -3,27 +3,28 @@
     <!--Headings-->
     <b-row class="mt-4 mb-2 pl-4">
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
-        <h2 v-if= "this.isProvider" class="textColor" v-text="$ml.get('provider_list_title_chat_overview')"></h2>
+        <h2
+          v-if="this.isProvider"
+          class="textColor"
+          v-text="$ml.get('provider_list_title_chat_overview')"
+        ></h2>
         <h2 v-else class="textColor" v-text="$ml.get('client_list_title_chat_overview')"></h2>
       </b-col>
       <b-col>
-        <h3 class="textColor" v-text="this.userName"> </h3>
-        <h4 class="textColor" v-if="this.$route.query.tag == 'allgemein'" v-text="$ml.get('general_chat')"></h4>
-        <h4 class="textColor" v-else> Dokument: {{this.$route.query.tag}} </h4>
+        <h3 class="textColor" v-text="this.nameForOverview"></h3>
+        <h4
+          class="textColor"
+          v-if="this.$route.query.tag == 'allgemein'"
+          v-text="$ml.get('general_chat')"
+        ></h4>
+        <h4 class="textColor" v-else>Dokument: {{this.$route.query.tag}}</h4>
       </b-col>
     </b-row>
     <b-row class="mt-3">
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
         <!--Wenn Provider-->
         <div v-if="isProvider">
-          <aggr-chat-provider-component
-            v-for="chatItem in chats"
-            v-bind:key="chatItem.thread.conversation_id"
-            v-bind:documentName="chatItem.thread.conversation_tag"
-            v-bind:date="chatItem.thread.updated_at"
-            v-bind:userName="chatItem.withUser.name"
-            v-bind:message="chatItem.thread.message"
-          ></aggr-chat-provider-component>
+          <aggr-chat-provider-component></aggr-chat-provider-component>
         </div>
         <!--Wenn Client-->
         <div v-else>
@@ -55,7 +56,7 @@ import ChatClientComponent from "./client/ChatClientComponent.vue";
 import AggrChatProviderComponent from "./provider/AggrChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import { store } from "../../store.js";
-import { MLBuilder } from 'vue-multilanguage';
+import { MLBuilder } from "vue-multilanguage";
 
 export default {
   mounted() {
@@ -69,7 +70,7 @@ export default {
     console.log("in chatview");
     console.log(this.providers);
     console.log(this.isProvider);
-    console.log({userName});
+    // console.log({userName});
   },
   data() {
     return {
@@ -87,8 +88,8 @@ export default {
     chats: function() {
       return store.state.inboxForProvider;
     },
-    userName: function (){
-      return this.$ml.get('your_chat') + " " + this.$route.query.partner;
+    nameForOverview: function() {
+      return this.$ml.get("your_chat") + " " + this.$route.query.partner;
     }
   },
   methods: {

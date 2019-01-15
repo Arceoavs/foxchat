@@ -14,7 +14,8 @@ use GuzzleHttp\Stream\Stream;
 
 
 
-class ProviderFoxdoxController extends Controller{
+class ProviderFoxdoxController extends Controller
+{
 
     protected $chatapiservice;
 
@@ -105,9 +106,9 @@ class ProviderFoxdoxController extends Controller{
 
         $subscribersInDatabase = [];
 
-        foreach($aggrSubscribers as $item){
+        foreach ($aggrSubscribers as $item) {
             $notExistentinList = !(strpos(json_encode($subscribersInDatabase), $item->SubscriptionId));
-            if($this->isValidUser($item->UserProfile->UserName) && $notExistentinList){
+            if ($this->isValidUser($item->UserProfile->UserName) && $notExistentinList) {
                 array_push($subscribersInDatabase, $item);
             }
         }
@@ -115,15 +116,21 @@ class ProviderFoxdoxController extends Controller{
         return $subscribersInDatabase;
     }
 
-    public function listSubscribersWithoutGeneralChat(){
-        $allSubs = $this->listAggregatedSubscribers();        
-        
+    public function listSubscribersWithoutGeneralChat()
+    {
+        $allSubs = $this->listAggregatedSubscribers();
+
         $output = [];
-        foreach($allSubs as $sub){
-            $response = $this->chatapiservice->getConversationByName($sub->UserProfile->UserName, "allgemein", 0, 1);
-            if($response->getStatusCode() != 200){
+        foreach ($allSubs as $sub) {
+            try {
+                $response = $this->chatapiservice->getConversationByName($sub->UserProfile->UserName, "allgemein", 0, 1);
+                if ($response->getStatusCode() != 200) {
+                    array_push($output, $sub);
+                }
+            } catch (\Throwable $th) {
                 array_push($output, $sub);
             }
+
         }
 
         return $output;
@@ -170,6 +177,6 @@ class ProviderFoxdoxController extends Controller{
         }
         return $chats;
     }
-    */
+     */
 
 }
