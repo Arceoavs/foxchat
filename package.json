@@ -36,7 +36,8 @@
         "mdbvue": "^4.10.1",
         "npm": "^6.4.1",
         "pusher-js": "^4.3.1",
-        "vue-beautiful-foxchat": "^2.3.0",
+        "vue-beautiful-foxchat": "^2.3.1",
+        "vue-loader": "^15.5.1",
         "vue-multilanguage": "^4.0.7",
         "vuex-persistedstate": "^2.5.4"
     }
