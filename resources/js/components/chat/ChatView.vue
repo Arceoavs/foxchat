@@ -12,32 +12,30 @@
       </b-col>
       <b-col>
         <div class="chatTitle overViewTitle">
-          <h4 class="" v-text="this.nameForOverview"></h4>
-          <h5
-            class=""
-            v-if="this.$route.query.tag == 'allgemein'"
-            v-text="$ml.get('general_chat')"
-          ></h5>
-          <h5 class="" v-else>Dokument: {{this.$route.query.tag}}</h5>
+          <h4 class v-text="this.nameForOverview"></h4>
+          <h5 class v-if="this.$route.query.tag == 'allgemein'" v-text="$ml.get('general_chat')"></h5>
+          <h5 class v-else>Dokument: {{this.$route.query.tag}}</h5>
         </div>
       </b-col>
     </b-row>
     <b-row>
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
-        <!--Wenn Provider-->
-        <div v-if="isProvider">
-          <aggr-chat-provider-component></aggr-chat-provider-component>
-        </div>
-        <!--Wenn Client-->
-        <div v-else>
-          <chat-client-component
-            class="smaller-heading"
-            v-for="provideritem in providers"
-            v-bind:key="provideritem.ProviderShortName"
-            v-bind:provider="provideritem.ProviderShortName"
-            v-bind:documentChats="provideritem.documentChats"
-            v-bind:generalChat="provideritem.generalChat"
-          ></chat-client-component>
+        <div class="leftSideOfChat">
+          <!--Wenn Provider-->
+          <div v-if="isProvider">
+            <aggr-chat-provider-component></aggr-chat-provider-component>
+          </div>
+          <!--Wenn Client-->
+          <div v-else>
+            <chat-client-component
+              class="smaller-heading"
+              v-for="provideritem in providers"
+              v-bind:key="provideritem.ProviderShortName"
+              v-bind:provider="provideritem.ProviderShortName"
+              v-bind:documentChats="provideritem.documentChats"
+              v-bind:generalChat="provideritem.generalChat"
+            ></chat-client-component>
+          </div>
         </div>
       </b-col>
       <b-col md="8" cols="12">
@@ -113,7 +111,12 @@ export default {
 </script>
 
 <style>
-.overViewTitle{
+.overViewTitle {
   color: white;
+}
+.leftSideOfChat{
+  height: 527px;
+  overflow-y: scroll;
+  overflow-x:hidden;
 }
 </style>
