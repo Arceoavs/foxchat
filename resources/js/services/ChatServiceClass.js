@@ -195,9 +195,13 @@ export default class ChatService {
           if (sender == you.name) {
             sender = 'me';
           }
-          var time = message.updated_at.slice(11, 16);
+          if(message.is_seen == 0){
+            var meta = "✓ " + message.updated_at.slice(11, 16);
+          }else{
+            var meta = "✓✓" + message.updated_at.slice(11, 16);
+          }
           responseArr.push(
-            new Message('text', sender, null, message.message, time, null, null)
+            new Message('text', sender, null, message.message, meta, null, null)
           );
         }
       })
