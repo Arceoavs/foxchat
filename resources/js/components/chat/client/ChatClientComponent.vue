@@ -159,6 +159,7 @@ export default {
   padding: 0.3em;
   margin: 0.3em;
   background-color: rgba(90, 83, 83, 0.1) !important;
+  cursor: pointer;
 }
 .rotate-down {
   -moz-transform: rotate(90deg);
