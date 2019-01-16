@@ -18,34 +18,29 @@
 
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
-      <b-card class="textColor" @click="changeChatPartner()">
-        <router-link
-          :to="'/chat/communication?partner='+provider+'&tag=allgemein'"
-          class="textColor chat-overview-link"
-        >
-          <b-row>
-            <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
-              <font-awesome-icon icon="comments" size="2x"/>
-            </b-col>
-            <b-col>
-              <b-row>
-                <b-col>
-                  <p class="font-weight-bold" v-text="$ml.get('general_chat')"/>
-                </b-col>
-                <b-col v-if="generalChat">
-                  <p
-                    class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
-                  >{{dateTimerForGeneralChat}}</p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col v-if="generalChat">
-                  <p class="font-weight-light text-left">{{generalChatMessagePreview}}</p>
-                </b-col>
-              </b-row>
-            </b-col>
-          </b-row>
-        </router-link>
+      <b-card class="textColor" @click="informChatComponent()">
+        <b-row>
+          <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
+            <font-awesome-icon icon="comments" size="2x"/>
+          </b-col>
+          <b-col>
+            <b-row>
+              <b-col>
+                <p class="font-weight-bold" v-text="$ml.get('general_chat')"/>
+              </b-col>
+              <b-col v-if="generalChat">
+                <p
+                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+                >{{dateTimerForGeneralChat}}</p>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col v-if="generalChat">
+                <p class="font-weight-light text-left">{{generalChatMessagePreview}}</p>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
       </b-card>
 
       <!-- Document chats -->
@@ -72,7 +67,7 @@
             <p class="font-weight-bold" v-text="$ml.get('add_chat')"/>
           </b-col>
         </b-row>
-      </b-card> -->
+      </b-card>-->
     </b-collapse>
   </b-jumbotron>
 </template>
@@ -92,9 +87,6 @@ export default {
     };
   },
   created() {
-    //Load Broadcast after side refresh
-    BroadcastingService.initialize();
-    BroadcastingService.subscribeToChannel();
   },
   components: {
     ChatListComponent
@@ -140,15 +132,25 @@ export default {
     }
   },
   methods: {
-    changeChatPartner: function() {
+    informChatComponent: function() {
+      this.$router.push({
+        name: "ChatViewUser",
+        query: { partner: this.provider, tag: "allgemein" }
+      });
       EventBus.$emit("chatPartnerChanged");
     }
+  },
+  beforeDestroy(){
+    console.log("bd chatclientcomponent");
+    EventBus.$off("chatPartnerChanged", () => {});
+  },
+  destroyed(){
+    console.log("d chatclientcomponent");
   }
 };
 </script>
 
 <style>
-
 .chatDateTime {
   font-size: 0.8em;
 }

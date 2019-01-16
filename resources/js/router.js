@@ -143,7 +143,7 @@ const router = new VueRouter({
         },
         {
           path: 'communication',
-          name: 'Chat',
+          name: 'ChatViewUser',
           props: true,
           component: ChatView,
           meta: {
@@ -175,6 +175,7 @@ const router = new VueRouter({
         },
         {
           path: 'communication',
+          name: "ChatViewProvider",
           props: true,
           component: ChatView,
           meta: {

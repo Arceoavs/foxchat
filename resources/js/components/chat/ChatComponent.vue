@@ -19,13 +19,14 @@ import ChatService from "../../services/ChatService";
 import EventBus from "../../services/event-bus.js";
 
 export default {
-  name: "app",
   data() {
     return {
-      participants: [{
-        id : "",
-        name: ""
-      }],
+      participants: [
+        {
+          id: "",
+          name: ""
+        }
+      ],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
       messageList: [],
@@ -37,6 +38,17 @@ export default {
   },
   created() {
     ChatService.init();
+    console.log("Chat Component created");
+    this.initChat();
+    if (this.$route.query.partner && this.$route.query.tag) {
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        this
+      );
+    }
     EventBus.$on("messageWasReceived", payload => {
       ChatService.getConversationByName(
         this.$route.query.partner,
@@ -56,11 +68,8 @@ export default {
         this
       );
     });
-  },
-  mounted() {
-    console.log("Chat Component mounted");
-    this.initChat();
-    if (this.$route.query.partner && this.$route.query.tag) {
+    EventBus.$on("messageWasSent", payload => {
+      // this.initChat();
       ChatService.getConversationByName(
         this.$route.query.partner,
         this.$route.query.tag,
@@ -68,7 +77,7 @@ export default {
         100,
         this
       );
-    }
+    });
   },
   methods: {
     initChat() {
@@ -122,12 +131,20 @@ export default {
     messageStylingToggled(e) {
       this.messageStyling = e.target.checked;
     },
-    resetChat(){
+    resetChat() {
       this.initChat();
       this.messageList = [];
     }
   },
-  computed: {}
+  beforeDestroy() {
+    console.log("bd chatcomponent");
+    EventBus.$off("messageWasReceived", () => {});
+    EventBus.$off("chatPartnerChanged", () => {});
+    EventBus.$off("messageWasSent", () => {});
+  },
+  destroyed() {
+    console.log("d chatcomponent");
+  }
 };
 </script>
 

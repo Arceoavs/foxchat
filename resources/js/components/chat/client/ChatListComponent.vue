@@ -1,33 +1,28 @@
 <template >
   <div class="mt-2">
     <b-card class="textColor" @click="informChatComponent()">
-      <router-link
-        :to="'/chat/communication?partner='+provider+'&tag='+title"
-        class="textColor chat-overview-link"
-      >
-        <b-row>
-          <b-col class="chatIcons textFox" cols="1" sm="2" md="1">
-            <font-awesome-icon icon="file" size="2x"/>
-          </b-col>
-          <b-col>
-            <b-row>
-              <b-col>
-                <p class="font-weight-bold">{{title}}</p>
-              </b-col>
-              <b-col>
-                <p
-                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
-                >{{cuttedDate}} {{cuttedTime}}</p>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col>
-                <p class="font-weight-light text-left">{{message}}</p>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </router-link>
+      <b-row>
+        <b-col class="chatIcons textFox" cols="1" sm="2" md="1">
+          <font-awesome-icon icon="file" size="2x"/>
+        </b-col>
+        <b-col>
+          <b-row>
+            <b-col>
+              <p class="font-weight-bold">{{title}}</p>
+            </b-col>
+            <b-col>
+              <p
+                class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+              >{{cuttedDate}} {{cuttedTime}}</p>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <p class="font-weight-light text-left">{{message}}</p>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
     </b-card>
   </div>
 </template>
@@ -47,8 +42,19 @@ export default {
   },
   methods: {
     informChatComponent: function() {
+      this.$router.push({
+        name: "ChatViewUser",
+        query: { partner: this.provider, tag: this.title }
+      });
       EventBus.$emit("chatPartnerChanged");
     }
+  },
+  beforeDestroy() {
+    console.log("bd chatlistcomponent");
+    EventBus.$off("chatPartnerChanged", () => {});
+  },
+  destroyed(){
+    console.log("d chatlistcomponent");
   }
 };
 </script>

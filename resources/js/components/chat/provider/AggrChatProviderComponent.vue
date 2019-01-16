@@ -1,5 +1,5 @@
 <template>
-    <b-row class="mt-3">
+    <b-row>
       <b-col>
         <!-- Chats -->
         <chat-provider-component
@@ -41,12 +41,6 @@ export default {
   },
   created() {
     //Load Broadcast after side refresh
-    EventBus.$on("messageWasReceived", payload => {
-      ChatService.getInboxProvider();
-    });
-    FoxdoxSubscriberService.getSubscriberList();
-  },
-  mounted() {
     ChatService.getInboxProvider();
     FoxdoxSubscriberService.getSubscriberList();
   },

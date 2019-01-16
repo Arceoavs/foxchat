@@ -1,49 +1,43 @@
 <template>
   <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
     <b-card @click="informChatComponent()" class="textColor">
-      <router-link
-        :to="'/provider-chat/communication?partner='+userName+'&tag='+documentName"
-        class="textColor chat-overview-link"
-      >
-        <div slot="header" style="text-align:left;">{{userName}}</div>
-
-        <b-row>
-          <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
-            <font-awesome-icon
-              v-if="documentName == 'allgemein'"
-              class="textFox"
-              icon="comments"
-              size="2x"
-            />
-            <font-awesome-icon v-if="documentName != 'allgemein'" icon="file" size="2x"/>
-          </b-col>
-          <b-col>
-            <b-row>
-              <b-col>
-                <h5 class="text-left" v-if="documentName != 'allgemein'">Dokument: {{documentName}}</h5>
-                <h5
-                  class="text-left"
-                  v-if="documentName == 'allgemein'"
-                  v-text="$ml.get('this_is_the_general_chat')"
-                ></h5>
-              </b-col>
-              <b-col>
-                <h5 class="text-right">Chat mit: {{userName}}</h5>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col>
-                <p class="font-weight-light text-left">{{message}}</p>
-              </b-col>
-              <b-col>
-                <p
-                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
-                >{{dateTimeForProviders}}</p>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </router-link>
+      <div slot="header" style="text-align:left;">{{userName}}</div>
+      <b-row>
+        <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
+          <font-awesome-icon
+            v-if="documentName == 'allgemein'"
+            class="textFox"
+            icon="comments"
+            size="2x"
+          />
+          <font-awesome-icon v-if="documentName != 'allgemein'" icon="file" size="2x"/>
+        </b-col>
+        <b-col>
+          <b-row>
+            <b-col>
+              <h5 class="text-left" v-if="documentName != 'allgemein'">Dokument: {{documentName}}</h5>
+              <h5
+                class="text-left"
+                v-if="documentName == 'allgemein'"
+                v-text="$ml.get('this_is_the_general_chat')"
+              ></h5>
+            </b-col>
+            <b-col>
+              <h5 class="text-right">Chat mit: {{userName}}</h5>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <p class="font-weight-light text-left">{{message}}</p>
+            </b-col>
+            <b-col>
+              <p
+                class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+              >{{dateTimeForProviders}}</p>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
     </b-card>
   </b-jumbotron>
 </template>
@@ -55,13 +49,11 @@ import EventBus from "../../../services/event-bus";
 
 export default {
   props: ["documentName", "date", "userName", "message"],
-  components: {
-    ChatListComponent
-  },
   created() {
     //Load Broadcast after side refresh
-    BroadcastingService.initialize();
-    BroadcastingService.subscribeToChannel();
+    EventBus.$on("messageWasReceived", payload => {
+      ChatService.getInboxProvider();
+    });
   },
   computed: {
     dateTimeForProviders() {
@@ -83,8 +75,19 @@ export default {
       return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
     }
   },
+  beforeDestroy() {
+    console.log("bd chatprovidercomponent");
+    EventBus.$off("messageWasSent", () => {});
+  },
+  destroyed(){
+    console.log("d chatprovidercomponent");
+  },
   methods: {
     informChatComponent: function() {
+      this.$router.push({
+        name: "ChatViewProvider",
+        query: { partner: this.userName, tag: this.documentName }
+      });
       EventBus.$emit("chatPartnerChanged");
     }
   }

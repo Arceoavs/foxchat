@@ -161,8 +161,7 @@ export default class ChatService {
         );
       })
       .finally(param => {
-        self.$emit('messageWasSent');
-        EventBus.$emit('chatPartnerChanged');
+        EventBus.$emit('messageWasSent');
       });
   }
 
@@ -184,7 +183,7 @@ export default class ChatService {
     axios
       .post(this.path + '/getconversationbyname', body, configExt)
       .then(response => {
-        console.log(response);
+        console.log("Listening conversation...");
 
         var partner = response.data.withUser;
         var you = JSON.parse(localStorage.getItem('user'));

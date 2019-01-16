@@ -41,17 +41,21 @@ export default {
     EventBus.$on("messageWasReceived", payload => {
       ChatService.getInbox();
     });
+    ChatService.getInbox();
   },
   components: {
     ChatClientComponent
-  },
-  mounted() {
-    ChatService.getInbox();
   },
   computed: {
     providers: function() {
       return store.state.inboxForUser;
     }
+  },
+  beforeDestroy(){
+    EventBus.$off("messageWasReceived", () => {});
+  },
+  destroyed(){
+    console.log("d chatclientoverview");
   }
 };
 </script>

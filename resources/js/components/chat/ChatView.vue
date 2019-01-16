@@ -44,7 +44,6 @@
         <chat-component
           v-bind:partner="this.$route.query.partner"
           v-bind:tag="this.$route.query.tag"
-          v-on:messageWasSent="refreshInbox"
         ></chat-component>
       </b-col>
     </b-row>
@@ -57,22 +56,29 @@ import ChatComponent from "./ChatComponent.vue";
 import ChatClientComponent from "./client/ChatClientComponent.vue";
 import AggrChatProviderComponent from "./provider/AggrChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
+import BroadcastingService from "../../services/BroadcastingService.js";
 import { store } from "../../store.js";
 import { MLBuilder } from "vue-multilanguage";
+import EventBus from "../../services/event-bus.js";
 
 export default {
-  mounted() {
+  created() {
+    BroadcastingService.initialize();
+    BroadcastingService.subscribeToChannel();
+    EventBus.$on("messageWasSent", payload => {
+      console.log("refresh wurde aufgerufen");
+      if (store.state.user.isProvider) {
+        ChatService.getInboxProvider();
+      } else {
+        ChatService.getInbox();
+      }
+    });
     if (store.state.user.isProvider) {
       ChatService.getInboxProvider();
     } else {
       ChatService.getInbox();
     }
-    console.log(this.$route.query.partner);
-    console.log(this.$route.query.tag);
-    console.log("in chatview");
-    console.log(this.providers);
-    console.log(this.isProvider);
-    // console.log({userName});
+    console.log("chatview created");
   },
   data() {
     return {
@@ -94,15 +100,12 @@ export default {
       return this.$ml.get("your_chat") + " " + this.$route.query.partner;
     }
   },
-  methods: {
-    refreshInbox() {
-      console.log("refresh wurde aufgerufen");
-      if (store.state.user.isProvider) {
-        ChatService.getInboxProvider();
-      } else {
-        ChatService.getInbox();
-      }
-    }
+  beforeDestroy() {
+    console.log("bd chatview");
+    EventBus.$off("messageWasSent", () => {});
+  },
+  destroyed() {
+    console.log("d chatview");
   },
   components: {
     ChatComponent,
