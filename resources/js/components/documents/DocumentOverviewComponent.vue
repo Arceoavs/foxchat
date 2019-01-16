@@ -4,7 +4,7 @@
       <b-col>
         <b-row class="mt-4 pl-3">
           <b-col>
-            <h2 class="textColor" v-text="Zuletzt hinzugefügt"/>
+            <h2 class="textColor" v-text="$ml.get('lastFiveDocsTitle')"/>
           </b-col>
         </b-row>
         <b-card>

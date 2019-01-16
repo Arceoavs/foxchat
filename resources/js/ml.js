@@ -27,6 +27,7 @@ export default new MLCreate({
       footer_message_right: 'powered by foxdox',
       your_chat: 'Ihr Chat mit: ',
       chat_list_provider: 'Weitere Chats',
+      lastFiveDocsTitle: 'Zuletzt benutzt',
       keine_Provider_msg:
         'Sie haben keine Provider, die sich für den foxChat registriert haben.',
       keine_User_msg:
@@ -66,6 +67,7 @@ export default new MLCreate({
       last_document_title_doc_overview: 'Your documents',
       my_providers_title_doc_overview: 'My providers',
       footer_message_left: 'Seminar: Digital Safe',
+      lastFiveDocsTitle: 'Last used',
       footer_message_right: 'powered by foxdox',
       your_chat: 'Your chat with: ',
       chat_list_provider: 'More chats',
