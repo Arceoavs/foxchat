@@ -93,4 +93,61 @@ export default class FolderService {
       console.log('Error getting subfolders: ' + error);
     }
   }
+
+
+  async getAllDocuments() {
+    this.refresh();
+
+    try {
+      const response = await axios.get(
+        path + '/listalldocs', configExt
+      );
+      console.log('Retrieving all documents..');
+      console.log(JSON.stringify(response.data.Items));
+      console.log('Got all documents');
+      let lastFive = this.getLastFiveDocuments(response.data.Items); 
+      store.commit('setLastFiveDocuments', lastFive);
+      console.log('Cached all documents');
+    } catch (error) {
+      console.log('Error getting all documents: ' + error);
+    }
+  }
+
+  getLastFiveDocuments(documents){
+    if(Array.isArray(documents)){
+      for(let i = 0; i<documents.length; i++){
+        try{
+          documents[i].Modified = new Date(documents[i].Modified);
+        }catch(ex){
+          console.warn('Unparseable date: '+documents[i].Modified);
+          documents.splice(i, 1);
+        }
+      }
+   
+      documents.sort( function(a, b){
+        return b.Modified.getTime() - a.Modified.getTime();
+        //  return a.Size - b.Size;
+      });
+
+      documents.splice(5, documents.length);
+      return documents;
+    }else{
+      console.error('Error in FolderServiceClass.getLastFiveDocuments(): Malformed Paramter, documents is not an Array');
+    }
+  }
+
+  compareDocumentsByModifiedTimestamp(){
+    return function(a, b){
+        console.log("dif: "+(a.Modified.getTime() - b.Modified.getTime()));
+        if( Object.prototype.toString.call(a) === "[object Date]" && Object.prototype.toString.call(b) !== "[object Date]" ){
+          return 1;
+        } else if( Object.prototype.toString.call(a) !== "[object Date]" && Object.prototype.toString.call(b) === "[object Date]" ){
+          return -1;
+        } else if( Object.prototype.toString.call(a) !== "[object Date]" && Object.prototype.toString.call(b) !== "[object Date]" ) {
+          return 0;
+        } else {
+          return a.Modified.getTime() - b.Modified.getTime();
+        }
+      }
+  }
 }

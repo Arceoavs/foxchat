@@ -4,6 +4,21 @@
       <b-col>
         <b-row class="mt-4 pl-3">
           <b-col>
+            <h2 class="textColor" v-text="Zuletzt hinzugefügt"/>
+          </b-col>
+        </b-row>
+        <b-card>
+          <b-list-group flush>
+            <document-component
+              v-for="document in lastFive"
+              v-bind:key="document.Id"
+              v-bind:id="document.Id"
+              v-bind:name="document.Name"
+            />
+          </b-list-group>
+        </b-card>
+        <b-row class="mt-4 pl-3">
+          <b-col>
             <h2 class="textColor" v-text="$ml.get('last_document_title_doc_overview')"/>
           </b-col>
         </b-row>
@@ -42,7 +57,13 @@ export default {
       showCollapse: false
     };
   },
+  mounted(){
+     FolderService.getAllDocuments();
+  },
   computed: {
+    lastFive: function(){
+       return store.state.lastFiveDocuments;
+    },
     documents: function() {
       return store.state.recentDocuments;
     },

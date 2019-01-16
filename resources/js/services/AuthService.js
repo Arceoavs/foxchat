@@ -44,6 +44,7 @@ class AuthService {
         EventBus.$emit('loaded');
         FoxdoxGeneralService.getProviderList();
         FolderService.getRootFolder();
+        FolderService.getAllDocuments();
         //getRootFolder holt dann Subfolder und Dokumente in rootFolder
       })
       .catch(error => {

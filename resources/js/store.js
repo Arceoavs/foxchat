@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
     recentDocuments: {
       Name: 'Loading...'
     },
+    lastFiveDocuments: [],
     recentFolders: [],
     currentFolder: [],
     currentDocuments: []
@@ -43,6 +44,9 @@ export const store = new Vuex.Store({
     },
     getRecentDocuments(state) {
       return state.recentDocuments;
+    },
+    getLastFiveDocuments(state) {
+      return state.lastFiveDocuments;
     },
     getRecentFolders(state) {
       return state.recentFolders;
@@ -72,6 +76,9 @@ export const store = new Vuex.Store({
     },
     setRecentDocuments(state, newDocumentList) {
       state.recentDocuments = newDocumentList;
+    },
+    setLastFiveDocuments(state, newLastFiveList) {
+      state.lastFiveDocuments = newLastFiveList;
     },
     setRecentFolders(state, newFolderList) {
       state.recentFolders = newFolderList;
@@ -121,6 +128,9 @@ export const store = new Vuex.Store({
     },
     resetCurrentDocuments({}) {
       commit('setCurrentDocuments', [{}]);
+    },
+    resetLastFiveDocuments({}) {
+      commit('setLastFiveDocuments', [{}]);
     }
   }
 });
