@@ -73,6 +73,20 @@
           </b-col>
         </b-row>
       </b-card> -->
+      <router-link :to="'/Documents'" class="undecorated">
+        <b-card class="mt-2 textColor">
+          <b-row>
+            <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
+              <div class="chatIcons textFox">
+                <font-awesome-icon icon="plus-circle" size="2x"/>
+              </div>
+            </b-col>
+            <b-col>
+              <p class="font-weight-bold" v-text="$ml.get('add_chat')"/>
+            </b-col>
+          </b-row>
+        </b-card>
+      </router-link>
     </b-collapse>
   </b-jumbotron>
 </template>
