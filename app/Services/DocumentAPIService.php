@@ -58,4 +58,18 @@ class DocumentAPIService extends Controller
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
     }
 
+    public function publishDocument($documentId)
+    {
+        $url = 'https://api.foxdox.de/document/publish';
+        $foxdoxapiclient = new FoxdoxApiClient($url, ['documentId' => $documentId, 'isPublic' => 'true']);
+        return $foxdoxapiclient->apiRequest(auth()->user()->name);
+    }
+
+    public function downloadPublicDocument($url)
+    {
+        $foxdoxapiclient = new FoxdoxApiClient($url, []);
+        $foxdoxapiclient->setMethod('GET');
+        return $foxdoxapiclient->apiRequest(auth()->user()->name);
+    }
+
 }

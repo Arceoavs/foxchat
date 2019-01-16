@@ -93,7 +93,8 @@ Route::group([
     Route::post('listfolders', 'Foxdox\DocumentAPI@listFolders');
     Route::post('listdocuments', 'Foxdox\DocumentAPI@listDocuments');
     Route::post('downloaddocument', 'Foxdox\DocumentAPI@downloadDocument');
-
+    Route::post('publishdocument', 'Foxdox\DocumentAPI@publishDocument');
+    Route::post('downloadpublicdocument', 'Foxdox\DocumentAPI@downloadPublicDocument');
   
 });
 

@@ -37,6 +37,60 @@ class DocumentService {
   getProviderName(path) {
     return path.split("/")[1];
   }
+
+  async publishDocument(documentId) {
+    this.refresh();
+    var body = { documentId: documentId };
+
+    try {
+      const response = await axios
+        .post(path + '/publishdocument', body, configExt)
+        .then(response => {
+          console.log('Publishing document ' + documentId + ' . . .');
+          console.log(JSON.stringify(response.data.PublicUrl));
+          console.log('Document published!');
+        })
+    } catch (error) {
+      console.log("Error publishing document: " + JSON.stringify(error))
+    }
+
+  }
+
+  downloadPublicDocument(documentId) {
+    this.refresh();
+
+    var body = { documentId: documentId };
+
+    axios
+      .get(path + '/downloadpublicdocument', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('bearer')
+        },
+        params: {
+          documentId: documentId
+        }
+      })
+      .then(response => {
+        console.log('Downloading public document ' + documentId + ' . . .');
+        console.log(JSON.stringify(response.data));
+        console.log('Document downloaded!');
+      })
+      .catch(error => {
+        console.log('Error downloading public document: ' + JSON.stringify(error));
+      });
+
+    // axios
+    //   .post(path + '/downloadpublicdocument', body, configExt)
+    //   .then(response => {
+    //     console.log('Downloading public document ' + documentId + ' . . .');
+    //     console.log(JSON.stringify(response.data));
+    //     console.log('Document downloaded!');
+    //   })
+    //   .catch(error => {
+    //     console.log('Error downloading public document: ' + JSON.stringify(error));
+    //   });
+  }
 }
 
 
