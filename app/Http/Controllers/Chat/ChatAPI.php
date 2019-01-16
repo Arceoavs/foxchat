@@ -177,4 +177,21 @@ abstract class ChatAPI extends Controller
 
         return $this->chatapiservice->deleteMessage($messageid);
     }
+
+    public function makeConversationSeen()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'conversationid' => 'required'
+        ]);
+        
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $conversationid = request()->input('conversationid');
+
+        return $this->chatapiservice->makeConversationSeen($conversationid);
+    }
 }

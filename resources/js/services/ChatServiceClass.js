@@ -15,6 +15,11 @@ export default class ChatService {
   refresh() {
     configExt.headers.Authorization =
       'Bearer ' + localStorage.getItem('bearer');
+    if (JSON.parse(localStorage.getItem('user')).isProvider == 0) {
+      this.path = '/api/chat/user';
+    } else {
+      this.path = '/api/chat/provider';
+    }
   }
 
   init(pPath) {
@@ -149,10 +154,10 @@ export default class ChatService {
         console.log(JSON.stringify(error));
         console.log(
           error.response.status +
-            ' ' +
-            error.response.statusText +
-            ' message: ' +
-            error.response.data.message
+          ' ' +
+          error.response.statusText +
+          ' message: ' +
+          error.response.data.message
         );
       })
       .finally(param => {
@@ -188,17 +193,25 @@ export default class ChatService {
           new Participant(you.id, you.name)
         ];
 
+        this.makeConversationSeen(response.data.messages[0].conversation_id, self);
+
         var responseArr = self.messageList;
         responseArr.splice(0);
         for (var message of response.data.messages) {
           var sender = message.sender.name;
           if (sender == you.name) {
             sender = 'me';
-          }
-          if(message.is_seen == 0){
-            var meta = "✓ " + message.updated_at.slice(11, 16);
-          }else{
-            var meta = "✓✓" + message.updated_at.slice(11, 16);
+            if (message.is_seen == 0) {
+              var meta = "✓ " + message.updated_at.slice(11, 16);
+            } else {
+              var meta = "✓✓ " + message.updated_at.slice(11, 16);
+            }
+          } else {
+            if (message.is_seen == 0) {
+              var meta = message.updated_at.slice(11, 16);
+            } else {
+              var meta = message.updated_at.slice(11, 16);
+            }
           }
           responseArr.push(
             new Message('text', sender, null, message.message, meta, null, null)
@@ -211,10 +224,10 @@ export default class ChatService {
         console.log(JSON.stringify(error));
         console.log(
           error.response.status +
-            ' ' +
-            error.response.statusText +
-            ' message: ' +
-            JSON.stringify(error.response.data)
+          ' ' +
+          error.response.statusText +
+          ' message: ' +
+          JSON.stringify(error.response.data)
         );
 
         self.resetChat();
@@ -291,6 +304,24 @@ export default class ChatService {
       .then(response => {
         self.response.makeSeen = response;
         console.log('makeSeen success!');
+      })
+      .catch(error => {
+        console.log(error);
+        console.log(JSON.stringify(error));
+      });
+  }
+
+  makeConversationSeen(conversationId, self) {
+    this.refresh();
+    var body = {
+      conversationid: conversationId
+    };
+
+    axios
+      .post(this.path + '/makeconversationseen', body, configExt)
+      .then(response => {
+        // self.response.makeSeen = response;
+        console.log('makeConversationSeen success!');
       })
       .catch(error => {
         console.log(error);

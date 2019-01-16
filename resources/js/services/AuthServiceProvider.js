@@ -31,7 +31,7 @@ class AuthServiceProvider {
       .then(response => {
         console.log('Logging in axios...');
         localStorage.setItem('bearer', response.data.access_token);
-        ChatService.getInboxProvider(this);
+
 
         this.retrieveUser(self);
 
@@ -110,7 +110,7 @@ class AuthServiceProvider {
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
         store.commit('setUser', response.data);
-
+        ChatService.getInboxProvider(this);
         console.log('Got Providerdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
 
