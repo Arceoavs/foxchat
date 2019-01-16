@@ -36,7 +36,7 @@ class AuthServiceProvider {
         this.retrieveUser(self);
 
         if (self.noError) {
-          self.$router.push('/');
+          
           console.log('Logged In');
         }
       })
@@ -53,6 +53,7 @@ class AuthServiceProvider {
         this.logout(self);
       })
       .finally(param => {
+        
         EventBus.$emit('loaded');
         BroadcastingService.initialize();
       });
@@ -132,6 +133,7 @@ class AuthServiceProvider {
         self.noError = !self.showAlert;
       })
       .finally(param => {
+        self.$router.push({name: "Chat Foxdox Provider Overview"});
         BroadcastingService.subscribeToChannel();
         EventBus.$emit('loaded');
         EventBus.$emit('UserData loaded');

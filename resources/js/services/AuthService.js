@@ -38,10 +38,6 @@ class AuthService {
         localStorage.setItem('bearer', response.data.access_token);
         this.retrieveUser(self);
 
-        if (self.noError) {
-          self.$router.push('/');
-          console.log('Logged In');
-        }
         
         //Alles was bei Anmeldung async nachgeladen werden muss:
         BroadcastingService.initialize();
@@ -125,6 +121,11 @@ class AuthService {
         store.commit('setUser', response.data);
         console.log('Got Userdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
+
+        if (self.noError) {
+          self.$router.push('/');
+          console.log('Logged In');
+        }
 
         // if( self.noError  ){
         //     self.$router.push('/');

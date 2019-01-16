@@ -37,7 +37,25 @@ const router = new VueRouter({
       //es werden Subroutes mit Hilfe von children und router-views umgesetzt
       //children haben dabei grundsätzlich kein Slash im Pfad, da dies automatisch ergänzt wird
       meta: {
+        requiresAuth: true
+        // requiresToBeUser: true
+      },
+
+      children: []
+    },
+    {
+      //aggregiert die Dokumentensicht für die router-views und breadcrumbs
+      //Die Komponenten werden in die Komponente DocumentAggr geladen. So müssen Funktionen, welche
+      //für alle Unterkomponenten ebenfalls benötigt werden, nicht mehrfach implementiert werden.
+      path: '/',
+      redirect: '/provider-chat/',
+      //component: DocumentAggr,
+
+      //es werden Subroutes mit Hilfe von children und router-views umgesetzt
+      //children haben dabei grundsätzlich kein Slash im Pfad, da dies automatisch ergänzt wird
+      meta: {
         requiresAuth: true,
+        requiresToBeProvider: true
       },
 
       children: []
@@ -47,6 +65,7 @@ const router = new VueRouter({
       component: DocumentAggr,
       meta: {
         requiresAuth: true,
+        requiresToBeUser: true
       },
       children: [
         {
@@ -57,6 +76,7 @@ const router = new VueRouter({
           component: FolderChild,
           meta: {
             requiresAuth: true,
+            requiresToBeUser: true
           },
         },
         {
@@ -65,6 +85,7 @@ const router = new VueRouter({
           component: DocumentOverviewComponent,
           meta: {
             requiresAuth: true,
+            requiresToBeUser: true
           },
         },
       ]
@@ -96,7 +117,8 @@ const router = new VueRouter({
       name: 'ConfirmChatToDocument',
       component: ConfirmChatToDoc,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresToBeUser: true
       }
     },
 
