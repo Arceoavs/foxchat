@@ -50,6 +50,11 @@ class DocumentAPI extends Controller
         return $this->documentapiservice->listFolders($folder);
     }
 
+    public function listAllDocuments()
+    {
+        return $this->documentapiservice->listAllDocuments();
+    }
+
     public function listDocuments()
     {
         //Check if request contains the necessary inputs
