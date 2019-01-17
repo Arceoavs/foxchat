@@ -8,7 +8,7 @@
           id="input-valid"
           :state="true"
           type="text"
-          style="width:525px"
+          style="width:530px"
           v-bind:value="publicLink"
           v-if="isPublished"
         />
