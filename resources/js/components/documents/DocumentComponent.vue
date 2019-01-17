@@ -14,10 +14,10 @@
 import DocumentService from "../../services/DocumentService.js";
 export default {
   props: ["id", "name", "folderPath"],
-  data(){
+  data() {
     var providerName = DocumentService.getProviderName(this.folderPath);
-    if (typeof providerName !== 'undefined') return {isFromProvider : true};
-    else return {isFromProvider : false};
+    if (providerName) return { isFromProvider: true };
+    else return { isFromProvider: false };
   },
   methods: {
     openDocument() {
@@ -32,7 +32,7 @@ export default {
       var publicUrl = DocumentService.publishDocument(this.id);
 
       var providerName = DocumentService.getProviderName(this.folderPath);
-  
+
       this.$router.push({
         name: "ConfirmChatToDocument",
         params: { docName: this.name, provName: providerName }
