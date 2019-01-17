@@ -34,11 +34,6 @@ import { store } from "../../../store.js";
 
 
 export default {
-  data() {
-    return {
-      addChat: "Neuen Chat starten"
-    };
-  },
   created() {
     //Load Broadcast after side refresh
     EventBus.$on("messageWasReceived", payload => {
