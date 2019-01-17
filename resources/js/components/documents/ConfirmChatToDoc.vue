@@ -32,7 +32,7 @@
 export default {
   methods: {
     startChat() {
-      this.$router.push({name: 'Chat',
+      this.$router.push({name: 'ChatViewUser',
       query: { partner: this.providerName, tag: this.documentName }})
     },
     abort() {

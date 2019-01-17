@@ -1400,7 +1400,7 @@
                             "schema": {
                                 "type": "object",
 								"required": {
-									"serviceId"
+									"serviceId": "string"
 								},
                                 "properties": {
                                     "serviceId": {

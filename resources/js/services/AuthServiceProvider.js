@@ -34,10 +34,6 @@ class AuthServiceProvider {
 
         this.retrieveUser(self);
 
-        if (self.noError) {
-          FoxdoxSubscriberService.getSubscriberList();
-          console.log('Logged In');
-        }
       })
       .catch(error => {
         console.log('error while Login' + JSON.stringify(error));
