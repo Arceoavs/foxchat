@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
     recentDocuments: {
       Name: 'Loading...'
     },
+    messageList: [],
     recentFolders: [],
     currentFolder: [],
     currentDocuments: []
@@ -55,6 +56,9 @@ export const store = new Vuex.Store({
     },
     getCurrentDocuments(state) {
       return state.currentDocuments;
+    },
+    getMessageList(state){
+      return state.messageList;
     }
   },
   mutations: {
@@ -84,6 +88,9 @@ export const store = new Vuex.Store({
     },
     setCurrentDocuments(state, newCurrentDocuments) {
       state.currentDocuments = newCurrentDocuments;
+    },
+    setMessageList(state, newMessageList) {
+      state.messageList = newMessageList;
     }
   },
   actions: {
@@ -121,6 +128,9 @@ export const store = new Vuex.Store({
     },
     resetCurrentDocuments({}) {
       commit('setCurrentDocuments', [{}]);
+    },
+    resetMessageList({commit}){
+      commit('setMessageList', []);
     }
   }
 });

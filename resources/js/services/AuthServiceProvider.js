@@ -92,6 +92,7 @@ class AuthServiceProvider {
     localStorage.removeItem('user');
     store.dispatch('resetProviderInbox');
     store.dispatch('resetUser');
+    store.dispatch('resetMessageList');
   }
 
   retrieveUser(self) {

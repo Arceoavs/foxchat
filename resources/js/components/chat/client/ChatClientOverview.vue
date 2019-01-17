@@ -2,15 +2,17 @@
   <b-container>
     <b-row class="mt-4 pl-2">
       <b-col>
-        <h2 v-if="providers.length==1" class="textColor" v-text="$ml.get('chat_client_overview_title')"/>
+        <h2
+          v-if="providers.length==1"
+          class="textColor"
+          v-text="$ml.get('chat_client_overview_title')"
+        />
       </b-col>
     </b-row>
     <b-row class="mt-3">
       <b-col>
-        <div
-          v-if="providers.length==0"
-          class="text-center">
-          <p v-text="$ml.get('keine_Provider_msg')" />
+        <div v-if="providers.length==0" class="text-center">
+          <p v-text="$ml.get('keine_Provider_msg')"/>
         </div>
         <chat-client-component
           v-for="provideritem in providers"
@@ -18,6 +20,7 @@
           v-bind:provider="provideritem.ProviderShortName"
           v-bind:documentChats="provideritem.documentChats"
           v-bind:generalChat="provideritem.generalChat"
+          v-on:chat-partner-changed="changeRoute"
         ></chat-client-component>
       </b-col>
     </b-row>
@@ -51,10 +54,18 @@ export default {
       return store.state.inboxForUser;
     }
   },
-  beforeDestroy(){
+  methods: {
+    changeRoute(e) {
+      this.$router.push({
+        name: "ChatViewUser",
+        query: { partner: e.provider, tag: e.tag }
+      });
+    }
+  },
+  beforeDestroy() {
     EventBus.$off("messageWasReceived", () => {});
   },
-  destroyed(){
+  destroyed() {
     console.log("d chatclientoverview");
   }
 };

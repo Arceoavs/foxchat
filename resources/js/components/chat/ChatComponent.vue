@@ -16,7 +16,7 @@
 
 <script>
 import ChatService from "../../services/ChatService";
-import EventBus from "../../services/event-bus.js";
+import { store } from "../../store.js";
 
 export default {
   data() {
@@ -29,7 +29,6 @@ export default {
       ],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
-      messageList: [],
       newMessagesCount: 0,
       showTypingIndicator: "",
       alwaysScrollToBottom: false,
@@ -37,18 +36,8 @@ export default {
     };
   },
   created() {
-    ChatService.init();
-    console.log("Chat Component created");
+    
     this.initChat();
-    if (this.$route.query.partner && this.$route.query.tag) {
-      ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
-    }
     EventBus.$on("messageWasReceived", payload => {
       ChatService.getConversationByName(
         this.$route.query.partner,
@@ -58,26 +47,14 @@ export default {
         this
       );
     });
-    EventBus.$on("chatPartnerChanged", payload => {
-      // this.initChat();
-      ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
-    });
-    EventBus.$on("messageWasSent", payload => {
-      // this.initChat();
-      ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
-    });
+  },
+  updated() {
+    console.log("in chat component updated");
+  },
+  computed:{
+    messageList: function(){
+      return store.state.messageList;
+    }
   },
   methods: {
     initChat() {
@@ -119,7 +96,6 @@ export default {
         this.$route.query.tag,
         this
       );
-      // this.messageList = [...this.messageList, message];
     },
     showStylingInfo() {
       this.$modal.show("dialog", {
@@ -133,17 +109,7 @@ export default {
     },
     resetChat() {
       this.initChat();
-      this.messageList = [];
     }
-  },
-  beforeDestroy() {
-    console.log("bd chatcomponent");
-    EventBus.$off("messageWasReceived", () => {});
-    EventBus.$off("chatPartnerChanged", () => {});
-    EventBus.$off("messageWasSent", () => {});
-  },
-  destroyed() {
-    console.log("d chatcomponent");
   }
 };
 </script>

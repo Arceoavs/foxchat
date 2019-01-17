@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import ChatListComponent from "../client/ChatListComponent.vue";
-
 export default {
     props: ["username"],
     mounted() {

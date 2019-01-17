@@ -36,6 +36,7 @@
               v-bind:provider="provideritem.ProviderShortName"
               v-bind:documentChats="provideritem.documentChats"
               v-bind:generalChat="provideritem.generalChat"
+              v-on:chat-partner-changed="changeRoute"
             ></chat-client-component>
           </div>
         </div>
@@ -44,6 +45,7 @@
         <chat-component
           v-bind:partner="this.$route.query.partner"
           v-bind:tag="this.$route.query.tag"
+          v-on:message-was-sent="updateChatServices"
         ></chat-component>
       </b-col>
     </b-row>
@@ -59,24 +61,25 @@ import ChatService from "../../services/ChatService";
 import BroadcastingService from "../../services/BroadcastingService.js";
 import { store } from "../../store.js";
 import { MLBuilder } from "vue-multilanguage";
-import EventBus from "../../services/event-bus.js";
 
 export default {
   created() {
+    ChatService.init();
     BroadcastingService.initialize();
     BroadcastingService.subscribeToChannel();
-    EventBus.$on("messageWasSent", payload => {
-      console.log("refresh wurde aufgerufen");
-      if (store.state.user.isProvider) {
-        ChatService.getInboxProvider();
-      } else {
-        ChatService.getInbox();
-      }
-    });
     if (store.state.user.isProvider) {
       ChatService.getInboxProvider();
     } else {
       ChatService.getInbox();
+    }
+    if (this.$route.query.partner && this.$route.query.tag) {
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        this
+      );
     }
     console.log("chatview created");
   },
@@ -100,12 +103,27 @@ export default {
       return this.$ml.get("your_chat") + " " + this.$route.query.partner;
     }
   },
-  beforeDestroy() {
-    console.log("bd chatview");
-    EventBus.$off("messageWasSent", () => {});
-  },
-  destroyed() {
-    console.log("d chatview");
+  methods: {
+    changeRoute(e) {
+      this.$router.push({
+        name: "ChatViewUser",
+        query: { partner: e.provider, tag: e.tag }
+      });
+      this.updateChatServices();
+    },
+    updateChatServices() {
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100
+      );
+      if (store.state.user.isProvider) {
+        ChatService.getInboxProvider();
+      } else {
+        ChatService.getInbox();
+      }
+    }
   },
   components: {
     ChatComponent,

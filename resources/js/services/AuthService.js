@@ -101,6 +101,7 @@ class AuthService {
     store.dispatch('resetRootFolder');
     store.dispatch('resetRecentFolders');
     store.dispatch('resetRecentDocuments');
+    store.dispatch('resetMessageList');
   }
 
   retrieveUser(self) {
