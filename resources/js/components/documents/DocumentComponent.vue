@@ -32,6 +32,11 @@ export default {
         params: { docName: this.name, provName: providerName }
       });
     }
+  }, 
+  mounted: {
+    isFromProvider: function() {
+      console.log(DocumentService.getProviderName(this.folderPath))
+    }
   }
 };
 </script>
