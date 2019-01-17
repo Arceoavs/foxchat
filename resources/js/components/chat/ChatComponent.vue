@@ -16,19 +16,19 @@
 
 <script>
 import ChatService from "../../services/ChatService";
-import EventBus from "../../services/event-bus.js";
+import { store } from "../../store.js";
 
 export default {
-  name: "app",
   data() {
     return {
-      participants: [{
-        id : "",
-        name: ""
-      }],
+      participants: [
+        {
+          id: "",
+          name: ""
+        }
+      ],
       titleImageUrl:
         "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
-      messageList: [],
       newMessagesCount: 0,
       showTypingIndicator: "",
       alwaysScrollToBottom: false,
@@ -36,38 +36,14 @@ export default {
     };
   },
   created() {
-    ChatService.init();
-    EventBus.$on("messageWasReceived", payload => {
-      ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
-    });
-    EventBus.$on("chatPartnerChanged", payload => {
-      // this.initChat();
-      ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
-    });
-  },
-  mounted() {
-    console.log("Chat Component mounted");
     this.initChat();
-    if (this.$route.query.partner && this.$route.query.tag) {
-      ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
+  },
+  updated() {
+    console.log("in chat component updated");
+  },
+  computed:{
+    messageList: function(){
+      return store.state.messageList;
     }
   },
   methods: {
@@ -110,7 +86,6 @@ export default {
         this.$route.query.tag,
         this
       );
-      // this.messageList = [...this.messageList, message];
     },
     showStylingInfo() {
       this.$modal.show("dialog", {
@@ -122,12 +97,10 @@ export default {
     messageStylingToggled(e) {
       this.messageStyling = e.target.checked;
     },
-    resetChat(){
+    resetChat() {
       this.initChat();
-      this.messageList = [];
     }
-  },
-  computed: {}
+  }
 };
 </script>
 

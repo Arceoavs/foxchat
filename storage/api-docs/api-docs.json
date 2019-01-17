@@ -1794,6 +1794,9 @@
                     },
                     "take": {
                         "type": "string"
+                    },
+                    "triggeredByPusherEvent":{
+                        "type": "boolean"
                     }
                 }
             },

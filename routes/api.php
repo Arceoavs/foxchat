@@ -54,7 +54,7 @@ Route::group([
     Route::post('getconversationbyidall', 'Chat\ChatAPIFoxdoxUser@getConversationByIdAll');
     Route::patch('makeseen', 'Chat\ChatAPIFoxdoxUser@makeSeen');
     Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxUser@deleteMessage');
-
+    Route::post('makeconversationseen', 'Chat\ChatAPIFoxdoxUser@makeConversationSeen');
 });
 
 Route::group([
@@ -74,6 +74,7 @@ Route::group([
     Route::post('getconversationbyidall', 'Chat\ChatAPIFoxdoxProvider@getConversationByIdAll');
     Route::patch('makeseen', 'Chat\ChatAPIFoxdoxProvider@makeSeen');
     Route::patch('deletemessage', 'Chat\ChatAPIFoxdoxProvider@deleteMessage');
+    Route::post('makeconversationseen', 'Chat\ChatAPIFoxdoxProvider@makeConversationSeen');
 
 });
 

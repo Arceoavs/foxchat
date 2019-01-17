@@ -25,7 +25,7 @@
         <div class="leftSideOfChat">
           <!--Wenn Provider-->
           <div v-if="isProvider">
-            <aggr-chat-provider-component></aggr-chat-provider-component>
+            <chat-provider-component v-on:chat-partner-changed="changeRoute"></chat-provider-component>
           </div>
           <!--Wenn Client-->
           <div v-else>
@@ -36,6 +36,7 @@
               v-bind:provider="provideritem.ProviderShortName"
               v-bind:documentChats="provideritem.documentChats"
               v-bind:generalChat="provideritem.generalChat"
+              v-on:chat-partner-changed="changeRoute"
             ></chat-client-component>
           </div>
         </div>
@@ -44,7 +45,7 @@
         <chat-component
           v-bind:partner="this.$route.query.partner"
           v-bind:tag="this.$route.query.tag"
-          v-on:messageWasSent="refreshInbox"
+          v-on:message-was-sent="updateChatServicesTriggeredByPusher"
         ></chat-component>
       </b-col>
     </b-row>
@@ -55,24 +56,37 @@
 <script>
 import ChatComponent from "./ChatComponent.vue";
 import ChatClientComponent from "./client/ChatClientComponent.vue";
-import AggrChatProviderComponent from "./provider/AggrChatProviderComponent.vue";
+import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
+import BroadcastingService from "../../services/BroadcastingService.js";
+import FoxdoxSubscriberService from "../../services/FoxdoxSubscriberService.js";
 import { store } from "../../store.js";
 import { MLBuilder } from "vue-multilanguage";
+import EventBus from "../../services/event-bus";
 
 export default {
-  mounted() {
+  created() {
+    EventBus.$on("messageWasReceived", payload => {
+      this.updateChatServices();
+    });
+    EventBus.$on("messageWasRead", payload => {
+      this.updateChatServicesTriggeredByPusher();
+    });
     if (store.state.user.isProvider) {
       ChatService.getInboxProvider();
     } else {
       ChatService.getInbox();
     }
-    console.log(this.$route.query.partner);
-    console.log(this.$route.query.tag);
-    console.log("in chatview");
-    console.log(this.providers);
-    console.log(this.isProvider);
-    // console.log({userName});
+    if (this.$route.query.partner && this.$route.query.tag) {
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        false
+      );
+    }
+    console.log("chatview created");
   },
   data() {
     return {
@@ -95,19 +109,64 @@ export default {
     }
   },
   methods: {
-    refreshInbox() {
-      console.log("refresh wurde aufgerufen");
+    changeRoute(e) {
+      if (store.state.user.isProvider) {
+        console.log("in change route" + e.provider + e.tag);
+        this.$router.push({
+          name: "ChatViewProvider",
+          query: { partner: e.partner, tag: e.tag }
+        });
+      } else {
+        this.$router.push({
+          name: "ChatViewUser",
+          query: { partner: e.provider, tag: e.tag }
+        });
+      }
+      this.updateChatServices();
+    },
+    updateChatServices() {
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        false
+      );
       if (store.state.user.isProvider) {
         ChatService.getInboxProvider();
+        FoxdoxSubscriberService.getSubscriberList();
       } else {
         ChatService.getInbox();
       }
+    },
+    updateChatServicesTriggeredByPusher() {
+      this.wait(200);
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        true
+      );
+      if (store.state.user.isProvider) {
+        ChatService.getInboxProvider();
+        FoxdoxSubscriberService.getSubscriberList();
+      } else {
+        ChatService.getInbox();
+      }
+    },
+    wait(ms) {
+      var d = new Date();
+      var d2 = null;
+      do {
+        d2 = new Date();
+      } while (d2 - d < ms);
     }
   },
   components: {
     ChatComponent,
     ChatClientComponent,
-    AggrChatProviderComponent
+    ChatProviderComponent
   }
 };
 </script>

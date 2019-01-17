@@ -33,12 +33,24 @@ import FooterComponent from "./Footer.vue";
 import EventBus from "../services/event-bus.js";
 import { store } from "../store.js";
 import { MLBuilder } from "vue-multilanguage";
+import ServicesManagementService from '../services/ServicesManagementService';
 
 export default {
   data: function() {
     return {
       loggedIn: false
     };
+  },
+  created(){
+    if(localStorage.getItem('bearer')!=null){
+      if(store.state.user.isProvider == 1){
+        ServicesManagementService.startProviderServicesWithBearer();
+        ServicesManagementService.startProviderServicesWithUserInformation();
+      }else{
+        ServicesManagementService.startUserServicesWithBearer();
+        ServicesManagementService.startUserServicesWithUserInformation();
+      }
+    }
   },
   mounted() {
     this.loggedIn = localStorage.getItem("bearer");

@@ -1,7 +1,5 @@
 import EventBus from './event-bus.js';
-import FoxdoxGeneralService from './FoxdoxGeneralService';
-import FolderService from './FolderService';
-import BroadcastingService from '../services/BroadcastingService.js';
+import ServicesManagementService from './ServicesManagementService.js';
 import { store } from '../store.js';
 
 const config = {
@@ -37,15 +35,6 @@ class AuthService {
         console.log('Logging In...');
         localStorage.setItem('bearer', response.data.access_token);
         this.retrieveUser(self);
-
-        
-        //Alles was bei Anmeldung async nachgeladen werden muss:
-        BroadcastingService.initialize();
-        EventBus.$emit('loaded');
-        FoxdoxGeneralService.getProviderList();
-        FolderService.getRootFolder();
-        FolderService.getAllDocuments();
-        //getRootFolder holt dann Subfolder und Dokumente in rootFolder
       })
       .catch(error => {
         console.log('error while Login' + JSON.stringify(error));
@@ -61,7 +50,8 @@ class AuthService {
         this.logout(self);
       })
       .finally(param => {
-
+        EventBus.$emit('loaded');
+        ServicesManagementService.startUserServicesWithBearer();
       });
   }
 
@@ -90,18 +80,11 @@ class AuthService {
         console.log('Error logging Out.');
       })
       .finally(param => {
+        ServicesManagementService.removeUserServicesAndData();
         self.$router.push('/login');
         EventBus.$emit('loaded');
       });
-    BroadcastingService.unsubscribeFromChannel();
-    //Alle Daten wieder loeschen
-    localStorage.removeItem('bearer');
-    localStorage.removeItem('user');
-    store.dispatch('resetUserInbox');
-    store.dispatch('resetUser');
-    store.dispatch('resetRootFolder');
-    store.dispatch('resetRecentFolders');
-    store.dispatch('resetRecentDocuments');
+
   }
 
   retrieveUser(self) {
@@ -122,16 +105,10 @@ class AuthService {
         store.commit('setUser', response.data);
         console.log('Got Userdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
-
         if (self.noError) {
           self.$router.push('/');
           console.log('Logged In');
         }
-
-        // if( self.noError  ){
-        //     self.$router.push('/');
-        //     console.log('Logged In.');
-        // }
       })
       .catch(error => {
         this.logout(self);
@@ -145,7 +122,7 @@ class AuthService {
         self.noError = !self.showAlert;
       })
       .finally(param => {
-        BroadcastingService.subscribeToChannel();
+        ServicesManagementService.startUserServicesWithUserInformation();
         EventBus.$emit('loaded');
         EventBus.$emit('UserData loaded');
       });

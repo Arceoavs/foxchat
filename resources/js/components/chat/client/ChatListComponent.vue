@@ -1,54 +1,89 @@
 <template >
-  <div class="mt-2">
+  <div class="mb-2">
     <b-card class="textColor" @click="informChatComponent()">
-      <router-link
-        :to="'/chat/communication?partner='+provider+'&tag='+title"
-        class="textColor chat-overview-link"
-      >
-        <b-row>
-          <b-col class="chatIcons textFox" cols="1" sm="2" md="1">
-            <font-awesome-icon icon="file" size="2x"/>
-          </b-col>
-          <b-col>
-            <b-row>
-              <b-col>
-                <p class="font-weight-bold">{{title}}</p>
-              </b-col>
-              <b-col>
-                <p
-                  class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
-                >{{cuttedDate}} {{cuttedTime}}</p>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col>
-                <p class="font-weight-light text-left">{{message}}</p>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </router-link>
+      <b-row>
+        <b-col class="chatIcons textFox" cols="1" sm="2" md="1">
+          <font-awesome-icon v-if="tag=='allgemein'" icon="comments" size="2x"/>
+          <font-awesome-icon v-else icon="file" size="2x"/>
+        </b-col>
+        <b-col>
+          <b-row>
+            <b-col>
+              <p v-if="tag=='allgemein' || !tag" class="font-weight-bold" v-text="$ml.get('general_chat')"/>
+              <p v-else class="font-weight-bold">{{tag}}</p>
+            </b-col>
+            <b-col>
+              <p
+                v-if="date"
+                class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+              >{{dateTimer}}</p>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <p v-if="message" class="font-weight-light text-left">{{chatMessagePreview}}</p>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
     </b-card>
   </div>
 </template>
 
  <script>
-import EventBus from "../../../services/event-bus";
 
 export default {
-  props: ["title", "provider", "message", "date"],
+  props: ["tag", "provider", "message", "date"],
   computed: {
     cuttedTime() {
       return this.date.slice(11, 16);
     },
     cuttedDate() {
       return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
+    },
+    chatMessagePreview() {
+      var messagePreviewLength = 70;
+      if (this.message.length > messagePreviewLength)
+        return this.message.substring(0, messagePreviewLength) + "...";
+      else return this.message;
+    },
+    dateTimer() {
+      // Create date from input value
+      var inputDate = new Date(this.date);
+      // Get today's date
+      var todaysDate = new Date();
+
+      // call setHours to take the time out of the comparison
+      if (inputDate.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0))
+        // Date equals today's date
+        return this.cuttedTime;
+      else return this.cuttedDate;
+    },
+    cuttedTime() {
+      return this.date.slice(11, 16);
+    },
+    cuttedDate() {
+      return (
+        this.date.slice(8, 10) +
+        "." +
+        this.date.slice(5, 7) +
+        "."
+      );
     }
   },
   methods: {
     informChatComponent: function() {
-      EventBus.$emit("chatPartnerChanged");
+      var routeProps=new Object();
+      routeProps.provider = this.provider;
+      routeProps.tag=this.tag;
+      this.$emit("chat-partner-changed", routeProps);
     }
+  },
+  beforeDestroy() {
+    console.log("bd chatlistcomponent");
+  },
+  destroyed() {
+    console.log("d chatlistcomponent");
   }
 };
 </script>

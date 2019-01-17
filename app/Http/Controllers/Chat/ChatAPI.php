@@ -58,7 +58,8 @@ abstract class ChatAPI extends Controller
             'username' => 'required',
             'conversationtag' => 'required',
             'offset' => 'required',
-            'take' => 'required'
+            'take' => 'required',
+            'triggeredByPusherEvent' => 'required'
         ]);
 
         //Send errors
@@ -70,8 +71,9 @@ abstract class ChatAPI extends Controller
         $conversationtag = request()->input('conversationtag');
         $offset = request()->input('offset');
         $take = request()->input('take');
+        $triggeredByPusherEvent = request()->input('triggeredByPusherEvent');
 
-        return $this->chatapiservice->getConversationByName($user, $conversationtag, $offset, $take);
+        return $this->chatapiservice->getConversationByName($user, $conversationtag, $offset, $take, $triggeredByPusherEvent);
     }
 
     public function getConversationByNameAll()
@@ -176,5 +178,22 @@ abstract class ChatAPI extends Controller
         $messageid = request()->input('messageid');
 
         return $this->chatapiservice->deleteMessage($messageid);
+    }
+
+    public function makeConversationSeen()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'conversationid' => 'required'
+        ]);
+        
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $conversationid = request()->input('conversationid');
+
+        return $this->chatapiservice->makeConversationSeen($conversationid);
     }
 }

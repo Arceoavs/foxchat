@@ -1,6 +1,5 @@
 import EventBus from './event-bus.js';
-import ChatService from './ChatService.js';
-import BroadcastingService from '../services/BroadcastingService.js';
+import ServicesManagementService from './ServicesManagementService.js';
 import { store } from '../store.js';
 
 const config = {
@@ -31,7 +30,7 @@ class AuthServiceProvider {
       .then(response => {
         console.log('Logging in axios...');
         localStorage.setItem('bearer', response.data.access_token);
-        ChatService.getInboxProvider(this);
+
 
         this.retrieveUser(self);
 
@@ -53,9 +52,8 @@ class AuthServiceProvider {
         this.logout(self);
       })
       .finally(param => {
-        
+        ServicesManagementService.startProviderServicesWithBearer();
         EventBus.$emit('loaded');
-        BroadcastingService.initialize();
       });
   }
 
@@ -87,11 +85,7 @@ class AuthServiceProvider {
         self.$router.push('/login/provider');
         EventBus.$emit('loaded');
       });
-    BroadcastingService.unsubscribeFromChannel();
-    localStorage.removeItem('bearer');
-    localStorage.removeItem('user');
-    store.dispatch('resetProviderInbox');
-    store.dispatch('resetUser');
+      
   }
 
   retrieveUser(self) {
@@ -110,7 +104,6 @@ class AuthServiceProvider {
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
         store.commit('setUser', response.data);
-
         console.log('Got Providerdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
 
@@ -134,7 +127,7 @@ class AuthServiceProvider {
       })
       .finally(param => {
         self.$router.push({name: "Chat Foxdox Provider Overview"});
-        BroadcastingService.subscribeToChannel();
+        ServicesManagementService.startProviderServicesWithUserInformation();
         EventBus.$emit('loaded');
         EventBus.$emit('UserData loaded');
       });

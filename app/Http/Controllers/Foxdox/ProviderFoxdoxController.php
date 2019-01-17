@@ -123,7 +123,7 @@ class ProviderFoxdoxController extends Controller
         $output = [];
         foreach ($allSubs as $sub) {
             try {
-                $response = $this->chatapiservice->getConversationByName($sub->UserProfile->UserName, "allgemein", 0, 1);
+                $response = $this->chatapiservice->getConversationByName($sub->UserProfile->UserName, "allgemein", 0, 1, true);
                 if ($response->getStatusCode() != 200) {
                     array_push($output, $sub);
                 }
