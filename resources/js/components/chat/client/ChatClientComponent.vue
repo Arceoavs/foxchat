@@ -110,12 +110,6 @@ export default {
     informChatComponent(e) {
       this.$emit("chat-partner-changed", e);
     }
-  },
-  beforeDestroy() {
-    console.log("bd chatclientcomponent");
-  },
-  destroyed() {
-    console.log("d chatclientcomponent");
   }
 };
 </script>

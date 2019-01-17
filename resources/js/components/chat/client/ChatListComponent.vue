@@ -78,12 +78,6 @@ export default {
       routeProps.tag=this.tag;
       this.$emit("chat-partner-changed", routeProps);
     }
-  },
-  beforeDestroy() {
-    console.log("bd chatlistcomponent");
-  },
-  destroyed() {
-    console.log("d chatlistcomponent");
   }
 };
 </script>
