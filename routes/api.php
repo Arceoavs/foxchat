@@ -88,12 +88,13 @@ Route::group([
     Route::get('listproviders', 'Foxdox\UserFoxdoxController@listProviders');
     Route::get('listprovidersforoverview', 'Foxdox\UserFoxdoxController@listProvidersforOverview');
     
-    Route::get('listalldocs', 'Foxdox\DocumentAPI@listAllDocuments');
+    Route::get('listalldocs', 'Foxdox\DocumentAPI@listAllDocuments'); // NOT IN USE ANYMORE
     Route::get('retrieverootfolder', 'Foxdox\DocumentAPI@retrieveRootFolder');
     Route::post('listfolders', 'Foxdox\DocumentAPI@listFolders');
     Route::post('listdocuments', 'Foxdox\DocumentAPI@listDocuments');
     Route::post('downloaddocument', 'Foxdox\DocumentAPI@downloadDocument');
-
+    Route::post('publishdocument', 'Foxdox\DocumentAPI@publishDocument');
+    Route::post('downloadpublicdocument', 'Foxdox\DocumentAPI@downloadPublicDocument');
   
 });
 

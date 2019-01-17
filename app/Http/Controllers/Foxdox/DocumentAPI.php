@@ -109,5 +109,40 @@ class DocumentAPI extends Controller
         return $this->documentapiservice->retrieveRootFolder();
     }
 
+    public function publishDocument()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'documentId' => 'required',
+        ]);
+
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //Get all the informations from the request
+        $document = request()->input('documentId');
+
+        return $this->documentapiservice->publishDocument($document);
+    }
+
+    public function downloadPublicDocument()
+    {
+        //Check if request contains the necessary inputs
+        $validator = Validator::make(request()->all(), [
+            'documentId' => 'required',
+        ]);
+
+        //Send errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //Get all the informations from the request
+        $document = request()->input('documentId');
+
+        return $this->documentapiservice->downloadPublicDocument($document);
+    }
 
 }

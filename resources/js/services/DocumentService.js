@@ -37,6 +37,53 @@ class DocumentService {
   getProviderName(path) {
     return path.split("/")[1];
   }
+
+  publishDocument(documentId) {
+    this.refresh();
+    var body = { documentId: documentId };
+
+    try {
+      axios
+        .post(path + '/publishdocument', body, configExt)
+        .then(response => {
+          console.log('Publishing document ' + documentId + ' . . .');
+          console.log(JSON.stringify(response.data.PublicUrl));
+          console.log('Document published!');
+        })
+    } catch (error) {
+      console.log("Error publishing document: " + JSON.stringify(error))
+    }
+
+  }
+
+  downloadPublicDocument(documentId, documentName) {
+    this.refresh();
+
+    var body = { documentId: documentId };
+    var config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('bearer')
+      },
+      responseType: 'blob'
+    };
+
+    axios
+      .post(path + '/downloadpublicdocument', body, config)
+      .then(response => {
+        console.log('Downloading public document ' + documentId + ' . . .');
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', documentName);
+        document.body.appendChild(link);
+        link.click();
+        console.log('Document downloaded!');
+      })
+      .catch(error => {
+        console.log('Error downloading public document: ' + JSON.stringify(error));
+      });
+  }
 }
 
 

@@ -15,11 +15,16 @@ export default {
   props: ["id", "name", "folderPath"],
   methods: {
     openDocument() {
-      alert("Dokument " + this.id + " wird heruntergeladen");
-      // DocumentService.downloadDocument(this.id);
+      // alert("Dokument " + this.id + " wird freigegeben");
+      DocumentService.publishDocument(this.id);
+      DocumentService.downloadPublicDocument(this.id, this.name);
     },
     startChat() {
       //alert("Sie starten nun einen Chat zu Dokument " + this.name);
+
+      //TODO: Dokumentfreigabe -> LINK UEBERGEBEN
+      var publicUrl = DocumentService.publishDocument(this.id);
+
       var providerName = DocumentService.getProviderName(this.folderPath);
   
       this.$router.push({
