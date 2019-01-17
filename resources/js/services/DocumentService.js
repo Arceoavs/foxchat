@@ -38,18 +38,16 @@ class DocumentService {
     return path.split("/")[1];
   }
 
-  publishDocument(documentId) {
+  async publishDocument(documentId) {
     this.refresh();
     var body = { documentId: documentId };
 
     try {
-      axios
-        .post(path + '/publishdocument', body, configExt)
-        .then(response => {
-          console.log('Publishing document ' + documentId + ' . . .');
-          console.log(JSON.stringify(response.data.PublicUrl));
-          console.log('Document published!');
-        })
+      const response = await axios.post(path + '/publishdocument', body, configExt)
+      console.log('Publishing document ' + documentId + ' . . .');
+      console.log(JSON.stringify(response.data.PublicUrl));
+      console.log('Document published!');
+      return response.data.PublicUrl;
     } catch (error) {
       console.log("Error publishing document: " + JSON.stringify(error))
     }

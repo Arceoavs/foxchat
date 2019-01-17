@@ -2,10 +2,23 @@
   <b-list-group-item>
     <font-awesome-icon class="fox" icon="file" size="2x"/>
     <button type="button" class="listcomponent" @click="openDocument()">{{name}}</button>
-    <div v-if="isFromProvider" class="cardIcon textFox">
-      <button type="button" class="listcomponent" @click="startChat()">
-        <font-awesome-icon class="fox" icon="comments" size="2x"/>
-      </button>
+    <div class="cardIcon textFox">
+      <b-form inline>
+        <b-input
+          id="input-valid"
+          :state="true"
+          type="text"
+          style="width:525px"
+          v-bind:value="publicLink"
+          v-if="isPublished"
+        />
+        <b-button type="button" class="listcomponent" @click="shareDocument()" v-if="toPublish">
+          <font-awesome-icon class="fox" icon="share-square" size="1x"/>
+        </b-button>
+        <button type="button" v-if="isFromProvider" class="listcomponent" @click="startChat()">
+          <font-awesome-icon class="fox" icon="comments" size="1x"/>
+        </button>
+      </b-form>
     </div>
   </b-list-group-item>
 </template>
@@ -14,16 +27,34 @@
 import DocumentService from "../../services/DocumentService.js";
 export default {
   props: ["id", "name", "folderPath"],
-  data() {
+  data: function() {
     var providerName = DocumentService.getProviderName(this.folderPath);
-    if (providerName) return { isFromProvider: true };
-    else return { isFromProvider: false };
+    if (providerName)
+      return {
+        isFromProvider: true,
+        isPublished: false,
+        toPublish: true,
+        publicLink: "loading"
+      };
+    else
+      return {
+        isFromProvider: false,
+        isPublished: false,
+        toPublish: true,
+        publicLink: "loading"
+      };
   },
   methods: {
     openDocument() {
-      // alert("Dokument " + this.id + " wird freigegeben");
       DocumentService.publishDocument(this.id);
       DocumentService.downloadPublicDocument(this.id, this.name);
+    },
+    shareDocument() {
+      DocumentService.publishDocument(this.id).then(data => {
+        this.publicLink = data;
+      });
+      this.isPublished = true;
+      this.toPublish = false;
     },
     startChat() {
       //alert("Sie starten nun einen Chat zu Dokument " + this.name);
