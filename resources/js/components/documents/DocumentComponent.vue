@@ -2,9 +2,10 @@
   <b-list-group-item>
     <font-awesome-icon class="fox" icon="file" size="2x"/>
     <button type="button" class="listcomponent" @click="openDocument()">{{name}}</button>
-    <div class="cardIcon textFox">
-      <button type="button" class="listcomponent" @click="startChat()" v-text="$ml.get('chat_starten')"></button>
-      <font-awesome-icon class="fox" icon="comments" size="2x"/>
+    <div v-if="isFromProvider" class="cardIcon textFox">
+      <button type="button" class="listcomponent" @click="startChat()">
+        <font-awesome-icon class="fox" icon="comments" size="2x"/>
+      </button>
     </div>
   </b-list-group-item>
 </template>
@@ -13,6 +14,11 @@
 import DocumentService from "../../services/DocumentService.js";
 export default {
   props: ["id", "name", "folderPath"],
+  data(){
+    var providerName = DocumentService.getProviderName(this.folderPath);
+    if (typeof providerName !== 'undefined') return {isFromProvider : true};
+    else return {isFromProvider : false};
+  },
   methods: {
     openDocument() {
       // alert("Dokument " + this.id + " wird freigegeben");
@@ -31,11 +37,6 @@ export default {
         name: "ConfirmChatToDocument",
         params: { docName: this.name, provName: providerName }
       });
-    }
-  }, 
-  mounted: {
-    isFromProvider: function() {
-      console.log(DocumentService.getProviderName(this.folderPath))
     }
   }
 };

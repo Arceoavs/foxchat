@@ -14,6 +14,7 @@
               v-bind:key="document.Id"
               v-bind:id="document.Id"
               v-bind:name="document.Name"
+              v-bind:folderPath="document.FolderPath"
             />
           </b-list-group>
         </b-card>
@@ -29,6 +30,7 @@
               v-bind:key="document.Id"
               v-bind:id="document.Id"
               v-bind:name="document.Name"
+              v-bind:folderPath="document.FolderPath"
             />
             <folder-component
               v-for="folder in folders"
