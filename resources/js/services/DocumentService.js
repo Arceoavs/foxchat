@@ -38,12 +38,12 @@ class DocumentService {
     return path.split("/")[1];
   }
 
-  async publishDocument(documentId) {
+  publishDocument(documentId) {
     this.refresh();
     var body = { documentId: documentId };
 
     try {
-      const response = await axios
+      axios
         .post(path + '/publishdocument', body, configExt)
         .then(response => {
           console.log('Publishing document ' + documentId + ' . . .');
@@ -56,40 +56,33 @@ class DocumentService {
 
   }
 
-  downloadPublicDocument(documentId) {
+  downloadPublicDocument(documentId, documentName) {
     this.refresh();
 
     var body = { documentId: documentId };
+    var config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('bearer')
+      },
+      responseType: 'blob'
+    };
 
     axios
-      .get(path + '/downloadpublicdocument', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('bearer')
-        },
-        params: {
-          documentId: documentId
-        }
-      })
+      .post(path + '/downloadpublicdocument', body, config)
       .then(response => {
         console.log('Downloading public document ' + documentId + ' . . .');
-        console.log(JSON.stringify(response.data));
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', documentName);
+        document.body.appendChild(link);
+        link.click();
         console.log('Document downloaded!');
       })
       .catch(error => {
         console.log('Error downloading public document: ' + JSON.stringify(error));
       });
-
-    // axios
-    //   .post(path + '/downloadpublicdocument', body, configExt)
-    //   .then(response => {
-    //     console.log('Downloading public document ' + documentId + ' . . .');
-    //     console.log(JSON.stringify(response.data));
-    //     console.log('Document downloaded!');
-    //   })
-    //   .catch(error => {
-    //     console.log('Error downloading public document: ' + JSON.stringify(error));
-    //   });
   }
 }
 
