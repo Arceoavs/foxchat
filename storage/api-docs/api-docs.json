@@ -1334,6 +1334,32 @@
                 ]
             }
         },
+        "/api/foxdoxapi/user/retrieverootfolder": {
+            "get": {
+                "tags": [
+                    "Foxdox-API-Client"
+                ],
+                "summary": "For detailed description please take a look to the Foxdox API Documentation.",
+                "responses": {
+                    "200": {},
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
 		"/api/foxdoxapi/provider/listAllServices": {
             "get": {
                 "tags": [
