@@ -94,7 +94,12 @@ export default class FolderService {
     }
   }
 
-
+  /**
+   * Will get a response from backend Api, to get an JSON array 
+   * with all documents of the foxdox User, to filter
+   * for the Last Five used with help of 
+   * getLastFiveDocuments()
+   */
   async getAllDocuments() {
     this.refresh();
 
@@ -105,7 +110,10 @@ export default class FolderService {
       console.log('Retrieving all documents..');
       console.log(JSON.stringify(response.data.Items));
       console.log('Got all documents');
+
+      //call help function
       let lastFive = this.getLastFiveDocuments(response.data.Items); 
+
       store.commit('setLastFiveDocuments', lastFive);
       console.log('Cached all documents');
     } catch (error) {
@@ -113,8 +121,15 @@ export default class FolderService {
     }
   }
 
+  /**
+   * help function fo getAllDocuments() will clean up the array by converting date strings to dates for
+   * comparing them, finally sorting and slice the recent five
+   * @param {} documents 
+   */
   getLastFiveDocuments(documents){
     if(Array.isArray(documents)){
+      //parse dates for all documents
+      //use modified over creation date
       for(let i = 0; i<documents.length; i++){
         try{
           documents[i].Modified = new Date(documents[i].Modified);
@@ -124,30 +139,16 @@ export default class FolderService {
         }
       }
    
+      //sort by comparorator function, comparing the dates
       documents.sort( function(a, b){
         return b.Modified.getTime() - a.Modified.getTime();
-        //  return a.Size - b.Size;
       });
 
+      //cutting of everything instead of recent five
       documents.splice(5, documents.length);
       return documents;
     }else{
       console.error('Error in FolderServiceClass.getLastFiveDocuments(): Malformed Paramter, documents is not an Array');
     }
-  }
-
-  compareDocumentsByModifiedTimestamp(){
-    return function(a, b){
-        console.log("dif: "+(a.Modified.getTime() - b.Modified.getTime()));
-        if( Object.prototype.toString.call(a) === "[object Date]" && Object.prototype.toString.call(b) !== "[object Date]" ){
-          return 1;
-        } else if( Object.prototype.toString.call(a) !== "[object Date]" && Object.prototype.toString.call(b) === "[object Date]" ){
-          return -1;
-        } else if( Object.prototype.toString.call(a) !== "[object Date]" && Object.prototype.toString.call(b) !== "[object Date]" ) {
-          return 0;
-        } else {
-          return a.Modified.getTime() - b.Modified.getTime();
-        }
-      }
   }
 }
