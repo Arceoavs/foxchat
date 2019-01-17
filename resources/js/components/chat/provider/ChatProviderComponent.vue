@@ -1,109 +1,59 @@
 <template>
-  <b-jumbotron bg-variant="secondary" class="chatGroup mt-3">
-    <b-card @click="informChatComponent()" class="textColor">
-      <div slot="header" style="text-align:left;">{{userName}}</div>
-      <b-row>
-        <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
-          <font-awesome-icon
-            v-if="documentName == 'allgemein'"
-            class="textFox"
-            icon="comments"
-            size="2x"
-          />
-          <font-awesome-icon v-if="documentName != 'allgemein'" icon="file" size="2x"/>
-        </b-col>
-        <b-col>
-          <b-row>
-            <b-col>
-              <h5 class="text-left" v-if="documentName != 'allgemein'">Dokument: {{documentName}}</h5>
-              <h5
-                class="text-left"
-                v-if="documentName == 'allgemein'"
-                v-text="$ml.get('this_is_the_general_chat')"
-              ></h5>
-            </b-col>
-            <b-col>
-              <h5 class="text-right">Chat mit: {{userName}}</h5>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col>
-              <p class="font-weight-light text-left">{{message}}</p>
-            </b-col>
-            <b-col>
-              <p
-                class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
-              >{{dateTimeForProviders}}</p>
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
-    </b-card>
-  </b-jumbotron>
+  <b-container>
+    <b-row class="mt-3">
+      <b-col>
+        <!-- Chats -->
+        <chat-provider-list-component
+          v-for="chatItem in chats"
+          v-bind:key="chatItem.thread.conversation_id"
+          v-bind:documentName="chatItem.thread.conversation_tag"
+          v-bind:message="chatItem.thread.message"
+          v-bind:date="chatItem.thread.updated_at"
+          v-bind:userName="chatItem.withUser.name"
+          v-on:chat-partner-changed="informChatComponent"
+        ></chat-provider-list-component>
+        <add-chat-provider
+          v-for="subscriber in subscribers"
+          v-bind:key="subscriber.SubscriptionId"
+          v-bind:userName="subscriber.UserName"
+          v-on:chat-partner-changed="informChatComponent"
+        ></add-chat-provider>
+        <div v-if="chats.length==0 && subscribers.length==0" class="text-center">
+          <p v-text="$ml.get('keine_User_msg')"/>
+        </div>
+      </b-col>
+      <router-view></router-view>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import ChatListComponent from "../client/ChatListComponent.vue";
-import BroadcastingService from "../../../services/BroadcastingService.js";
-import EventBus from "../../../services/event-bus";
+import ChatProviderListComponent from "./ChatProviderListComponent.vue";
+import AddChatProvider from "./AddChatProvider.vue";
+import { store } from "../../../store.js";
 
 export default {
-  props: ["documentName", "date", "userName", "message"],
-  created() {
-    //Load Broadcast after side refresh
-    EventBus.$on("messageWasReceived", payload => {
-      ChatService.getInboxProvider();
-    });
+  props: [],
+  created() {},
+  components: {
+    ChatProviderListComponent,
+    AddChatProvider
   },
   computed: {
-    dateTimeForProviders() {
-      // Create date from input value
-      var inputDate = new Date(this.date);
-      // Get today's date
-      var todaysDate = new Date();
-
-      // call setHours to take the time out of the comparison
-      if (inputDate.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0))
-        // Date equals today's date
-        return this.cuttedTime;
-      else return this.cuttedDate;
+    chats: function() {
+      return store.state.inboxForProvider;
     },
-    cuttedTime() {
-      return this.date.slice(11, 16);
-    },
-    cuttedDate() {
-      return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
+    subscribers: function() {
+      return store.state.subscriberList;
     }
   },
-  beforeDestroy() {
-    console.log("bd chatprovidercomponent");
-    EventBus.$off("messageWasSent", () => {});
-  },
-  destroyed(){
-    console.log("d chatprovidercomponent");
-  },
   methods: {
-    informChatComponent: function() {
-      this.$router.push({
-        name: "ChatViewProvider",
-        query: { partner: this.userName, tag: this.documentName }
-      });
-      EventBus.$emit("chatPartnerChanged");
+    informChatComponent(e) {
+      this.$emit("chat-partner-changed", e);
     }
   }
 };
 </script>
 
 <style>
-.chatDateTime {
-  font-size: 0.8em;
-}
-.chatIcon {
-  min-width: 3em;
-}
-.chatGroup {
-  padding: 0.3em;
-  margin: 0.3em;
-  background-color: rgba(90, 83, 83, 0.1) !important;
-}
 </style>

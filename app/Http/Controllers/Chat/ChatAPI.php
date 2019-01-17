@@ -58,7 +58,8 @@ abstract class ChatAPI extends Controller
             'username' => 'required',
             'conversationtag' => 'required',
             'offset' => 'required',
-            'take' => 'required'
+            'take' => 'required',
+            'triggeredByPusherEvent' => 'required'
         ]);
 
         //Send errors
@@ -70,8 +71,9 @@ abstract class ChatAPI extends Controller
         $conversationtag = request()->input('conversationtag');
         $offset = request()->input('offset');
         $take = request()->input('take');
+        $triggeredByPusherEvent = request()->input('triggeredByPusherEvent');
 
-        return $this->chatapiservice->getConversationByName($user, $conversationtag, $offset, $take);
+        return $this->chatapiservice->getConversationByName($user, $conversationtag, $offset, $take, $triggeredByPusherEvent);
     }
 
     public function getConversationByNameAll()

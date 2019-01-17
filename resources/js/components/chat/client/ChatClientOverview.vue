@@ -30,7 +30,6 @@
 <script>
 import ChatClientComponent from "./ChatClientComponent.vue";
 import ChatService from "../../../services/ChatService";
-import EventBus from "../../../services/event-bus.js";
 import { store } from "../../../store.js";
 
 export default {
@@ -38,13 +37,6 @@ export default {
     return {
       //pageTitle: "Ihre Chats mit Providern"
     };
-  },
-  created() {
-    //Load Broadcast after side refresh
-    EventBus.$on("messageWasReceived", payload => {
-      ChatService.getInbox();
-    });
-    ChatService.getInbox();
   },
   components: {
     ChatClientComponent
@@ -61,12 +53,6 @@ export default {
         query: { partner: e.provider, tag: e.tag }
       });
     }
-  },
-  beforeDestroy() {
-    EventBus.$off("messageWasReceived", () => {});
-  },
-  destroyed() {
-    console.log("d chatclientoverview");
   }
 };
 </script>

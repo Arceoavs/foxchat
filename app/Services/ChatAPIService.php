@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Events\MessageWasSent;
 use Tymon\JWTAuth\Claims\Custom;
+use App\Events\MessageWasRead;
 
 class ChatAPIService extends Controller
 {
@@ -79,7 +80,7 @@ class ChatAPIService extends Controller
         return CustomTalk::getInboxAll('desc', $offset, $take);
     }
 
-    public function getConversationByName($username, $conversationtag, $offset, $take)
+    public function getConversationByName($username, $conversationtag, $offset, $take, $triggeredByPusherEvent)
     {
         $chatpartner = $this->getUserFromDatabase($username);
 
@@ -94,6 +95,14 @@ class ChatAPIService extends Controller
         }
         if (!$conversation) {
             throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
+        }
+
+        if($triggeredByPusherEvent != true && $triggeredByPusherEvent != false){
+            throw new ChatAPIServiceException("Provided triggeredByPusherEvent");
+        }
+        $receiver = $this->getUserFromDatabase($username);
+        if(!$triggeredByPusherEvent){
+            event(new MessageWasRead(Auth::user(), $receiver));
         }
         return response()->json(CustomTalk::getConversationsById($conversation->id, $offset, $take));
     }

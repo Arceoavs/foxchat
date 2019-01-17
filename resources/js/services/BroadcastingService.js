@@ -2,6 +2,7 @@ import Echo from 'laravel-echo';
 import EventBus from './event-bus';
 import { store } from '../store.js';
 
+
 class BroadcastingService {
   initialize() {
     if (!window.Echo) {
@@ -21,13 +22,21 @@ class BroadcastingService {
 
   subscribeToChannel() {
     if (store.state.user.name != undefined) {
-      window.Echo.private('chat.' + store.state.user.name).listen(
-        '.MessageWasSent',
-        e => {
-          console.log(e);
-          EventBus.$emit('messageWasReceived');
-        }
-      );
+      window.Echo.private('chat.' + store.state.user.name)
+        .listen(
+          '.MessageWasSent',
+          e => {
+            console.log(e);
+            EventBus.$emit('messageWasReceived');
+          }
+        )
+        .listen(
+          '.MessageWasRead',
+          e => {
+            console.log(e);
+            EventBus.$emit('messageWasRead');
+          }
+        );
     }
   }
 

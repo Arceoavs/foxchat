@@ -71,7 +71,6 @@
 <script>
 import ChatListComponent from "./ChatListComponent.vue";
 import BroadcastingService from "../../../services/BroadcastingService.js";
-import EventBus from "../../../services/event-bus";
 
 export default {
   props: ["provider", "documentChats", "generalChat"],

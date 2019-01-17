@@ -36,17 +36,7 @@ export default {
     };
   },
   created() {
-    
     this.initChat();
-    EventBus.$on("messageWasReceived", payload => {
-      ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
-        0,
-        100,
-        this
-      );
-    });
   },
   updated() {
     console.log("in chat component updated");

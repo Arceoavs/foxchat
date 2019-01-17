@@ -15,7 +15,7 @@ export default {
   refresh() {
     configExt.headers.Authorization =
       'Bearer ' + localStorage.getItem('bearer');
-    if (JSON.parse(localStorage.getItem('user')).isProvider == 0) {
+    if (store.state.user.isProvider == 0) {
       this.path = '/api/chat/user';
     } else {
       this.path = '/api/chat/provider';
@@ -26,7 +26,7 @@ export default {
     this.path = pPath;
 
     if (pPath == null) {
-      if (JSON.parse(localStorage.getItem('user')).isProvider == 0) {
+      if (store.state.user.isProvider == 0){
         this.path = '/api/chat/user';
       } else {
         this.path = '/api/chat/provider';
@@ -168,16 +168,16 @@ export default {
   /**
    * getConversationByProviderName
    */
-  getConversationByName(username, conversationTag, offset, take) {
+  getConversationByName(username, conversationTag, offset, take, triggeredByPusherEvent) {
     this.refresh();
-
     // EventBus.$emit('loading');
-
+    setTimeout(function(){},2000);
     var body = {
       username: username,
       conversationtag: conversationTag,
       offset: offset,
-      take: take
+      take: take,
+      triggeredByPusherEvent: triggeredByPusherEvent
     };
     var convid;
     axios
@@ -186,7 +186,7 @@ export default {
         console.log("Listening conversation...");
 
         var partner = response.data.withUser;
-        var you = JSON.parse(localStorage.getItem('user'));
+        var you = store.state.user;
         self.participants = [
           new Participant(partner.id, partner.name),
           new Participant(you.id, you.name)
@@ -226,12 +226,13 @@ export default {
           ' ' +
           error.response.statusText +
           ' message: ' +
-          JSON.stringify(error.response.data)
+          error.response.data
         );
 
         store.dispatch('resetMessageList');
       })
       .finally(param => {
+        console.log("das ist die conversationid" + convid);
         this.makeConversationSeen(convid, self);
       });
   },

@@ -101,7 +101,7 @@ export const store = new Vuex.Store({
         }
       ]);
     },
-    resetSubscriberList() {
+    resetSubscriberList({commit}) {
       commit('setSubscriberList', []);
     },
     resetProviderInbox({ commit }) {

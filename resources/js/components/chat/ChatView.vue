@@ -25,7 +25,7 @@
         <div class="leftSideOfChat">
           <!--Wenn Provider-->
           <div v-if="isProvider">
-            <aggr-chat-provider-component></aggr-chat-provider-component>
+            <chat-provider-component v-on:chat-partner-changed="changeRoute"></chat-provider-component>
           </div>
           <!--Wenn Client-->
           <div v-else>
@@ -45,7 +45,7 @@
         <chat-component
           v-bind:partner="this.$route.query.partner"
           v-bind:tag="this.$route.query.tag"
-          v-on:message-was-sent="updateChatServices"
+          v-on:message-was-sent="updateChatServicesTriggeredByPusher"
         ></chat-component>
       </b-col>
     </b-row>
@@ -56,17 +56,22 @@
 <script>
 import ChatComponent from "./ChatComponent.vue";
 import ChatClientComponent from "./client/ChatClientComponent.vue";
-import AggrChatProviderComponent from "./provider/AggrChatProviderComponent.vue";
+import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import BroadcastingService from "../../services/BroadcastingService.js";
+import FoxdoxSubscriberService from "../../services/FoxdoxSubscriberService.js";
 import { store } from "../../store.js";
 import { MLBuilder } from "vue-multilanguage";
+import EventBus from "../../services/event-bus";
 
 export default {
   created() {
-    ChatService.init();
-    BroadcastingService.initialize();
-    BroadcastingService.subscribeToChannel();
+    EventBus.$on("messageWasReceived", payload => {
+      this.updateChatServices();
+    });
+    EventBus.$on("messageWasRead", payload => {
+      this.updateChatServicesTriggeredByPusher();
+    });
     if (store.state.user.isProvider) {
       ChatService.getInboxProvider();
     } else {
@@ -78,7 +83,7 @@ export default {
         this.$route.query.tag,
         0,
         100,
-        this
+        false
       );
     }
     console.log("chatview created");
@@ -105,10 +110,18 @@ export default {
   },
   methods: {
     changeRoute(e) {
-      this.$router.push({
-        name: "ChatViewUser",
-        query: { partner: e.provider, tag: e.tag }
-      });
+      if (store.state.user.isProvider) {
+        console.log("in change route" + e.provider + e.tag);
+        this.$router.push({
+          name: "ChatViewProvider",
+          query: { partner: e.partner, tag: e.tag }
+        });
+      } else {
+        this.$router.push({
+          name: "ChatViewUser",
+          query: { partner: e.provider, tag: e.tag }
+        });
+      }
       this.updateChatServices();
     },
     updateChatServices() {
@@ -116,19 +129,44 @@ export default {
         this.$route.query.partner,
         this.$route.query.tag,
         0,
-        100
+        100,
+        false
       );
       if (store.state.user.isProvider) {
         ChatService.getInboxProvider();
+        FoxdoxSubscriberService.getSubscriberList();
       } else {
         ChatService.getInbox();
       }
+    },
+    updateChatServicesTriggeredByPusher() {
+      this.wait(200);
+      ChatService.getConversationByName(
+        this.$route.query.partner,
+        this.$route.query.tag,
+        0,
+        100,
+        true
+      );
+      if (store.state.user.isProvider) {
+        ChatService.getInboxProvider();
+        FoxdoxSubscriberService.getSubscriberList();
+      } else {
+        ChatService.getInbox();
+      }
+    },
+    wait(ms) {
+      var d = new Date();
+      var d2 = null;
+      do {
+        d2 = new Date();
+      } while (d2 - d < ms);
     }
   },
   components: {
     ChatComponent,
     ChatClientComponent,
-    AggrChatProviderComponent
+    ChatProviderComponent
   }
 };
 </script>
