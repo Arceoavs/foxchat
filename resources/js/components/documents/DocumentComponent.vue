@@ -12,7 +12,7 @@
           v-bind:value="publicLink"
           v-if="isPublished"
         />
-        <b-button type="button" class="listcomponent" @click="shareDocument()" v-if="toPublish">
+        <b-button type="button" class="listcomponent" @click="shareDocument()" v-if="toPublish&&isFromProvider">
           <font-awesome-icon class="fox" icon="share-square" size="1x"/>
         </b-button>
         <button type="button" v-if="isFromProvider" class="listcomponent" @click="startChat()">
