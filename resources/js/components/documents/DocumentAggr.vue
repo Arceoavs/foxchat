@@ -13,11 +13,11 @@ export default {
     items: function() {
       //get current route, split the components and delete the - and / characters with a regex expression
       var routePath = this.$route.path.split(/[-\/\/]/);
-      console.log(routePath);
+      // console.log(routePath);
       var breadcrumbPath = [];
 
       routePath.map(function(item) {
-        if (item != "")
+        if (item != "" && item != "Documents")
           breadcrumbPath.push({
             text: item
           });
