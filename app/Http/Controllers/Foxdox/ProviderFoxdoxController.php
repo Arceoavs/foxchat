@@ -116,7 +116,11 @@ class ProviderFoxdoxController extends Controller
         return $subscribersInDatabase;
     }
 
-    public function listSubscribersWithoutGeneralChat()
+    public function listSubscribersWithoutGeneralChat(){
+        return $this->listSubscribersWithoutGeneralChatImpl2();
+    }
+
+    public function listSubscribersWithoutGeneralChaImpl1()
     {
         $allSubs = $this->listAggregatedSubscribers();
 
@@ -137,7 +141,7 @@ class ProviderFoxdoxController extends Controller
     }
     
 
-    /*public function listSubscribersWithoutGeneralChatHelp(){
+    public function listSubscribersWithoutGeneralChatImpl2(){
         $allSubs = $this->listAggregatedSubscribers();
         $chats = $this->getAllChats();
         $encodedUsers = "";
@@ -147,10 +151,6 @@ class ProviderFoxdoxController extends Controller
                 if($chat->thread->conversation_tag === "allgemein"){
                     $encodedUsers = $encodedUsers . $chat->withUser->name;
                 }
-            }
-        }else if($chats != null){
-            if($chat->thread->conversation_tag === "allgemein"){
-                $encodedUsers = $encodedUsers . $chat->withUser->name;
             }
         }
         
@@ -165,18 +165,16 @@ class ProviderFoxdoxController extends Controller
     }    
 
     protected function getAllChats(){
-        $chats = $this->chatapiservice->getInboxAll(0, 10);
+        $chats = $this->chatapiservice->getInboxAll(0, 100);
 
         if(is_array($chats)){
             $i = 1;
             do{
-                $chatsNext = $this->chatapiservice->getInboxAll($i, 10);
+                $chatsNext = $this->chatapiservice->getInboxAll($i, 100);
                 $chats = array_merge($chats, $chatsNext);
                 $i++;
             } while(count($chatsNext) > 0);
         }
         return $chats;
     }
-     */
-
 }
