@@ -33,7 +33,7 @@ import FooterComponent from "./Footer.vue";
 import EventBus from "../services/event-bus.js";
 import { store } from "../store.js";
 import { MLBuilder } from "vue-multilanguage";
-import ServicesManagementService from '../services/ServicesManagementService';
+import ServicesManagementService from "../services/ServicesManagementService";
 
 export default {
   data: function() {
@@ -41,16 +41,30 @@ export default {
       loggedIn: false
     };
   },
-  created(){
-    if(localStorage.getItem('bearer')!=null){
-      if(store.state.user.isProvider == 1){
+  created() {
+    if (localStorage.getItem("bearer") != null) {
+      if (store.state.user.isProvider == 1) {
         ServicesManagementService.startProviderServicesWithBearer();
         ServicesManagementService.startProviderServicesWithUserInformation();
-      }else{
+      } else {
         ServicesManagementService.startUserServicesWithBearer();
         ServicesManagementService.startUserServicesWithUserInformation();
       }
     }
+    this.$toasted.register(
+      "new_message_received",
+      "New message was received.",
+      {
+        type: 'info',
+        duration: 3000,
+        iconPack: 'fontawesome',
+        className: ['toast',],
+        icon: 'message'
+      }
+    );
+    EventBus.$on("messageWasReceived", payload => {
+      this.$toasted.global.new_message_received();
+    });
   },
   mounted() {
     this.loggedIn = localStorage.getItem("bearer");
@@ -65,11 +79,10 @@ export default {
     isProvider() {
       return store.state.user.isProvider;
     },
-    chatUrl(){
-      if (store.state.user.isProvider == 1){
+    chatUrl() {
+      if (store.state.user.isProvider == 1) {
         return "/provider-chat";
-      }
-      else return "/chat";
+      } else return "/chat";
     }
   },
   components: {
@@ -99,6 +112,9 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+.toast {
+  background-color: #f86a2d !important;
 }
 </style>
 

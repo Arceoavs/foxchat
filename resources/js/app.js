@@ -23,9 +23,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './ml';
+import Toasted from 'vue-toasted';
 
 Vue.use(BootstrapVue);
 Vue.use(Chat);
+Vue.use(Toasted);
 
 
 

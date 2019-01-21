@@ -35,6 +35,7 @@
         "vue-beautiful-foxchat": "^2.3.1",
         "vue-loader": "^15.5.1",
         "vue-multilanguage": "^4.0.7",
+        "vue-toasted": "^1.1.26",
         "vuex-persistedstate": "^2.5.4"
     }
 }
