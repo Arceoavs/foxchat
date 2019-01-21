@@ -1,5 +1,7 @@
 <template>
   <div id="container">
+    <button v-on:click="test"></button>
+
     <loading-component></loading-component>
     <b-navbar toggleable="md" class="navbar-laravel">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -18,6 +20,7 @@
         </b-nav-item>
       </b-collapse>
     </b-navbar>
+
     <div id="body">
       <router-view></router-view>
     </div>
@@ -53,13 +56,14 @@ export default {
     }
     this.$toasted.register(
       "new_message_received",
-      "New message was received.",
+      " New message was received.",
       {
-        type: 'info',
-        duration: 3000,
-        iconPack: 'fontawesome',
-        className: ['toast',],
-        icon: 'message'
+        type: "error",
+        // duration: 3000,
+        className: ["toast"],
+        icon: {
+          name: "fas fa-comments mr-2"
+        }
       }
     );
     EventBus.$on("messageWasReceived", payload => {
@@ -89,6 +93,11 @@ export default {
     LogoutComponent,
     LoadingComponent,
     FooterComponent
+  },
+  methods: {
+    test() {
+      this.$toasted.global.new_message_received();
+    }
   }
 };
 </script>

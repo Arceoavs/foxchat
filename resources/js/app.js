@@ -12,6 +12,7 @@ import store from './store.js';
 import router from './router.js';
 import App from './components/App.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { dom } from '@fortawesome/fontawesome-svg-core';
 import {
   faCoffee,
   faAngleRight,
@@ -27,14 +28,16 @@ import Toasted from 'vue-toasted';
 
 Vue.use(BootstrapVue);
 Vue.use(Chat);
-Vue.use(Toasted);
+Vue.use(Toasted, {
+  iconPack: 'custom-class' // set your iconPack, defaults to material. material|fontawesome|custom-class
+});
 
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 library.add(faCoffee, faAngleRight, faComments, faPlusCircle, faFile, faFolderOpen, faShareSquare);
-
+dom.watch();
 const app = new Vue({
   el: '#app',
   router,
