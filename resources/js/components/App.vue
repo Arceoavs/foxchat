@@ -128,8 +128,15 @@ export default {
           store.state.toastUrl.senderName
       });
     }
+  },
+  beforeDestroy(){
+    EventBus.$off("messageWasReceived");
+  },
+  destroyed(){
+    console.log("app destrpyed");
   }
-};
+}
+
 </script>
 
 <style>

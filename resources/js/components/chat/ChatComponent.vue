@@ -38,9 +38,6 @@ export default {
   created() {
     this.initChat();
   },
-  updated() {
-    console.log("in chat component updated");
-  },
   computed:{
     messageList: function(){
       return store.state.messageList;
