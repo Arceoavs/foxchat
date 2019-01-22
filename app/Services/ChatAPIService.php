@@ -66,7 +66,7 @@ class ChatAPIService extends Controller
         }
         $receiver = $this->getUserFromDatabase($receiver);
         $sentMessage = CustomTalk::sendMessageByUserIdWithTag($receiver->id, $message, $conversationtag);
-        event(new MessageWasSent(Auth::user(), $receiver));
+        event(new MessageWasSent(Auth::user(), $receiver, $conversationtag));
         return $sentMessage;
     }
 

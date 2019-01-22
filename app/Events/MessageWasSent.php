@@ -18,15 +18,19 @@ class MessageWasSent implements ShouldBroadcast
     protected $user;
     protected $receiver;
     public $message = "A message was sent to you!";
+    public $senderName;
+    public $conversationTag;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user, $receiver)
+    public function __construct(User $user, $receiver, $conversationtag)
     {
         $this->user = $user;
+        $this->senderName=$this->user->name;
+        $this->conversationTag=$conversationtag;
         $this->receiver = $receiver->name;
     }
 

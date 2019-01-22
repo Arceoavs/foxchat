@@ -19,6 +19,7 @@ export const store = new Vuex.Store({
       }
     ],
     user: {},
+    toastUrl: { senderName: "", conversationTag:"" },
     userRootFolder: [],
     recentDocuments: {
       Name: 'Loading...'
@@ -33,6 +34,9 @@ export const store = new Vuex.Store({
   getters: {
     getUserInbox(state) {
       return state.inboxForUser;
+    },
+    getToastUrl(state) {
+      return state.toastUrl;
     },
     getSubscriberList(state) {
       return state.subscriberList;
@@ -61,13 +65,16 @@ export const store = new Vuex.Store({
     getCurrentDocuments(state) {
       return state.currentDocuments;
     },
-    getMessageList(state){
+    getMessageList(state) {
       return state.messageList;
     }
   },
   mutations: {
     setUserInbox(state, newProviderList) {
       state.inboxForUser = newProviderList;
+    },
+    setUserInbox(state, newToastUrl) {
+      state.toastUrl = newToastUrl;
     },
     setSubscriberList(state, newSubscriberList) {
       state.subscriberList = newSubscriberList;
@@ -108,7 +115,7 @@ export const store = new Vuex.Store({
         }
       ]);
     },
-    resetSubscriberList({commit}) {
+    resetSubscriberList({ commit }) {
       commit('setSubscriberList', []);
     },
     resetProviderInbox({ commit }) {
@@ -120,6 +127,9 @@ export const store = new Vuex.Store({
     },
     resetUser({ commit }) {
       commit('setUser', [{}]);
+    },
+    resetToastUrl({ commit }) {
+      commit('setToastUrl', { senderName: "", conversationTag:"" });
     },
     resetRootFolder({ commit }) {
       commit('setRootFolder', [{}]);
@@ -133,13 +143,13 @@ export const store = new Vuex.Store({
     resetCurrentFolder({ commit }) {
       commit('setCurrentFolder', [{}]);
     },
-    resetCurrentDocuments({}) {
+    resetCurrentDocuments({ }) {
       commit('setCurrentDocuments', [{}]);
     },
-    resetLastFiveDocuments({}) {
+    resetLastFiveDocuments({ }) {
       commit('setLastFiveDocuments', [{}]);
     },
-    resetMessageList({commit}){
+    resetMessageList({ commit }) {
       commit('setMessageList', []);
     }
   }

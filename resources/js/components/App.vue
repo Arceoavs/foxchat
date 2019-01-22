@@ -1,7 +1,5 @@
 <template>
   <div id="container">
-    <button v-on:click="test"></button>
-
     <loading-component></loading-component>
     <b-navbar toggleable="md" class="navbar-laravel">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -56,19 +54,44 @@ export default {
     }
     this.$toasted.register(
       "new_message_received",
-      " New message was received.",
+      payload => {
+
+        // if there is a message show it with the message
+        return payload.message;
+      },
       {
-        type: "error",
-        // duration: 3000,
+        position: "bottom-left",
+        type: "default",
+        duration: 5000,
         className: ["toast"],
         icon: {
           name: "fas fa-comments mr-2"
+        },
+        action: {
+          text: this.$ml.get("open"),
+          onClick: (e, toastObject) => {
+            if (store.state.user.isProvider) {
+              this.$router.push({
+                name: "ChatViewProvider",
+                query: {
+                  partner: store.state.toastUrl.senderName,
+                  tag: store.state.toastUrl.conversationTag
+                }
+              });
+            } else {
+              this.$router.push({
+                name: "ChatViewUser",
+                query: {
+                  partner: store.state.toastUrl.senderName,
+                  tag: store.state.toastUrl.conversationTag
+                }
+              });
+            }
+          }
         }
       }
     );
-    EventBus.$on("messageWasReceived", payload => {
-      this.$toasted.global.new_message_received();
-    });
+    EventBus.$on("messageWasReceived", this.toastMessage);
   },
   mounted() {
     this.loggedIn = localStorage.getItem("bearer");
@@ -95,8 +118,15 @@ export default {
     FooterComponent
   },
   methods: {
-    test() {
-      this.$toasted.global.new_message_received();
+    toastMessage(e) {
+      store.state.toastUrl.senderName = e.senderName;
+      store.state.toastUrl.conversationTag = e.conversationTag;
+      this.$toasted.global.new_message_received({
+        message:
+          this.$ml.get("new_message_toast") +
+          " " +
+          store.state.toastUrl.senderName
+      });
     }
   }
 };
@@ -123,7 +153,7 @@ body {
   width: 100%;
 }
 .toast {
-  background-color: #f86a2d !important;
+  background-color: grey !important;
 }
 </style>
 

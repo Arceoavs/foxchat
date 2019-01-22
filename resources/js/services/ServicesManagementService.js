@@ -26,6 +26,7 @@ export default {
         store.dispatch('resetRecentFolders');
         store.dispatch('resetRecentDocuments');
         store.dispatch('resetMessageList');
+        store.dispatch('resetToastUrl');
     },
     startProviderServicesWithBearer() {
         BroadcastingService.initialize();
@@ -44,5 +45,6 @@ export default {
         store.dispatch('resetUser');
         store.dispatch('resetMessageList');
         store.dispatch('resetSubscriberList');
+        store.dispatch('resetToastUrl');
     }
 }

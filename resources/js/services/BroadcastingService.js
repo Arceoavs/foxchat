@@ -27,7 +27,7 @@ class BroadcastingService {
           '.MessageWasSent',
           e => {
             console.log(e);
-            EventBus.$emit('messageWasReceived');
+            EventBus.$emit('messageWasReceived', e);
           }
         )
         .listen(

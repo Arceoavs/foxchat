@@ -47,7 +47,9 @@ export default new MLCreate({
       sprache: 'Sprache',
       impressum: 'Impressum',
       sprache_waehlen: 'Sprache wählen:',
-      this_is_the_general_chat: 'Dies ist der allgemeine Servicechat.'
+      this_is_the_general_chat: 'Dies ist der allgemeine Servicechat.',
+      open: "Öffnen",
+      new_message_toast: "Neue Nachricht von"
     }),
 
     new MLanguage('English').create({
@@ -91,7 +93,9 @@ export default new MLCreate({
       sprache: 'Language',
       impressum: 'Imprint',
       sprache_waehlen: 'Choose language:',
-      this_is_the_general_chat: 'This is the general service chat.'
+      this_is_the_general_chat: 'This is the general service chat.',
+      open: "Open",
+      new_message_toast: "New messsage received from"
     })
   ]
 });
