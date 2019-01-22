@@ -17,7 +17,7 @@ export default new MLCreate({
       user_login: 'Zum Benutzer-Login',
       abmelden: 'Abmelden',
       general_chat: 'Allgemeiner Chat',
-      add_chat: 'Chat hinzufügen mit',
+      add_chat: 'Chat hinzufügen',
       chat_client_overview_title: 'Ihre Chats mit Providern',
       provider_list_title_chat_overview: 'Weitere Chats',
       client_list_title_chat_overview: 'Chatübersicht',
@@ -25,7 +25,7 @@ export default new MLCreate({
       my_providers_title_doc_overview: 'Meine Provider',
       footer_message_left: 'Projektseminar: Digitaler Tresor',
       footer_message_right: 'powered by foxdox',
-      your_chat: 'Ihr Chat mit: ',
+      your_chat: 'Chat mit: ',
       chat_list_provider: 'Weitere Chats',
       lastFiveDocsTitle: 'Zuletzt benutzt',
       keine_Provider_msg:
@@ -47,7 +47,7 @@ export default new MLCreate({
       sprache: 'Sprache',
       impressum: 'Impressum',
       sprache_waehlen: 'Sprache wählen:',
-      this_is_the_general_chat: 'Dies ist der allgemeine Servicechat.',
+      this_is_the_general_chat: 'Allgemeiner Chat',
       open: "Öffnen",
       new_message_toast: "Neue Nachricht von"
     }),
@@ -61,17 +61,17 @@ export default new MLCreate({
       login_button: 'Login',
       user_login: 'User - Login',
       abmelden: 'Logout',
-      general_chat: 'General Chat',
-      add_chat: 'Add chat with',
+      general_chat: 'General chat',
+      add_chat: 'Add chat',
       chat_client_overview_title: 'Your chats with providers',
       provider_list_title_chat_overview: 'Other chats',
       client_list_title_chat_overview: 'Chat overview',
       last_document_title_doc_overview: 'Your documents',
       my_providers_title_doc_overview: 'My providers',
       footer_message_left: 'Seminar: Digital Safe',
-      lastFiveDocsTitle: 'Last used',
+      lastFiveDocsTitle: 'Recent documents',
       footer_message_right: 'powered by foxdox',
-      your_chat: 'Your chat with: ',
+      your_chat: 'Chat with: ',
       chat_list_provider: 'More chats',
       chat_list_client: 'Other providers',
       keine_Provider_msg: "You don't have any registered providers in foxChat.",
@@ -79,9 +79,9 @@ export default new MLCreate({
         "You don't have any registered subscribers in foxChat.",
       willkommen_bei: 'Welcome to ',
       starting_chat_to_doc:
-        'You are starting a chat with the following document: ',
+        "You are starting a chat with the following document: ",
       abbruch: 'Cancel',
-      chat_starten: 'Start Chat',
+      chat_starten: 'Start chat',
       dokument: 'Document ',
       being_downloaded: ' is now downloaded. ',
       ordner: 'Folder ',
@@ -93,9 +93,9 @@ export default new MLCreate({
       sprache: 'Language',
       impressum: 'Imprint',
       sprache_waehlen: 'Choose language:',
-      this_is_the_general_chat: 'This is the general service chat.',
+      this_is_the_general_chat: 'General chat',
       open: "Open",
-      new_message_toast: "New messsage received from"
+      new_message_toast: "New message received from"
     })
   ]
 });
