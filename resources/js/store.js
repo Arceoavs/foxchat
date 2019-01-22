@@ -73,7 +73,7 @@ export const store = new Vuex.Store({
     setUserInbox(state, newProviderList) {
       state.inboxForUser = newProviderList;
     },
-    setUserInbox(state, newToastUrl) {
+    setToastUrl(state, newToastUrl) {
       state.toastUrl = newToastUrl;
     },
     setSubscriberList(state, newSubscriberList) {

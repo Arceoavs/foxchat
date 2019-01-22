@@ -37,7 +37,7 @@ export default {
   /**
    * getInbox
    */
-  getInbox(self) {
+  getInbox() {
     this.refresh();
 
     var path = '/api/chat/user/getinbox';
@@ -98,7 +98,7 @@ export default {
   /**
    * getInbox
    */
-  getInboxProvider(self) {
+  getInboxProvider() {
     this.refresh();
 
     var path = '/api/chat/provider/getinbox';

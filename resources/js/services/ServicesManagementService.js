@@ -14,6 +14,7 @@ export default {
     },
     startUserServicesWithUserInformation() {
         ChatService.init();
+        ChatService.getInbox();
         BroadcastingService.subscribeToChannel();
     },
     removeUserServicesAndData() {

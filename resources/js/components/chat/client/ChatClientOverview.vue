@@ -38,6 +38,9 @@ export default {
       //pageTitle: "Ihre Chats mit Providern"
     };
   },
+  created(){
+    ChatService.getInbox();
+  },
   components: {
     ChatClientComponent
   },
