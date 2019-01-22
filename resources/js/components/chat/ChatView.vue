@@ -88,6 +88,10 @@ export default {
     }
     console.log("chatview created");
   },
+  beforeDestroy(){
+    EventBus.$off("messageWasReceived");
+    EventBus.$off("messageWasRead");
+  },
   data() {
     return {
       chatPartner: this.$route.query.partner,

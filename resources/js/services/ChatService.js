@@ -233,7 +233,7 @@ export default {
       })
       .finally(param => {
         console.log("das ist die conversationid" + convid);
-        this.makeConversationSeen(convid, self);
+        this.makeConversationSeen(convid);
       });
   },
 
@@ -311,7 +311,7 @@ export default {
       });
   },
 
-  makeConversationSeen(conversationId, self) {
+  makeConversationSeen(conversationId) {
     this.refresh();
     var body = {
       conversationid: conversationId
