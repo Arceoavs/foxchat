@@ -46,8 +46,9 @@ export default {
   },
   methods: {
     openDocument() {
-      DocumentService.publishDocument(this.id);
-      DocumentService.downloadPublicDocument(this.id, this.name);
+      // DocumentService.publishDocument(this.id);
+      // DocumentService.downloadPublicDocument(this.id, this.name);
+      DocumentService.downloadDocument(this.id, this.name);
     },
     shareDocument() {
       DocumentService.publishDocument(this.id).then(data => {

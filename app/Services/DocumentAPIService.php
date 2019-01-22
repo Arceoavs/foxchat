@@ -52,7 +52,7 @@ class DocumentAPIService extends Controller
     public function downloadDocument($documentId)
     {
         // NON NUMERIC VALUE APPEARED???
-        $url = 'https://api.foxdox.de/document/getdoc?id=' + $documentId;
+        $url = 'https://api.foxdox.de/document/getdoc?id=' . $documentId;
         $foxdoxapiclient = new FoxdoxApiClient($url, ['documentId' => $documentId]);
         $foxdoxapiclient->setMethod('GET');
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
