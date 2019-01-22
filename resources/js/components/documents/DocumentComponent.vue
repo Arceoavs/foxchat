@@ -8,9 +8,9 @@
           id="input-valid"
           :state="true"
           type="text"
-          style="width:530px"
           v-bind:value="publicLink"
           v-if="isPublished"
+          onFocus="this.select()"
         />
         <b-button type="button" class="listcomponent" @click="shareDocument()" v-if="toPublish&&isFromProvider">
           <font-awesome-icon class="fox" icon="share-square" size="1x"/>
