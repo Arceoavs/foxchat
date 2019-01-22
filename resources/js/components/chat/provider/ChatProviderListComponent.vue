@@ -23,7 +23,7 @@
               ></h5>
             </b-col>
             <b-col>
-              <h5 class="text-right">Chat mit: {{userName}}</h5>
+              <h5 class="text-right" v-text="$ml.get('your_chat')">{{userName}}</h5>
             </b-col>
           </b-row>
           <b-row>

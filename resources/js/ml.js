@@ -48,8 +48,8 @@ export default new MLCreate({
       impressum: 'Impressum',
       sprache_waehlen: 'Sprache wählen:',
       this_is_the_general_chat: 'Allgemeiner Chat',
-      open: "Öffnen",
-      new_message_toast: "Neue Nachricht von"
+      open: 'Öffnen',
+      new_message_toast: 'Neue Nachricht von'
     }),
 
     new MLanguage('English').create({
@@ -79,7 +79,7 @@ export default new MLCreate({
         "You don't have any registered subscribers in foxChat.",
       willkommen_bei: 'Welcome to ',
       starting_chat_to_doc:
-        "You are starting a chat with the following document: ",
+        'You are starting a chat with the following document: ',
       abbruch: 'Cancel',
       chat_starten: 'Start chat',
       dokument: 'Document ',
@@ -94,8 +94,8 @@ export default new MLCreate({
       impressum: 'Imprint',
       sprache_waehlen: 'Choose language:',
       this_is_the_general_chat: 'General chat',
-      open: "Open",
-      new_message_toast: "New message received from"
+      open: 'Open',
+      new_message_toast: 'New message received from'
     })
   ]
 });
