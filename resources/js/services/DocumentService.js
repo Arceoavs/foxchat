@@ -35,7 +35,7 @@ class DocumentService {
       });
   }
   getProviderName(path) {
-    return path.split("/")[1];
+    if(path) return path.split("/")[1];
   }
 
   async publishDocument(documentId) {
