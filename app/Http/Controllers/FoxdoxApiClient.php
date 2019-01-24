@@ -44,8 +44,7 @@ class FoxdoxApiClient extends Controller
             'X-DEVID' => 'KbYjzdwUSqmNU84nNek2',
             'X-APPID' => 'chXhweSqLsyUdAyZVz9a',
             'X-LANG' => 'de',
-            'Content-Type' => 'application/x-www-form-urlencoded',
-            'X-PROVIDER' => 'cSwKpDdwpCgVBYWfSkJY'
+            'Content-Type' => 'application/x-www-form-urlencoded'
         ];
         $this->body = $body;
     }
@@ -103,11 +102,14 @@ class FoxdoxApiClient extends Controller
      */
     public function apiRequest(string $foxdoxUsername)
     {
-        # $foxdoxUsername = session('foxdoxUsername');
-        $token = User::where('name', $foxdoxUsername)
-            ->pluck('foxdox-token')
-            ->first();
+        $user = User::where('name', $foxdoxUsername);
+
+        $token = $user->pluck('foxdox-token')->first();
+        $xProvider = $user->pluck('x-provider')->first();
+
         $this->setHeader('X-TOKEN', $token);
+        $this->setHeader('X-PROVIDER', $xProvider);
+
         $response = $this->client->request(
             $this->method,
             $this->url,
