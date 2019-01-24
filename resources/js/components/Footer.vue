@@ -1,8 +1,12 @@
 <template>
   <!-- Footer -->
-  <footer class="pt-2 mt-2 footer">
+  <footer class="footer">
     <b-container fluid>
-      <b-row>
+      <b-row class ="vertical-align">
+        <b-col class="text-left">
+          <span v-text="$ml.get('footer_message_left')"/>
+        </b-col>
+
         <b-col class="text-center">
           <b-dropdown id="ddown1" v-bind:text="$ml.get('sprache')" class="m-md-2">
             <b-dropdown-header v-text="$ml.get('sprache_waehlen')"></b-dropdown-header>
@@ -14,22 +18,12 @@
             ></b-dropdown-item>
           </b-dropdown>
         </b-col>
-      </b-row>
 
-      <b-row>
-        <b-col class="text-left">
-          <p v-text="$ml.get('footer_message_left')"/>
-        </b-col>
-
-        <b-col class="text-center">
+        <b-col class="text-right">
           <a
             href="https://www.d-velop.de/foxdox/foxdox-home"
             v-text="$ml.get('footer_message_right')"
           />
-        </b-col>
-
-        <b-col class="text-right">
-          <a href="#!" v-text="$ml.get('impressum')"></a>
         </b-col>
       </b-row>
     </b-container>
@@ -53,5 +47,10 @@
 .btn-secondary {
   background: rgb(255, 255, 255) !important;
   color: rgb(0, 0, 0) !important;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
 }
 </style>
