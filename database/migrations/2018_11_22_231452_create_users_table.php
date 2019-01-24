@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->boolean('isProvider')->nullable();
             $table->string('name')->unique();
             $table->string('foxdox-token');
+            $table->string('x-provider')->nullable();
             $table->timestamps();
         });
     }

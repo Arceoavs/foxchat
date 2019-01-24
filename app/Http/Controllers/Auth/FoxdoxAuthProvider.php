@@ -64,7 +64,8 @@ class FoxdoxAuthProvider extends EloquentUserProvider
                     ['name' => $name],
                     [
                         'foxdox-token' => $token,
-                        'isProvider' => true
+                        'isProvider' => true,
+                        'x-provider' => $xprovider
                     ]
                 );
             }
