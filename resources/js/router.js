@@ -124,7 +124,6 @@ const router = new VueRouter({
     //Der Chat-Teil für den Client wird ebenfalls aggregiert
     {
       path: '/chat',
-      // name: 'Chat Foxdox Client',
       component: ChatAggr,
       meta: {
         requiresAuth: true,

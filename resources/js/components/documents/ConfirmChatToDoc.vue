@@ -29,11 +29,14 @@
 </template>
 
 <script>
-export default {
+import { store } from "../../store.js";
+
+export default {  
   methods: {
     startChat() {
-      this.$router.push({name: 'ChatViewUser',
-      query: { partner: this.providerName, tag: this.documentName }})
+      var communicationUrl = { userName: this.providerName, conversationTag: this.documentName };
+      store.commit("setCommunicationUrl", communicationUrl);
+      this.$router.push({name: 'ChatViewUser'});
     },
     abort() {
       this.$router.push({name: 'Dokumente'});

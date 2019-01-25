@@ -15,8 +15,8 @@
       <b-col>
         <div class="chatTitle overViewTitle">
           <h4 class v-text="this.nameForOverview"></h4>
-          <h5 class v-if="conversationTag == 'allgemein'" v-text="$ml.get('general_chat')"></h5>
-          <h5 class v-else>Dokument: {{conversationTag}}</h5>
+          <h5 class v-if="this.conversationTag == 'allgemein'" v-text="$ml.get('general_chat')"></h5>
+          <h5 class v-else>Dokument: {{this.conversationTag}}</h5>
         </div>
       </b-col>
     </b-row>
@@ -94,8 +94,7 @@ export default {
   },
   data() {
     return {
-      chatPartner: store.state.communicationUrl.userName,
-      conversationTag: store.state.communicationUrl.conversationTag
+      chatPartner: store.state.communicationUrl.userName
     };
   },
   computed: {
@@ -110,6 +109,9 @@ export default {
     },
     nameForOverview: function() {
       return this.$ml.get("your_chat") + " " + store.state.communicationUrl.userName;
+    },
+    conversationTag(){
+      return store.state.communicationUrl.conversationTag;
     }
   },
   methods: {
@@ -132,7 +134,7 @@ export default {
     },
     updateChatServices() {
       ChatService.getConversationByName(
-        store.state.communicationUrl.senderName,
+        store.state.communicationUrl.userName,
         store.state.communicationUrl.conversationTag,
         0,
         100,
@@ -148,7 +150,7 @@ export default {
     updateChatServicesTriggeredByPusher() {
       this.wait(200);
       ChatService.getConversationByName(
-        store.state.communicationUrl.senderName,
+        store.state.communicationUrl.userName,
         store.state.communicationUrl.conversationTag,
         0,
         100,
