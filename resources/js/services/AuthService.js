@@ -106,7 +106,7 @@ class AuthService {
         console.log('Got Userdata:');
         console.log(JSON.stringify(localStorage.getItem('user')));
         if (self.noError) {
-          self.$router.push('/');
+          self.$router.push({name: 'Homepage'});
           console.log('Logged In');
         }
       })

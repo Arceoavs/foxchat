@@ -49,7 +49,9 @@ export default new MLCreate({
       sprache_waehlen: 'Sprache wählen:',
       this_is_the_general_chat: 'Allgemeiner Chat',
       open: 'Öffnen',
-      new_message_toast: 'Neue Nachricht von'
+      new_message_toast: 'Neue Nachricht von',
+      homepage_sentence: "Willkommen bei FoxChat.",
+      homepage_introduction: "Bitte wählen Sie Dokumente oder Chat aus, um zu beginnen!",
     }),
 
     new MLanguage('English').create({
@@ -95,7 +97,10 @@ export default new MLCreate({
       sprache_waehlen: 'Choose language:',
       this_is_the_general_chat: 'General chat',
       open: 'Open',
-      new_message_toast: 'New message received from'
+      new_message_toast: 'New message received from',
+      homepage_sentence: "Welcome to FoxChat!",
+      homepage_introduction: "Please choose either Documents or Chat to get started!",
+      
     })
   ]
 });

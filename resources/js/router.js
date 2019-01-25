@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //COMPONENTS
+import Homepage from './components/Homepage.vue'
 //Login
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
@@ -26,19 +27,25 @@ const router = new VueRouter({
   mode: 'hash',
   routes: [
     {
-      //aggregiert die Dokumentensicht für die router-views und breadcrumbs
-      //Die Komponenten werden in die Komponente DocumentAggr geladen. So müssen Funktionen, welche
-      //für alle Unterkomponenten ebenfalls benötigt werden, nicht mehrfach implementiert werden.
-      path: '/',
-      redirect: '/Documents/',
-      //component: DocumentAggr,
-
-      //es werden Subroutes mit Hilfe von children und router-views umgesetzt
-      //children haben dabei grundsätzlich kein Slash im Pfad, da dies automatisch ergänzt wird
+      path: '/homepage',
+      name: 'Homepage',
+      component: Homepage,
       meta: {
         requiresAuth: true
         // requiresToBeUser: true
       },
+    },
+    {
+      //aggregiert die Dokumentensicht für die router-views und breadcrumbs
+      //Die Komponenten werden in die Komponente DocumentAggr geladen. So müssen Funktionen, welche
+      //für alle Unterkomponenten ebenfalls benötigt werden, nicht mehrfach implementiert werden.
+      path: '/',
+      redirect : 'Documents',
+      //component: DocumentAggr,
+
+      //es werden Subroutes mit Hilfe von children und router-views umgesetzt
+      //children haben dabei grundsätzlich kein Slash im Pfad, da dies automatisch ergänzt wird
+
 
       children: []
     },
