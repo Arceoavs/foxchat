@@ -48,7 +48,7 @@ export default {
       this.participants = [
         {
           id: "0",
-          name: this.$route.query.partner,
+          name: store.state.communicationUrl.userName,
           imageUrl: ""
         },
         {
@@ -78,7 +78,7 @@ export default {
     },
     onMessageWasSent(message) {
       ChatService.sendMessage(
-        store.state.communicationUrl.senderName,
+        store.state.communicationUrl.userName,
         message.data.text,
         store.state.communicationUrl.conversationTag,
         this

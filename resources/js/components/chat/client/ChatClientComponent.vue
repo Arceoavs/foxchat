@@ -7,7 +7,7 @@
       aria-controls="collapse"
       :aria-expanded="showCollapse ? 'true' : 'false'"
     >
-      <h4 class="left textColor">{{provider}}</h4>
+      <h4 class="left textColor">{{userName}}</h4>
       <font-awesome-icon
         class="cardIcon textFox"
         icon="angle-right"
@@ -22,7 +22,7 @@
         <div v-if="generalChat">
           <chat-list-component
             v-bind:tag="generalChat.conversation_tag"
-            v-bind:provider="provider"
+            v-bind:userName="userName"
             v-bind:message="generalChat.message"
             v-bind:date="generalChat.updated_at"
             v-on:chat-partner-changed="informChatComponent"
@@ -32,7 +32,7 @@
         <div v-else>
           <chat-list-component
             v-bind:tag="'allgemein'"
-            v-bind:provider="provider"
+            v-bind:userName="userName"
             v-on:chat-partner-changed="informChatComponent"
           ></chat-list-component>
         </div>
@@ -44,7 +44,7 @@
           v-for="documentChat in documentChats"
           v-bind:key="documentChat.conversation_id"
           v-bind:tag="documentChat.conversation_tag"
-          v-bind:provider="provider"
+          v-bind:userName="userName"
           v-bind:message="documentChat.message"
           v-bind:date="documentChat.updated_at"
           v-on:chat-partner-changed="informChatComponent"
@@ -87,7 +87,7 @@ import ChatListComponent from "./ChatListComponent.vue";
 import BroadcastingService from "../../../services/BroadcastingService.js";
 
 export default {
-  props: ["provider", "documentChats", "generalChat"],
+  props: ["userName", "documentChats", "generalChat"],
   data() {
     return {
       showCollapse: false

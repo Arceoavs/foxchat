@@ -17,7 +17,7 @@
         <chat-client-component
           v-for="provideritem in providers"
           v-bind:key="provideritem.ProviderShortName"
-          v-bind:provider="provideritem.ProviderShortName"
+          v-bind:userName="provideritem.ProviderShortName"
           v-bind:documentChats="provideritem.documentChats"
           v-bind:generalChat="provideritem.generalChat"
           v-on:chat-partner-changed="changeRoute"
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     changeRoute(e) {
-      var communicationUrl = { senderName: e.provider, conversationTag: e.tag };
+      var communicationUrl = { senderName: e.userName, conversationTag: e.tag };
       store.commit("setCommunicationUrl", communicationUrl);
       this.$router.push({
         name: "ChatViewUser"

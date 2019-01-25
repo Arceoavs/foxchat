@@ -6,6 +6,7 @@
 import ChatProviderComponent from "./ChatProviderComponent.vue";
 import FoxdoxSubscriberService from "../../../services/FoxdoxSubscriberService.js";
 import ChatService from "../../../services/ChatService";
+import { store } from "../../../store.js";
 
 export default {
   data() {
@@ -20,15 +21,17 @@ export default {
   computed: {},
   methods: {
     informChatComponent(e) {
+      var communicationUrl = { userName: e.userName, conversationTag: e.tag };
+      store.commit("setCommunicationUrl", communicationUrl);
       this.$router.push({
-        name: "ChatViewProvider",
-        query: { partner: e.partner, tag: e.tag }
+        name: "ChatViewProvider"
       });
     },
     changeRoute(e) {
+      var communicationUrl = { userName: e.userName, conversationTag: e.tag };
+      store.commit("setCommunicationUrl", communicationUrl);
       this.$router.push({
-        name: "ChatViewProvider",
-        query: { partner: e.partner, tag: e.tag }
+        name: "ChatViewProvider"
       });
     }
   },
