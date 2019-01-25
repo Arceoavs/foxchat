@@ -28,6 +28,7 @@ export default {
         store.dispatch('resetRecentDocuments');
         store.dispatch('resetMessageList');
         store.dispatch('resetToastUrl');
+        store.dispatch('resetCommunicationUrl');
     },
     startProviderServicesWithBearer() {
         BroadcastingService.initialize();
@@ -46,6 +47,6 @@ export default {
         store.dispatch('resetUser');
         store.dispatch('resetMessageList');
         store.dispatch('resetSubscriberList');
-        store.dispatch('resetToastUrl');
+        store.dispatch('resetCommunicationUrl');
     }
 }
