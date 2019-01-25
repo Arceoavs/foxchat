@@ -22,7 +22,7 @@ export default {
   methods: {
     informChatComponent: function() {
       var routeProps = new Object();
-      routeProps.partner = this.userName;
+      routeProps.userName = this.userName;
       routeProps.tag = "allgemein";
       this.$emit("chat-partner-changed", routeProps);
     }
