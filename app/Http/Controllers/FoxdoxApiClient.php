@@ -108,7 +108,10 @@ class FoxdoxApiClient extends Controller
         $xProvider = $user->pluck('x-provider')->first();
 
         $this->setHeader('X-TOKEN', $token);
-        $this->setHeader('X-PROVIDER', $xProvider);
+        if($xProvider){
+            $this->setHeader('X-PROVIDER', $xProvider);
+        }
+       
 
         $response = $this->client->request(
             $this->method,
