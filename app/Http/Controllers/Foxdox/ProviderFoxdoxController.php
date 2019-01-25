@@ -117,10 +117,10 @@ class ProviderFoxdoxController extends Controller
     }
 
     public function listSubscribersWithoutGeneralChat(){
-        return $this->listSubscribersWithoutGeneralChatImpl2();
+        return $this->listSubscribersWithoutGeneralChatImpl1();
     }
 
-    public function listSubscribersWithoutGeneralChaImpl1()
+    public function listSubscribersWithoutGeneralChatImpl1()
     {
         $allSubs = $this->listAggregatedSubscribers();
 
