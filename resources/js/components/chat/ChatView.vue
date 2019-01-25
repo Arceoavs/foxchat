@@ -79,8 +79,8 @@ export default {
     }
     if (this.$route.query.partner && this.$route.query.tag) {
       ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
+        store.state.communicationUrl.senderName,
+        store.state.communicationUrl.conversationTag,
         0,
         100,
         false
@@ -94,8 +94,8 @@ export default {
   },
   data() {
     return {
-      chatPartner: this.$route.query.partner,
-      conversationTag: this.$route.query.tag
+      chatPartner: store.state.communicationUrl.senderName,
+      conversationTag: store.state.communicationUrl.conversationTag
     };
   },
   computed: {
@@ -109,29 +109,31 @@ export default {
       return store.state.inboxForProvider;
     },
     nameForOverview: function() {
-      return this.$ml.get("your_chat") + " " + this.$route.query.partner;
+      return this.$ml.get("your_chat") + " " + store.state.communicationUrl.senderName;
     }
   },
   methods: {
     changeRoute(e) {
       if (store.state.user.isProvider) {
         console.log("in change route" + e.provider + e.tag);
+        var communicationUrl = { senderName: e.provider, conversationTag: e.tag };
+        store.commit("setCommunicationUrl", communicationUrl);
         this.$router.push({
-          name: "ChatViewProvider",
-          query: { partner: e.partner, tag: e.tag }
+          name: "ChatViewProvider"
         });
       } else {
+        var communicationUrl = { senderName: e.provider, conversationTag: e.tag };
+        store.commit("setCommunicationUrl", communicationUrl);
         this.$router.push({
-          name: "ChatViewUser",
-          query: { partner: e.provider, tag: e.tag }
+          name: "ChatViewUser"
         });
       }
       this.updateChatServices();
     },
     updateChatServices() {
       ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
+        store.state.communicationUrl.senderName,
+        store.state.communicationUrl.conversationTag,
         0,
         100,
         false
@@ -146,8 +148,8 @@ export default {
     updateChatServicesTriggeredByPusher() {
       this.wait(200);
       ChatService.getConversationByName(
-        this.$route.query.partner,
-        this.$route.query.tag,
+        store.state.communicationUrl.senderName,
+        store.state.communicationUrl.conversationTag,
         0,
         100,
         true

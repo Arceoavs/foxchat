@@ -78,9 +78,9 @@ export default {
     },
     onMessageWasSent(message) {
       ChatService.sendMessage(
-        this.$route.query.partner,
+        store.state.communicationUrl.senderName,
         message.data.text,
-        this.$route.query.tag,
+        store.state.communicationUrl.conversationTag,
         this
       );
     },
