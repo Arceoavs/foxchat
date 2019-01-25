@@ -51,6 +51,8 @@ export default {
   },
   methods: {
     changeRoute(e) {
+      var communicationUrl = { senderName: e.provider, conversationTag: e.tag };
+      store.commit("setCommunicationUrl");
       this.$router.push({
         name: "ChatViewUser",
         query: { partner: e.provider, tag: e.tag }

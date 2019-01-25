@@ -9,7 +9,7 @@
         <title>foxChat</title>
 
     </head>
-    {{-- <script src="http://localhost:8098"></script> --}}
+    <script src="http://localhost:8098"></script>
     <body>
         <div id="app"></div>
         <script type="text/javascript" src="/js/app.js"></script>

@@ -20,6 +20,7 @@ export const store = new Vuex.Store({
     ],
     user: {},
     toastUrl: { senderName: "", conversationTag:"" },
+    communicationUrl: { senderName: "", conversationTag:"" },
     userRootFolder: [],
     recentDocuments: {
       Name: 'Loading...'
@@ -37,6 +38,9 @@ export const store = new Vuex.Store({
     },
     getToastUrl(state) {
       return state.toastUrl;
+    },
+    getCommunicationUrl(state) {
+      return state.communicationUrl;
     },
     getSubscriberList(state) {
       return state.subscriberList;
@@ -75,6 +79,9 @@ export const store = new Vuex.Store({
     },
     setToastUrl(state, newToastUrl) {
       state.toastUrl = newToastUrl;
+    },
+    setCommunicationUrl(state, newCommunicationUrl) {
+      state.communicationUrl = newCommunicationUrl;
     },
     setSubscriberList(state, newSubscriberList) {
       state.subscriberList = newSubscriberList;
@@ -130,6 +137,9 @@ export const store = new Vuex.Store({
     },
     resetToastUrl({ commit }) {
       commit('setToastUrl', { senderName: "", conversationTag:"" });
+    },
+    resetCommunicationUrl({ commit }) {
+      commit('setCommunicationUrl', { senderName: "", conversationTag:"" });
     },
     resetRootFolder({ commit }) {
       commit('setRootFolder', [{}]);
