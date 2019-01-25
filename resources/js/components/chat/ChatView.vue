@@ -15,8 +15,8 @@
       <b-col>
         <div class="chatTitle overViewTitle">
           <h4 class v-text="this.nameForOverview"></h4>
-          <h5 class v-if="this.$route.query.tag == 'allgemein'" v-text="$ml.get('general_chat')"></h5>
-          <h5 class v-else>Dokument: {{this.$route.query.tag}}</h5>
+          <h5 class v-if="conversationTag == 'allgemein'" v-text="$ml.get('general_chat')"></h5>
+          <h5 class v-else>Dokument: {{conversationTag}}</h5>
         </div>
       </b-col>
     </b-row>
@@ -33,7 +33,7 @@
               class="smaller-heading"
               v-for="provideritem in providers"
               v-bind:key="provideritem.ProviderShortName"
-              v-bind:provider="provideritem.ProviderShortName"
+              v-bind:userName="provideritem.ProviderShortName"
               v-bind:documentChats="provideritem.documentChats"
               v-bind:generalChat="provideritem.generalChat"
               v-on:chat-partner-changed="changeRoute"
@@ -43,8 +43,8 @@
       </b-col>
       <b-col md="8" cols="12">
         <chat-component
-          v-bind:partner="this.$route.query.partner"
-          v-bind:tag="this.$route.query.tag"
+          v-bind:userName="chatPartner"
+          v-bind:tag="conversationTag"
           v-on:message-was-sent="updateChatServicesTriggeredByPusher"
         ></chat-component>
       </b-col>
@@ -77,9 +77,9 @@ export default {
     } else {
       ChatService.getInbox();
     }
-    if (this.$route.query.partner && this.$route.query.tag) {
+    if (store.state.communicationUrl.userName && store.state.communicationUrl.conversationTag) {
       ChatService.getConversationByName(
-        store.state.communicationUrl.senderName,
+        store.state.communicationUrl.userName,
         store.state.communicationUrl.conversationTag,
         0,
         100,
@@ -94,7 +94,7 @@ export default {
   },
   data() {
     return {
-      chatPartner: store.state.communicationUrl.senderName,
+      chatPartner: store.state.communicationUrl.userName,
       conversationTag: store.state.communicationUrl.conversationTag
     };
   },
@@ -109,20 +109,20 @@ export default {
       return store.state.inboxForProvider;
     },
     nameForOverview: function() {
-      return this.$ml.get("your_chat") + " " + store.state.communicationUrl.senderName;
+      return this.$ml.get("your_chat") + " " + store.state.communicationUrl.userName;
     }
   },
   methods: {
     changeRoute(e) {
       if (store.state.user.isProvider) {
-        console.log("in change route" + e.provider + e.tag);
-        var communicationUrl = { senderName: e.provider, conversationTag: e.tag };
+        console.log("in change route" + e.userName + e.tag);
+        var communicationUrl = { userName: e.userName, conversationTag: e.tag };
         store.commit("setCommunicationUrl", communicationUrl);
         this.$router.push({
           name: "ChatViewProvider"
         });
       } else {
-        var communicationUrl = { senderName: e.provider, conversationTag: e.tag };
+        var communicationUrl = { userName: e.userName, conversationTag: e.tag };
         store.commit("setCommunicationUrl", communicationUrl);
         this.$router.push({
           name: "ChatViewUser"

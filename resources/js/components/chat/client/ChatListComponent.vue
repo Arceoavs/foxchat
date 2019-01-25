@@ -33,7 +33,7 @@
  <script>
 
 export default {
-  props: ["tag", "provider", "message", "date"],
+  props: ["tag", "userName", "message", "date"],
   computed: {
     cuttedTime() {
       return this.date.slice(11, 16);
@@ -74,7 +74,7 @@ export default {
   methods: {
     informChatComponent: function() {
       var routeProps=new Object();
-      routeProps.provider = this.provider;
+      routeProps.userName = this.userName;
       routeProps.tag=this.tag;
       this.$emit("chat-partner-changed", routeProps);
     }

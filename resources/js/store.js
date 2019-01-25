@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
     ],
     user: {},
     toastUrl: { senderName: "", conversationTag:"" },
-    communicationUrl: { senderName: "", conversationTag:"" },
+    communicationUrl: { userName: "", conversationTag:"" },
     userRootFolder: [],
     recentDocuments: {
       Name: 'Loading...'
@@ -139,7 +139,7 @@ export const store = new Vuex.Store({
       commit('setToastUrl', { senderName: "", conversationTag:"" });
     },
     resetCommunicationUrl({ commit }) {
-      commit('setCommunicationUrl', { senderName: "", conversationTag:"" });
+      commit('setCommunicationUrl', { userName: "", conversationTag:"" });
     },
     resetRootFolder({ commit }) {
       commit('setRootFolder', [{}]);
