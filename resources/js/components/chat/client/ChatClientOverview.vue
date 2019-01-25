@@ -52,10 +52,9 @@ export default {
   methods: {
     changeRoute(e) {
       var communicationUrl = { senderName: e.provider, conversationTag: e.tag };
-      store.commit("setCommunicationUrl");
+      store.commit("setCommunicationUrl", communicationUrl);
       this.$router.push({
-        name: "ChatViewUser",
-        query: { partner: e.provider, tag: e.tag }
+        name: "ChatViewUser"
       });
     }
   }
