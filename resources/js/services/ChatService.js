@@ -1,3 +1,6 @@
+
+import Participant from '../model/participants.js';
+import Message from '../model/messages.js';
 import { store } from '../store.js';
 
 var configExt = {
