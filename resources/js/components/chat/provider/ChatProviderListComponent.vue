@@ -23,17 +23,14 @@
               ></h5>
             </b-col>
             <b-col>
-              <h5 class="text-right" v-text="$ml.get('your_chat')">{{userName}}</h5>
+              <p
+                class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
+              >{{dateTimeForProviders}}</p>
             </b-col>
           </b-row>
           <b-row>
             <b-col>
               <p class="font-weight-light text-left">{{chatMessagePreview}}</p>
-            </b-col>
-            <b-col>
-              <p
-                class="font-weight-light chatDateTime text-right d-none d-md-block d-lg-block d-xl-block"
-              >{{dateTimeForProviders}}</p>
             </b-col>
           </b-row>
         </b-col>
@@ -43,7 +40,6 @@
 </template>
 
 <script>
-
 export default {
   props: ["documentName", "date", "userName", "message"],
   computed: {
@@ -60,10 +56,16 @@ export default {
       else return this.cuttedDate;
     },
     cuttedTime() {
-      return this.date.slice(11, 16);
+      return this.date.slice(11, 16) + this.$ml.get("hour_stamp");
     },
     cuttedDate() {
-      return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
+      return (
+        this.date.slice(8, 10) +
+        "." +
+        this.date.slice(5, 7) +
+        "." +
+        this.date.slice(0, 4)
+      );
     },
     chatMessagePreview() {
       var messagePreviewLength = 70;

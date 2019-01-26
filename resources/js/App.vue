@@ -1,10 +1,15 @@
 <template>
+  <!-- The entire Frontend is in here -->
   <div id="container">
+    <!-- The "loading" spinning wheel that is overlayed when necessary-->
     <loading-component/>
+    <!-- The navigation bar on top of every view-->
     <navbar-component/>
+    <!-- Variable content of the site -->
     <div id="body">
       <router-view/>
     </div>
+    <!-- Footer bar at the bottom of the page -->
     <footer-component id="footer"/>
   </div>
 </template>
@@ -14,7 +19,7 @@ import LoadingComponent from "./components/Loading.vue";
 import FooterComponent from "./components/Footer.vue";
 import NavbarComponent from "./components/Navbar.vue";
 import EventBus from "./services/event-bus.js";
-import { MLBuilder } from "vue-multilanguage";
+//import { MLBuilder } from "vue-multilanguage";
 import ServicesManagementService from "./services/ServicesManagementService";
 
 export default {
