@@ -29,7 +29,7 @@
           </div>
           <!--Wenn Client-->
           <div v-else>
-            <chat-client-component
+            <chat-list-component
               class="smaller-heading"
               v-for="provideritem in providers"
               v-bind:key="provideritem.ProviderShortName"
@@ -37,7 +37,7 @@
               v-bind:documentChats="provideritem.documentChats"
               v-bind:generalChat="provideritem.generalChat"
               v-on:chat-partner-changed="changeRoute"
-            ></chat-client-component>
+            />
           </div>
         </div>
       </b-col>
@@ -55,7 +55,7 @@
 
 <script>
 import ChatComponent from "./ChatComponent.vue";
-import ChatClientComponent from "./client/ChatClientComponent.vue";
+import ChatListComponent from "./client/ChatList.vue";
 import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import BroadcastingService from "../../services/BroadcastingService.js";
@@ -76,7 +76,10 @@ export default {
     } else {
       ChatService.getInbox();
     }
-    if (this.$store.state.communicationUrl.userName && this.$store.state.communicationUrl.conversationTag) {
+    if (
+      this.$store.state.communicationUrl.userName &&
+      this.$store.state.communicationUrl.conversationTag
+    ) {
       ChatService.getConversationByName(
         this.$store.state.communicationUrl.userName,
         this.$store.state.communicationUrl.conversationTag,
@@ -87,7 +90,7 @@ export default {
     }
     console.log("chatview created");
   },
-  beforeDestroy(){
+  beforeDestroy() {
     EventBus.$off("messageWasReceived");
     EventBus.$off("messageWasRead");
   },
@@ -107,9 +110,13 @@ export default {
       return this.$store.state.inboxForProvider;
     },
     nameForOverview: function() {
-      return this.$ml.get("your_chat") + " " + this.$store.state.communicationUrl.userName;
+      return (
+        this.$ml.get("your_chat") +
+        " " +
+        this.$store.state.communicationUrl.userName
+      );
     },
-    conversationTag(){
+    conversationTag() {
       return this.$store.state.communicationUrl.conversationTag;
     }
   },
@@ -172,7 +179,7 @@ export default {
   },
   components: {
     ChatComponent,
-    ChatClientComponent,
+    ChatListComponent,
     ChatProviderComponent
   }
 };

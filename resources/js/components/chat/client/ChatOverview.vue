@@ -14,7 +14,7 @@
         <div v-if="providers.length==0" class="text-center">
           <p v-text="$ml.get('keine_Provider_msg')"/>
         </div>
-        <chat-client-component
+        <chat-list-component
           v-for="provideritem in providers"
           v-bind:key="provideritem.ProviderShortName"
           v-bind:userName="provideritem.ProviderShortName"
@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import ChatClientComponent from "./ChatClientComponent.vue";
+import ChatListComponent from "./ChatList.vue";
 import ChatService from "../../../services/ChatService";
-import AddChatComponent from "./AddChatComponent.vue";
+import AddChatComponent from "./AddChat.vue";
 
 export default {
   data() {
@@ -43,7 +43,7 @@ export default {
     ChatService.getInbox();
   },
   components: {
-    ChatClientComponent,
+    ChatListComponent,
     AddChatComponent
   },
   computed: {
