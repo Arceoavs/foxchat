@@ -1,47 +1,24 @@
 <template>
   <div id="container">
     <loading-component></loading-component>
-    <b-navbar toggleable="md" class="navbar-laravel">
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <b-navbar-brand to="/homepage">
-        <img class="img-logo" src="/img/FoxdoxChat.png">
-      </b-navbar-brand>
-      <b-collapse is-nav id="nav_collapse">
-        <b-nav-item v-show="loggedIn && !isProvider" to="/Documents">
-          <span class="navbar-element" v-text="$ml.get('dokumente')"/>
-        </b-nav-item>
-        <b-nav-item v-show="loggedIn" v-bind:to="chatUrl">
-          <span class="navbar-element" v-text="$ml.get('chat')"/>
-        </b-nav-item>
-        <b-nav-item v-show="loggedIn" right class="ml-auto">
-          <logout-component></logout-component>
-        </b-nav-item>
-      </b-collapse>
-    </b-navbar>
-
+    <navbar-component></navbar-component>
     <div id="body">
       <router-view></router-view>
     </div>
-    <!-- <b-row class="mt-5"></b-row> -->
     <footer-component id="footer"></footer-component>
   </div>
 </template>
 
 <script>
-import LogoutComponent from "./components/auth/LogoutComponent.vue";
 import LoadingComponent from "./components/LoadingComponent.vue";
 import FooterComponent from "./components/Footer.vue";
+import NavbarComponent from "./components/Navbar.vue";
 import EventBus from "./services/event-bus.js";
 import { store } from "./store.js";
 import { MLBuilder } from "vue-multilanguage";
 import ServicesManagementService from "./services/ServicesManagementService";
 
 export default {
-  data: function() {
-    return {
-      loggedIn: false
-    };
-  },
   created() {
     if (localStorage.getItem("bearer") != null) {
       if (store.state.user.isProvider == 1) {
@@ -55,7 +32,6 @@ export default {
     this.$toasted.register(
       "new_message_received",
       payload => {
-
         // if there is a message show it with the message
         return payload.message;
       },
@@ -93,27 +69,8 @@ export default {
     );
     EventBus.$on("messageWasReceived", this.toastMessage);
   },
-  mounted() {
-    this.loggedIn = localStorage.getItem("bearer");
-    EventBus.$on("loading", payload => {
-      this.loggedIn = localStorage.getItem("bearer");
-    });
-    EventBus.$on("loaded", payload => {
-      this.loggedIn = localStorage.getItem("bearer");
-    });
-  },
-  computed: {
-    isProvider() {
-      return store.state.user.isProvider;
-    },
-    chatUrl() {
-      if (store.state.user.isProvider == 1) {
-        return "/provider-chat";
-      } else return "/chat";
-    }
-  },
   components: {
-    LogoutComponent,
+    NavbarComponent,
     LoadingComponent,
     FooterComponent
   },
@@ -129,14 +86,13 @@ export default {
       });
     }
   },
-  beforeDestroy(){
+  beforeDestroy() {
     EventBus.$off("messageWasReceived");
   },
-  destroyed(){
+  destroyed() {
     console.log("app destrpyed");
   }
-}
-
+};
 </script>
 
 <style>
