@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import LogoutComponent from "./components/authentication/LogoutComponent.vue";
+import LogoutComponent from "./components/auth/LogoutComponent.vue";
 import LoadingComponent from "./components/LoadingComponent.vue";
 import FooterComponent from "./components/Footer.vue";
 import EventBus from "./services/event-bus.js";
