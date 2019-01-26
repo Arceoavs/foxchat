@@ -42,19 +42,19 @@
         </div>
       </b-col>
       <b-col md="8" cols="12">
-        <chat-component
+        <chat-window
           v-bind:userName="chatPartner"
           v-bind:tag="conversationTag"
           v-on:message-was-sent="updateChatServicesTriggeredByPusher"
-        ></chat-component>
+        />
       </b-col>
     </b-row>
-    <router-view></router-view>
+    <router-view/>
   </b-container>
 </template>
 
 <script>
-import ChatComponent from "./ChatComponent.vue";
+import ChatWindow from "./ChatWindow.vue";
 import ChatListComponent from "./client/ChatList.vue";
 import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
@@ -178,7 +178,7 @@ export default {
     }
   },
   components: {
-    ChatComponent,
+    ChatWindow,
     ChatListComponent,
     ChatProviderComponent
   }

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import LoadingComponent from "./components/LoadingComponent.vue";
+import LoadingComponent from "./components/Loading.vue";
 import FooterComponent from "./components/Footer.vue";
 import NavbarComponent from "./components/Navbar.vue";
 import EventBus from "./services/event-bus.js";

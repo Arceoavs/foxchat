@@ -16,7 +16,7 @@ import ConfirmChatToDoc from './views/ConfirmChatToDoc.vue';
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatOverview.vue';
 import ChatProviderOverview from './components/chat/provider/ChatProviderOverview.vue';
-import ChatAggr from './views/ChatAggr.vue';
+import ChatAggr from './views/Chat.vue';
 
 Vue.use(VueRouter);
 
