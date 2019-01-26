@@ -1,11 +1,11 @@
 <template>
   <div id="container">
-    <loading-component></loading-component>
-    <navbar-component></navbar-component>
+    <loading-component/>
+    <navbar-component/>
     <div id="body">
-      <router-view></router-view>
+      <router-view/>
     </div>
-    <footer-component id="footer"></footer-component>
+    <footer-component id="footer"/>
   </div>
 </template>
 
@@ -119,4 +119,3 @@ body {
   background-color: grey !important;
 }
 </style>
-

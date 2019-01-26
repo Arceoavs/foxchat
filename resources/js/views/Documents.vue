@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
-    <breadcrumb v-bind:items="items"></breadcrumb>
-    <router-view></router-view>
+    <breadcrumb v-bind:items="items"/>
+    <router-view/>
   </b-container>
 </template>
 
