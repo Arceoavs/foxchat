@@ -26,19 +26,17 @@ export default {
           name: ""
         }
       ],
-      titleImageUrl:
-        "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+      titleImageUrl: "",
       newMessagesCount: 0,
       showTypingIndicator: "",
-      alwaysScrollToBottom: false,
-      messageStyling: true
+      messageStyling: false
     };
   },
   created() {
     this.initChat();
   },
-  computed:{
-    messageList: function(){
+  computed: {
+    messageList: function() {
       return this.$store.state.messageList;
     }
   },
