@@ -6,7 +6,7 @@ import Homepage from './views/Homepage.vue'
 //Login
 import LoginComponent from './components/auth/LoginComponent.vue';
 import LoginComponentProvider from './components/auth/LoginComponentProvider.vue';
-import LoginAggr from './components/auth/LoginAggr.vue';
+import LoginAggr from './views/Login.vue';
 //Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import FolderChild from './components/documents/FolderChildComponent.vue';

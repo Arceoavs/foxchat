@@ -4,16 +4,61 @@
 </template>
 
 <script>
-import auth from "../../services/AuthService.js";
-
+import store from "../../store.js";
+import EventBus from "../../services/event-bus.js";
 export default {
   data() {
     return {};
   },
   methods: {
-    logout: function() {
-      console.log("Logging Out...");
-      auth.logout(this);
+    logout() {
+      EventBus.$emit("loading");
+      var path = "/api/auth/user";
+      var formData = new FormData();
+      formData.append(
+        "Authorization",
+        "Bearer " + localStorage.getItem("bearer")
+      );
+
+      var configExt = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("bearer")
+        }
+      };
+
+      axios
+        .post(path + "/logout", formData, configExt)
+        .then(response => {
+          console.log("Logged Out.");
+        })
+        .catch(error => {
+          console.log("Error logging Out.");
+        })
+        .finally(param => {
+          this.removeUserServicesAndData();
+          this.$router.push("/login");
+          EventBus.$emit("loaded");
+        });
+    },
+    removeUserServicesAndData() {
+      this.unsubscribeFromChannel();
+      localStorage.removeItem("bearer");
+      localStorage.removeItem("user");
+      store.dispatch("resetUserInbox");
+      store.dispatch("resetUser");
+      store.dispatch("resetRootFolder");
+      store.dispatch("resetRecentFolders");
+      store.dispatch("resetRecentDocuments");
+      store.dispatch("resetMessageList");
+      store.dispatch("resetToastUrl");
+      store.dispatch("resetCommunicationUrl");
+    },
+    unsubscribeFromChannel() {
+      if (window.Echo) {
+        window.Echo.leave("chat." + store.state.user.name);
+        delete window.Echo;
+      }
     }
   },
   mounted() {
@@ -44,4 +89,3 @@ export default {
   }
 }
 </style>
-

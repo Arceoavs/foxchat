@@ -17,19 +17,6 @@ export default {
         ChatService.getInbox();
         BroadcastingService.subscribeToChannel();
     },
-    removeUserServicesAndData() {
-        BroadcastingService.unsubscribeFromChannel();
-        localStorage.removeItem('bearer');
-        localStorage.removeItem('user');
-        store.dispatch('resetUserInbox');
-        store.dispatch('resetUser');
-        store.dispatch('resetRootFolder');
-        store.dispatch('resetRecentFolders');
-        store.dispatch('resetRecentDocuments');
-        store.dispatch('resetMessageList');
-        store.dispatch('resetToastUrl');
-        store.dispatch('resetCommunicationUrl');
-    },
     startProviderServicesWithBearer() {
         BroadcastingService.initialize();
     },
