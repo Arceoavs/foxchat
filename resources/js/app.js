@@ -7,6 +7,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import App from './App.vue';
 import Vue from 'vue';
+import Vuex from 'vuex'
 import BootstrapVue from 'bootstrap-vue';
 import Chat from 'vue-beautiful-foxchat';
 import store from './store.js';
@@ -28,6 +29,7 @@ import Toasted from 'vue-toasted';
 
 Vue.use(BootstrapVue);
 Vue.use(Chat);
+Vue.use(Vuex);
 Vue.use(Toasted, {
   iconPack: 'custom-class' // set your iconPack, defaults to material. material|fontawesome|custom-class
 });

@@ -48,7 +48,6 @@
 <script>
 import DocumentComponent from "./DocumentComponent.vue";
 import FolderService from "../../services/FolderService";
-import { store } from "../../store.js";
 import FolderComponent from "./FolderComponent.vue";
 import FolderChildComponent from "./FolderChildComponent.vue";
 
@@ -63,20 +62,20 @@ export default {
   },
   computed: {
     lastFive: function(){
-       return store.state.lastFiveDocuments;
+       return this.$store.state.lastFiveDocuments;
     },
     documents: function() {
-      return store.state.recentDocuments;
+      return this.$store.state.recentDocuments;
     },
     folders: function() {
       console.log(
-        "Alle Folders:" + JSON.stringify(store.state.recentFolders.Items)
+        "Alle Folders:" + JSON.stringify(this.$store.state.recentFolders.Items)
       );
-      return store.state.recentFolders.Items;
+      return this.$store.state.recentFolders.Items;
     },
     providers: function() {
       //return store.state.providerList;
-      return store.state.inboxForUser;
+      return this.$store.state.inboxForUser;
     },
     dropdownArrow() {
       let arrow = "rotate-down";

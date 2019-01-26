@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import store from "../../store.js";
 import EventBus from "../../services/event-bus.js";
 export default {
   data() {
@@ -45,18 +44,18 @@ export default {
       this.unsubscribeFromChannel();
       localStorage.removeItem("bearer");
       localStorage.removeItem("user");
-      store.dispatch("resetUserInbox");
-      store.dispatch("resetUser");
-      store.dispatch("resetRootFolder");
-      store.dispatch("resetRecentFolders");
-      store.dispatch("resetRecentDocuments");
-      store.dispatch("resetMessageList");
-      store.dispatch("resetToastUrl");
-      store.dispatch("resetCommunicationUrl");
+      this.$store.dispatch("resetUserInbox");
+      this.$store.dispatch("resetUser");
+      this.$store.dispatch("resetRootFolder");
+      this.$store.dispatch("resetRecentFolders");
+      this.$store.dispatch("resetRecentDocuments");
+      this.$store.dispatch("resetMessageList");
+      this.$store.dispatch("resetToastUrl");
+      this.$store.dispatch("resetCommunicationUrl");
     },
     unsubscribeFromChannel() {
       if (window.Echo) {
-        window.Echo.leave("chat." + store.state.user.name);
+        window.Echo.leave("chat." + this.$store.state.user.name);
         delete window.Echo;
       }
     }

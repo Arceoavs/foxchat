@@ -30,7 +30,6 @@
 <script>
 import ChatProviderListComponent from "./ChatProviderListComponent.vue";
 import AddChatProvider from "./AddChatProvider.vue";
-import { store } from "../../../store.js";
 
 export default {
   props: [],
@@ -41,10 +40,10 @@ export default {
   },
   computed: {
     chats: function() {
-      return store.state.inboxForProvider;
+      return this.$store.state.inboxForProvider;
     },
     subscribers: function() {
-      return store.state.subscriberList;
+      return this.$store.state.subscriberList;
     }
   },
   methods: {

@@ -30,7 +30,6 @@
 <script>
 import ChatClientComponent from "./ChatClientComponent.vue";
 import ChatService from "../../../services/ChatService";
-import { store } from "../../../store.js";
 
 export default {
   data() {
@@ -46,13 +45,13 @@ export default {
   },
   computed: {
     providers: function() {
-      return store.state.inboxForUser;
+      return this.$store.state.inboxForUser;
     }
   },
   methods: {
     changeRoute(e) {
       var communicationUrl = { userName: e.userName, conversationTag: e.tag };
-      store.commit("setCommunicationUrl", communicationUrl);
+      this.$store.commit("setCommunicationUrl", communicationUrl);
       this.$router.push({
         name: "ChatViewUser"
       });

@@ -21,7 +21,6 @@
 <script>
 import LogoutComponent from "./auth/LogoutComponent.vue";
 import EventBus from "../services/event-bus.js";
-import { store } from "../store.js";
 export default {
   data: function() {
     return {
@@ -39,10 +38,10 @@ export default {
   },
   computed: {
     isProvider() {
-      return store.state.user.isProvider;
+      return this.$store.state.user.isProvider;
     },
     chatUrl() {
-      if (store.state.user.isProvider == 1) {
+      if (this.$store.state.user.isProvider == 1) {
         return "/provider-chat";
       } else return "/chat";
     }

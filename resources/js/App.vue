@@ -14,14 +14,13 @@ import LoadingComponent from "./components/LoadingComponent.vue";
 import FooterComponent from "./components/Footer.vue";
 import NavbarComponent from "./components/Navbar.vue";
 import EventBus from "./services/event-bus.js";
-import { store } from "./store.js";
 import { MLBuilder } from "vue-multilanguage";
 import ServicesManagementService from "./services/ServicesManagementService";
 
 export default {
   created() {
     if (localStorage.getItem("bearer") != null) {
-      if (store.state.user.isProvider == 1) {
+      if (this.$store.state.user.isProvider == 1) {
         ServicesManagementService.startProviderServicesWithBearer();
         ServicesManagementService.startProviderServicesWithUserInformation();
       } else {
@@ -46,20 +45,20 @@ export default {
         action: {
           text: this.$ml.get("open"),
           onClick: (e, toastObject) => {
-            if (store.state.user.isProvider) {
+            if (this.$store.state.user.isProvider) {
               this.$router.push({
                 name: "ChatViewProvider",
                 query: {
-                  partner: store.state.toastUrl.senderName,
-                  tag: store.state.toastUrl.conversationTag
+                  partner: this.$store.state.toastUrl.senderName,
+                  tag: this.$store.state.toastUrl.conversationTag
                 }
               });
             } else {
               this.$router.push({
                 name: "ChatViewUser",
                 query: {
-                  partner: store.state.toastUrl.senderName,
-                  tag: store.state.toastUrl.conversationTag
+                  partner: this.$store.state.toastUrl.senderName,
+                  tag: this.$store.state.toastUrl.conversationTag
                 }
               });
             }
@@ -76,13 +75,13 @@ export default {
   },
   methods: {
     toastMessage(e) {
-      store.state.toastUrl.senderName = e.senderName;
-      store.state.toastUrl.conversationTag = e.conversationTag;
+      this.$store.state.toastUrl.senderName = e.senderName;
+      this.$store.state.toastUrl.conversationTag = e.conversationTag;
       this.$toasted.global.new_message_received({
         message:
           this.$ml.get("new_message_toast") +
           " " +
-          store.state.toastUrl.senderName
+          this.$store.state.toastUrl.senderName
       });
     }
   },

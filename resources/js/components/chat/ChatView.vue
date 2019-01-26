@@ -60,7 +60,6 @@ import ChatProviderComponent from "./provider/ChatProviderComponent.vue";
 import ChatService from "../../services/ChatService";
 import BroadcastingService from "../../services/BroadcastingService.js";
 import FoxdoxSubscriberService from "../../services/FoxdoxSubscriberService.js";
-import { store } from "../../store.js";
 import { MLBuilder } from "vue-multilanguage";
 import EventBus from "../../services/event-bus";
 
@@ -72,15 +71,15 @@ export default {
     EventBus.$on("messageWasRead", payload => {
       this.updateChatServicesTriggeredByPusher();
     });
-    if (store.state.user.isProvider) {
+    if (this.$store.state.user.isProvider) {
       ChatService.getInboxProvider();
     } else {
       ChatService.getInbox();
     }
-    if (store.state.communicationUrl.userName && store.state.communicationUrl.conversationTag) {
+    if (this.$store.state.communicationUrl.userName && this.$store.state.communicationUrl.conversationTag) {
       ChatService.getConversationByName(
-        store.state.communicationUrl.userName,
-        store.state.communicationUrl.conversationTag,
+        this.$store.state.communicationUrl.userName,
+        this.$store.state.communicationUrl.conversationTag,
         0,
         100,
         false
@@ -94,38 +93,38 @@ export default {
   },
   data() {
     return {
-      chatPartner: store.state.communicationUrl.userName
+      chatPartner: this.$store.state.communicationUrl.userName
     };
   },
   computed: {
     providers: function() {
-      return store.state.inboxForUser;
+      return this.$store.state.inboxForUser;
     },
     isProvider: function() {
       return JSON.parse(localStorage.getItem("user")).isProvider == 1;
     },
     chats: function() {
-      return store.state.inboxForProvider;
+      return this.$store.state.inboxForProvider;
     },
     nameForOverview: function() {
-      return this.$ml.get("your_chat") + " " + store.state.communicationUrl.userName;
+      return this.$ml.get("your_chat") + " " + this.$store.state.communicationUrl.userName;
     },
     conversationTag(){
-      return store.state.communicationUrl.conversationTag;
+      return this.$store.state.communicationUrl.conversationTag;
     }
   },
   methods: {
     changeRoute(e) {
-      if (store.state.user.isProvider) {
+      if (this.$store.state.user.isProvider) {
         console.log("in change route" + e.userName + e.tag);
         var communicationUrl = { userName: e.userName, conversationTag: e.tag };
-        store.commit("setCommunicationUrl", communicationUrl);
+        this.$store.commit("setCommunicationUrl", communicationUrl);
         this.$router.push({
           name: "ChatViewProvider"
         });
       } else {
         var communicationUrl = { userName: e.userName, conversationTag: e.tag };
-        store.commit("setCommunicationUrl", communicationUrl);
+        this.$store.commit("setCommunicationUrl", communicationUrl);
         this.$router.push({
           name: "ChatViewUser"
         });
@@ -134,13 +133,13 @@ export default {
     },
     updateChatServices() {
       ChatService.getConversationByName(
-        store.state.communicationUrl.userName,
-        store.state.communicationUrl.conversationTag,
+        this.$store.state.communicationUrl.userName,
+        this.$store.state.communicationUrl.conversationTag,
         0,
         100,
         false
       );
-      if (store.state.user.isProvider) {
+      if (this.$store.state.user.isProvider) {
         ChatService.getInboxProvider();
         FoxdoxSubscriberService.getSubscriberList();
       } else {
@@ -150,13 +149,13 @@ export default {
     updateChatServicesTriggeredByPusher() {
       this.wait(200);
       ChatService.getConversationByName(
-        store.state.communicationUrl.userName,
-        store.state.communicationUrl.conversationTag,
+        this.$store.state.communicationUrl.userName,
+        this.$store.state.communicationUrl.conversationTag,
         0,
         100,
         true
       );
-      if (store.state.user.isProvider) {
+      if (this.$store.state.user.isProvider) {
         ChatService.getInboxProvider();
         FoxdoxSubscriberService.getSubscriberList();
       } else {

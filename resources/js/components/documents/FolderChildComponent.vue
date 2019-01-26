@@ -14,14 +14,13 @@
       v-bind:id="folder.Id"
       v-bind:name="folder.Name"
     ></folder-component>
-    <!--<button v-on:click="test">Teste!</button>-->
   </b-container>
 </template>
 
 <script>
 import DocumentComponent from "./DocumentComponent.vue";
 import FolderService from "../../services/FolderService";
-import { store } from "../../store.js";
+// import { store } from "../../store.js";
 import FolderComponent from "./FolderComponent.vue";
 
 export default {
@@ -32,25 +31,15 @@ export default {
   },
   computed: {
     documents: function() {
-      return store.state.currentDocuments;
+      return this.$store.state.currentDocuments;
     },
     folders: function() {
-      return store.state.currentFolder;
+      return this.$store.state.currentFolder;
     }
   },
   components: {
     DocumentComponent,
     FolderComponent
-  },
-  methods: {
-    test() {
-      this.$router.go(-1);
-      //console.log("Teste!");
-      //FolderService.getSubFolders(this.parent);
-      //console.log(this.folders);
-      //FolderService.getDocuments(this.parent);
-      //console.log(this.documents);
-    }
   }
 };
 </script>

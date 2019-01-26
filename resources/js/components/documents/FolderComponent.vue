@@ -11,7 +11,6 @@
 import DocumentService from "../../services/DocumentService.js";
 import FolderService from "../../services/FolderService.js";
 import Folder from "../../model/folder.js";
-import { store } from "../../store.js";
 
 export default {
   props: ["id", "name"],

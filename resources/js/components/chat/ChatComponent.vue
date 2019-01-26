@@ -16,7 +16,6 @@
 
 <script>
 import ChatService from "../../services/ChatService";
-import { store } from "../../store.js";
 
 export default {
   data() {
@@ -40,7 +39,7 @@ export default {
   },
   computed:{
     messageList: function(){
-      return store.state.messageList;
+      return this.$store.state.messageList;
     }
   },
   methods: {
@@ -48,7 +47,7 @@ export default {
       this.participants = [
         {
           id: "0",
-          name: store.state.communicationUrl.userName,
+          name: this.$store.state.communicationUrl.userName,
           imageUrl: ""
         },
         {
@@ -78,9 +77,9 @@ export default {
     },
     onMessageWasSent(message) {
       ChatService.sendMessage(
-        store.state.communicationUrl.userName,
+        this.$store.state.communicationUrl.userName,
         message.data.text,
-        store.state.communicationUrl.conversationTag,
+        this.$store.state.communicationUrl.conversationTag,
         this
       );
     },
