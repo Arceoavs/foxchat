@@ -19,28 +19,25 @@
     <!-- General Chat -->
     <b-collapse class="mt-2 ml-3" v-model="showCollapse" id="collapse">
       <div>
-        <div v-if="generalChat">
-          <chat-list-component
-            v-bind:tag="generalChat.conversation_tag"
-            v-bind:userName="userName"
-            v-bind:message="generalChat.message"
-            v-bind:date="generalChat.updated_at"
-            v-on:chat-partner-changed="informChatComponent"
-          ></chat-list-component>
-        </div>
-
-        <div v-else>
-          <chat-list-component
-            v-bind:tag="'allgemein'"
-            v-bind:userName="userName"
-            v-on:chat-partner-changed="informChatComponent"
-          ></chat-list-component>
-        </div>
+        <chat-element-component
+          v-if="generalChat"
+          v-bind:tag="generalChat.conversation_tag"
+          v-bind:userName="userName"
+          v-bind:message="generalChat.message"
+          v-bind:date="generalChat.updated_at"
+          v-on:chat-partner-changed="informChatComponent"
+        />
+        <chat-element-component
+          v-else
+          v-bind:tag="'allgemein'"
+          v-bind:userName="userName"
+          v-on:chat-partner-changed="informChatComponent"
+        />
       </div>
 
       <!-- Document chats -->
       <div v-if="documentChats">
-        <chat-list-component
+        <chat-element-component
           v-for="documentChat in documentChats"
           v-bind:key="documentChat.conversation_id"
           v-bind:tag="documentChat.conversation_tag"
@@ -48,28 +45,14 @@
           v-bind:message="documentChat.message"
           v-bind:date="documentChat.updated_at"
           v-on:chat-partner-changed="informChatComponent"
-        ></chat-list-component>
+        />
       </div>
-
-      <!-- Add chat -->
-      <!-- <b-card class="mt-2 textColor">
-        <b-row>
-          <b-col cols="1" sm="2" md="1" class="textFox chatIcon">
-            <div class="chatIcons textFox">
-              <font-awesome-icon icon="plus-circle" size="2x"/>
-            </div>
-          </b-col>
-          <b-col>
-            <p class="font-weight-bold" v-text="$ml.get('add_chat')"/>
-          </b-col>
-        </b-row>
-      </b-card> -->
     </b-collapse>
   </b-jumbotron>
 </template>
 
 <script>
-import ChatListComponent from "./ChatListComponent.vue";
+import ChatElementComponent from "./ChatElement.vue";
 import BroadcastingService from "../../../services/BroadcastingService.js";
 
 export default {
@@ -81,7 +64,7 @@ export default {
   },
   created() {},
   components: {
-    ChatListComponent
+    ChatElementComponent
   },
   computed: {
     dropdownArrow() {
