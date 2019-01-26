@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Breadcrumb from "./Breadcrumb.vue";
+import Breadcrumb from "../components/documents/Breadcrumb.vue";
 
 export default {
   computed: {

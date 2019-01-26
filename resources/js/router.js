@@ -10,13 +10,13 @@ import LoginAggr from './views/Login.vue';
 //Documents
 import DocumentOverviewComponent from './components/documents/DocumentOverviewComponent';
 import FolderChild from './components/documents/FolderChildComponent.vue';
-import DocumentAggr from './components/documents/DocumentAggr.vue';
-import ConfirmChatToDoc from './components/documents/ConfirmChatToDoc.vue';
+import DocumentAggr from './views/Documents.vue';
+import ConfirmChatToDoc from './views/ConfirmChatToDoc.vue';
 //Chat
 import ChatView from './components/chat/ChatView.vue';
 import ChatClientOverview from './components/chat/client/ChatClientOverview.vue';
 import ChatProviderOverview from './components/chat/provider/ChatProviderOverview.vue';
-import ChatAggr from './components/chat/ChatAggr.vue';
+import ChatAggr from './views/ChatAggr.vue';
 
 Vue.use(VueRouter);
 
