@@ -5,12 +5,12 @@ require('./bootstrap');
 //import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+import App from './App.vue';
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import Chat from 'vue-beautiful-foxchat';
 import store from './store.js';
 import router from './router.js';
-import App from './components/App.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { dom } from '@fortawesome/fontawesome-svg-core';
 import {

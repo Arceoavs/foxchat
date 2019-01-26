@@ -28,13 +28,13 @@
 </template>
 
 <script>
-import LogoutComponent from "./authentication/LogoutComponent.vue";
-import LoadingComponent from "./LoadingComponent.vue";
-import FooterComponent from "./Footer.vue";
-import EventBus from "../services/event-bus.js";
-import { store } from "../store.js";
+import LogoutComponent from "./components/authentication/LogoutComponent.vue";
+import LoadingComponent from "./components/LoadingComponent.vue";
+import FooterComponent from "./components/Footer.vue";
+import EventBus from "./services/event-bus.js";
+import { store } from "./store.js";
 import { MLBuilder } from "vue-multilanguage";
-import ServicesManagementService from "../services/ServicesManagementService";
+import ServicesManagementService from "./services/ServicesManagementService";
 
 export default {
   data: function() {

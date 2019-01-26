@@ -3,8 +3,8 @@
     <b-row class="justify-content-center mt-5">
       <b-col md="4" sm="6" cols="8">
         <div class="panel">
-          <h2 v-text="$ml.get('anmeldung')" />
-          <p v-text="$ml.get('login_text')" />
+          <h2 v-text="$ml.get('anmeldung')"/>
+          <p v-text="$ml.get('login_text')"/>
         </div>
       </b-col>
     </b-row>
@@ -12,11 +12,20 @@
       <b-col md="4" sm="6" cols="8">
         <div @keyup.enter="sendPassword()">
           <div class="form-group">
-            <input v-model="username" class="form-control" v-bind:placeholder="$ml.get('benutzername')">
+            <input
+              v-model="username"
+              class="form-control"
+              v-bind:placeholder="$ml.get('benutzername')"
+            >
           </div>
 
           <div class="form-group">
-            <input v-model="password" type="password" class="form-control" v-bind:placeholder="$ml.get('password')">
+            <input
+              v-model="password"
+              type="password"
+              class="form-control"
+              v-bind:placeholder="$ml.get('password')"
+            >
           </div>
 
           <div class="form-group">
@@ -31,10 +40,12 @@
             >{{ errorMsg }}</b-alert>
 
             <router-link class="description" to="/login">
-              <p v-text="$ml.get('user_login')" />
+              <p v-text="$ml.get('user_login')"/>
             </router-link>
           </div>
-          <button type="button" v-on:click="sendPassword()" class="btn btn-primary"><p v-text="$ml.get('login_button')"/></button>
+          <button type="button" v-on:click="sendPassword()" class="btn btn-primary">
+            <p v-text="$ml.get('login_button')"/>
+          </button>
         </div>
       </b-col>
     </b-row>

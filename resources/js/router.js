@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 //COMPONENTS
-import Homepage from './components/Homepage.vue'
+import Homepage from './views/Homepage.vue'
 //Login
 import LoginComponent from './components/authentication/LoginComponent.vue';
 import LoginComponentProvider from './components/authentication/LoginComponentProvider.vue';
