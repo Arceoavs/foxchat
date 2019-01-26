@@ -1,7 +1,4 @@
 import axios from 'axios';
-import Folder from '../model/folder.js';
-import Document from '../model/document.js';
-import { stringify } from 'querystring';
 
 var configExt = {
   headers: {
