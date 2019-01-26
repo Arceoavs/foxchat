@@ -21,7 +21,8 @@
           v-bind:documentChats="provideritem.documentChats"
           v-bind:generalChat="provideritem.generalChat"
           v-on:chat-partner-changed="changeRoute"
-        ></chat-client-component>
+        />
+        <add-chat-component/>
       </b-col>
     </b-row>
   </b-container>
@@ -30,6 +31,7 @@
 <script>
 import ChatClientComponent from "./ChatClientComponent.vue";
 import ChatService from "../../../services/ChatService";
+import AddChatComponent from "./AddChatComponent.vue";
 
 export default {
   data() {
@@ -37,11 +39,12 @@ export default {
       //pageTitle: "Ihre Chats mit Providern"
     };
   },
-  created(){
+  created() {
     ChatService.getInbox();
   },
   components: {
-    ChatClientComponent
+    ChatClientComponent,
+    AddChatComponent
   },
   computed: {
     providers: function() {
