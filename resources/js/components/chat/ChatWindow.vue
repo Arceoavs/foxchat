@@ -11,6 +11,7 @@
     :showTypingIndicator="showTypingIndicator"
     :alwaysScrollToBottom="true"
     :messageStyling="messageStyling"
+    :placeholder="$ml.get('chat_input')"
   />
 </template>
 
