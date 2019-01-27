@@ -1,11 +1,12 @@
 <template>
-  <b-jumbotron bg-variant="secondary" class="chatGroup">
+  <b-jumbotron bg-variant="secondary" class="chatGroupList">
     <!-- Provider name -->
     <b-card
       @click="showCollapse = !showCollapse"
       :class="showCollapse ? 'collapsed' : null"
       aria-controls="collapse"
       :aria-expanded="showCollapse ? 'true' : 'false'"
+      class="cursorPointer"
     >
       <h4 class="left textColor">{{userName}}</h4>
       <font-awesome-icon
@@ -14,6 +15,7 @@
         size="2x"
         :class="dropdownArrow"
       />
+      
     </b-card>
 
     <!-- General Chat -->
@@ -90,16 +92,18 @@ export default {
 .chatIcon {
   min-width: 3em;
 }
-.chatGroup {
+.chatGroupList {
   padding: 0.3em;
   margin: 0.3em;
   background-color: rgba(90, 83, 83, 0.1) !important;
-  cursor: pointer;
 }
 .rotate-down {
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+.cursorPointer{
+  cursor: pointer;
 }
 </style>

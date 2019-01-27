@@ -1,6 +1,6 @@
 <template >
   <div class="mb-2">
-    <b-card class="textColor" @click="informChatComponent()">
+    <b-card class="textColor cursorPointer" @click="informChatComponent()">
       <b-row>
         <b-col class="chatIcons textFox" cols="1" sm="2" md="1">
           <font-awesome-icon v-if="tag=='allgemein'" icon="comments" size="2x"/>
@@ -85,5 +85,8 @@ export default {
  <style>
 .chatIcons {
   float: left;
+}
+.cursorPointer{
+  cursor: pointer;
 }
 </style>
