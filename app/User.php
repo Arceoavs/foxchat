@@ -17,7 +17,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'foxdox-token', 'isProvider', 'x-provider'
+        'name', 'foxdox_token', 'isProvider', 'x-provider'
     ];
 
     /**
