@@ -1,7 +1,4 @@
 import axios from 'axios';
-import Folder from '../model/folder.js';
-import Document from '../model/document.js';
-import { stringify } from 'querystring';
 
 var configExt = {
   headers: {
@@ -18,7 +15,7 @@ class DocumentService {
       'Bearer ' + localStorage.getItem('bearer');
   }
 
-  downloadDocument(documentId) {
+  downloadDocument(documentId, documentName) {
     this.refresh();
 
     var body = { documentId: documentId };
@@ -28,6 +25,14 @@ class DocumentService {
       .then(response => {
         console.log('Downloading document ' + documentId + ' . . .');
         console.log(JSON.stringify(response.data));
+
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', documentName);
+        document.body.appendChild(link);
+        link.click();
+        
         console.log('Got document');
       })
       .catch(error => {

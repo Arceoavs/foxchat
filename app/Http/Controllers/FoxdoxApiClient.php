@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
  * 
  * A client for communication with the foxdox-api
  * Contains methods for sending api-requests to any given URL with given parameters for HTML headers and body.
- * When login in the first time the loginRequest() method will be used as it does not need a Valid Foxdox-Token.
+ * When login in the first time the loginRequest() method will be used as it does not need a Valid foxdox_token.
  * 
  */
 
@@ -104,7 +104,7 @@ class FoxdoxApiClient extends Controller
     {
         $user = User::where('name', $foxdoxUsername);
 
-        $token = $user->pluck('foxdox-token')->first();
+        $token = $user->pluck('foxdox_token')->first();
         $xProvider = $user->pluck('x-provider')->first();
 
         $this->setHeader('X-TOKEN', $token);
@@ -119,6 +119,7 @@ class FoxdoxApiClient extends Controller
             [
                 'form_params' => $this->body,
                 'headers' => $this->headers,
+                'allow_redirects' => false
             ]
         );
         return $response;

@@ -1,11 +1,10 @@
 <?php
 namespace App\Services;
- 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FoxdoxApiClient;
 use App\Exceptions\ChatAuthException;
-
 use Illuminate\Support\Facades\Log;
 
 class DocumentAPIService extends Controller
@@ -18,9 +17,9 @@ class DocumentAPIService extends Controller
 
     public function validateUserAsUser()
     {
-        if(auth()->user()->isProvider==0){
+        if (auth()->user()->isProvider == 0) {
             return true;
-        }else{
+        } else {
             throw new ChatAuthException("You are not a Foxdox User.");
         }
     }
@@ -49,14 +48,16 @@ class DocumentAPIService extends Controller
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
     }
 
+
     public function downloadDocument($documentId)
     {
-        // NON NUMERIC VALUE APPEARED???
-        $url = 'https://api.foxdox.de/document/getdoc?id=' . $documentId;
-        $foxdoxapiclient = new FoxdoxApiClient($url, ['documentId' => $documentId]);
+        $url = 'https://api.foxdox.de/document/getdocex?token='. auth()->user()->foxdox_token . '&id=' . $documentId ;
+        $foxdoxapiclient = new FoxdoxApiClient($url, []);
         $foxdoxapiclient->setMethod('GET');
-        return $foxdoxapiclient->apiRequest(auth()->user()->name);
+        $foxdoxapiclient->setHeaders([]);
+        return $foxdoxapiclient->apiRequest(auth()->user()->name)->getHeaders()['Location'][0];
     }
+
 
     public function publishDocument($documentId)
     {
@@ -67,7 +68,7 @@ class DocumentAPIService extends Controller
 
     public function downloadPublicDocument($documentId)
     {
-        $url = 'https://api.foxdox.de/Public/document/'. $documentId;
+        $url = 'https://api.foxdox.de/Public/document/' . $documentId;
         $foxdoxapiclient = new FoxdoxApiClient($url, []);
         $foxdoxapiclient->setMethod('GET');
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
