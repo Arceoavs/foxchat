@@ -12,15 +12,19 @@ use App\User;
 use Validator;
 use GuzzleHttp\Stream\Stream;
 
-
-
+/**
+ * ProviderFoxdoxController is managing several
+ * Api requests to foxdoxapi, wich are provider specific.
+ * Methods are exposed through foxdoxapi/provider.
+ */
 class ProviderFoxdoxController extends Controller
 {
 
     protected $chatapiservice;
 
     /**
-     * Create a new ProviderFoxdoxController instance.
+     * Create a new ProviderFoxdoxController instance by 
+     * validating if accessing user is a provider.
      *
      * @return void
      */
@@ -31,6 +35,10 @@ class ProviderFoxdoxController extends Controller
     }
 
 
+    /**
+     * validating user by reading isProvider column.
+     * creating a new ChatApiService.
+     */
     public function validateProviderAsUser()
     {
         if (auth()->user()->isProvider == 1) {
@@ -41,6 +49,11 @@ class ProviderFoxdoxController extends Controller
         }
     }
 
+    /**
+     * Listing all Services a Foxdox Provider is offering. 
+     * 
+     * @return JSON
+     */
     public function listAllServices()
     {
         $foxdoxapiclient = new FoxdoxApiClient('https://papi.foxdox.de/service/listall', []);
@@ -49,6 +62,11 @@ class ProviderFoxdoxController extends Controller
         return $response;
     }
 
+    /**
+     * Listing all Subscribers using given service, for Rest Api, using Helper method, where actual foxdoxApi Request happens
+     * @param ServiceID
+     * @return JSON
+     */
     public function listSubscribers()
     {
         //Check if provided requests contains the needed parameters
@@ -66,11 +84,21 @@ class ProviderFoxdoxController extends Controller
         return $this->listSubscribersHelp($serviceId);
     }
 
+    /**
+     * getting user from database
+     * @param username
+     * @return User object
+     */
     protected function getUserFromDatabase($username)
     {
         return User::where('name', $username)->first();
     }
 
+    /**
+     * validating, that user is persistent in database
+     * @param username
+     * @return true if user is valid, false if user not found
+     */
     protected function isValidUser($username)
     {
         if (!$this->getUserFromDatabase($username)) {
@@ -79,6 +107,11 @@ class ProviderFoxdoxController extends Controller
         return true;
     }
 
+    /**
+     * Helper Method for getting Subscribers, for a specific service
+     * @param serviceID
+     * @return JSON
+     */
     protected function listSubscribersHelp($serviceId)
     {
         $body = [
@@ -92,12 +125,20 @@ class ProviderFoxdoxController extends Controller
         return $response;
     }
 
+    /**
+     * Listing all Subscribers of all services using @this->listSubscribersHelp() and
+     * @this->listAllServices and elimnating duplicates
+     * @return JSON
+     */
     public function listAggregatedSubscribers()
     {
         $services = json_decode($this->listAllServices()->getBody())->Items;
 
         $aggrSubscribers = [];
 
+        /**
+         * concating all subscribers from all services
+         */
         foreach ($services as $item) {
             $serviceId = $item->Id;
             $subscribers = json_decode($this->listSubscribersHelp($serviceId)->getBody())->Items;
@@ -106,6 +147,9 @@ class ProviderFoxdoxController extends Controller
 
         $subscribersInDatabase = [];
 
+        /**
+         * removing duplicates
+         */
         foreach ($aggrSubscribers as $item) {
             $notExistentinList = !(strpos(json_encode($subscribersInDatabase), $item->SubscriptionId));
             if ($this->isValidUser($item->UserProfile->UserName) && $notExistentinList) {
@@ -116,10 +160,19 @@ class ProviderFoxdoxController extends Controller
         return $subscribersInDatabase;
     }
 
+    /**
+     * Selecting which variant is currently used
+     */
     public function listSubscribersWithoutGeneralChat(){
         return $this->listSubscribersWithoutGeneralChatImpl1();
     }
 
+    /**
+     * Getting all subscribers from all services without duplicates and without subscribers, which
+     * currently have a general chat with this provider. This Impl is using a direct getConversationByName Database Request
+     * per subscriber, probably slow but stable.
+     * @return JSON
+     */
     public function listSubscribersWithoutGeneralChatImpl1()
     {
         $allSubs = $this->listAggregatedSubscribers();
@@ -127,8 +180,10 @@ class ProviderFoxdoxController extends Controller
         $output = [];
         foreach ($allSubs as $sub) {
             try {
+                //determine if user has a general conversation with provider 
                 $response = $this->chatapiservice->getConversationByName($sub->UserProfile->UserName, "allgemein", 0, 1, true);
                 if ($response->getStatusCode() != 200) {
+                    //only pushing to output, if general conversation unpresent
                     array_push($output, $sub);
                 }
             } catch (\Throwable $th) {
@@ -139,8 +194,14 @@ class ProviderFoxdoxController extends Controller
 
         return $output;
     }
-    
 
+    /**
+     * Getting all subscribers from all services without duplicates and without subscribers, which
+     * currently have a general chat with this provider. This Impl is using the Inbox by only
+     * executing one database request. This method is faster than Impl1 but has some 
+     * unresolved inconsistencies.
+     * @return JSON
+     */
     public function listSubscribersWithoutGeneralChatImpl2(){
         $allSubs = $this->listAggregatedSubscribers();
         $chats = $this->getAllChats();
@@ -164,6 +225,9 @@ class ProviderFoxdoxController extends Controller
         return $output;
     }    
 
+    /**
+     * Aggregating all Inbox Chats by using Pagination
+     */
     protected function getAllChats(){
         $chats = $this->chatapiservice->getInboxAll(0, 100);
 
