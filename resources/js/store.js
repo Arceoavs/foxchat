@@ -4,7 +4,19 @@ import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
+/**
+ * This store uses VueX to provide a location for
+ * saving and accessing values relevant to the current user session.
+ * Vuex will store json objects to browsers Session Storage and persisting
+ * them to LocalStorage. When session Storage is cleared
+ * Vuex will first look up for store in Local Storage.
+ */
 export const store = new Vuex.Store({
+
+  //state defines stores structure
+  //if you want to save data to this store
+  //a matching property owned by state must be 
+  //existent
   state: {
     inboxForUser: [
       {
@@ -31,7 +43,11 @@ export const store = new Vuex.Store({
     currentFolder: [],
     currentDocuments: []
   },
+
+  //loading plugins, for persisting state to Local storage
   plugins: [createPersistedState()],
+
+  //getters for stores attributes
   getters: {
     getUserInbox(state) {
       return state.inboxForUser;
@@ -73,6 +89,8 @@ export const store = new Vuex.Store({
       return state.messageList;
     }
   },
+
+  //setters for stores attributes
   mutations: {
     setUserInbox(state, newProviderList) {
       state.inboxForUser = newProviderList;
@@ -114,6 +132,8 @@ export const store = new Vuex.Store({
       state.messageList = newMessageList;
     }
   },
+
+  //defining reset operations -> setting default value of current attribute
   actions: {
     resetUserInbox({ commit }) {
       commit('setUserInbox', [
