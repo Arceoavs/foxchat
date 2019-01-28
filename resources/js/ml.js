@@ -3,10 +3,16 @@ import { MLInstaller, MLCreate, MLanguage } from 'vue-multilanguage';
 
 Vue.use(MLInstaller);
 
+/**
+ * providing Multilanguage support by using vue-multilanguage package
+ * and defining german and english string for each keyword
+ */
 export default new MLCreate({
   initial: 'Deutsch',
   save: process.env.NODE_ENV === 'production',
   languages: [
+    
+    //German
     new MLanguage('Deutsch').create({
       dokumente: 'Dokumente',
       chat: 'Chat',
@@ -56,6 +62,7 @@ export default new MLCreate({
       chat_input: "Schreiben Sie eine Antwort"
     }),
 
+    //English
     new MLanguage('English').create({
       dokumente: 'Documents',
       chat: 'Chat',
