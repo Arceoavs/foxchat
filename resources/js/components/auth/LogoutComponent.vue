@@ -5,12 +5,22 @@
 
 <script>
 import EventBus from "../../services/event-bus.js";
+import auth from "../../services/AuthService.js";
+import authProvider from "../../services/AuthServiceProvider.js";
+
 export default {
   data() {
     return {};
   },
   methods: {
-    logout() {
+    logout(){
+      if(this.$store.state.user.isProvider){
+        authProvider.logout(this);
+      }else{
+        auth.logout(this);
+      }
+    },
+    logoutLegacy() {
       EventBus.$emit("loading");
       var path = "/api/auth/user";
       var formData = new FormData();

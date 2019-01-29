@@ -81,7 +81,7 @@ class AuthService {
       })
       .finally(param => {
         self.removeUserServicesAndData();
-        this.$router.push("/login");
+        self.$router.push("/login");
         EventBus.$emit("loaded");
       });
   }
