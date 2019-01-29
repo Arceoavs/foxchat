@@ -17,6 +17,10 @@ use App\Events\MessageWasRead;
 
 class ChatAPIService extends Controller
 {
+    /**
+     * Creates a ChatService instance
+     * Works only when the User calling this is authenticated
+     */
     public function __construct()
     {
         $this->middleware('auth:api');
@@ -25,21 +29,41 @@ class ChatAPIService extends Controller
         }
     }
 
+    /**
+     * getting user from database
+     * @param username
+     * @return User object
+     */
     protected function getUserFromDatabase($username)
     {
         return User::where('name', $username)->first();
     }
 
+    /**
+     * getting conversation from database
+     * @param conversationid
+     * @return CustomConversation object
+     */
     protected function getConversationFromDatabase($conversationid)
     {
         return CustomConversation::find($conversationid);
     }
 
+    /**
+     * getting messageid from database
+     * @param messageid
+     * @return CustomMessage object
+     */
     protected function getMessageFromDatabase($messageid)
     {
         return CustomMessage::find($messageid);
     }
 
+    /**
+     * validating, that user is persistent in database
+     * @param username
+     * @return true if user is valid, false if user not found
+     */
     protected function isValidUser($username)
     {
         if (!$this->getUserFromDatabase($username)) {
@@ -48,6 +72,12 @@ class ChatAPIService extends Controller
         return true;
     }
 
+    /**
+     * validating, that receiver is in the database & when calling from a user not a user or
+     * when calling from a provider not a provider
+     * @param username
+     * @return true if user is valid, false if user not found
+     */
     public function isValidReceiver($username)
     {
         //Try to find user in database
@@ -59,6 +89,14 @@ class ChatAPIService extends Controller
         return true;
     }
 
+    /**
+     * Sending a message using Laravel Talk 
+     * Also broadcasts the event for the Push notifications to Pusher
+     * @param receiver
+     * @param message
+     * @param conversationtag
+     * @return JSON message model
+     */
     public function sendMessage($receiver, $message, $conversationtag)
     {
         if (!$this->isValidReceiver($receiver)) {
@@ -70,16 +108,38 @@ class ChatAPIService extends Controller
         return $sentMessage;
     }
 
+    /**
+     * Getting the inbox for the user using Laravel Talk, with possible paging
+     * @param offset
+     * @param take
+     * @return JSON inbox model
+     */
     public function getInbox($offset, $take)
     {
         return CustomTalk::getInbox('desc', $offset, $take);
     }
 
+    /**
+     * Getting the inbox (even soft deleted ones) for the user using Laravel Talk, with possible paging
+     * @param offset
+     * @param take
+     * @return JSON inbox model
+     */
     public function getInboxAll($offset, $take)
     {
         return CustomTalk::getInboxAll('desc', $offset, $take);
     }
 
+    /**
+     * Getting the conversation for the user using Laravel Talk, with possible paging
+     * Broadcasting the event that the message was read to the other chat participant
+     * @param username
+     * @param conversationtag
+     * @param offset
+     * @param take
+     * @param triggeredByPusherEvent
+     * @return JSON conversation model
+     */
     public function getConversationByName($username, $conversationtag, $offset, $take, $triggeredByPusherEvent)
     {
         $chatpartner = $this->getUserFromDatabase($username);
@@ -97,16 +157,24 @@ class ChatAPIService extends Controller
             throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
         }
 
-        if($triggeredByPusherEvent != true && $triggeredByPusherEvent != false){
+        if ($triggeredByPusherEvent != true && $triggeredByPusherEvent != false) {
             throw new ChatAPIServiceException("Provided triggeredByPusherEvent");
         }
         $receiver = $this->getUserFromDatabase($username);
-        if(!$triggeredByPusherEvent){
+        if (!$triggeredByPusherEvent) {
             event(new MessageWasRead(Auth::user(), $receiver));
         }
         return response()->json(CustomTalk::getConversationsById($conversation->id, $offset, $take));
     }
 
+    /**
+     * Getting the conversation (even soft deleted ones) for the user using Laravel Talk, with possible paging
+     * @param username
+     * @param conversationtag
+     * @param offset
+     * @param take
+     * @return JSON conversation model
+     */
     public function getConversationAllByName($username, $conversationtag, $offset, $take)
     {
         $chatpartner = $this->getUserFromDatabase($username);
@@ -123,6 +191,14 @@ class ChatAPIService extends Controller
         return response()->json(CustomTalk::getConversationsAllById($conversation->id, $offset, $take));
     }
 
+    /**
+     * Getting the conversation for the user using Laravel Talk, with possible paging
+     * @param userid
+     * @param conversationtag
+     * @param offset
+     * @param take
+     * @return JSON conversation model
+     */
     public function getConversationById($userid, $conversationtag, $offset, $take)
     {
         $chatpartner = User::find($userid);
@@ -139,6 +215,14 @@ class ChatAPIService extends Controller
         return response()->json(CustomTalk::getConversationsById($conversation->id, $offset, $take));
     }
 
+    /**
+     * Getting the conversation (even soft deleted ones) for the user using Laravel Talk, with possible paging
+     * @param userid
+     * @param conversationtag
+     * @param offset
+     * @param take
+     * @return JSON conversation model
+     */
     public function getConversationAllById($userid, $conversationtag, $offset, $take)
     {
         $chatpartner = User::find($userid);
@@ -155,6 +239,11 @@ class ChatAPIService extends Controller
         return response()->json(CustomTalk::getConversationsAllById($conversation->id, $offset, $take));
     }
 
+    /**
+     * Marks a specific message as seen
+     * @param messageid
+     * @return JSON message object
+     */
     public function makeSeen($messageid)
     {
         $message = $this->getMessageFromDatabase($messageid);
@@ -170,25 +259,28 @@ class ChatAPIService extends Controller
         }
     }
 
+    /**
+     * Marks a hole conversation as seen 
+     * @param conversationid
+     * @return JSON conversation object
+     */
     public function makeConversationSeen($conversationid)
     {
-        // $messages = CustomMessage::where(["user_id" => !auth()->user()->id, "conversation_id" => $conversationid])->get();
-        $messages = CustomMessage::where([["conversation_id", "=", $conversationid ], ["user_id", "!=", auth()->user()->id]]);
-        // Log::info($messages);
+        $messages = CustomMessage::where([["conversation_id", "=", $conversationid], ["user_id", "!=", auth()->user()->id]]);
 
         if (!$messages) {
             throw new ChatAPIServiceException("conversationid");
         }
-
         $messages->update(["is_seen" => 1]);
-
-        // foreach ($messages as $message) {
-        //     $message->update(["make_seen" => 1]);
-        // }
 
         return response()->json(["conversation" => $conversationid, "text" => "Marked as seen."]);
     }
 
+    /**
+     * Archived a specific message 
+     * @param messageid
+     * @return JSON conversation object
+     */
     public function deleteMessage($messageid)
     {
         $message = $this->getMessageFromDatabase($messageid);
