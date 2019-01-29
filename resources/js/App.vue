@@ -82,12 +82,19 @@ export default {
     toastMessage(e) {
       this.$store.state.toastUrl.senderName = e.senderName;
       this.$store.state.toastUrl.conversationTag = e.conversationTag;
-      this.$toasted.global.new_message_received({
-        message:
-          this.$ml.get("new_message_toast") +
-          " " +
-          this.$store.state.toastUrl.senderName
-      });
+      if (
+        this.$store.state.toastUrl.senderName !=
+          this.$store.state.communicationUrl.senderName &&
+        this.$store.state.toastUrl.conversationTag !=
+          this.$store.state.communicationUrl.conversationTag
+      ) {
+        this.$toasted.global.new_message_received({
+          message:
+            this.$ml.get("new_message_toast") +
+            " " +
+            this.$store.state.toastUrl.senderName
+        });
+      }
     }
   },
   beforeDestroy() {

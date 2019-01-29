@@ -176,8 +176,7 @@ export default {
       username: username,
       conversationtag: conversationTag,
       offset: offset,
-      take: take,
-      triggeredByPusherEvent: triggeredByPusherEvent
+      take: take
     };
     var convid;
     axios
@@ -233,7 +232,7 @@ export default {
       })
       .finally(param => {
         console.log("das ist die conversationid" + convid);
-        this.makeConversationSeen(convid);
+        this.makeConversationSeen(convid, username, triggeredByPusherEvent);
       });
   },
 
@@ -311,10 +310,12 @@ export default {
       });
   },
 
-  makeConversationSeen(conversationId) {
+  makeConversationSeen(conversationId, username, triggeredByPusherEvent) {
     this.refresh();
     var body = {
-      conversationid: conversationId
+      conversationid: conversationId,
+      username: username,
+      triggeredByPusherEvent : triggeredByPusherEvent
     };
 
     axios
