@@ -78,7 +78,7 @@ class AuthServiceProvider {
         console.log('Error logging Out.');
       })
       .finally(param => {
-        self.removeUserServicesAndData();
+        self.removeProviderServicesAndData();
         self.$router.push('/login/provider');
         EventBus.$emit('loaded');
       });     

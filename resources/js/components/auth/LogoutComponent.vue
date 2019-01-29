@@ -53,6 +53,16 @@ export default {
       this.$store.dispatch("resetToastUrl");
       this.$store.dispatch("resetCommunicationUrl");
     },
+    removeProviderServicesAndData() {
+        this.unsubscribeFromChannel();
+        localStorage.removeItem('bearer');
+        localStorage.removeItem('user');
+        store.dispatch('resetProviderInbox');
+        store.dispatch('resetUser');
+        store.dispatch('resetMessageList');
+        store.dispatch('resetSubscriberList');
+        store.dispatch('resetCommunicationUrl');
+    },
     unsubscribeFromChannel() {
       if (window.Echo) {
         window.Echo.leave("chat." + this.$store.state.user.name);
