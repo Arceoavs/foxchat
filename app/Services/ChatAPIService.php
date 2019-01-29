@@ -255,6 +255,10 @@ class ChatAPIService extends Controller
      */
     public function makeConversationSeen($conversationid, $username, $triggeredByPusherEvent)
     {
+        $chatpartner = $this->getUserFromDatabase($username);
+        if (!$chatpartner) {
+            throw new ChatAPIServiceException("Provided Username");
+        }
         $messages = CustomMessage::where([["conversation_id", "=", $conversationid], ["user_id", "!=", auth()->user()->id]]);
         if (!$messages) {
             throw new ChatAPIServiceException("conversationid");

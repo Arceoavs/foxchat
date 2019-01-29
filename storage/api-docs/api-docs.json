@@ -710,6 +710,73 @@
                 ]
             }
         },
+        "/api/chat/user/makeconversationseen": {
+            "patch": {
+                "tags": [
+                    "UserChat"
+                ],
+                "summary": "Marks a conversation sent from a FoxdoxProvider as seen.",
+                "description": "",
+                "operationId": "makeconversationseenFoxdoxUser",
+                "requestBody": {
+                    "description": "Takes a conversationid, username and triggeredByPusherEvent ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "conversationid": {
+                                        "type": "integer"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "triggeredByPusherEvent": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Marked as seen.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "conversationid": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "conversationid, username Provided triggeredByPusherEvent not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/api/chat/user/deletemessage": {
             "patch": {
                 "tags": [
@@ -1196,6 +1263,73 @@
                     },
                     "400": {
                         "description": "Messageid not valid."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chat/provider/makeconversationseen": {
+            "patch": {
+                "tags": [
+                    "ProviderChat"
+                ],
+                "summary": "Marks a conversation sent from a FoxdoxUser as seen.",
+                "description": "",
+                "operationId": "makeconversationseenFoxdoxProvider",
+                "requestBody": {
+                    "description": "Takes a conversationid, username and triggeredByPusherEvent ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "conversationid": {
+                                        "type": "integer"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "triggeredByPusherEvent": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Marked as seen.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "conversationid": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "conversationid, username Provided triggeredByPusherEvent not valid."
                     },
                     "401": {
                         "description": "Unauthorized",
@@ -1794,9 +1928,6 @@
                     },
                     "take": {
                         "type": "string"
-                    },
-                    "triggeredByPusherEvent":{
-                        "type": "boolean"
                     }
                 }
             },
