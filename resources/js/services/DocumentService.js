@@ -26,12 +26,13 @@ class DocumentService {
         console.log('Downloading document ' + documentId + ' . . .');
         console.log(JSON.stringify(response.data));
 
-        const url = window.URL.createObjectURL(new Blob([response.data]))
+        // const url = window.URL.createObjectURL(new Blob([response.data]))
         const link = document.createElement('a');
-        link.href = url;
+        link.href = response.data;
         link.setAttribute('download', documentName);
         document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
         
         console.log('Got document');
       })
