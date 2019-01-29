@@ -28,6 +28,7 @@
               variant="danger"
               dismissible
             >{{ errorMsg }}</b-alert>
+            <!--link to provider login component-->
             <router-link class="description" to="/login/provider">
               <p v-text="$ml.get('provider_login')" />
             </router-link>
