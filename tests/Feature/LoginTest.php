@@ -82,7 +82,7 @@ class LoginTest extends TestCase
             "id",
             "isProvider",
             "name",
-            "foxdox-token",
+            "foxdox_token",
             "created_at",
             "updated_at"
         ]);

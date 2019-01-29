@@ -63,7 +63,7 @@ class FoxdoxAuthProvider extends EloquentUserProvider
                 User::updateOrCreate(
                     ['name' => $name],
                     [
-                        'foxdox-token' => $token,
+                        'foxdox_token' => $token,
                         'isProvider' => true,
                         'x-provider' => $xprovider
                     ]
@@ -90,7 +90,7 @@ class FoxdoxAuthProvider extends EloquentUserProvider
                 User::updateOrCreate(
                     ['name' => $name],
                     [
-                        'foxdox-token' => $token,
+                        'foxdox_token' => $token,
                         'isProvider' => false
                     ]
                 );
