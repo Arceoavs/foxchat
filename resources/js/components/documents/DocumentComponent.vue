@@ -11,6 +11,7 @@
           v-bind:value="publicLink"
           v-if="isPublished"
           onFocus="this.select()"
+          onClick="this.select()"
         />
         <b-button type="button" class="listcomponent" @click="shareDocument()" v-if="toPublish&&isFromProvider">
           <font-awesome-icon class="fox" icon="share-square" size="1x"/>
