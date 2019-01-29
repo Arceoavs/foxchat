@@ -55,7 +55,7 @@ class AuthServiceProvider {
 
   logout(self) {
     EventBus.$emit('loading');
-
+    var path = "/api/auth/user";
     var formData = new FormData();
     formData.append(
       'Authorization',
@@ -78,10 +78,10 @@ class AuthServiceProvider {
         console.log('Error logging Out.');
       })
       .finally(param => {
+        self.removeUserServicesAndData();
         self.$router.push('/login/provider');
         EventBus.$emit('loaded');
-      });
-      
+      });     
   }
 
   retrieveUser(self) {

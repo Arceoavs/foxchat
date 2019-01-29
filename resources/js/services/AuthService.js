@@ -55,6 +55,37 @@ class AuthService {
       });
   }
 
+  logout(self) {
+    EventBus.$emit("loading");
+    var path = "/api/auth/user";
+    var formData = new FormData();
+    formData.append(
+      "Authorization",
+      "Bearer " + localStorage.getItem("bearer")
+    );
+
+    var configExt = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer " + localStorage.getItem("bearer")
+      }
+    };
+
+    axios
+      .post(path + "/logout", formData, configExt)
+      .then(response => {
+        console.log("Logged Out.");
+      })
+      .catch(error => {
+        console.log("Error logging Out.");
+      })
+      .finally(param => {
+        self.removeUserServicesAndData();
+        this.$router.push("/login");
+        EventBus.$emit("loaded");
+      });
+  }
+
   retrieveUser(self) {
     EventBus.$emit('loading');
 
