@@ -140,29 +140,18 @@ class ChatAPIService extends Controller
      * @param triggeredByPusherEvent
      * @return JSON conversation model
      */
-    public function getConversationByName($username, $conversationtag, $offset, $take, $triggeredByPusherEvent)
+    public function getConversationByName($username, $conversationtag, $offset, $take)
     {
         $chatpartner = $this->getUserFromDatabase($username);
-
-
         if (!$chatpartner) {
             throw new ChatAPIServiceException("Provided Name");
         }
-
         $conversation = CustomConversation::where(["user_one" => $chatpartner->id, "user_two" => auth()->user()->id, "tag" => $conversationtag])->first();
         if (!$conversation) {
             $conversation = CustomConversation::where(["user_one" => auth()->user()->id, "user_two" => $chatpartner->id, "tag" => $conversationtag])->first();
         }
         if (!$conversation) {
             throw new ChatAPIServiceException("Provided Tag, Username or the combination of both");
-        }
-
-        if ($triggeredByPusherEvent != true && $triggeredByPusherEvent != false) {
-            throw new ChatAPIServiceException("Provided triggeredByPusherEvent");
-        }
-        $receiver = $this->getUserFromDatabase($username);
-        if (!$triggeredByPusherEvent) {
-            event(new MessageWasRead(Auth::user(), $receiver));
         }
         return response()->json(CustomTalk::getConversationsById($conversation->id, $offset, $take));
     }
@@ -264,15 +253,20 @@ class ChatAPIService extends Controller
      * @param conversationid
      * @return JSON conversation object
      */
-    public function makeConversationSeen($conversationid)
+    public function makeConversationSeen($conversationid, $username, $triggeredByPusherEvent)
     {
         $messages = CustomMessage::where([["conversation_id", "=", $conversationid], ["user_id", "!=", auth()->user()->id]]);
-
         if (!$messages) {
             throw new ChatAPIServiceException("conversationid");
         }
+        if ($triggeredByPusherEvent != true && $triggeredByPusherEvent != false) {
+            throw new ChatAPIServiceException("Provided triggeredByPusherEvent");
+        }
+        $receiver = $this->getUserFromDatabase($username);
         $messages->update(["is_seen" => 1]);
-
+        if (!$triggeredByPusherEvent) {
+            event(new MessageWasRead(Auth::user(), $receiver));
+        }
         return response()->json(["conversation" => $conversationid, "text" => "Marked as seen."]);
     }
 

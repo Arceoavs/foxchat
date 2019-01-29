@@ -93,6 +93,7 @@ export default {
   beforeDestroy() {
     EventBus.$off("messageWasReceived");
     EventBus.$off("messageWasRead");
+    this.$store.dispatch('resetCommunicationUrl');
   },
   data() {
     return {
@@ -154,7 +155,6 @@ export default {
       }
     },
     updateChatServicesTriggeredByPusher() {
-      this.wait(200);
       ChatService.getConversationByName(
         this.$store.state.communicationUrl.userName,
         this.$store.state.communicationUrl.conversationTag,
@@ -168,13 +168,6 @@ export default {
       } else {
         ChatService.getInbox();
       }
-    },
-    wait(ms) {
-      var d = new Date();
-      var d2 = null;
-      do {
-        d2 = new Date();
-      } while (d2 - d < ms);
     }
   },
   components: {
