@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Log;
 class CustomTalk extends Talk
 { 
     /**
-     * make new conversation the given receiverId with currently loggedin user.
+     * make new conversation the given receiverId and conversationtag with currently loggedin user.
      *
      * @param int $receiverId
-     *
+     * @param string $conversationtag
      * @return int
      */
     protected function newConversationWithTag($receiverId, $conversationtag)
@@ -42,7 +42,7 @@ class CustomTalk extends Talk
      * make sure is this conversation exist for this user with currently loggedin user.
      *
      * @param int $userId
-     *
+     * @param string $conversationtag
      * @return bool|int
      */
     public function isConversationExistsWithTag($userId, $conversationtag)
@@ -61,7 +61,7 @@ class CustomTalk extends Talk
      *
      * @param int    $receiverId
      * @param string $message
-     *
+     * @param string $conversationtag
      * @return \Nahid\Talk\Messages\Message
      */
     public function sendMessageByUserIdWithTag($receiverId, $message, $conversationtag)

@@ -13,11 +13,12 @@ class CustomConversationRepository extends ConversationRepository
         return Conversation::class;
     }
 
-    /*
+    /**
      * check this given two users is already make a conversation
      *
      * @param   int $user1
      * @param   int $user2
+     * @param string $conversationtag
      * @return  int|bool
      * */
     public function isExistsAmongTwoUsersWithTag($user1, $user2, $conversationtag)
@@ -32,7 +33,7 @@ class CustomConversationRepository extends ConversationRepository
         return false;
     }
 
-    /*
+    /**
      * retrieve all message thread without soft deleted message with latest one message and
      * sender and receiver user model
      *
@@ -76,7 +77,7 @@ class CustomConversationRepository extends ConversationRepository
         return collect($threads);
     }
 
-    /*
+    /**
      * retrieve all message thread with latest one message and sender and receiver user model
      *
      * @param   int $user
