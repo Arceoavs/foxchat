@@ -55,7 +55,7 @@ class AuthServiceProvider {
 
   logout(self) {
     EventBus.$emit('loading');
-    var path = "/api/auth/user";
+    var path = "/api/auth/provider";
     var formData = new FormData();
     formData.append(
       'Authorization',

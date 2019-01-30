@@ -67,11 +67,11 @@ export default {
         this.unsubscribeFromChannel();
         localStorage.removeItem('bearer');
         localStorage.removeItem('user');
-        store.dispatch('resetProviderInbox');
-        store.dispatch('resetUser');
-        store.dispatch('resetMessageList');
-        store.dispatch('resetSubscriberList');
-        store.dispatch('resetCommunicationUrl');
+        this.$store.dispatch('resetProviderInbox');
+        this.$store.dispatch('resetUser');
+        this.$store.dispatch('resetMessageList');
+        this.$store.dispatch('resetSubscriberList');
+        this.$store.dispatch('resetCommunicationUrl');
     },
     unsubscribeFromChannel() {
       if (window.Echo) {
