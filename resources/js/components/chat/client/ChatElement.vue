@@ -33,20 +33,25 @@
  <script>
 
 export default {
+  //This component will represent each chat in the chatoverviews, this means it needs the tag, userName, message and date, to show the related meta data.
   props: ["tag", "userName", "message", "date"],
   computed: {
+    //This cuts the date to only the time.
     cuttedTime() {
       return this.date.slice(11, 16);
     },
+    //This cuts the date to only the date.
     cuttedDate() {
       return this.date.slice(8, 10) + "." + this.date.slice(5, 7) + ".";
     },
+    //This cuts the chat message to show only the first 70 digits of the message (message preview).
     chatMessagePreview() {
       var messagePreviewLength = 70;
       if (this.message.length > messagePreviewLength)
         return this.message.substring(0, messagePreviewLength) + "...";
       else return this.message;
     },
+    //This will make sure that when the chats last activity was today, the time will be shown, else the date.
     dateTimer() {
       // Create date from input value
       var inputDate = new Date(this.date);
@@ -58,20 +63,10 @@ export default {
         // Date equals today's date
         return this.cuttedTime;
       else return this.cuttedDate;
-    },
-    cuttedTime() {
-      return this.date.slice(11, 16);
-    },
-    cuttedDate() {
-      return (
-        this.date.slice(8, 10) +
-        "." +
-        this.date.slice(5, 7) +
-        "."
-      );
     }
   },
   methods: {
+    //If the button will be klicked on the parents will be informed. With the needed parameters(userName and tag)
     informChatComponent: function() {
       var routeProps=new Object();
       routeProps.userName = this.userName;

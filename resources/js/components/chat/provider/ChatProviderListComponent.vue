@@ -41,6 +41,7 @@
 
 <script>
 export default {
+  //This component will represent each chat in the chatoverviews, this means it needs the documentName, userName, message and date, to show the related meta data.
   props: ["documentName", "date", "userName", "message"],
   computed: {
     dateTimeForProviders() {
@@ -55,9 +56,11 @@ export default {
         return this.cuttedTime;
       else return this.cuttedDate;
     },
+    //This cuts the date to only the time.
     cuttedTime() {
       return this.date.slice(11, 16) + this.$ml.get("hour_stamp");
     },
+    //This cuts the date to only the date.
     cuttedDate() {
       return (
         this.date.slice(8, 10) +
@@ -67,6 +70,7 @@ export default {
         this.date.slice(0, 4)
       );
     },
+    //This cuts the chat message to show only the first 70 digits of the message (message preview).
     chatMessagePreview() {
       var messagePreviewLength = 70;
       if (this.message.length > messagePreviewLength)
@@ -75,6 +79,7 @@ export default {
     }
   },
   methods: {
+    //If the button will be klicked on the parents will be informed. With the needed parameters(userName and tag).
     informChatComponent: function() {
       var routeProps = new Object();
       routeProps.userName = this.userName;

@@ -32,26 +32,25 @@
 import ChatListComponent from "./ChatList.vue";
 import ChatService from "../../../services/ChatService";
 import AddChatComponent from "./AddChat.vue";
-
+//This component will be included in the user's chat overview.
 export default {
-  data() {
-    return {
-      //pageTitle: "Ihre Chats mit Providern"
-    };
-  },
+  //When the component is created the current inbox will be requested.
   created() {
     ChatService.getInbox();
   },
+  //The components used.
   components: {
     ChatListComponent,
     AddChatComponent
   },
+  //The inbox for the user.
   computed: {
     providers: function() {
       return this.$store.state.inboxForUser;
     }
   },
   methods: {
+    //If one of the child components emitted the change route event, here the routing will be done to the communication page.
     changeRoute(e) {
       var communicationUrl = { userName: e.userName, conversationTag: e.tag };
       this.$store.commit("setCommunicationUrl", communicationUrl);

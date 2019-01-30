@@ -6,26 +6,15 @@
 import ChatProviderComponent from "./ChatProviderComponent.vue";
 import FoxdoxSubscriberService from "../../../services/FoxdoxSubscriberService.js";
 import ChatService from "../../../services/ChatService";
-
+//This component will be included in the providers's chat overview.
 export default {
-  data() {
-    return {
-      addChat: "Neuen Chat starten"
-    };
-  },
+  //When the component will be created the provider's inbox und subscriber's are requested.
   created() {
     ChatService.getInboxProvider();
     FoxdoxSubscriberService.getSubscriberList();
   },
-  computed: {},
   methods: {
-    informChatComponent(e) {
-      var communicationUrl = { userName: e.userName, conversationTag: e.tag };
-      this.$store.commit("setCommunicationUrl", communicationUrl);
-      this.$router.push({
-        name: "ChatViewProvider"
-      });
-    },
+    //If one of the child components emitted the change route event, here the routing will be done to the communication page.
     changeRoute(e) {
       var communicationUrl = { userName: e.userName, conversationTag: e.tag };
       this.$store.commit("setCommunicationUrl", communicationUrl);
@@ -34,6 +23,7 @@ export default {
       });
     }
   },
+  //The components used.
   components: {
     ChatProviderComponent
   }

@@ -10,7 +10,9 @@ var configExt = {
     Authorization: 'Bearer ' + localStorage.getItem('bearer')
   }
 };
-
+/**
+ * All these methods will trigger api calls which can be found in the swagger documentation.
+ */
 export default {
   refresh() {
     configExt.headers.Authorization =

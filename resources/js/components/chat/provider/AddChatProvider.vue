@@ -15,11 +15,10 @@
 
 <script>
 export default {
+  // This component will be used to show the "add chat button" on the chat overview
   props: ["userName"],
-  mounted() {
-    console.log("AddChatProvider mounted");
-  },
   methods: {
+    //If the button will be klicked on the parents will be informed. With the needed parameters(userName and tag)
     informChatComponent: function() {
       var routeProps = new Object();
       routeProps.userName = this.userName;

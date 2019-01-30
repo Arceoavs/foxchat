@@ -58,13 +58,14 @@ import ChatElementComponent from "./ChatElement.vue";
 import BroadcastingService from "../../../services/BroadcastingService.js";
 
 export default {
+  //The component will be done for every provider the user subscribed to and registered on foxChat.
   props: ["userName", "documentChats", "generalChat"],
   data() {
     return {
       showCollapse: false
     };
   },
-  created() {},
+  //The components used.
   components: {
     ChatElementComponent
   },
@@ -78,6 +79,7 @@ export default {
     }
   },
   methods: {
+    //This will emit the given event to the parent component.
     informChatComponent(e) {
       this.$emit("chat-partner-changed", e);
     }

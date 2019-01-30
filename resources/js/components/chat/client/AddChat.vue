@@ -18,6 +18,8 @@
 </template>
 
 <script>
+// This component will be used to show the "add chat button" on the chat overview
+// If the button will be clicked on the User will be redirected to the "Documents" path
 export default {};
 </script>
 <style>
