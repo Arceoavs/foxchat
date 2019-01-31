@@ -33,6 +33,7 @@ export default {
         ServicesManagementService.startUserServicesWithUserInformation();
       }
     }
+    //Toast notification for chat messages
     this.$toasted.register(
       "new_message_received",
       payload => {
@@ -40,6 +41,7 @@ export default {
         return payload.message;
       },
       {
+        //Configuration of toast message
         position: "bottom-left",
         type: "default",
         duration: 5000,
@@ -50,27 +52,31 @@ export default {
         action: {
           text: this.$ml.get("open"),
           onClick: (e, toastObject) => {
+            //Open the chat when clicked on a conversation
             if (this.$store.state.user.isProvider) {
+              var communicationUrl = {
+                userName: this.$store.state.toastUrl.senderName,
+                conversationTag: this.$store.state.toastUrl.conversationTag
+              };
+              this.$store.commit("setCommunicationUrl", communicationUrl);
               this.$router.push({
-                name: "ChatViewProvider",
-                query: {
-                  partner: this.$store.state.toastUrl.senderName,
-                  tag: this.$store.state.toastUrl.conversationTag
-                }
+                name: "ChatViewProvider"
               });
             } else {
+              var communicationUrl = {
+                userName: this.$store.state.toastUrl.senderName,
+                conversationTag: this.$store.state.toastUrl.conversationTag
+              };
+              this.$store.commit("setCommunicationUrl", communicationUrl);
               this.$router.push({
-                name: "ChatViewUser",
-                query: {
-                  partner: this.$store.state.toastUrl.senderName,
-                  tag: this.$store.state.toastUrl.conversationTag
-                }
+                name: "ChatViewUser"
               });
             }
           }
         }
       }
     );
+    //The Eventbus listening for Events to show toastMessages
     EventBus.$on("messageWasReceived", this.toastMessage);
   },
   components: {
@@ -79,14 +85,22 @@ export default {
     FooterComponent
   },
   methods: {
+    //This method will be called to show the toast notification
     toastMessage(e) {
-      this.$store.state.toastUrl.senderName = e.senderName;
-      this.$store.state.toastUrl.conversationTag = e.conversationTag;
+      var newToastUrl = {
+        senderName: e.senderName,
+        conversationTag: e.conversationTag
+      };
+      //Stores the new value in store
+      this.$store.commit("setToastUrl", newToastUrl);
+      //Checks if the the incoming method matches the current open one, if not a toast message will be shown
       if (
         this.$store.state.toastUrl.senderName !=
-          this.$store.state.communicationUrl.senderName &&
-        this.$store.state.toastUrl.conversationTag !=
-          this.$store.state.communicationUrl.conversationTag
+          this.$store.state.communicationUrl.userName ||
+        (this.$store.state.toastUrl.senderName ==
+          this.$store.state.communicationUrl.userName &&
+          this.$store.state.toastUrl.conversationTag !=
+            this.$store.state.communicationUrl.conversationTag)
       ) {
         this.$toasted.global.new_message_received({
           message:

@@ -10,12 +10,14 @@
           <p class="card-text">{{documentName}}</p>
         </div>
         <div>
+          <!-- Confirmation Button -->
           <button
             type="button"
             class="btn btn-success btn-md mr-1 buttonCC"
             @click="startChat()"
             v-text="$ml.get('chat_starten')"
           ></button>
+          <!-- Cancellation Button -->
           <button
             type="button"
             class="btn btn-danger btn-md ml-1 buttonCC"
@@ -33,16 +35,19 @@ import { store } from "../store.js";
 
 export default {  
   methods: {
+    // starts the Chat to the document after confirmation by the User
     startChat() {
       var communicationUrl = { userName: this.providerName, conversationTag: this.documentName };
       store.commit("setCommunicationUrl", communicationUrl);
       this.$router.push({name: 'ChatViewUser'});
     },
+    // navigates back to the Document Overview after the cancellation of the process
     abort() {
       this.$router.push({name: 'Dokumente'});
     }
   },
   data() {
+    // stores the name of the document and the corresponding provider
     return {
       providerName: this.$route.params.provName,
       documentName: this.$route.params.docName
