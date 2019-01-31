@@ -1,4 +1,5 @@
 <template >
+  <!-- One single Chat to be displayed in the ChatList component -->
   <div class="mb-2">
     <b-card class="textColor cursorPointer" @click="informChatComponent()">
       <b-row>
@@ -9,7 +10,11 @@
         <b-col>
           <b-row>
             <b-col>
-              <p v-if="tag=='allgemein' || !tag" class="font-weight-bold" v-text="$ml.get('general_chat')"/>
+              <p
+                v-if="tag=='allgemein' || !tag"
+                class="font-weight-bold"
+                v-text="$ml.get('general_chat')"
+              />
               <p v-else class="font-weight-bold">{{tag}}</p>
             </b-col>
             <b-col>
@@ -31,7 +36,6 @@
 </template>
 
  <script>
-
 export default {
   //This component will represent each chat in the chatoverviews, this means it needs the tag, userName, message and date, to show the related meta data.
   props: ["tag", "userName", "message", "date"],
@@ -68,9 +72,9 @@ export default {
   methods: {
     //If the button will be klicked on the parents will be informed. With the needed parameters(userName and tag)
     informChatComponent: function() {
-      var routeProps=new Object();
+      var routeProps = new Object();
       routeProps.userName = this.userName;
-      routeProps.tag=this.tag;
+      routeProps.tag = this.tag;
       this.$emit("chat-partner-changed", routeProps);
     }
   }
@@ -81,7 +85,7 @@ export default {
 .chatIcons {
   float: left;
 }
-.cursorPointer{
+.cursorPointer {
   cursor: pointer;
 }
 </style>

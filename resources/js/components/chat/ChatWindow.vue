@@ -1,4 +1,6 @@
 <template>
+  <!-- Displays the actual chat window. Uses the vue-beautiful-foxchat component. -->
+  <!-- See vue-beautiful-(fox)chat for insights -->
   <beautiful-chat
     :participants="participants"
     :titleImageUrl="titleImageUrl"

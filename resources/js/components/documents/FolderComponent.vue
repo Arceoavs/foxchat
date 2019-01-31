@@ -1,10 +1,9 @@
 <template>
-  <!--<router-link v-bind:to="{ path: name}" append>-->
+  <!-- Zeigt eine Ordnerliste auf oberster Ebene der Dokuementenansicht an -->
   <b-list-group-item href="#" @click="openFolder()">
     <font-awesome-icon class="fox" icon="folder-open" size="2x"/>
     <button type="button" class="listcomponent">{{name}}</button>
   </b-list-group-item>
-  <!--</router-link>-->
 </template>
 
  <script>
@@ -16,11 +15,16 @@ export default {
   props: ["id", "name"],
   mounted() {},
   methods: {
+    /**
+     * Wenn ein Ordner angeklickt wird, soll der aktuelle Unterordner im store aktualisiert werden (Ordner und Dokumente).
+     * Anschliessend wird die Dokumentenansicht in diesen Ordner navigiert
+     */
     openFolder() {
       console.log(this.buildURL());
       FolderService.getSubFolders(this.id).data;
       FolderService.getDocuments(this.id);
       this.$router.push({
+        // Der Unterordner wird durch eine FolderChildComponent abgebildet
         name: "FolderChild",
         params: { name: this.buildURL() }
       });
@@ -35,8 +39,9 @@ export default {
   }
 };
 </script>
- 
+
  <style>
+/* In der Ordneransicht verwendete Styles */
 .fox {
   color: #f86a2d !important;
 }

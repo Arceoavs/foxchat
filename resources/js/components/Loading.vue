@@ -1,13 +1,15 @@
 <template>
+  <!-- Die Loading Component kann angezeigt werden wenn asynchrone Abfragen eine nicht-triviale Ladezeit haben -->
   <div class="overlay" v-show="counter > 0">
     <div class="loader-wrapper">
       <div class="loader"></div>
     </div>
   </div>
 </template>
-<script>
-import EventBus from "../services/event-bus.js";
 
+<script>
+// Die Loading Component wird von einem eigens dafuer implementierten Event Bus gesteuert
+import EventBus from "../services/event-bus.js";
 export default {
   data: function() {
     return {

@@ -1,4 +1,5 @@
 <template>
+  <!-- Before starting a chat related to a document, the user has confirm his decision -->
   <b-container>
     <div class="card text-center border-dark mt-3">
       <div class="card-body">
@@ -46,7 +47,7 @@ export default {
       store.commit("setCommunicationUrl", communicationUrl);
       // DocumentService.publishDocument(this.docId).then(data => {
       //   ChatService.sendMessage(this.providerName, data, this.documentName);
-        this.$router.push({ name: "ChatViewUser" });
+      this.$router.push({ name: "ChatViewUser" });
       // });
     },
     sleep(ms) {

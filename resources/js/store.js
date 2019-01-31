@@ -18,6 +18,7 @@ export const store = new Vuex.Store({
   //a matching property owned by state must be 
   //existent
   state: {
+    // All messages of the current user (if logged in as provider)
     inboxForUser: [
       {
         ProviderShortName: 'Loading...'
@@ -25,22 +26,31 @@ export const store = new Vuex.Store({
     ],
     subscriberList: [
     ],
+    // All messages of the current user (if logged in as provider)
     inboxForProvider: [
       {
         document: 'Loading...'
       }
     ],
+    // The current user
     user: {},
     toastUrl: { senderName: "", conversationTag:"" },
     communicationUrl: { userName: "", conversationTag:"" },
+    // The folder id of the users root folder
     userRootFolder: [],
+    // The docuements located in the users root folder
     recentDocuments: {
       Name: 'Loading...'
     },
+    // The last 5 documents that were added to the account
     lastFiveDocuments: [],
+    // The list of all of the messages of a given chat
     messageList: [],
+    // The subfolders located in the users root folder
     recentFolders: [],
+    // The subfolders located in folder that the user has currently navigated to
     currentFolder: [],
+    // The documents located in folder that the user has currently navigated to
     currentDocuments: []
   },
 

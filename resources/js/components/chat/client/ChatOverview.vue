@@ -1,6 +1,8 @@
 <template>
+  <!-- Shows all the ongoing chat with providers (if there are any) when logged in as a client -->
   <b-container>
     <b-row class="mt-4 pl-2">
+      <!-- Headings -->
       <b-col>
         <h2
           v-if="providers.length==1"
@@ -14,6 +16,7 @@
         <div v-if="providers.length==0" class="text-center">
           <p v-text="$ml.get('keine_Provider_msg')"/>
         </div>
+        <!-- The list of the chats -->
         <chat-list-component
           v-for="provideritem in providers"
           v-bind:key="provideritem.ProviderShortName"
@@ -22,6 +25,7 @@
           v-bind:generalChat="provideritem.generalChat"
           v-on:chat-partner-changed="changeRoute"
         />
+        <!-- To be able to add a chat an additional component is displayed specifically for that purpose -->
         <add-chat-component/>
       </b-col>
     </b-row>

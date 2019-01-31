@@ -1,5 +1,8 @@
 <template>
+  <!-- Diese Component wird als Unterordner eines beliebigen Oberordners angezeigt. 
+  Ordner auf oberster Ebene werden durch die Folder Component abgebildet.-->
   <b-container>
+    <!-- Alle Dokumente in diesem Ordner anzeigen -->
     <document-component
       v-for="document in documents"
       v-bind:key="document.Id"
@@ -8,6 +11,7 @@
       v-bind:folderPath="document.FolderPath"
     ></document-component>
 
+    <!-- Alle Unterordner in diesem Ornder anzeigen -->
     <folder-component
       v-for="folder in folders"
       v-bind:key="folder.Id"
@@ -23,15 +27,12 @@ import FolderService from "../../services/FolderService";
 import FolderComponent from "./FolderComponent.vue";
 
 export default {
-  data() {
-    return {
-      //parent: this.$route.query.parent
-    };
-  },
   computed: {
+    // Dokumente des aktuellen Ordners werden im store gespeichert
     documents: function() {
       return this.$store.state.currentDocuments;
     },
+    // Unterordner des aktuellen Ordners werden um store gespeichert
     folders: function() {
       return this.$store.state.currentFolder;
     }
@@ -44,6 +45,7 @@ export default {
 </script>
 
 <style>
+/* In Unterordnern verwendete Styles*/
 .box {
   color: rgba(108, 117, 125, 1) !important;
   text-decoration: none !important;

@@ -1,6 +1,9 @@
 <template>
+<!-- In this view the document components are displayed under the /documents route -->
   <b-container fluid>
+    <!-- breadcrumbs are displayed to show the path of the current folder (for subfolders) -->
     <breadcrumb v-bind:items="items"/>
+    <!-- router view can be either Document view (root level) or FolderChildComponents (subfolders) -->
     <router-view/>
   </b-container>
 </template>

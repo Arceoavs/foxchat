@@ -1,4 +1,5 @@
 <template>
+  <!-- Shows a collapsable visual component for every provider, containing all ongoing chats -->
   <b-jumbotron bg-variant="secondary" class="chatGroupList">
     <!-- Provider name -->
     <b-card
@@ -15,7 +16,6 @@
         size="2x"
         :class="dropdownArrow"
       />
-      
     </b-card>
 
     <!-- General Chat -->
@@ -105,7 +105,7 @@ export default {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.cursorPointer{
+.cursorPointer {
   cursor: pointer;
 }
 </style>

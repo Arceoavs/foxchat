@@ -1,4 +1,6 @@
 <template>
+  <!-- Displays the View where a user can chat with another user.  -->
+  <!-- Displays other chats with clients/ providers of the screen size is big enough -->
   <b-container fluid>
     <!--Headings-->
     <b-row class="mt-3">
@@ -23,11 +25,11 @@
     <b-row>
       <b-col md="4" class="d-none d-md-block d-lg-block d-xl-block">
         <div class="leftSideOfChat">
-          <!--Wenn Provider-->
+          <!--If provider: show all the chats with other clients-->
           <div v-if="isProvider">
             <chat-provider-component v-on:chat-partner-changed="changeRoute"></chat-provider-component>
           </div>
-          <!--Wenn Client-->
+          <!--If Client: Show all other chats with providers-->
           <div v-else>
             <chat-list-component
               class="smaller-heading"
@@ -42,6 +44,7 @@
         </div>
       </b-col>
       <b-col md="8" cols="12">
+        <!-- The actual chat window. See ChatWindow component -->
         <chat-window
           v-bind:userName="chatPartner"
           v-bind:tag="conversationTag"
@@ -67,12 +70,14 @@ import EventBus from "../../services/event-bus";
 export default {
   created() {
     //When the component is created it will listen to events from pusher if the chat partner sent a message.
-    EventBus.$on("messageWasReceived",
+    EventBus.$on(
+      "messageWasReceived",
       //Update the chat service because a new message is there.
       this.updateChatServices
     );
     //When the component is created it will listen to events from pusher if the chat partner read a message.
-    EventBus.$on("messageWasRead", 
+    EventBus.$on(
+      "messageWasRead",
       //Update the chat service because a message sent from you was read.
       //But to prevent a unlimited cycle of pusher events trigger api calls this special triggeredbypusher method will be used.
       this.updateChatServicesTriggeredByPusher
@@ -101,7 +106,7 @@ export default {
   beforeDestroy() {
     EventBus.$off("messageWasReceived", this.updateChatServices);
     EventBus.$off("messageWasRead", this.updateChatServicesTriggeredByPusher);
-    this.$store.dispatch('resetCommunicationUrl');
+    this.$store.dispatch("resetCommunicationUrl");
   },
   //The current chatpartner from the store.
   data() {

@@ -1,4 +1,5 @@
 <template>
+  <!-- Button that enables to start a new chat -->
   <b-jumbotron bg-variant="secondary" class="chatGroup">
     <router-link :to="'/Documents'" class="undecorated">
       <b-card class="textColor">
