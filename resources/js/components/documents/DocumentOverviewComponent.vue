@@ -1,4 +1,5 @@
 <template>
+  <!-- Zeigt die Dokumente und Ordner der obsersten Ebene, sowie die letzten 5 verwendeten Dokumente in der Dokumentenansicht an -->
   <b-container>
     <b-row>
       <b-col>
@@ -8,6 +9,7 @@
           </b-col>
         </b-row>
         <b-card>
+          <!-- Die 5 zuletzt hinzugefügten Dokumente-->
           <b-list-group flush>
             <document-component
               v-for="document in lastFive"
@@ -24,6 +26,7 @@
           </b-col>
         </b-row>
         <b-card>
+          <!-- Dokumente auf root- Ebene -->
           <b-list-group flush>
             <document-component
               v-for="document in documents"
@@ -32,6 +35,7 @@
               v-bind:name="document.Name"
               v-bind:folderPath="document.FolderPath"
             />
+            <!-- Ordner auf root- Ebene -->
             <folder-component
               v-for="folder in folders"
               v-bind:key="folder.Id"
@@ -57,12 +61,12 @@ export default {
       showCollapse: false
     };
   },
-  mounted(){
-     FolderService.getAllDocuments();
+  mounted() {
+    FolderService.getAllDocuments();
   },
   computed: {
-    lastFive: function(){
-       return this.$store.state.lastFiveDocuments;
+    lastFive: function() {
+      return this.$store.state.lastFiveDocuments;
     },
     documents: function() {
       return this.$store.state.recentDocuments;
@@ -74,7 +78,6 @@ export default {
       return this.$store.state.recentFolders.Items;
     },
     providers: function() {
-      //return store.state.providerList;
       return this.$store.state.inboxForUser;
     },
     dropdownArrow() {
@@ -95,6 +98,7 @@ export default {
 </script>
 
 <style>
+/* Von der Dokumentenansicht verwendete Styles */
 .box {
   color: rgba(108, 117, 125, 1) !important;
   text-decoration: none !important;
