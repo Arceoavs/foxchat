@@ -56,8 +56,8 @@ export default new MLCreate({
       this_is_the_general_chat: 'Allgemeiner Chat',
       open: 'Öffnen',
       new_message_toast: 'Neue Nachricht von',
-      homepage_sentence: "Willkommen bei FoxChat.",
-      homepage_introduction: "Bitte wählen Sie Dokumente oder Chat aus, um zu beginnen!",
+      homepage_sentence: "Willkommen bei FoxChat!",
+      homepage_introduction: "Bitte wählen Sie Dokumente oder Chat aus, um zu beginnen.",
       hour_stamp: " Uhr",
       chat_input: "Schreiben Sie eine Antwort"
     }),
@@ -108,7 +108,7 @@ export default new MLCreate({
       open: 'Open',
       new_message_toast: 'New message received from',
       homepage_sentence: "Welcome to FoxChat!",
-      homepage_introduction: "Please choose either Documents or Chat to get started!",
+      homepage_introduction: "Please choose either Documents or Chat to get started.",
       hour_stamp: " o'clock",
       chat_input: "Write a reply"
     })
