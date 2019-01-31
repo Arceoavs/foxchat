@@ -3,10 +3,11 @@
   <footer class="footer">
     <b-container fluid>
       <b-row class ="vertical-align">
+        <!-- Footer Linke Seite -->
         <b-col class="text-left">
           <span v-text="$ml.get('footer_message_left')"/>
         </b-col>
-
+        <!-- Dropdown Menue fuer die Mehrsprachigkeit (Mitte) -->
         <b-col class="text-center">
           <b-dropdown id="ddown1" v-bind:text="$ml.get('sprache')" class="m-md-2">
             <b-dropdown-header v-text="$ml.get('sprache_waehlen')"></b-dropdown-header>
@@ -18,7 +19,7 @@
             ></b-dropdown-item>
           </b-dropdown>
         </b-col>
-
+        <!-- Footer Text rechte Seite -->
         <b-col class="text-right">
           <a
             href="https://www.d-velop.de/foxdox/foxdox-home"
@@ -33,9 +34,11 @@
 <script>
 </script>
 
+
+<!-- Style fuer den Footer -->
 <style>
 .footer {
-  position: sticky;
+  position: sticky; /*Damit der Footer unten bleibt*/
   width: 100%;
   font-size: 0.8rem;
   background: rgb(255, 255, 255);
