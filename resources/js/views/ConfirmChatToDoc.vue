@@ -2,8 +2,8 @@
   <b-container>
     <div class="card text-center border-dark mt-3">
       <div class="card-body">
-        <h5 class="card-title" v-text= "$ml.get('willkommen_bei')"></h5>
-        <h5> {{mlProviderName}} </h5>
+        <h5 class="card-title" v-text="$ml.get('willkommen_bei')"></h5>
+        <h5>{{mlProviderName}}</h5>
         <p class="card-text" v-text="$ml.get('starting_chat_to_doc')"/>
         <div class="textFox mt-4 mb-4">
           <font-awesome-icon icon="file" size="2x"/>
@@ -32,25 +32,37 @@
 
 <script>
 import { store } from "../store.js";
+import ChatService from "../services/ChatService.js";
+import DocumentService from "../services/DocumentService.js";
 
-export default {  
+export default {
   methods: {
     // starts the Chat to the document after confirmation by the User
     startChat() {
-      var communicationUrl = { userName: this.providerName, conversationTag: this.documentName };
+      var communicationUrl = {
+        userName: this.providerName,
+        conversationTag: this.documentName
+      };
       store.commit("setCommunicationUrl", communicationUrl);
-      this.$router.push({name: 'ChatViewUser'});
+      // DocumentService.publishDocument(this.docId).then(data => {
+      //   ChatService.sendMessage(this.providerName, data, this.documentName);
+        this.$router.push({ name: "ChatViewUser" });
+      // });
+    },
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     // navigates back to the Document Overview after the cancellation of the process
     abort() {
-      this.$router.push({name: 'Dokumente'});
+      this.$router.push({ name: "Dokumente" });
     }
   },
   data() {
     // stores the name of the document and the corresponding provider
     return {
       providerName: this.$route.params.provName,
-      documentName: this.$route.params.docName
+      documentName: this.$route.params.docName,
+      docId: this.$route.params.docId
     };
   },
   computed: {

@@ -26,6 +26,7 @@
 
  <script>
 import DocumentService from "../../services/DocumentService.js";
+import ChatService from "../../services/ChatService.js";
 export default {
   props: ["id", "name", "folderPath"],
   data: function() {
@@ -59,13 +60,17 @@ export default {
       this.toPublish = false;
     },
     startChat() {
+      var providerName = DocumentService.getProviderName(this.folderPath);
       var publicUrl = DocumentService.publishDocument(this.id);
+      DocumentService.publishDocument(this.id).then(data => {
+        ChatService.sendMessage(providerName, data, this.name);
+      });
 
       var providerName = DocumentService.getProviderName(this.folderPath);
       // navigates to the confirmation page and passes the name of the document and the corresponding provider
       this.$router.push({
         name: "ConfirmChatToDocument",
-        params: { docName: this.name, provName: providerName }
+        params: { docName: this.name, provName: providerName, docId: this.id}
       });
     }
   }
