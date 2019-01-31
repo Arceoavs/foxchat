@@ -66,12 +66,4 @@ class DocumentAPIService extends Controller
         return $foxdoxapiclient->apiRequest(auth()->user()->name);
     }
 
-    public function downloadPublicDocument($documentId)
-    {
-        $url = 'https://api.foxdox.de/Public/document/' . $documentId;
-        $foxdoxapiclient = new FoxdoxApiClient($url, []);
-        $foxdoxapiclient->setMethod('GET');
-        return $foxdoxapiclient->apiRequest(auth()->user()->name);
-    }
-
 }

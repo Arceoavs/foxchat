@@ -48,8 +48,6 @@ export default {
   },
   methods: {
     openDocument() {
-      // DocumentService.publishDocument(this.id);
-      // DocumentService.downloadPublicDocument(this.id, this.name);
       DocumentService.downloadDocument(this.id, this.name);
     },
     shareDocument() {

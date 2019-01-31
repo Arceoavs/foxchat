@@ -60,34 +60,6 @@ class DocumentService {
 
   }
 
-  downloadPublicDocument(documentId, documentName) {
-    this.refresh();
-
-    var body = { documentId: documentId };
-    var config = {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('bearer')
-      },
-      responseType: 'blob'
-    };
-
-    axios
-      .post(path + '/downloadpublicdocument', body, config)
-      .then(response => {
-        console.log('Downloading public document ' + documentId + ' . . .');
-
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', documentName);
-        document.body.appendChild(link);
-        link.click();
-        console.log('Document downloaded!');
-      })
-      .catch(error => {
-        console.log('Error downloading public document: ' + JSON.stringify(error));
-      });
-  }
 }
 
 
