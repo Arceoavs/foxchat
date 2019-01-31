@@ -67,16 +67,16 @@ import EventBus from "../../services/event-bus";
 export default {
   created() {
     //When the component is created it will listen to events from pusher if the chat partner sent a message.
-    EventBus.$on("messageWasReceived", payload => {
+    EventBus.$on("messageWasReceived",
       //Update the chat service because a new message is there.
-      this.updateChatServices();
-    });
+      this.updateChatServices
+    );
     //When the component is created it will listen to events from pusher if the chat partner read a message.
-    EventBus.$on("messageWasRead", payload => {
+    EventBus.$on("messageWasRead", 
       //Update the chat service because a message sent from you was read.
       //But to prevent a unlimited cycle of pusher events trigger api calls this special triggeredbypusher method will be used.
-      this.updateChatServicesTriggeredByPusher();
-    });
+      this.updateChatServicesTriggeredByPusher
+    );
     //Checks if the current user is a provider or user and gets the matching inbox.
     if (this.$store.state.user.isProvider) {
       ChatService.getInboxProvider();
@@ -99,8 +99,8 @@ export default {
   },
   // If the user leaves the page, the EventBus will be deactivated and the current conversations url resetted.
   beforeDestroy() {
-    EventBus.$off("messageWasReceived");
-    EventBus.$off("messageWasRead");
+    EventBus.$off("messageWasReceived", this.updateChatServices);
+    EventBus.$off("messageWasRead", this.updateChatServicesTriggeredByPusher);
     this.$store.dispatch('resetCommunicationUrl');
   },
   //The current chatpartner from the store.

@@ -33,6 +33,7 @@ export default {
         ServicesManagementService.startUserServicesWithUserInformation();
       }
     }
+    //Toast notification for chat messages
     this.$toasted.register(
       "new_message_received",
       payload => {
@@ -51,20 +52,23 @@ export default {
           text: this.$ml.get("open"),
           onClick: (e, toastObject) => {
             if (this.$store.state.user.isProvider) {
+              var communicationUrl = {
+                userName: this.$store.state.toastUrl.senderName,
+                conversationTag: this.$store.state.toastUrl.conversationTag
+              };
+              this.$store.commit("setCommunicationUrl", communicationUrl);
               this.$router.push({
-                name: "ChatViewProvider",
-                query: {
-                  partner: this.$store.state.toastUrl.senderName,
-                  tag: this.$store.state.toastUrl.conversationTag
-                }
+                name: "ChatViewProvider"
               });
             } else {
+              console.log(e);
+              var communicationUrl = {
+                userName: this.$store.state.toastUrl.senderName,
+                conversationTag: this.$store.state.toastUrl.conversationTag
+              };
+              this.$store.commit("setCommunicationUrl", communicationUrl);
               this.$router.push({
-                name: "ChatViewUser",
-                query: {
-                  partner: this.$store.state.toastUrl.senderName,
-                  tag: this.$store.state.toastUrl.conversationTag
-                }
+                name: "ChatViewUser"
               });
             }
           }
@@ -80,13 +84,18 @@ export default {
   },
   methods: {
     toastMessage(e) {
-      this.$store.state.toastUrl.senderName = e.senderName;
-      this.$store.state.toastUrl.conversationTag = e.conversationTag;
+      var newToastUrl = {
+        senderName: e.senderName,
+        conversationTag: e.conversationTag
+      };
+      this.$store.commit("setToastUrl", newToastUrl);
       if (
         this.$store.state.toastUrl.senderName !=
-          this.$store.state.communicationUrl.senderName &&
-        this.$store.state.toastUrl.conversationTag !=
-          this.$store.state.communicationUrl.conversationTag
+          this.$store.state.communicationUrl.userName ||
+        (this.$store.state.toastUrl.senderName ==
+          this.$store.state.communicationUrl.userName &&
+          this.$store.state.toastUrl.conversationTag !=
+            this.$store.state.communicationUrl.conversationTag)
       ) {
         this.$toasted.global.new_message_received({
           message:
