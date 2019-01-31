@@ -8,7 +8,7 @@ Vue.use(MLInstaller);
  * and defining german and english string for each keyword
  */
 export default new MLCreate({
-  initial: 'Deutsch',
+  initial: 'Deutsch', /* Die Sprache, wenn man auf die Website kommt ist auf Deutsch gestellt*/
   save: process.env.NODE_ENV === 'production',
   languages: [
     
