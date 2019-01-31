@@ -6,7 +6,7 @@
         <b-col class="text-left">
           <span v-text="$ml.get('footer_message_left')"/>
         </b-col>
-
+        <!-- Dropdown Button (Language selection) -->
         <b-col class="text-center">
           <b-dropdown id="ddown1" v-bind:text="$ml.get('sprache')" class="m-md-2">
             <b-dropdown-header v-text="$ml.get('sprache_waehlen')"></b-dropdown-header>

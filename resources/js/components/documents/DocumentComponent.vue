@@ -59,13 +59,10 @@ export default {
       this.toPublish = false;
     },
     startChat() {
-      //alert("Sie starten nun einen Chat zu Dokument " + this.name);
-
-      //TODO: Dokumentfreigabe -> LINK UEBERGEBEN
       var publicUrl = DocumentService.publishDocument(this.id);
 
       var providerName = DocumentService.getProviderName(this.folderPath);
-
+      // navigates to the confirmation page and passes the name of the document and the corresponding provider
       this.$router.push({
         name: "ConfirmChatToDocument",
         params: { docName: this.name, provName: providerName }
