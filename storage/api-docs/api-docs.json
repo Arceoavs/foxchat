@@ -25,6 +25,10 @@
         {
             "name": "Foxdox-API-Provider",
             "description": "Gateway to Foxdox-Provider-API - Please make sure to be calling this as a Foxdox Provider"
+        },
+        {
+            "name": "UserDocuments",
+            "description": "Everything about the UserDocuments - Please make sure to be calling this as a Foxdox User"
         }
     ],
     "paths": {
@@ -1421,7 +1425,7 @@
                 "tags": [
                     "Foxdox-API-Client"
                 ],
-                "summary": "For detailed description please take a look to the Foxdox API Documentation.",
+                "summary": "Listing providers of current user. For detailed description please take a look to the Foxdox API Documentation.",
                 "responses": {
                     "200": {},
                     "401": {
@@ -1442,12 +1446,24 @@
                 ]
             }
         },
-        "/api/foxdoxapi/user/listalldocs": {
-            "get": {
+        ,
+        "/api/foxdoxapi/user/listfolders": {
+            "post": {
                 "tags": [
                     "Foxdox-API-Client"
                 ],
-                "summary": "For detailed description please take a look to the Foxdox API Documentation.",
+                "summary": "Listing subfolders of specified folder for current user. For detailed description please take a look to the Foxdox API Documentation.",
+                "requestBody": {
+                    "description": "Takes folderId of requested folder to list its subfolders.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/listfoldersForm"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {},
                     "401": {
@@ -1494,7 +1510,7 @@
                 ]
             }
         },
-		"/api/foxdoxapi/provider/listAllServices": {
+        "/api/foxdoxapi/provider/listAllServices": {
             "get": {
                 "tags": [
                     "Foxdox-API-Provider"
@@ -1520,22 +1536,22 @@
                 ]
             }
         },
-		"/api/foxdoxapi/provider/listSubscribers": {
+        "/api/foxdoxapi/provider/listSubscribers": {
             "post": {
                 "tags": [
                     "Foxdox-API-Provider"
                 ],
                 "summary": "Listing all subscribers for the specific service identified by serviceId.",
-				"requestBody": {
+                "requestBody": {
                     "description": "Takes a serviceId.",
                     "required": true,
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
                                 "type": "object",
-								"required": {
-									"serviceId": "string"
-								},
+                                "required": {
+                                    "serviceId": "string"
+                                },
                                 "properties": {
                                     "serviceId": {
                                         "type": "string"
@@ -1565,7 +1581,7 @@
                 ]
             }
         },
-		"/api/foxdoxapi/provider/listAggregatedSubscribers": {
+        "/api/foxdoxapi/provider/listAggregatedSubscribers": {
             "get": {
                 "tags": [
                     "Foxdox-API-Provider"
@@ -1627,9 +1643,153 @@
                     "200": {
                         "description": "The list of subscribed providers.",
                         "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
                             "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
                             }
                         }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/foxdoxapi/user/listalldocs": {
+            "get": {
+                "tags": [
+                    "UserDocuments"
+                ],
+                "summary": "Listing all documents of current user. For detailed description please take a look to the Foxdox API Documentation.",
+                "responses": {
+                    "200": {
+                        "description": "List of all documents for current user. For an example see Foxdox API Documentation."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/foxdoxapi/user/listdocuments": {
+            "post": {
+                "tags": [
+                    "UserDocuments"
+                ],
+                "summary": "Listing documents of specified folder for current user. For detailed description please take a look to the Foxdox API Documentation.",
+                "requestBody": {
+                    "description": "Takes folderId of requested folder to list its subfolders.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/listfoldersForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "List of documents for specified folder. For an example see Foxdox API Documentation."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/foxdoxapi/user/downloaddocument": {
+            "post": {
+                "tags": [
+                    "UserDocuments"
+                ],
+                "summary": "Download a specific document from the Foxdox servers. For detailed description please take a look to the Foxdox API Documentation.",
+                "requestBody": {
+                    "description": "Takes documentId of requested document to pass it to the Foxdox API.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/downloaddocumentForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Link to the downloadable document or document as BLOB (depends on redirection settings of HTTP-Client). See Foxdox API Documentation."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unauthorizedError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/foxdoxapi/user/publishdocument": {
+            "post": {
+                "tags": [
+                    "UserDocuments"
+                ],
+                "summary": "Publish a specific document. For detailed description please take a look to the Foxdox API Documentation.",
+                "requestBody": {
+                    "description": "Takes documentId of the document to pass it to the Foxdox API.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/downloaddocumentForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Public URL for the document. See Foxdox API Documentation for an example."
                     },
                     "401": {
                         "description": "Unauthorized",
@@ -1718,6 +1878,28 @@
                         "type": "string"
                     },
                     "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "listfoldersForm": {
+                "type": "object",
+                "required": [
+                    "folderId"
+                ],
+                "properties": {
+                    "folderId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "downloaddocumentForm": {
+                "type": "object",
+                "required": [
+                    "documentId"
+                ],
+                "properties": {
+                    "documentId": {
                         "type": "string"
                     }
                 }
