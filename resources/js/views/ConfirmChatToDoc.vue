@@ -44,11 +44,12 @@ export default {
         userName: this.providerName,
         conversationTag: this.documentName
       };
+
       store.commit("setCommunicationUrl", communicationUrl);
-      // DocumentService.publishDocument(this.docId).then(data => {
-      //   ChatService.sendMessage(this.providerName, data, this.documentName);
+      DocumentService.publishDocument(this.docId).then(data => {
+        ChatService.sendMessage(this.providerName, data, this.documentName);
+      });
       this.$router.push({ name: "ChatViewUser" });
-      // });
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));

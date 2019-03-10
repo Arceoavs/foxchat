@@ -59,12 +59,6 @@ export default {
     },
     startChat() {
       var providerName = DocumentService.getProviderName(this.folderPath);
-      var publicUrl = DocumentService.publishDocument(this.id);
-      DocumentService.publishDocument(this.id).then(data => {
-        ChatService.sendMessage(providerName, data, this.name);
-      });
-
-      var providerName = DocumentService.getProviderName(this.folderPath);
       // navigates to the confirmation page and passes the name of the document and the corresponding provider
       this.$router.push({
         name: "ConfirmChatToDocument",
